@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS app_youtube (youtube_id INT NOT NULL AUTO_INCREMENT, youtube_title VARCHAR(50), youtube_url VARCHAR(50), youtube_author VARCHAR(50), youtube_date TIMESTAMP, youtube_status TINYINT, PRIMARY KEY (youtube_id));

@@ -1,0 +1,6 @@
+formato email:
+/[a-z0-9_\.\-]+@[a-z0-9_\.\-]*[a-z0-9_\.\-]+\.[a-z]{2,4}$/
+
+formato link ou nome de imagens:
+'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜüİŞßàáâãäåæçèéêëìíîïğñòóôõöøùúûıışÿRr"!@#$%&*()_-+={[}]/?;:.,\\\'<>°ºª'
+'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                 '
