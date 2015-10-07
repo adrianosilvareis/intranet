@@ -10,7 +10,6 @@
         $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $postid = filter_input(INPUT_GET, 'postId', FILTER_VALIDATE_INT);
 
-
         if (isset($post) && $post['SendPostForm']):
             $post['post_status'] = ( $post['SendPostForm'] == 'Atualizar' ? '0' : '1');
             $post['post_cover'] = ( $_FILES['post_cover']['tmp_name'] ? $_FILES['post_cover'] : 'null');
@@ -22,10 +21,17 @@
             $cadastra->ExeUpdate($postid, $post);
 
             WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
+
             if (!empty($_FILES['gallery_covers']['tmp_name'])):
                 $sendGallery = new AdminPost();
                 $sendGallery->gbSend($_FILES['gallery_covers'], $postid);
             endif;
+
+            if (!empty($_FILES['files']['tmp_name'])):
+                $sendFiles = new AdminPost;
+                $sendFiles->flSend($_FILES['files'], $postid);
+            endif;
+
         else:
             $WsPosts = new WsPosts;
             $WsPosts->setPost_id($postid);
@@ -51,14 +57,47 @@
 
         <form name="PostForm" action="" method="post" enctype="multipart/form-data">
 
-            <label class="label">
-                <span class="field">Enviar Capa:</span>
-                <input type="file" name="post_cover" />
-            </label>
+            <div class="label_line">
+                <label class="label_medium">
+                    <span class="field">Enviar Capa:</span>
+                    <input type="file" name="post_cover" />
+                </label>
+                
+                <label class="label_small">
+                    <span class="field">Tipo:</span>
+                    <select name="post_type">
+                        <option value="" > Selecione um tipo: </option>
+                        <option value="membros" <?php
+                        if ($post['post_type'] == "membros"): echo "selected=\"selected\" ";
+                        endif;
+                        ?>> Membros </option>
+
+                        <option value="links" <?php
+                        if ($post['post_type'] == "links"): echo "selected=\"selected\" ";
+                        endif;
+                        ?>> Links </option>
+
+                        <option value="grupos" <?php
+                        if ($post['post_type'] == "grupos"): echo "selected=\"selected\" ";
+                        endif;
+                        ?>> Grupos </option>
+
+                        <option value="posts" <?php
+                        if ($post['post_type'] == "posts"): echo "selected=\"selected\" ";
+                        endif;
+                        ?>> Geral </option>
+                    </select>
+                </label>
+            </div>
 
             <label class="label">
                 <span class="field">Titulo:</span>
                 <input type="text" name="post_title" value="<?php if (isset($post['post_title'])) echo $post['post_title']; ?>"/>
+            </label>
+
+            <label class="label">
+                <span class="field">Site Url:</span>
+                <input type="url" name="post_url" value="<?php if (isset($post['post_url'])) echo $post['post_url']; ?>" placeholder="http://www.site.com.br"/>
             </label>
 
             <label class="label">
@@ -174,6 +213,47 @@
                     endif;
                     ?>
                 </ul>                
+            </div>
+
+            <div class="label gbform">
+                <label class="label">
+                    <span class="field">Enviar Arquivos:</span>
+                    <input type="file" multiple name="files[]" />
+                </label>
+
+                <?php
+                $delfl = filter_input(INPUT_GET, 'fldel', FILTER_VALIDATE_INT);
+                if ($delfl):
+                    require_once '_models/AdminPost.class.php';
+                    $DellGallery = new AdminPost();
+                    $DellGallery->flRemove($delfl);
+
+                    WSErro($DellGallery->getError()[0], $DellGallery->getError()[1]);
+                endif;
+                ?>               
+
+                <ul class="gallery">
+                    <?php
+                    $gbi = 0;
+                    $Files = new WsPostsFile();
+                    $Files->setPost_id($postid);
+                    $Files->Execute()->Query("#post_id#");
+
+                    if ($Files->Execute()->getResult()):
+                        foreach ($Files->Execute()->getResult() as $gb):
+                            $gbi++;
+                            ?>
+                            <li<?php if ($gbi % 5 == 0) echo ' class="right"'; ?>>
+                                <div class="link">
+                                    <a href="../uploads/<?= $gb->file_url; ?>" ><?= $gb->file_name; ?></a>
+                                </div>
+                                <a href="painel.php?exe=cartilhas/update&postId=<?= $postid; ?>&fldel=<?= $gb->file_id; ?>#gbfoco" class="del">Deletar</a>
+                            </li>
+                            <?php
+                        endforeach;
+                    endif;
+                    ?>
+                </ul>   
             </div>
 
             <input type="submit" class="btn blue" value="Atualizar" name="SendPostForm" />

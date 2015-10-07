@@ -2,7 +2,9 @@
 
     <section>
 
-        <h1>Posts:</h1>
+        <header>
+            <h1>Posts:</h1>
+        </header>
 
         <?php
         $empty = filter_input(INPUT_GET, 'empty', FILTER_VALIDATE_BOOLEAN);
@@ -46,7 +48,7 @@
         $Pager->ExePager($getPage, 6);
 
         $Read = new Controle();
-        $Read->FullRead("SELECT * FROM ws_posts WHERE post_type = 'post' ORDER by post_status ASC, post_date DESC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+        $Read->FullRead("SELECT * FROM ws_posts ORDER by post_status ASC, post_date DESC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 
         if (!$Read->getResult()):
             $Pager->ReturnPage();
@@ -74,21 +76,22 @@
                         <?php else: ?>
                             <li><a class="act_inative" href="painel.php?exe=posts/index&post=<?= $post_id; ?>&action=inative" title="Inativar">Inativar</a></li>
                         <?php endif; ?>
-
                         <li><a class="act_delete" href="painel.php?exe=posts/index&post=<?= $post_id; ?>&action=delete" title="Excluir">Deletar</a></li>
                     </ul>
-
+                    <p class="post_tipo"><strong>Tipo:</strong> <?= $post_type; ?></p>
                 </article>
+
+
                 <?php
             endforeach;
+
+            echo "<div class=\"clear\"></div>";
+
+            $Pager->ExePaginator("ws_posts");
+            echo $Pager->getPaginator();
         endif;
         ?>
 
         <div class="clear"></div>
     </section>
-    <?php
-    $Pager->ExePaginator("ws_posts", "#post_type#", "post_type={$post_type}", true);
-    echo $Pager->getPaginator();
-    ?>
-    <div class="clear"></div>
 </div> <!-- content home -->

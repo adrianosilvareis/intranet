@@ -82,20 +82,6 @@ endif;
                                 <li><a href="painel.php?exe=youtube/index">Listar / Editar Videos</a></li>
                             </ul>
                         </li>
-
-                        <li class="li<?php if (in_array('membros', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Membros</a>
-                            <ul class="sub">
-                                <li><a href="painel.php?exe=membros/create">Criar Membros</a></li>
-                                <li><a href="painel.php?exe=membros/index">Listar / Editar Membros</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="li<?php if (in_array('cartilhas', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Cartilhas</a>
-                            <ul class="sub">
-                                <li><a href="painel.php?exe=cartilhas/create">Criar Cartilhas</a></li>
-                                <li><a href="painel.php?exe=cartilhas/index">Listar / Editar Cartilhas</a></li>
-                            </ul>
-                        </li>
                         
                         <!-- adicionar novas categorias aqui-->
 
@@ -135,7 +121,6 @@ endif;
     <script src="../_cdn/jquery.js"></script>
     <script src="../_cdn/jmask.js"></script>
     <script src="../_cdn/combo.js"></script>
-    <script src="../_cdn/menus.js"></script>
     <script src="__jsc/tiny_mce/tiny_mce.js"></script>
     <script src="__jsc/tiny_mce/plugins/tinybrowser/tb_tinymce.js.php"></script>
     <script src="__jsc/admin.js"></script>

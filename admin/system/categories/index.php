@@ -49,7 +49,7 @@
                         </ul>
                     </header>
 
-                    <h2>Sub categorias de vídeo aulas:</h2>
+                    <h2>Sub categorias:</h2>
 
                     <?php
                     $ReadSes->setCategory_parent($category_id);

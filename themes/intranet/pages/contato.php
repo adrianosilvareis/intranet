@@ -1,7 +1,7 @@
 <div class="section">
     <div class="well">
 
-        <h1>Fale Conosco</h1>
+        <h1 class="title-page">Fale Conosco</h1>
 
         <div class="row">
             <div class="col-md-12">
@@ -23,7 +23,7 @@
                 <form name="SendFormContato" action="#contato" method="post">
                     <div class="form-group">
                         <label class="control-label" >Nome</label>
-                        <input class="form-control" placeholder="Digite seu nome (Deixe em branco caso deseje anonimato)"
+                        <input class="form-control" placeholder="Digite seu nome"
                                type="text" title="Informe seu nome" name="RemetenteNome" required>
                     </div>
                     <div class="form-group">

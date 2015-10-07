@@ -1,0 +1,18 @@
+* ****************************************
+* ******** INSTALAÇÃO DO SYSTEMA *********
+* ************ NOVO USUARIOS *************
+* ****************************************
+
+Ao criar um novo banco de dados e setar no arquivo config,
+basta acessar o site no browser, ele encontrará alguns erros.
+neste momento as tabelas referente a cada erro
+é criada no banco por demanda, isto é, a cada erro cria a tabela referente.
+este procedimento impede que o sistema pare de funcionar totalmente e não
+sobrecarrega as conexões criando tabelas.
+
+Caso o banco seja completamente reescrito o primeiro usuario é
+USER: admin@sistem.com.br
+PASS: 123456789
+PASS md5= '25f9e794323b453885f5181f1b624d0b'
+
+

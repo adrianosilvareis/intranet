@@ -138,6 +138,7 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 .post_actions li .act_ative{background: #eee url(../icons/act_ative.png) center center no-repeat;}
 .post_actions li .act_inative{background: #eee url(../icons/act_inative.png) center center no-repeat;}
 .post_actions li .act_delete{background: #eee url(../icons/act_delete.png) center center no-repeat;}
+.post_tipo{width: 298px; font-size: 12px;}
 
 /*FORM CADASTRO*/
 .form_create .trigger{margin: 20px 0 25px 0;}
@@ -155,10 +156,15 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 .form_create article form .label_small input{width: 250px;}
 .form_create article form .label_small select{width: 280px; padding: 9px 10px}
 
-.form_create article form .label_medium{float: left; width: 442px; float: left; margin-right: 44px;}
+.form_create article form .label_medium{float: left; width: 500px; float: left; margin-right: 44px;}
 .form_create article form .label_medium:last-child{float: right; margin-right: 0;}
-.form_create article form .label_medium input{width: 412px;}
+.form_create article form .label_medium input{width: 600px;}
 .form_create article form .label_medium select{width: 442px; padding: 9px 10px}
+
+.label_list{float: left; width: 500px; margin-right: 44px; clear: both;}
+.label_list:last-child{float: right; margin-right: 0;}
+.label_list input{width: 600px;}
+.label_list select{width: 442px; padding: 9px 10px}
 
 .form_create article form .btn{margin-top: 5px; margin-right: 15px;}
 

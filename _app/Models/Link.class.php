@@ -54,11 +54,17 @@ class Link {
      * ****************************************
      */
     
+    /*
+     * verifica e inclui os arquivos por demanda. Podendo encontra-los dentro da pasta rais ou subpastas.
+     * cada nivel de subpasta deve ser preestabelecido com elseif.
+     */
     private function setPatch() {
         if (file_exists(REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . '.php')):
             $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . '.php';
         elseif (file_exists(REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . DIRECTORY_SEPARATOR . $this->Link . '.php')):
             $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . DIRECTORY_SEPARATOR . $this->Link . '.php';
+        elseif (file_exists(REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . DIRECTORY_SEPARATOR . $this->Link . DIRECTORY_SEPARATOR . 'index.php')):
+            $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . DIRECTORY_SEPARATOR . $this->Link . DIRECTORY_SEPARATOR . 'index.php';
         else:
             $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . '404.php';
         endif;

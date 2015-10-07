@@ -139,7 +139,7 @@ class Check {
         if (file_exists(self::$Data) && !is_dir(self::$Data)):
             $patch = HOME;
             $imagem = self::$Data;
-            return "<img src=\"{$patch}/tim.php?src={$patch}/{$imagem}&w={$ImageW}&h={$ImageH}\" alt=\"{$ImageDesc}\" title=\"{$ImageDesc}\"/>";
+            return "<img src=\"{$patch}/tim.php?src={$patch}/{$imagem}&w={$ImageW}&h={$ImageH}\" alt=\"{$ImageDesc}\" title=\"{$ImageDesc}\" class='img-thumbnail'/>";
         else:
             return false;
         endif;

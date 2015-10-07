@@ -11,6 +11,7 @@ class WsPosts extends Beans {
 
     private $post_id;
     private $post_name;
+    private $post_url;
     private $post_title;
     private $post_content;
     private $post_cover;
@@ -35,6 +36,7 @@ class WsPosts extends Beans {
     public function getThis() {
         $this->Controle->setDados(array_filter([
             'post_name' => $this->getPost_name(),
+            'post_url' => $this->getPost_url(),
             'post_title' => $this->getPost_title(),
             'post_content' => $this->getPost_content(),
             'post_cover' => $this->getPost_cover(),
@@ -58,6 +60,7 @@ class WsPosts extends Beans {
      */
     public function setThis($object) {
         $this->setPost_name((isset($object->post_name) ? $object->post_name : null));
+        $this->setPost_url(isset($object->post_url) ? $object->post_url : null);
         $this->setPost_title((isset($object->post_title) ? $object->post_title : null));
         $this->setPost_content((isset($object->post_content) ? $object->post_content : null));
         $this->setPost_cover((isset($object->post_cover) ? $object->post_cover : null));
@@ -94,6 +97,10 @@ class WsPosts extends Beans {
 
     function getPost_name() {
         return $this->post_name;
+    }
+    
+    function getPost_url() {
+        return $this->post_url;
     }
 
     function getPost_title() {
@@ -147,7 +154,11 @@ class WsPosts extends Beans {
     function setPost_name($post_name) {
         $this->post_name = $post_name;
     }
-
+    
+    function setPost_url($post_url) {
+        $this->post_url = $post_url;
+    }
+    
     function setPost_title($post_title) {
         $this->post_title = $post_title;
     }

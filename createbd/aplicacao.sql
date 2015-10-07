@@ -1,1 +1,2 @@
 CREATE TABLE IF NOT EXISTS app_youtube (youtube_id INT NOT NULL AUTO_INCREMENT, youtube_title VARCHAR(50), youtube_url VARCHAR(50), youtube_author VARCHAR(50), youtube_date TIMESTAMP, youtube_status TINYINT, PRIMARY KEY (youtube_id));
+CREATE TABLE IF NOT EXISTS app_niver(niver_id INT NOT NULL AUTO_INCREMENT, niver_nome VARCHAR(50), niver_setor VARCHAR(50), niver_data TIMESTAMP, niver_ordem INT NOT NULL, PRIMARY KEY (niver_id));

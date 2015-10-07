@@ -70,7 +70,8 @@ class Upload {
             'application/pdf',
             'text/plain',
             'application/vnd.ms-excel',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/x-zip-compressed'
         ];
 
         $this->saveFile($FileAccept, $MaxFileSize);

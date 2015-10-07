@@ -1,5 +1,5 @@
 <div class="content form_create">    
-    
+
     <article>
 
         <header>
@@ -11,19 +11,13 @@
         if (isset($post) && $post['SendPostForm']):
             $post['post_status'] = ( $post['SendPostForm'] == 'Cadastrar' ? '0' : '1');
             $post['post_cover'] = ( $_FILES['post_cover']['tmp_name'] ? $_FILES['post_cover'] : null);
-            $post['post_type'] = 'post';
             unset($post['SendPostForm']);
-            
+
             require '_models/AdminPost.class.php';
             $cadastra = new AdminPost();
             $cadastra->ExeCreate($post);
 
             if ($cadastra->getResult()):
-                if (!empty($_FILES['gallery_covers']['tmp_name'])):
-                    $sendGallery = new AdminPost;
-                    $sendGallery->gbSend($_FILES['gallery_covers'], $cadastra->getResult());
-                endif;
-                
                 header('Location: painel.php?exe=posts/update&create=true&postId=' . $cadastra->getResult());
             else:
                 WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
@@ -33,14 +27,32 @@
 
         <form name="PostForm" action="" method="post" enctype="multipart/form-data">
 
-            <label class="label">
-                <span class="field">Enviar Capa:</span>
-                <input type="file" name="post_cover" />
-            </label>
+            <div class="label_line">
+                <label class="label_medium">
+                    <span class="field">Enviar Capa:</span>
+                    <input type="file" name="post_cover" />
+                </label>
+
+                <label class="label_small">
+                    <span class="field">Tipo:</span>
+                    <select name="post_type">
+                        <option value="" > Selecione um tipo: </option>
+                        <option value="membros"> Membros </option>
+                        <option value="links"> Links </option>
+                        <option value="grupos"> Grupos </option>
+                        <option value="posts"> Geral </option>
+                    </select>
+                </label>
+            </div>
 
             <label class="label">
                 <span class="field">Titulo:</span>
-                <input type="text" name="post_title" value="<?php if (isset($post['post_title'])) echo $post['post_title']; ?>" />
+                <input type="text" name="post_title" value="<?php if (isset($post['post_title'])) echo $post['post_title']; ?>" placeholder="Titulo do post"/>
+            </label>
+
+            <label class="label">
+                <span class="field">Site Url:</span>
+                <input type="url" name="post_url" value="<?php if (isset($post['post_url'])) echo $post['post_url']; ?>" placeholder="http://www.site.com.br"/>
             </label>
 
             <label class="label">
@@ -114,13 +126,6 @@
                 </label>
 
             </div><!--/line-->
-
-            <div class="label gbform">
-                <label class="label">             
-                    <span class="field">Enviar Galeria:</span>
-                    <input type="file" multiple name="gallery_covers[]" />
-                </label>           
-            </div>
 
             <input type="submit" class="btn blue" value="Cadastrar" name="SendPostForm" />
             <input type="submit" class="btn green" value="Cadastrar & Publicar" name="SendPostForm" />

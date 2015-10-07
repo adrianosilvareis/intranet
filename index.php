@@ -10,23 +10,29 @@ $Session = new Session;
         <?php
         $Link = new Link;
         $Link->getTags();
-        Check::Manutencao($Link->getLocal());
+        //Check::Manutencao($Link->getLocal());
         ?>        
     </head>
 
     <body>
-        <div class="section bg-color-fundo">
-            <div class="corpo bg-color-branco">
-                <?php
-                require(REQUIRE_PATH . '/inc/header.inc.php');
+        <?php
+        require(REQUIRE_PATH . '/inc/header.inc.php');
+        ?>
 
+        <div class="section">
+            <div class="container">
+                <?php
+                $Login = new Login(1);
                 if (!require($Link->getPatch())):
                     WSErro('Erro ao incluir arquivo de navegação!', WS_ERROR, true);
                 endif;
                 ?>
             </div>
-            <?php require(REQUIRE_PATH . '/inc/footer.inc.php'); ?>
         </div>
+
+        <?php
+        require(REQUIRE_PATH . '/inc/footer.inc.php');
+        ?>
     </body>
 </html>
 <?php

@@ -7,7 +7,7 @@ endif;
 ?>
 <!--HOME CONTENT-->
 <section class="section">
-    <div class="col-md-12">
+    <div class="well row">
 
         <header>
             <h1 class="title"><?= $category_title; ?></h1>
@@ -25,18 +25,15 @@ endif;
             $Pager->ReturnPage();
             WSErro("Desculpe, a categoria <b>{$category_title}</b> ainda não tem artigos publicados, favor volte mais tarde!", WS_INFOR);
         else:
-            $cc = 1;
             $View = new View();
             $tpl_m = $View->Load('article_m');
             foreach ($readCat->Execute()->getResult() as $cat):
                 echo "\n<div class='col-md-4'>\n";
-                $class = ($cc % 3 == 0 ? ' class="right"' : null);
                 $cat->post_title = Check::Words($cat->post_title, 8);
                 $cat->post_content = Check::Words($cat->post_content, 20);
                 $cat->datetime = date('Y-m-d', strtotime($cat->post_date));
                 $cat->pubdate = date('d/m/Y H:i', strtotime($cat->post_date));
                 $View->Show((array) $cat, $tpl_m);
-                $cc++;
                 echo "\n</div>\n";
             endforeach;
         endif;

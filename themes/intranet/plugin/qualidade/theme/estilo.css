@@ -1,0 +1,56 @@
+body{
+	margin: 5% 10%;
+	background: url('/ftp/img/fundo.jpg');
+}
+footer{
+	clear: both;
+	color: white;
+	text-align: center;
+	font-size: 12px;
+	font-family: arial;
+}
+.icon{
+	float: left;
+	font-family: arial;
+	font-size: 10px;
+	width: 100px;
+	height: 100px;
+	margin: 0 3px;
+	overflow:hidden;
+}
+.icon:hover{
+	overflow: visible;
+	margin: 5px;
+	font-size: 15px;
+}
+.corpo{
+	padding: 10px;
+	overflow: auto;
+	height: 550px;
+	clear: both;
+}
+.back{
+	float: right;
+}
+.titulo{
+	float: left;
+}
+.topo{
+	clear: both;
+}
+.page{
+	border: 2px solid gray;
+	background-color: white;
+}
+ul{
+	list-style: none;
+}
+
+ul li a{
+	font-size: 18px;
+	color: green;
+	text-decoration: none;
+}
+ul li a:hover{
+	font-weight: bold;
+};

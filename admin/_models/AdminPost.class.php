@@ -15,6 +15,9 @@ class AdminPost {
 
     public function ExeCreate(array $Data) {
         $this->Data = $Data;
+        if (!$this->Data['post_url']):
+            unset($this->Data['post_url']);
+        endif;
 
         if (in_array('', $this->Data)):
             $this->Error = ["Erro ao cadastrar: Para criar um post, favor preencha todos os campos!", WS_ALERT];
@@ -30,6 +33,9 @@ class AdminPost {
     public function ExeUpdate($PostId, array $Data) {
         $this->Post = (int) $PostId;
         $this->Data = $Data;
+        if (!$this->Data['post_url']):
+            unset($this->Data['post_url']);
+        endif;
 
         if (in_array('', $this->Data)):
             $this->Error = ["Para atualizar este post, preencha todos os campos ( Capa não precisa ser enviada! )", WS_ALERT];
@@ -226,7 +232,7 @@ class AdminPost {
         foreach ($gbFiles as $gbUploads):
             $FileName = "{$ImageName}-fl-{$this->Post}-" . (substr(md5(time() + $i), 0, 5));
             $flSend->File($gbUploads, $FileName);
-
+            
             if ($flSend->getResult()):
                 $File = $flSend->getResult();
                 $gbCreate = new WsPostsFile();

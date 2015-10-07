@@ -1,88 +1,64 @@
-<?php
-$View = new View();
-$carousel = $View->Load("carousel_m");
-$cartilha = $View->Load("cartilhas_m");
-$youtube = $View->Load("youtube_m");
-$tpl_p = $View->Load("article_p");
-$tpl_m = $View->Load("article_m");
+<hr>
+<div class="col-md-9">
 
-$Read = new WsPosts();
-$result = $Read->Execute()->FullRead("SELECT COUNT(post_name) as 'cont' FROM ws_posts WHERE post_type = 'post'")[0]->cont;
-$All = (!empty($Read->Execute()->findAll()) ? (int) $result : 0);
-?>
-<section class="section">
-    <div class="well">
-        <!-- carrousel -->
-        <section class="section">
-
-            <div id="fullcarousel-example" data-interval="4000" class="carousel slide"
-                 data-ride="carousel">
-
-                <?php
-                $cat = Check::CatByName('destaque');
-                $Read->Execute()->Query("post_status = 1 AND post_type = 'post' AND (post_cat_parent = :cat OR post_category = :cat) ORDER BY post_date DESC LIMIT :limit OFFSET :offset", "cat={$cat}&limit=3&offset=0", true);
-                if (!$Read->Execute()->getResult()):
-                    WSErro("Desculpe não temos posts no momento, favor volte mais tarde!", WS_INFOR);
-                else:
-                    ?>
-
-
-                    <!-- Indicators -->
-                    <?php if ($Read->Execute()->getRowCount() > 1): ?>                         
-                        <ol class="carousel-indicators">
-                            <?php
-                            $i = 0;
-                            foreach ($Read->Execute()->getResult() as $ind):
-                                $class = ($i == 0 ? "active" : "");
-                                echo "<li data-target='#fullcarousel-example' data-slide-to='{$i}' class='{$class}'></li>" . "\n";
-                                $i++;
-                            endforeach;
-                            ?>
-                        </ol>
-                    <?php endif; ?>
-
-
-                    <!--itens-->
-                    <div class="carousel-inner">
-                        <?php
-                        $i = 0;
-                        foreach ($Read->Execute()->getResult() as $item):
-                            $item->post_title = Check::Words($item->post_title, 12);
-                            $item->post_content = Check::Words($item->post_content, 38);
-                            $item->datetime = date('Y-m-d', strtotime($item->post_date));
-                            $item->pubdate = date("d/m/Y H:i", strtotime($item->post_date));
-                            $item->class = ($i == 0 ? "item active" : "item");
-                            $View->Show((array) $item, $carousel);
-                            $i++;
-                        endforeach;
-                        ?>
-                    </div>
-
-
-                    <?php
-                    if ($Read->Execute()->getRowCount() > 1):
-                        echo "<a class='left carousel-control' href='#fullcarousel-example' data-slide='prev'><i class='icon-prev fa fa-angle-left'></i></a>" . "\n";
-                        echo "<a class='right carousel-control' href='#fullcarousel-example' data-slide='next'><i class='icon-next fa fa-angle-right'></i></a>" . "\n";
-                    endif;
-                endif;
-                ?>
-
-            </div>
-
-        </section>
-        <!-- carrousel -->
-
-
-        <div class="row">
-            <!--columa esquerda-->
+    <div id="carousel" data-interval="3000" class="carousel slide well" data-ride="carousel">
+        <div class="carousel-inner">
             <?php
-            //coluna esquerda
-            require(REQUIRE_PATH . '/inc/colum.left.inc.php');
-
-            //coluna direita
-            require(REQUIRE_PATH . '/inc/colum.right.inc.php');
+            $cat = Check::CatByName("destaque");
+            $Read = new WsPosts();
+            $Read->setPost_category($cat);
+            $Read->Execute()->Query("post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat) ORDER BY post_date LIMIT 3", "cat={$cat}", true);
+            if (!$Read->Execute()->getResult()):
+                WSErro("Opps! Não temos artigos em destaques!", WS_INFOR);
+            else:
+                $View = new View();
+                $siderbar = $View->Load("carousel_m");
+                $c = 0;
+                foreach ($Read->Execute()->getResult() as $bar):
+                    $bar->datetime = date('Y-m-d', strtotime($bar->post_date));
+                    $bar->pubdate = date("d/m/Y H:i", strtotime($bar->post_date));
+                    $bar->post_content = Check::Words($bar->post_content, 6);
+                    $bar->class = ($c == 0 ? "item active" : "item");
+                    if (!$bar->post_url):
+                        $bar->post_url = "#HOME#/artigo/#post_name#";
+                    endif;
+                    $View->Show((array) $bar, $siderbar);
+                    $c++;
+                endforeach;
+            endif;
             ?>
+
+        </div>
+        <?php
+        if ($c != 1):
+            echo "<a class='left carousel-control' href='#carousel' data-slide='prev'><i class='icon-prev fa fa-angle-left'></i></a>";
+            echo "<a class='right carousel-control' href='#carousel' data-slide='next'><i class='icon-next fa fa-angle-right'></i></a>";
+        endif;
+        ?>
+    </div>
+
+    <section class="well">
+
+        <div class="row"><h1 class="title-page">Intranet Tommasi</h1></div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="<?= HOME ?>/membros/equipe-de-ti/"><img src="<?= HOME . '/themes/' . THEME ?>/images/site.png" alt="Intranet" class="img-responsive"></a>
+            </div>
+            <div class="col-md-6">
+                <div class="text-justify">
+                    <p>A <strong>INTRANET TOMMASI</strong>, surgiu da real necessidade de um maior abastecimento de informações sobre o que acontece em nosso Laboratório.</p>
+                    <p>Para que todos nós, funcionários do Tommasi Laboratório, participemos mais ativamente do resultado gerado pela empresa e para nos informar mais sobre o que acontece em nossa instituição.</p>
+                    <p>Este portal completa 6 anos de atividades, em 2015, e para que ele continue a melhorar e se tornar cada vez mais útil, necessitamos que todos colaborem com o abastecimento de informações e opiniões, para o crescimento de nosso trabalho.</p>
+                    <p class="text-right"><a href="<?= HOME ?>/membros/equipe-de-ti/">TI – Tecnologia da Informação</a></p>
+                </div>
+            </div>
         </div>
 
-    </div>
-</section>
+    </section>
+</div>
+
+<?php
+//coluna direita
+$cat = Check::CatByName("siderbar-left");
+require(REQUIRE_PATH . '/inc/siderbar.inc.php');
