@@ -30,12 +30,13 @@
                                     <li role="separator" class="divider"></li>
                                     <li class="disabled"><a>Links</a></li>
                                     <li><a href="http://helpdesktommasi.ddns.net:8778/ocomon/" target="_blank">HelpDesk</a></li>
-                                    <li><a href="#">Coleta Domiciliar</a></li>
+                                    <li><a href="http://sdlaudos.portalglauco.com.br/LoginNovo.aspx?ReturnUrl=%2fSistema%2fAberturaNova.aspx">SDLaudos</a></li>
                                     <li><a href="http://187.72.199.27/shift/lis/tommasi/s00.iu.Login.cls" target="_blank">SHIFT LIS</a></li>
+                                    <li><a href="http://189.36.4.25/shift/lis/tommasi/s00.iu.Login.cls" target="_blank">SHIFT Controller</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li class="disabled"><a>Aplicativos</a></li>
                                     <li><a href="/view/redirect/sft_redirect.html" target="_blank">SFT - Tommasi</a></li>
-                                    <li><a href="<?= HOME ?>/pages/qualidade">Qualidade</a></li>
+                                    <li><a href="/ftp">Qualidade</a></li>
                                     <li><a href="<?= HOME ?>/pages/aniversarios">Aniversariantes</a></li>
                                 </ul>
                             </li>

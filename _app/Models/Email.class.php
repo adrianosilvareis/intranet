@@ -95,7 +95,7 @@ class Email {
         //SMTP AUTH
         $this->Mail->isSMTP();
         $this->Mail->SMTPAuth = true;
-        $this->Mail->SMTPSecure = "tls";
+        $this->Mail->SMTPSecure = "tsl";
         $this->Mail->isHTML();
 
         //REMETENTE E RETORNO
