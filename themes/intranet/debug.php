@@ -1,0 +1,1 @@
+<h1><a href="<?= HOME ?>/url?link=teste">Teste de redirecionamento</a></h1>

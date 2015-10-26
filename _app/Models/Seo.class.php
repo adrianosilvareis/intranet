@@ -64,10 +64,7 @@ class Seo {
                     $this->Data = [$post_title . ' - ' . SITENAME, $post_content, HOME . "/artigo/{$post_name}", HOME . "/uploads/{$post_cover}"];
 
                     //post:: conta viws do post
-                    $ReadSeo->setPost_id($post_id);
-                    $ReadSeo->setPost_views($post_views + 1);
-                    $ReadSeo->setPost_last_views(date('Y-m-d H:i:s'));
-                    $ReadSeo->Execute()->update($ReadSeo->Execute()->getDados(), 'post_id');
+                    Check::ContPostViews($post_id);
                 endif;
                 break;
 
@@ -102,10 +99,7 @@ class Seo {
                     $this->Data = [$category_title . ' - ' . SITENAME, $category_content, HOME . "/categoria/{$category_name}", INCLUDE_PATH . '/images/site.png'];
 
                     //categories:: conta views da categoria
-                    $ReadSeo->setCategory_id($category_id);
-                    $ReadSeo->setCategory_views($category_views + 1);
-                    $ReadSeo->setCategory_last_view(date('Y-m-d H:i:s'));
-                    $ReadSeo->Execute()->update($ReadSeo->Execute()->getDados(), 'category_id');
+                    Check::ContCategoryViews($category_id);
                 endif;
                 break;
 
@@ -114,7 +108,7 @@ class Seo {
                 $ReadSeo = new WsCategories;
                 $ReadSeo->setCategory_name($this->Link);
                 $ReadSeo->Execute()->Query("#category_name#");
-
+                
                 if (!$ReadSeo->Execute()->getResult()):
                     $this->seoData = null;
                     $this->seoTags = null;
@@ -122,12 +116,9 @@ class Seo {
                     extract((array) $ReadSeo->Execute()->getResult()[0]);
                     $this->seoData = (array) $ReadSeo->Execute()->getResult()[0];
                     $this->Data = [$category_title . ' - ' . SITENAME, $category_content, HOME . "/categoria/{$category_name}", INCLUDE_PATH . '/images/site.png'];
-
+                    
                     //categories:: conta views da categoria
-                    $ReadSeo->setCategory_id($category_id);
-                    $ReadSeo->setCategory_views($category_views + 1);
-                    $ReadSeo->setCategory_last_view(date('Y-m-d H:i:s'));
-                    $ReadSeo->Execute()->update($ReadSeo->Execute()->getDados(), 'category_id');
+                    Check::ContCategoryViews($category_id);
                 endif;
                 break;
 
@@ -146,10 +137,7 @@ class Seo {
                     $this->Data = [$category_title . ' - ' . SITENAME, $category_content, HOME . "/membros/{$category_name}", INCLUDE_PATH . '/images/site.png'];
 
                     //categories:: conta views da categoria
-                    $ReadSeo->setCategory_id($category_id);
-                    $ReadSeo->setCategory_views($category_views + 1);
-                    $ReadSeo->setCategory_last_view(date('Y-m-d H:i:s'));
-                    $ReadSeo->Execute()->update($ReadSeo->Execute()->getDados(), 'category_id');
+                    Check::ContCategoryViews($category_id);
                 endif;
 
                 break;
@@ -200,7 +188,7 @@ class Seo {
 
             //SEO:: PLUGIN
             case 'plugin':
-                $this->Data = [SITENAME . ' - Plugin', SITEDESC, HOME , INCLUDE_PATH . '/images/site.png'];
+                $this->Data = [SITENAME . ' - Plugin', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                 break;
 
             //SEO:: 404

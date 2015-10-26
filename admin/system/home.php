@@ -103,6 +103,7 @@
                         </div>
 
                         <h1><a target="_blank" href="../artigo/<?= $post_name; ?>" title="Ver Post"><?= Check::Words($post_title, 5) ?></a></h1>
+                        <p class="post_views"><strong>Views:</strong> <?= $post_views;?></p>
                         <ul class="info post_actions">
                             <li><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($post_date)); ?>Hs</li>
                             <li><a class="act_view" target="_blank" href="../artigo/<?= $post_name; ?>" title="Ver no site">Ver no site</a></li>
@@ -143,8 +144,9 @@
                         </div>
 
                         <h1><a target="_blank" href="../artigo/<?= $post_name; ?>" title="Ver Post"><?= Check::Words($post_title, 10) ?></a></h1>
+                        <p class="post_views"><strong>Views:</strong> <?= $post_views;?></p>
                         <ul class="info post_actions">
-                            <li><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($post_date)); ?>Hs</li>
+                            <li><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($post_date)); ?>Hs<br></li>
                             <li><a class="act_view" target="_blank" href="../artigo/<?= $post_name; ?>" title="Ver no site">Ver no site</a></li>
                             <li><a class="act_edit" href="painel.php?exe=posts/update&postid=<?= $post_id; ?>" title="Editar">Editar</a></li>
 
@@ -156,7 +158,6 @@
 
                             <li><a class="act_delete" href="painel.php?exe=posts/index&post=<?= $post_id; ?>&action=delete" title="Excluir">Deletar</a></li>
                         </ul>
-
                     </article>
                     <?php
                 endforeach;

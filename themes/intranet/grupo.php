@@ -23,7 +23,7 @@ endif;
                 $Pager->ExePager($getPage, 12);
 
                 $Read = new WsPosts();
-                $Read->Execute()->Query("post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat) ORDER BY post_date DESC LIMIT :limit OFFSET :offset", "cat={$category_id}&limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+                $Read->Execute()->Query("post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat) ORDER BY post_date, post_views DESC LIMIT :limit OFFSET :offset", "cat={$category_id}&limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 
                 if (!$Read->Execute()->getResult()):
                     $Pager->ReturnPage();

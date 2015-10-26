@@ -127,7 +127,7 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 .home .content_statistics section article h1 a:hover{text-decoration: underline;}
 
 /*POSTS*/
-.post_actions{float: left; width: 298px; font-size: 12px;}
+.post_actions{float: left; width: 298px; font-size: 12px; clear: right;}
 .post_actions li{float: left; margin-right: 6px;}
 .post_actions li:first-child{margin-right: 32px; margin-top: 4px;}
 .post_actions li:last-child{margin: 0;}
@@ -139,6 +139,7 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 .post_actions li .act_inative{background: #eee url(../icons/act_inative.png) center center no-repeat;}
 .post_actions li .act_delete{background: #eee url(../icons/act_delete.png) center center no-repeat;}
 .post_tipo{width: 298px; font-size: 12px;}
+.post_views{font-size: 10px; color: #5b5b5b}
 
 /*FORM CADASTRO*/
 .form_create .trigger{margin: 20px 0 25px 0;}

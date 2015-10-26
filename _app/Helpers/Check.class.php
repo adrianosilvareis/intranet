@@ -100,6 +100,33 @@ class Check {
     }
 
     /**
+     * <b>Contagem de Views:</b> Realiza uma contagem ao post informado.
+     * @param INT $post_id
+     */
+    public static function ContPostViews($post_id) {
+        $WsPosts = new WsPosts();
+        $WsPosts->setPost_id($post_id);
+        extract((array) $WsPosts->Execute()->find());
+        $WsPosts->setPost_views($post_views + 1);
+        $WsPosts->setPost_last_views(date('Y-m-d H:i:s'));
+        $WsPosts->Execute()->update($WsPosts->Execute()->getDados(), 'post_id');
+        return $post_url;
+    }
+
+    /**
+     * <b>Contagem de Views:</b> Realiza uma contagem ao post informado.
+     * @param INT $post_id
+     */
+    public static function ContCategoryViews($category_id) {
+        $WsCategories = new WsCategories();
+        $WsCategories->setCategory_id($category_id);
+        extract((array) $WsCategories->Execute()->find());
+        $WsCategories->setCategory_views($category_views + 1);
+        $WsCategories->setCategory_last_view(date('Y-m-d H:i:s'));
+        $WsCategories->Execute()->update($WsCategories->Execute()->getDados(), 'category_id');
+    }
+
+    /**
      * <b>Usuários Online:</b> Ao executar este HELPER, ele automaticamente deleta os usuários expirados. Logo depois
      * executa um READ para obter quantos usuários estÃ£o realmente online no momento!
      * @return INT = Qtd de usuários online

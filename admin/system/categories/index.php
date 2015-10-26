@@ -40,7 +40,7 @@
                     <header>
                         <h1><?= $category_title; ?>  <span>( <?= $ContSesPosts; ?> posts ) ( <?= $ContSesCats; ?> Categorias )</span></h1>
                         <p class="tagline"><?= $category_content; ?></p>
-
+                        <p class="post_views"><strong>Views:</strong> <?= $category_views; ?></p>
                         <ul class="info post_actions">
                             <li><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($category_date)); ?>Hs</li>
                             <li><a class="act_view" target="_blank" href="../categoria/<?= $category_name; ?>" title="Ver no site">Ver no site</a></li>
@@ -63,10 +63,11 @@
                             $ReadCatPosts = new WsPosts();
                             $ReadCatPosts->setPost_category($sub->category_id);
                             $ReadCatPosts->Execute()->Query("#post_category#");
+                            $category_views = (!empty($category_views) ? $category_views : 0);
                             ?>
                             <article<?php if ($a % 3 == 0) echo ' class="right"'; ?>>
                                 <h1><a target="_blank" href="../categoria/<?= $sub->category_name; ?>" title="Ver Categoria"><?= $sub->category_title; ?></a>  ( <?= $ReadCatPosts->Execute()->getRowCount(); ?> posts )</h1>
-
+                                <p class="post_views"><strong>Views:</strong> <?= $sub->category_views; ?></p>
                                 <ul class="info post_actions">
                                     <li><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($sub->category_date)); ?>Hs</li>
                                     <li><a class="act_view" target="_blank" href="../categoria/<?= $sub->category_name; ?>" title="Ver no site">Ver no site</a></li>
