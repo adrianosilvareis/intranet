@@ -64,7 +64,7 @@ function __autoload($Class_name) {
      * ************* PLUGINS ******************
      * ****************************************
      */
-    $pDir = ['contatores-de-impressao', 'qualidade'];
+    $pDir = ['contadores-de-impressao', 'qualidade'];
     if (!$iDir):
         foreach ($pDir as $dirName):
             $file = __DIR__ . DIRECTORY_SEPARATOR . "plugins" . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class_name . ".class.php";

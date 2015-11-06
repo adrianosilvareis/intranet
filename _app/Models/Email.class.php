@@ -88,7 +88,7 @@ class Email {
     }
 
     private function setMsg() {
-        $this->Mensagem = "{$this->Mensagem} <hr><small>Recebida em " . date("d/m/Y H:m:s") . "</small>";
+        $this->Mensagem = "{$this->Mensagem} <hr><small>Recebida em " . date("d/m/Y H:i:s") . "</small>";
     }
 
     private function Config() {

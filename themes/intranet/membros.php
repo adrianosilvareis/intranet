@@ -17,7 +17,7 @@ endif;
         <?php
         $getPage = (int) (!empty($Link->getLocal()[2]) ? $Link->getLocal()[2] : 1);
         $Pager = new Pager(HOME . '/membros/' . $category_name . '/');
-        $Pager->ExePager($getPage, 4);
+        $Pager->ExePager($getPage, 6);
         $Pager->ExePaginator("ws_posts", "post_status = 1 AND post_type = 'membros' AND (post_category = :cat OR post_cat_parent = :cat)", "cat={$category_id}", true);
 
         $Read = new WsPosts();

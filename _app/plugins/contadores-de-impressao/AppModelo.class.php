@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * AppModelo.class.php [Beans]
+ * 
+ * Classe que representa a tabela app_modelo do banco de dados
+ * 
+ * @copyright (c) 2015, Adriano S. Reis Programador
+ */
+class AppModelo extends Beans {
+
+    private $modelo_id;
+    private $modelo_descricao;
+
+    function __construct() {
+        $this->Controle = new Controle('app_modelo');
+    }
+
+    /**
+     * 
+     * @return Objeto pupulado com todos os dados não nulo setado anteriormente.
+     * 
+     */
+    public function getThis() {
+        $this->Controle->setDados(array_filter([
+            'modelo_descricao' => $this->getModelo_descricao(),
+            'modelo_id' => $this->getModelo_id()
+        ]));
+        return $this->Controle->getDados();
+    }
+
+    /**
+     * transforma a stdClass neste objeto, transferindo todos os dados não nulos para esta classe;
+     * 
+     * @param stdClass $object
+     */
+    public function setThis($object) {
+        $this->setModelo_id((isset($object->modelo_id) ? $object->modelo_id : null));
+        $this->setModelo_descricao((isset($object->modelo_descricao) ? $object->modelo_descricao : null));
+    }
+
+    /**
+     * Retorna operações de insert, update, delete, e buscas
+     * 
+     * @return Controle
+     */
+    public function Execute() {
+        $this->getThis();
+        return $this->Controle;
+    }
+
+    /**
+     * ****************************************
+     * ************** GET & SET ***************
+     * ****************************************
+     */
+    function getModelo_id() {
+        return $this->modelo_id;
+    }
+
+    function getModelo_descricao() {
+        return $this->modelo_descricao;
+    }
+
+    function setModelo_id($modelo_id) {
+        $this->modelo_id = $modelo_id;
+    }
+
+    function setModelo_descricao($modelo_descricao) {
+        $this->modelo_descricao = $modelo_descricao;
+    }
+
+}
