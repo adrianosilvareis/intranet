@@ -22,7 +22,7 @@ class AdminImpressoras {
         if (!empty($postos)):
             $this->Result = $this->Read->Execute()->Query("impressora_status = 0 AND fk_postos = $postos");
             $this->Imp = $this->Result[0]->impressora_id;
-
+            
             if (!empty($this->Result)):
                 $this->Result = $this->Read->Execute()->Query("fk_postos = $postos");
             elseif ($this->Read->Execute()->Query("fk_postos = $postos")):

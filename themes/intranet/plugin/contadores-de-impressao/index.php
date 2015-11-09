@@ -4,6 +4,7 @@
 
             <?php
             Check::Manutencao($Link->getLocal());
+            include_once 'config.inc.php';
             ?>
             <header>
                 <h1>Contadores de impressão</h1>

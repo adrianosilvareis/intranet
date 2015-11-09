@@ -12,6 +12,7 @@ class AdminPostos {
     private $Rest;
     private $Result;
     private $Read;
+    private $Data;
 
     function __construct() {
         $this->Read = new AppPostos();
@@ -19,6 +20,28 @@ class AdminPostos {
         $this->Result = $this->Read->Execute()->getResult();
 
         $this->Executar();
+    }
+
+    public function ExeUpdate($Data) {
+        $this->Data = $Data;
+        $this->setData();
+        $this->Read->Execute()->update($this->Data, "postos_id");
+    }
+
+    public function ExeStatus($postoId, $postoStatus) {
+        $update = $this->Read->Execute()->update("postos_id={$postoId}&postos_ativo=$postoStatus", "postos_id");
+        return $update;
+    }
+
+    public function ListAdmin() {
+        $this->Read->Execute()->FullRead("SELECT * FROM app_postos ORDER BY postos_ativo");
+        $this->Result = $this->Read->Execute()->getResult();
+        $this->Executar();
+    }
+
+    public function getPosto($postoId) {
+        $this->Read->Execute()->find("postos_id={$postoId}");
+        return $this->Read->Execute()->getResult();
     }
 
     public function getConcluidos() {
@@ -29,11 +52,20 @@ class AdminPostos {
         return $this->Rest;
     }
 
+    public function getResult() {
+        return $this->Result;
+    }
+
     /**
      * ****************************************
      * ************* PRIVATES *****************
      * ****************************************
      */
+    private function setData() {
+        $this->Data = array_map('strip_tags', $this->Data);
+        $this->Data = array_map('trim', $this->Data);
+    }
+
     private function Executar() {
         $AppImpressora = new AppImpressora();
         foreach ($this->Result as $posto) {

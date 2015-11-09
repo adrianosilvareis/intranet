@@ -19,8 +19,8 @@ if (!empty($data['sendContador'])):
 
     $minContador = $AdImpress->MinContador($data['contadores_contador'], $Link->getLocal()[3]);
     if (!$minContador):
-        $AdImpress->ExeCreate($data);
-        header("Location: " . HOME . "/plugin/contadores-de-impressao/{$Link->getLocal()[2]}");
+        $AdImpress->ExeRegister($data);
+        header("Location: " . HOME . IMPRESSORAS . $Link->getLocal()[2]);
     else:
         WSErro("O contador deve ser maior que: <b>{$minContador[0]->contadores_contador}</b>", WS_INFOR);
     endif;
