@@ -30,6 +30,30 @@ Folha de estilo para alterações especificas
 .post_tipo{width: 298px; font-size: 12px;}
 .plugin{width: auto !important; margin: 0px !important; padding: 0px !important;}
 
+/*PAINEL ADMIN*/
+#navtab *{padding: 0; margin: 0;list-style: none; line-height: 1.2;}
+#navtab{width: 100%; height: 147px; position: relative; margin-bottom: 50px;padding-left: 35px;}
+#navtab{background: url(../images/header_bg.png) repeat-x #fbfbfb; }
+#navtab nav{width: 968px; display: block; float: left; position: absolute; bottom: 0px;}
+#navtab nav a{text-decoration: none;}
+#navtab nav h1{float: left; font-size: 18px; background: #F2F2F2; margin-right: 15px; border-bottom: 1px solid #F2F2F2;}
+#navtab nav h1 a{color: #09f; padding: 11px 26px 11px 26px; float: left;}
+#navtab nav h1 a:hover{background: #09f; color: #fff;}
+#navtab nav ul{float: left; margin-top: 6px;}
+#navtab nav ul .li{float: left; margin-right: 5px; position: relative;}
+#navtab nav ul li:hover .opensub{background: #F2F2F2; color: #333}
+#navtab nav ul .li:last-child{margin: 0;}
+#navtab nav ul .li .opensub{float: left; padding: 10px 20px; color: #fff; background: #005875; font-size: 14px; font-weight: 600; border-bottom: 1px solid #777777;}
+#navtab nav ul .li .opensub:hover{background: #F2F2F2;}
+#navtab nav ul li:hover .sub{display: block;}
+#navtab nav ul .li .sub{position: absolute; top: 33px; width: 960px;}
+#navtab nav ul .li .sub li{float: left; font-size: 12px; text-transform: uppercase; margin-right: 20px;}
+#navtab nav ul .li .sub li a{float: left; font-weight: bold; color: #999; padding: 17px 10px;}
+#navtab nav ul .li .sub li a:hover{color: #333;}
+#navtab nav ul .li .sub{display: none;}
+#navtab nav ul .active .opensub{background-color: #F2F2F2 !important; color: #333 !important;}
+
+.panel{border-top: 1px solid #ccc; border-top-left-radius: 0; border-top-right-radius: 0; }
 /*botoes em imagens*/
 .img-block{
     position: relative;

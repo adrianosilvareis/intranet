@@ -66,6 +66,10 @@ if (!empty($Link->getLocal()[2])):
         case "delete":
             WSErro("Esta opção não deve ser usada, desative o posto.", WS_ERROR);
             break;
+        
+        case "admin":
+            header("Location: " . IMP_INCLUDE . "_models/AdminImpressoras.class.php");
+            break;
 
         default:
             WSErro("Oppss! Opção inválida.", WS_ALERT);
@@ -98,20 +102,20 @@ endif;
                     ?>
                     <tr class="text-center">
                         <td <?php if (!$cont): echo "class='danger'"; endif; ?>>
-                            <a href="<?= HOME . IMPRESSORAS . $postos_id; ?>"><?= $postos_nome; ?></a>
+                            <a href="<?= IMP_INCLUDE . $postos_id; ?>"><?= $postos_nome; ?></a>
                         </td>
                         <td <?php if (!$cont): echo "class='danger'"; endif; ?>>
                                 <?= $cont; ?>
                         </td>
                         <td <?php if (!$cont): echo "class='danger'"; endif; ?>>
                             <ul class="post_actions plugin">
-                                <li><a class="act_edit" href="<?= HOME . IMPRESSORAS ?>update/<?= $postos_id; ?>" title="Editar">Editar</a></li>
+                                <li><a class="act_edit" href="<?= IMP_INCLUDE ?>update/<?= $postos_id; ?>" title="Editar">Editar</a></li>
                                 <?php if (!$postos_ativo): ?>
-                                    <li><a class="act_ative" href="<?= HOME . IMPRESSORAS ?>active/<?= $postos_id; ?>" title="Ativar">Ativar</a></li>
+                                    <li><a class="act_ative" href="<?= IMP_INCLUDE ?>active/<?= $postos_id; ?>" title="Ativar">Ativar</a></li>
                                 <?php else: ?>
-                                    <li><a class="act_inative" href="<?= HOME . IMPRESSORAS ?>inative/<?= $postos_id; ?>" title="Inativar">Inativar</a></li>
+                                    <li><a class="act_inative" href="<?= IMP_INCLUDE ?>inative/<?= $postos_id; ?>" title="Inativar">Inativar</a></li>
                                 <?php endif; ?>
-                                <li><a class="act_delete" href="<?= HOME . IMPRESSORAS ?>delete/<?= $postos_id; ?>" title="Excluir">Deletar</a></li>
+                                <li><a class="act_delete" href="<?= IMP_INCLUDE ?>delete/<?= $postos_id; ?>" title="Excluir">Deletar</a></li>
                             </ul>
                         </td>
                     </tr>
@@ -125,7 +129,7 @@ endif;
                     ?>
                     <tr class="text-center">
                         <td>
-                            <a href="<?= HOME . "/plugin/contadores-de-impressao/" . $postos_id; ?>"><?= $postos_nome; ?></a>
+                            <a href="<?= IMP_INCLUDE . $postos_id; ?>"><?= $postos_nome; ?></a>
                         </td>
                         <td>
                             <?= $cont; ?>

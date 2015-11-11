@@ -2,7 +2,8 @@
 $AppPostos = new AppPostos();
 $AppPostos->Execute()->find("postos_id={$Link->getLocal()[2]}");
 ?>
-<a style="float: right;" class="btn btn-info" href="<?= HOME . "/plugin/contadores-de-impressao" ?>">Voltar</a>
+
+<a style="float: right;" class="btn btn-info" href="<?= IMP_INCLUDE ?>">Voltar</a>
 <h2><small><?= $AppPostos->Execute()->getResult()->postos_nome; ?></small></h2>
 
 <?php
@@ -20,7 +21,7 @@ if (!empty($data['sendContador'])):
     $minContador = $AdImpress->MinContador($data['contadores_contador'], $Link->getLocal()[3]);
     if (!$minContador):
         $AdImpress->ExeRegister($data);
-        header("Location: " . HOME . IMPRESSORAS . $Link->getLocal()[2]);
+        header("Location: " . IMP_INCLUDE . $Link->getLocal()[2]);
     else:
         WSErro("O contador deve ser maior que: <b>{$minContador[0]->contadores_contador}</b>", WS_INFOR);
     endif;
@@ -79,7 +80,7 @@ endif;
                         </td>
                     <?php else: ?>
                         <td class="error">
-                            <a href="<?= HOME . "/plugin/contadores-de-impressao/{$imp->fk_postos}/{$impressora_id}" ?>">PENDENTE</a>
+                            <a href="<?= IMP_INCLUDE . "{$imp->fk_postos}/{$impressora_id}" ?>">PENDENTE</a>
                         </td>   
                     <?php
                     endif;
