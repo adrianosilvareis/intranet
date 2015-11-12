@@ -5,6 +5,7 @@
         <div class="carousel-inner">
             <?php
             $cat = Check::CatByName("destaque");
+            $c = 0;
             $Read = new WsPosts();
             $Read->setPost_category($cat);
             $Read->Execute()->Query("post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat) ORDER BY post_date LIMIT 3", "cat={$cat}", true);
@@ -13,7 +14,6 @@
             else:
                 $View = new View();
                 $siderbar = $View->Load("carousel_m");
-                $c = 0;
                 foreach ($Read->Execute()->getResult() as $bar):
                     $bar->datetime = date('Y-m-d', strtotime($bar->post_date));
                     $bar->pubdate = date("d/m/Y H:i", strtotime($bar->post_date));

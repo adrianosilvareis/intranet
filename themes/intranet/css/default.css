@@ -53,7 +53,7 @@ Folha de estilo para alterações especificas
 #navtab nav ul .li .sub{display: none;}
 #navtab nav ul .active .opensub{background-color: #F2F2F2 !important; color: #333 !important;}
 
-.panel{border-top: 1px solid #ccc; border-top-left-radius: 0; border-top-right-radius: 0; }
+.panel{border-top: 1px solid #ccc; border-top-left-radius: 0; border-top-right-radius: 0; padding: 40px 25px;}
 /*botoes em imagens*/
 .img-block{
     position: relative;

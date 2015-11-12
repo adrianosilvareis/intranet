@@ -181,7 +181,7 @@ class Check {
 
         if (strpos($msg, "ws_categories") || strpos($msg, "ws_posts") || strpos($msg, "ws_posts_gallery") || strpos($msg, "ws_siteviews") || strpos($msg, "ws_siteviews_agent") || strpos($msg, "ws_siteviews_online") || strpos($msg, "ws_users")):
             $tab = 'framework';
-        elseif (strpos($msg, "app_youtube")):
+        elseif (strpos($msg, "app_youtube") || strpos($msg, "app_niver")):
             $tab = 'aplicacao';
         elseif (strpos($msg, "app_cidades")):
             $tab = 'cidades';
@@ -189,6 +189,8 @@ class Check {
             $tab = 'estados';
         elseif (strpos($msg, "app_cidades")):
             $tab = 'cidades';
+        elseif (strpos($msg, "app_postos")):
+            $tab = 'plugin_impress';
         endif;
 
         if (!empty($tab)):
