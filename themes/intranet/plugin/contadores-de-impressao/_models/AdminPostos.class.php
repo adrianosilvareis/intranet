@@ -16,21 +16,51 @@ class AdminPostos {
 
     function __construct() {
         $this->Read = new AppPostos();
-        $this->Read->Execute()->Query("postos_ativo = 1");
-        $this->Result = $this->Read->Execute()->getResult();
+    }
 
-        $this->Executar();
+    public function ExeCreate($Data) {
+        $this->Data = $Data;
+        $this->setData();
+        $this->Read->setThis((object) $this->Data);
+        $insert = $this->Read->Execute()->insert();
+        $this->Result = $this->Read->Execute()->MaxFild("postos_id");
+        return $insert;
     }
 
     public function ExeUpdate($Data) {
         $this->Data = $Data;
         $this->setData();
-        $this->Read->Execute()->update($this->Data, "postos_id");
+        $this->Read->setThis((object) $this->Data);
+        $status = $this->ExeStatus($this->Read->getPostos_id(), $this->Read->getPostos_ativo());
+        $update = $this->Read->Execute()->update(null, "postos_id");
+        if($status || $update):
+            return true;
+        endif;
     }
 
     public function ExeStatus($postoId, $postoStatus) {
         $update = $this->Read->Execute()->update("postos_id={$postoId}&postos_ativo=$postoStatus", "postos_id");
         return $update;
+    }
+    
+    public function ExeDelete($fk_postos){
+        $AppImpressora = new AppImpressora();
+        $AppImpressora->setFk_postos($fk_postos);
+        $AppImpressora->Execute()->Query("#fk_postos#");
+        
+        foreach ($AppImpressora->Execute()->getResult() as $imp):
+            $update = new $AppImpressora();
+            $update->setThis((object) $imp);
+            $update->setFk_postos(666);
+            var_dump($update);
+            $update->Execute()->update(null, "impressora_id");
+        endforeach;
+    }
+    
+    public function Lista() {
+        $this->Read->Execute()->Query("postos_ativo = 1");
+        $this->Result = $this->Read->Execute()->getResult();
+        $this->Executar();
     }
 
     public function ListAdmin() {
@@ -39,8 +69,13 @@ class AdminPostos {
         $this->Executar();
     }
 
-    public function getPosto($postoId) {
+    public function getPostoId($postoId) {
         $this->Read->Execute()->find("postos_id={$postoId}");
+        return $this->Read->Execute()->getResult();
+    }
+
+    public function getPostoNumero($postoNumero) {
+        $this->Read->Execute()->find("postos_numero={$postoNumero}");
         return $this->Read->Execute()->getResult();
     }
 
@@ -66,7 +101,8 @@ class AdminPostos {
         $this->Data = array_map('trim', $this->Data);
     }
 
-    private function Executar() {
+    public function Executar() {
+
         $AppImpressora = new AppImpressora();
         foreach ($this->Result as $posto) {
             //encontra todas as impressoras deste posto

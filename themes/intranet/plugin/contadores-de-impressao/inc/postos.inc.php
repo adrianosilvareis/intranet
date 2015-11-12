@@ -4,7 +4,7 @@ if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminPostos.clas
 endif;
 
 $AdPostos = new AdminPostos();
-
+$AdPostos->Lista();
 /**
  * Formulario de atualização
  */
@@ -21,7 +21,7 @@ endif;
 /**
  * Tratamento de erro
  */
-if (!empty($Link->getLocal()[2])):
+if (!empty($Link->getLocal()[2]) && $Login->CheckLogin()):
     switch ($Link->getLocal()[2]):
         case "ok":
             WSErro("Registro já concluido", WS_ACCEPT);
@@ -33,7 +33,7 @@ if (!empty($Link->getLocal()[2])):
 
         case "update":
             if (!$posto):
-                $posto = (array) $AdPostos->getPosto($Link->getLocal()[3]);
+                $posto = (array) $AdPostos->getPostoId($Link->getLocal()[3]);
             endif;
             ?>
             <form name="update" method="POST" class="form-inline form-group">
@@ -47,7 +47,7 @@ if (!empty($Link->getLocal()[2])):
 
         case "inative":
             if (!empty($Link->getLocal()[3])):
-                ($AdPostos->ExeStatus($Link->getLocal()[3], 0) ? WSErro("Posto <b>{$AdPostos->getPosto($Link->getLocal()[3])->postos_nome}</b> inativado com sucesso!", WS_ACCEPT) : WSErro("Oppss! Erro ao inativar o posto <b>{$AdPostos->getPosto($Link->getLocal()[3])->postos_nome}</b>.", WS_ERROR));
+                ($AdPostos->ExeStatus($Link->getLocal()[3], 0) ? WSErro("Posto <b>{$AdPostos->getPostoId($Link->getLocal()[3])->postos_nome}</b> inativado com sucesso!", WS_ACCEPT) : WSErro("Oppss! Erro ao inativar o posto <b>{$AdPostos->getPostoId($Link->getLocal()[3])->postos_nome}</b>.", WS_ERROR));
                 $AdPostos->ListAdmin();
             else:
                 WSErro("Oppss! Opção inválida.", WS_ALERT);
@@ -56,7 +56,7 @@ if (!empty($Link->getLocal()[2])):
 
         case "active":
             if (!empty($Link->getLocal()[3])):
-                ($AdPostos->ExeStatus($Link->getLocal()[3], 1) ? WSErro("Posto <b>{$AdPostos->getPosto($Link->getLocal()[3])->postos_nome}</b> ativado com sucesso!", WS_ACCEPT) : WSErro("Oppss! Erro ao ativar o posto <b>{$AdPostos->getPosto($Link->getLocal()[3])->postos_nome}</b>.", WS_ERROR));
+                ($AdPostos->ExeStatus($Link->getLocal()[3], 1) ? WSErro("Posto <b>{$AdPostos->getPostoId($Link->getLocal()[3])->postos_nome}</b> ativado com sucesso!", WS_ACCEPT) : WSErro("Oppss! Erro ao ativar o posto <b>{$AdPostos->getPostoId($Link->getLocal()[3])->postos_nome}</b>.", WS_ERROR));
                 $AdPostos->ListAdmin();
             else:
                 WSErro("Oppss! Opção inválida.", WS_ALERT);
@@ -66,15 +66,17 @@ if (!empty($Link->getLocal()[2])):
         case "delete":
             WSErro("Esta opção não deve ser usada, desative o posto.", WS_ERROR);
             break;
-        
-        case "admin":
-            header("Location: " . IMP_INCLUDE . "_models/AdminImpressoras.class.php");
-            break;
 
         default:
             WSErro("Oppss! Opção inválida.", WS_ALERT);
             break;
     endswitch;
+elseif(!empty($Link->getLocal()[2])):
+    WSErro("Oppss! Opção inválida.", WS_ALERT);
+endif;
+
+if($Login->CheckLogin()):
+    echo "<a title=\"Gerenciamento\" href=\"" . IMP_INCLUDE . "admin\" class=\"btn btn-danger glyphicon glyphicon-cog\" style=\"float: right; margin: 25px;\"></a>";
 endif;
 ?>
 
@@ -101,13 +103,22 @@ endif;
                     extract((array) $imp);
                     ?>
                     <tr class="text-center">
-                        <td <?php if (!$cont): echo "class='danger'"; endif; ?>>
+                        <td <?php
+                        if (!$cont): echo "class='danger'";
+                        endif;
+                        ?>>
                             <a href="<?= IMP_INCLUDE . $postos_id; ?>"><?= $postos_nome; ?></a>
                         </td>
-                        <td <?php if (!$cont): echo "class='danger'"; endif; ?>>
+                        <td <?php
+                        if (!$cont): echo "class='danger'";
+                        endif;
+                        ?>>
                                 <?= $cont; ?>
                         </td>
-                        <td <?php if (!$cont): echo "class='danger'"; endif; ?>>
+                        <td <?php
+                        if (!$cont): echo "class='danger'";
+                        endif;
+                        ?>>
                             <ul class="post_actions plugin">
                                 <li><a class="act_edit" href="<?= IMP_INCLUDE ?>update/<?= $postos_id; ?>" title="Editar">Editar</a></li>
                                 <?php if (!$postos_ativo): ?>

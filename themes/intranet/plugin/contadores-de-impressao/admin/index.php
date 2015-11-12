@@ -7,7 +7,7 @@ Check::UserOnline();
 
 if (!$Login->CheckLogin()):
     unset($_SESSION['userlogin']);
-    header('Location: ' . IMP_INCLUDE);
+    header('Location: ' . HOME . '/admin/index.php?exe=restrito');
 else:
     $userlogin = $_SESSION['userlogin'];
 endif;

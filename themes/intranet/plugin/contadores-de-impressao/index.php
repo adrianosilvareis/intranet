@@ -3,7 +3,7 @@
         <div class="well">
 
             <?php
-            Check::Manutencao($Link->getLocal());
+            //Check::Manutencao($Link->getLocal());
             include_once 'config.inc.php';
             ?>
             <header>

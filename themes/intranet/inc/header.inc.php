@@ -32,6 +32,7 @@
                                     <li><a href="http://helpdesktommasi.ddns.net:8778/ocomon/" target="_blank">HelpDesk</a></li>
                                     <li><a href="http://sdlaudos.portalglauco.com.br/LoginNovo.aspx?ReturnUrl=%2fSistema%2fAberturaNova.aspx">SDLaudos</a></li>
                                     <li><a href="http://187.72.199.27/shift/lis/tommasi/s00.iu.Login.cls" target="_blank">SHIFT LIS</a></li>
+                                    <li><a href="http://cetan.tempsite.ws/coleta/adm/login.php" target="_blank">Coleta Domiciliar</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li class="active"><a>Aplicativos</a></li>
                                     <li><a href="/view/redirect/sft_redirect.html" target="_blank">SFT - Tommasi</a></li>
