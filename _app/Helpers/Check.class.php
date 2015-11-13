@@ -2,7 +2,7 @@
 
 /**
  * Check.class.php [Helpers]
- * Classe responsavel por manipular e validar dadso do sistema
+ * Classe responsavel por manipular e validar dados do sistema
  * 
  * @copyright (c) 2015, Adriano S. Reis Programador
  */
@@ -44,7 +44,7 @@ class Check {
 
         return strtolower(utf8_encode(self::$Data));
     }
-
+    
     /**
      * <b>Tranforma Data:</b> Transforma uma data no formato DD/MM/YY em uma data no formato TIMESTAMP!
      * @param STRING $Name = Data em (d/m/Y) ou (d/m/Y H:i:s)

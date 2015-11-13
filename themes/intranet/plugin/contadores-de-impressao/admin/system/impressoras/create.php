@@ -5,13 +5,15 @@ endif;
 
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-if (isset($Dados) && $Dados['SendPostForm']):
+if (!empty($Dados)):
 
-    $Dados['postos_ativo'] = ($Dados['SendPostForm'] == "Cadastrar" ? '0' : '1');
-    unset($Dados["SendPostForm"]);
+    if (isset($Dados) && $Dados['SendPostForm']):
+        $Dados['postos_ativo'] = ($Dados['SendPostForm'] == "Cadastrar" ? '0' : '1');
+        unset($Dados["SendPostForm"]);
+    endif;
 
     $AdminPostos = new AdminPostos();
-
+    
     if (in_array("", $Dados)):
         WSErro("Preencha todos os campos!", WS_ALERT);
     elseif (!is_numeric($Dados['postos_numero'])):
@@ -34,14 +36,12 @@ endif;
 
     <div class="row">
         <form class="form col-md-offset-2 col-md-8" name="postos" method="post">
-            <div class="form-group">
-                <label>Nome:</label>
-                <input name="postos_nome" type="text" placeholder="Nome" class="form-control" value="<?= $Dados['postos_nome']; ?>">
-            </div>
-            <div class="form-group">
-                <label>Numero:</label>
-                <input name="postos_numero" type="text" placeholder="Numero" class="form-control" value="<?= $Dados['postos_numero']; ?>"> 
-            </div>
+
+            <label>Nome:</label>
+            <input name="postos_nome" type="text" placeholder="Nome" class="form-control" value="<?= $Dados['postos_nome']; ?>">
+            <label>Numero:</label>
+            <input name="postos_numero" type="text" placeholder="Numero" class="form-control" value="<?= $Dados['postos_numero']; ?>"> 
+            <hr>
             <input type="submit" class="btn btn-primary" name="SendPostForm" value="Cadastrar"/>
             <input type="submit" class="btn btn-success" name="SendPostForm" value="Cadastrar Ativo"/>
         </form>

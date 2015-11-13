@@ -25,6 +25,20 @@ endif;
         endif;
         ?>
         <ul>
+            <li class="li<?php if (in_array('impressoras', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Impressoras</a>
+                <ul class="sub">
+                    <li><a href="<?= IMP_INCLUDE ?>admin/&exe=impressoras/create">Criar Impressoras</a></li>
+                    <li><a href="<?= IMP_INCLUDE ?>admin/&exe=impressoras/index">Listar / Editar Impressoras</a></li>
+                </ul>
+            </li>
+            
+            <li class="li<?php if (in_array('contadores', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Contadores</a>
+                <ul class="sub">
+                    <li><a href="<?= IMP_INCLUDE ?>admin/&exe=contadores/create">Criar Contadores</a></li>
+                    <li><a href="<?= IMP_INCLUDE ?>admin/&exe=contadores/index">Listar / Editar Contadores</a></li>
+                </ul>
+            </li>
+            
             <li class="li<?php if (in_array('postos', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Postos</a>
                 <ul class="sub">
                     <li><a href="<?= IMP_INCLUDE ?>admin/&exe=postos/create">Criar Postos</a></li>
@@ -32,24 +46,10 @@ endif;
                 </ul>
             </li>
 
-            <li class="li<?php if (in_array('impressoras', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Impressoras</a>
-                <ul class="sub">
-                    <li><a href="<?= IMP_INCLUDE ?>admin/&exe=impressoras/create">Criar Impressoras</a></li>
-                    <li><a href="<?= IMP_INCLUDE ?>admin/&exe=impressoras/index">Listar / Editar Impressoras</a></li>
-                </ul>
-            </li>
-
             <li class="li<?php if (in_array('modelo', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Modelos</a>
                 <ul class="sub">
                     <li><a href="<?= IMP_INCLUDE ?>admin/&exe=modelo/create">Criar Modelos</a></li>
                     <li><a href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index">Listar / Editar Modelos</a></li>
-                </ul>
-            </li>
-
-            <li class="li<?php if (in_array('contadores', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Contadores</a>
-                <ul class="sub">
-                    <li><a href="<?= IMP_INCLUDE ?>admin/&exe=contadores/create">Criar Contadores</a></li>
-                    <li><a href="<?= IMP_INCLUDE ?>admin/&exe=contadores/index">Listar / Editar Contadores</a></li>
                 </ul>
             </li>
 

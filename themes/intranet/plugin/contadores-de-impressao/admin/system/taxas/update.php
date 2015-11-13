@@ -10,9 +10,7 @@ if (isset($Dados) && $Dados['SendPostForm']):
     $Dados['postos_ativo'] = ($Dados['SendPostForm'] == "Atualizar" ? '0' : '1');
     $Dados['postos_id'] = $postoId;
     unset($Dados["SendPostForm"]);
-    
-    $AdminPostos = new AdminPostos();
-    
+
     if (in_array("", $Dados)):
         WSErro("Preencha todos os campos!", WS_ALERT);
     elseif (!is_numeric($Dados['postos_numero'])):

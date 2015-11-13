@@ -47,18 +47,18 @@ class AdminPostos {
         $AppImpressora = new AppImpressora();
         $AppImpressora->setFk_postos($fk_postos);
         $AppImpressora->Execute()->Query("#fk_postos#");
-        
+
         $posto = $this->Read->Execute()->getResult();
-        
+
         $this->Read->setPostos_nome("DESATIVADO");
         $this->Read->Execute()->Query("#postos_nome#");
         $undeleteId = $this->Read->Execute()->getResult()[0]->postos_id;
-        
+
         if ($fk_postos != $undeleteId):
             foreach ($AppImpressora->Execute()->getResult() as $imp):
                 $AppImpressora->Execute()->update("fk_postos=$undeleteId&impressora_id=$imp->impressora_id", "impressora_id");
             endforeach;
-            
+
             $this->Read->setThis($posto);
             return $this->Read->Execute()->delete();
         else:
@@ -99,7 +99,7 @@ class AdminPostos {
     public function getResult() {
         return $this->Result;
     }
-
+    
     /**
      * ****************************************
      * ************* PRIVATES *****************

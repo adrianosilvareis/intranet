@@ -1,16 +1,16 @@
 <?php
-if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminPostos.class.php")):
-    include PLUGIN_PATH . "\contadores-de-impressao\_models\AdminPostos.class.php";
+if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminModelo.class.php")):
+    include PLUGIN_PATH . "\contadores-de-impressao\_models\AdminModelo.class.php";
 endif;
 
 $action = filter_input(INPUT_GET, "action", FILTER_DEFAULT);
 
 if (!empty($action)):
-    $AdminPostos = new AdminPostos();
+    $AdminModelo = new AdminModelo();
 
     $toaction = explode("/", $action);
 
-    $posto = $AdminPostos->getPostoId($toaction[1]);
+    $posto = $AdminModelo->getPostoId($toaction[1]);
 
     if (!empty($posto)):
         switch ($toaction[0]):
