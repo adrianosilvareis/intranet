@@ -12,27 +12,35 @@ if (!empty($action)):
 
     $posto = $AdminPostos->getPostoId($toaction[1]);
 
-    switch ($toaction[0]):
+    if (!empty($posto)):
+        switch ($toaction[0]):
 
-        case "active":
-            $AdminPostos->ExeStatus($toaction[1], 1);
-            WSErro("Posto <b>$posto->postos_nome</b> ativo com sucesso!", WS_ACCEPT);
-            break;
+            case "active":
+                $AdminPostos->ExeStatus($toaction[1], 1);
+                WSErro("Posto <b>$posto->postos_nome</b> ativo com sucesso!", WS_ACCEPT);
+                break;
 
-        case "inative":
-            $AdminPostos->ExeStatus($toaction[1], 0);
-            WSErro("Posto <b>$posto->postos_nome</b> desativado com sucesso!", WS_ACCEPT);
-            break;
+            case "inative":
+                $AdminPostos->ExeStatus($toaction[1], 0);
+                WSErro("Posto <b>$posto->postos_nome</b> desativado com sucesso!", WS_ACCEPT);
+                break;
 
-        case "delete":
-            $AdminPostos->ExeDelete($toaction[1]);
-            WSErro("Posto <b>$posto->postos_nome</b> deletado com sucesso!", WS_ACCEPT);
-            break;
+            case "delete":
+                if ($AdminPostos->ExeDelete($toaction[1])):
+                    WSErro("Posto <b>$posto->postos_nome</b> deletado com sucesso!", WS_ACCEPT);
+                else:
+                    WSErro("Erro ao deletar", WS_ERROR);
+                endif;
 
-        default :
-            WSErro("Opss! opção invalida.", WS_ERROR);
-            break;
-    endswitch;
+                break;
+
+            default :
+                WSErro("Opss! opção invalida.", WS_ERROR);
+                break;
+        endswitch;
+    else:
+        WSErro("O posto informado não pode ser encontrado!", WS_INFOR);
+    endif;
 endif;
 
 $Read = new AppPostos();

@@ -33,7 +33,7 @@ class AdminPostos {
         $this->Read->setThis((object) $this->Data);
         $status = $this->ExeStatus($this->Read->getPostos_id(), $this->Read->getPostos_ativo());
         $update = $this->Read->Execute()->update(null, "postos_id");
-        if($status || $update):
+        if ($status || $update):
             return true;
         endif;
     }
@@ -42,21 +42,30 @@ class AdminPostos {
         $update = $this->Read->Execute()->update("postos_id={$postoId}&postos_ativo=$postoStatus", "postos_id");
         return $update;
     }
-    
-    public function ExeDelete($fk_postos){
+
+    public function ExeDelete($fk_postos) {
         $AppImpressora = new AppImpressora();
         $AppImpressora->setFk_postos($fk_postos);
         $AppImpressora->Execute()->Query("#fk_postos#");
         
-        foreach ($AppImpressora->Execute()->getResult() as $imp):
-            $update = new $AppImpressora();
-            $update->setThis((object) $imp);
-            $update->setFk_postos(666);
-            var_dump($update);
-            $update->Execute()->update(null, "impressora_id");
-        endforeach;
+        $posto = $this->Read->Execute()->getResult();
+        
+        $this->Read->setPostos_nome("DESATIVADO");
+        $this->Read->Execute()->Query("#postos_nome#");
+        $undeleteId = $this->Read->Execute()->getResult()[0]->postos_id;
+        
+        if ($fk_postos != $undeleteId):
+            foreach ($AppImpressora->Execute()->getResult() as $imp):
+                $AppImpressora->Execute()->update("fk_postos=$undeleteId&impressora_id=$imp->impressora_id", "impressora_id");
+            endforeach;
+            
+            $this->Read->setThis($posto);
+            return $this->Read->Execute()->delete();
+        else:
+            WSErro("O posto <b>DESATIVADO</b> não pode ser deletado!", WS_ERROR);
+        endif;
     }
-    
+
     public function Lista() {
         $this->Read->Execute()->Query("postos_ativo = 1");
         $this->Result = $this->Read->Execute()->getResult();
