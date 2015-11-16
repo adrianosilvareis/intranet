@@ -188,7 +188,17 @@ class Seo {
 
             //SEO:: PLUGIN
             case 'plugin':
-                $this->Data = [SITENAME . ' - Plugin', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                switch ($this->Link) {
+                    //SEO:: Contato
+                    case 'contadores-de-impressao':
+                        $this->Data = [SITENAME . ' - Contadores de impressão', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        break;
+
+                    //SEO:: 404
+                    default :
+                        $this->Data = [SITENAME . ' - Plugin', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        break;
+                }
                 break;
 
             //SEO:: 404

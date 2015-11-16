@@ -1,0 +1,58 @@
+@import url('reset.css');
+/* General Demo Style */
+
+.container{
+	position:relative;
+}
+a{
+	color: #fff;
+	text-decoration: none;
+}
+.clr{
+	clear: both;
+}
+.container{
+	position:relative;
+}
+
+/* Header Style */
+.container{
+	font-family:'Arial Narrow', Arial, sans-serif;
+	line-height: 24px;
+	font-size: 11px;
+	background: #000;
+	opacity: 0.9;
+	text-transform: uppercase;
+	z-index: 9999;
+	position: relative;
+	-moz-box-shadow: 1px 0px 2px #000;
+	-webkit-box-shadow: 1px 0px 2px #000;
+	box-shadow: 1px 0px 2px #000;
+}
+.container a{
+	padding: 0px 10px;
+	letter-spacing: 1px;
+	color: #ddd;
+	display: block;
+	float: left;
+}
+.container a:top-bar-content{
+	color: #fff;
+}
+.container span.right{
+	float: right;
+}
+.container span.right a{
+	float: none;
+	display: inline;
+}
+.more{
+	position:relative;
+	clear:both;
+    font-size: 11px;
+    padding: 20px 0px;
+    text-transform:uppercase;
+    width: 390px;
+    height:55px;
+    margin: 0 auto;
+}

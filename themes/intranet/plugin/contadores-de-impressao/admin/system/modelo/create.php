@@ -6,6 +6,7 @@ endif;
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 if (isset($Dados) && $Dados['SendPostForm']):
+    $Dados['modelo_status'] = ( $Dados['SendPostForm'] == 'Cadastrar' ? '0' : '1');
     unset($Dados["SendPostForm"]);
 
 
@@ -36,6 +37,7 @@ endif;
                 <input name="modelo_descricao" type="text" placeholder="Nome" class="form-control" value="<?= $Dados['modelo_descricao']; ?>">
             </div>
             <input type="submit" class="btn btn-primary" name="SendPostForm" value="Cadastrar"/>
+            <input type="submit" class="btn btn-success" name="SendPostForm" value="Cadastrar Ativo"/>
         </form>
     </div>
 </article>

@@ -22,6 +22,7 @@ endif;
  * Tratamento de erro
  */
 if (!empty($Link->getLocal()[2]) && $Login->CheckLogin()):
+
     switch ($Link->getLocal()[2]):
         case "ok":
             WSErro("Registro já concluido", WS_ACCEPT);
@@ -71,11 +72,26 @@ if (!empty($Link->getLocal()[2]) && $Login->CheckLogin()):
             WSErro("Oppss! Opção inválida.", WS_ALERT);
             break;
     endswitch;
-elseif(!empty($Link->getLocal()[2])):
-    WSErro("Oppss! Opção inválida.", WS_ALERT);
+
+elseif (!empty($Link->getLocal()[2])):
+    switch ($Link->getLocal()[2]) :
+
+        case "ok":
+            WSErro("Registro já concluido", WS_ACCEPT);
+            break;
+
+        case "erro":
+            WSErro("Oppss! Este posto não existe ou não tem impressoras vinculadas.", WS_ERROR);
+            break;
+
+        default:
+            WSErro("Oppss! Opção inválida.", WS_ALERT);
+            break;
+
+    endswitch;
 endif;
 
-if($Login->CheckLogin()):
+if ($Login->CheckLogin()):
     echo "<a title=\"Gerenciamento\" href=\"" . IMP_INCLUDE . "admin\" class=\"btn btn-danger glyphicon glyphicon-cog\" style=\"float: right; margin: 25px;\"></a>";
 endif;
 ?>

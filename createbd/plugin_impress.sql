@@ -44,6 +44,7 @@ CREATE TABLE `app_taxa_impress` (
   `taxa_id` int(11) NOT NULL AUTO_INCREMENT,
   `taxa_descricao` varchar(255) DEFAULT NULL,
   `taxa_valor` double DEFAULT NULL,
+  `taxa_status` boolean DEFAULT NULL,
   PRIMARY KEY (`taxa_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
@@ -51,7 +52,7 @@ CREATE TABLE `app_taxa_impress` (
 # Data for table "taxa"
 #
 
-INSERT INTO `app_taxa_impress` VALUES (1,'Normal',0.4),(2,'Reduzido',0.39);
+INSERT INTO `app_taxa_impress` VALUES (1,'Normal',0.4,true),(2,'Reduzido',0.39,true);
 
 #
 # Structure for table "impressora"

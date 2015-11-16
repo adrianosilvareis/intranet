@@ -12,6 +12,7 @@ class AppTaxaImpress extends Beans {
     private $taxa_id;
     private $taxa_descricao;
     private $taxa_valor;
+    private $taxa_status;
 
     function __construct() {
         $this->Controle = new Controle('app_taxa_impress');
@@ -26,6 +27,7 @@ class AppTaxaImpress extends Beans {
         $this->Controle->setDados(array_filter([
             'taxa_descricao' => $this->getTaxa_descricao(),
             'taxa_valor' => $this->getTaxa_valor(),
+            'taxa_status' => $this->getTaxa_status(),
             'taxa_id' => $this->getTaxa_id()
         ]));
         return $this->Controle->getDados();
@@ -40,6 +42,7 @@ class AppTaxaImpress extends Beans {
         $this->setTaxa_id((isset($object->taxa_id) ? $object->taxa_id : null));
         $this->setTaxa_descricao((isset($object->taxa_descricao) ? $object->taxa_descricao : null));
         $this->setTaxa_valor((isset($object->taxa_valor) ? $object->taxa_valor : null));
+        $this->setTaxa_status((isset($object->taxa_status) ? $object->taxa_status : null));
     }
 
     /**
@@ -80,5 +83,12 @@ class AppTaxaImpress extends Beans {
     function setTaxa_valor($taxa_valor) {
         $this->taxa_valor = $taxa_valor;
     }
+    
+    function getTaxa_status() {
+        return $this->taxa_status;
+    }
 
+    function setTaxa_status($taxa_status) {
+        $this->taxa_status = $taxa_status;
+    }
 }

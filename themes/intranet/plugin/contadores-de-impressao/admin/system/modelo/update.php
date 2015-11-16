@@ -7,6 +7,7 @@ $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 $modeloId = filter_input(INPUT_GET, "modeloId", FILTER_DEFAULT);
 
 if (isset($Dados) && $Dados['SendPostForm']):
+    $Dados['modelo_status'] = ( $Dados['SendPostForm'] == 'Cadastrar' ? '0' : '1');
     $Dados['modelo_id'] = $modeloId;
     unset($Dados["SendPostForm"]);
     
@@ -44,6 +45,7 @@ endif;
                 <input name="modelo_descricao" type="text" placeholder="Nome" class="form-control" value="<?= $Dados['modelo_descricao']; ?>">
             </div>
             <input type="submit" class="btn btn-primary" name="SendPostForm" value="Atualizar"/>
+            <input type="submit" class="btn btn-success" name="SendPostForm" value="Atualizar Ativo"/>
         </form>
     </div>
 </article>

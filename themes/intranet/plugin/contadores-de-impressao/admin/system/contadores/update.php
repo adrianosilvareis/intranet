@@ -1,53 +1,120 @@
 <?php
-if (file_exists(IMP_PATH . "_models\AdminPostos.class.php")):
-    include IMP_PATH . "_models\AdminPostos.class.php";
+if (file_exists(IMP_PATH . "_models\AdminImpressoras.class.php")):
+    include IMP_PATH . "_models\AdminImpressoras.class.php";
 endif;
 
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-$postoId = filter_input(INPUT_GET, "postoId", FILTER_DEFAULT);
+$impressoraId = filter_input(INPUT_GET, "impressoraId", FILTER_DEFAULT);
 
 if (isset($Dados) && $Dados['SendPostForm']):
-    $Dados['postos_ativo'] = ($Dados['SendPostForm'] == "Atualizar" ? '0' : '1');
-    $Dados['postos_id'] = $postoId;
+    $Dados['impressora_status'] = ($Dados['SendPostForm'] == "Atualizar" ? '0' : '1');
+    $Dados['impressora_id'] = $impressoraId;
     unset($Dados["SendPostForm"]);
+
+    $AdminImpressoras = new AdminImpressoras();
 
     if (in_array("", $Dados)):
         WSErro("Preencha todos os campos!", WS_ALERT);
-    elseif (!is_numeric($Dados['postos_numero'])):
-        WSErro("O Campo <b>Numero</b>, deve ser um valor numerico.", WS_ERROR);
     else:
-        if ($AdminPostos->ExeUpdate($Dados)):
+        if ($AdminImpressoras->ExeUpdate($Dados)):
             WSErro("Atualizado com sucesso!", WS_ACCEPT);
         else:
             WSErro("Erro ao atualizar!", WS_ERROR);
         endif;
     endif;
 else:
-    $AppPostos = new AppPostos();
-    $AppPostos->Execute()->find("postos_id=$postoId");
-    $Dados = (array) $AppPostos->Execute()->getResult();
+    $AppImpressora = new AppImpressora();
+    $AppImpressora->Execute()->find("impressora_id=$impressoraId");
+    $Dados = (array) $AppImpressora->Execute()->getResult();
 endif;
 
 $checkCreate = filter_input(INPUT_GET, 'create', FILTER_VALIDATE_BOOLEAN);
-if ($checkCreate && empty($AdminPostos)):
-    WSErro("O posto <b>{$Dados['postos_nome']}</b> foi cadastrado com sucesso no sistema!", WS_ACCEPT);
+if ($checkCreate && empty($AppImpressora)):
+    WSErro("Impressora <b>{$Dados['impressora_serial']}</b> cadastrada com sucesso no sistema!", WS_ACCEPT);
 endif;
 ?>
 
 <article>
-    <h1>Atualizar Postos:</h1>
+    <h1>Atualizar Impressora:</h1>
 
     <div class="row">
-        <form class="form col-md-offset-2 col-md-4" name="postos" method="post">
+        <form class="form col-md-offset-2 col-md-8" name="impressora" method="post">
 
             <div class="form-group">
-                <label>Nome:</label>
-                <input name="postos_nome" type="text" placeholder="Nome" class="form-control" value="<?= $Dados['postos_nome']; ?>">
+                <label>Serial:</label>
+                <input name="impressora_serial" type="text" placeholder="Serial" class="form-control" value="<?= $Dados['impressora_serial']; ?>">
             </div>
+
             <div class="form-group">
-                <label>Numero:</label>
-                <input name="postos_numero" type="text" placeholder="Numero" class="form-control" value="<?= $Dados['postos_numero']; ?>"> 
+                <label>Descrição:</label>
+                <input name="impressora_descricao" type="text" placeholder="Descrição" class="form-control" value="<?= $Dados['impressora_descricao']; ?>"> 
             </div>
+
+            <div class="row">
+
+                <?php
+                $AppPostos = new AppPostos();
+                $AppPostos->Execute()->findAll();
+                ?>
+                <div class="form-group col-md-4">
+                    <label>Posto:</label>
+                    <select class="form-control" name="fk_postos">
+                        <option value=""> Selecione um posto: </option>
+                        <?php
+                        foreach ($AppPostos->Execute()->getResult() as $posto):
+                            extract((array) $posto);
+                            echo "<option value=\"$postos_id\" "
+                            . ($Dados['fk_postos'] == $postos_id ? "selected=true" : "")
+                            . ">" . ucfirst(strtolower($postos_nome))
+                            . "</option>";
+                        endforeach;
+                        ?>
+                    </select>
+                </div>
+
+                <?php
+                $AppModelo = new AppModelo();
+                $AppModelo->Execute()->findAll();
+                ?>
+                <div class="form-group col-md-4">
+                    <label>Modelo:</label>
+                    <select class="form-control" name="fk_modelo">
+                        <option value=""> Selecione um modelo: </option>
+                        <?php
+                        foreach ($AppModelo->Execute()->getResult() as $modelo):
+                            extract((array) $modelo);
+                            echo "<option value=\"$modelo_id\" "
+                            . ($Dados['fk_modelo'] == $modelo_id ? "selected=true" : "")
+                            . "> $modelo_descricao "
+                            . "</option>";
+                        endforeach;
+                        ?>
+                    </select>
+                </div>
+
+                <?php
+                $AppTaxa = new AppTaxaImpress();
+                $AppTaxa->Execute()->findAll();
+                ?>
+                <div class="form-group col-md-4">
+                    <label>Taxa:</label>
+                    <select class="form-control" name="fk_taxa">
+                        <option value=""> Selecione uma taxa: </option>
+                        <?php
+                        foreach ($AppTaxa->Execute()->getResult() as $taxa):
+                            extract((array) $taxa);
+                            echo "<option value=\"$taxa_id\" "
+                            . ($Dados['fk_taxa'] == $taxa_id ? "selected=true" : "")
+                            . "> $taxa_descricao "
+                            . "</option>";
+                        endforeach;
+                        ?>
+                    </select>
+                </div>
+
+            </div>
+
+
             <input type="submit" class="btn btn-primary" name="SendPostForm" value="Atualizar"/>
             <input type="submit" class="btn btn-success" name="SendPostForm" value="Atualizar Ativo"/>
         </form>

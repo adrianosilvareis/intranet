@@ -1,0 +1,79 @@
+	<div id="dlg" class="easyui-dialog" style="width:800px;height:600px;padding:10px 20px"
+			closed="true" buttons="#dlg-buttons">
+		<form id="fm" method="post" novalidate>
+			<div class="ftitle">Dados do Solicitante</div>
+			<div class="fitem">
+				<label>E-mail:</label>
+				<input name="email" size="35" class="easyui-validatebox" validType="email" required="true">
+			</div>
+			<div class="fitem">
+				<label>Setor: </label>
+				<input name="setor" placeholder="Ex: Secretária" size="27" class="easyui-validatebox">
+			</div>
+			<div class="fitem">
+				<br><div class="ftitle">Dados do Exame</div>
+				<b><label>Exame:</label></b>
+				<input name="exame" size="27" class="easyui-validatebox" required="true">
+			</div>
+			<div class="fitem">
+				<label>Sinonímia:</label>
+				<input name="sinonimia" size="50" class="easyui-validatebox" required="true">
+			</div>
+			<div class="fitem">
+				<label>Unidade:</label>
+				<input name="unidade" size="50" class="easyui-validatebox" required="true">
+			</div>
+			<div class="fitem">
+				<label>Valores de Referência:</label>
+				<input name="valoref" size="50" class="easyui-validatebox" required="true">
+			</div>	
+			<div class="fitem">
+				<label>Metodologia:</label>
+				<input name="metodologia" size="50" class="easyui-validatebox" required="true">
+			</div>
+			<div class="fitem">
+				<label>Prazo:</label>
+				<input name="prazo" size="27" class="easyui-validatebox" required="true">
+			</div>
+			<div class="fitem">
+				<label>Lab. de Apoio/Setor Exec.:</label>
+				<input name="apoio" size="50" class="easyui-validatebox" required="true">
+			</div>	
+			<div class="fitem">
+				<label>Material:</label>
+				<input name="material" size="27" class="easyui-validatebox" required="true">
+			</div>	
+			<div class="fitem">
+				<label>Jejum:</label>
+				<input name="jejum" size="27" class="easyui-validatebox" required="true">
+			</div>	
+			<div class="fitem">
+				<label>Valor R$: </label>
+				<input name="valor" size="27" placeholder="Ex: 100,00" class="easyui-validatebox" required="true">
+			</div>	
+				<div class="fitem">
+				<label>Método para Coleta:</label>
+				<input name="coleta" size="50" class="easyui-validatebox" required="true">
+			</div>	
+				<div class="fitem">
+				<label>Encaminhamento:</label>
+				<input name="encaminha" size="50" class="easyui-validatebox" required="true">	
+			</div>	
+				<div class="fitem">
+				<label>Uso:</label>
+				<input name="uso" size="27" class="easyui-validatebox" required="true">	
+			</div>	<br>
+				<div class="fitem">
+				<b><label>Observações:</label></b>
+				<textarea name="zem" id="zem" class="easyui-validatebox" cols="50"></textarea>
+				</div>
+				<input type="hidden" name="ospt" id="ospt" class="easyui-validatebox" id="ospt">
+				<script>
+				document.getElementById("ospt").value = "-";
+				</script>
+			</div>
+		</form>
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">Salvar</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">Cancelar</a>
+	</div>

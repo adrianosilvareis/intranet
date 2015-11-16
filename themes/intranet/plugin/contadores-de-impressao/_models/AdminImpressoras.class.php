@@ -22,7 +22,7 @@ class AdminImpressoras {
         if (!empty($postos)):
             $this->Result = $this->Read->Execute()->Query("impressora_status = 0 AND fk_postos = $postos");
             $this->Imp = $this->Result[0]->impressora_id;
-            
+
             if (!empty($this->Result)):
                 $this->Result = $this->Read->Execute()->Query("fk_postos = $postos");
             elseif ($this->Read->Execute()->Query("fk_postos = $postos")):
@@ -34,7 +34,7 @@ class AdminImpressoras {
             endif;
         endif;
     }
-    
+
     /**
      * Libera todas as impressoras para um novo lote de registros.
      */
@@ -65,6 +65,86 @@ class AdminImpressoras {
     }
 
     /**
+     * Cria impressora no sistema.
+     * 
+     * @param array $Data
+     * @return boolean
+     */
+    public function ExeCreate($Data) {
+        $this->Data = $Data;
+        $this->setData();
+        $this->Read->setThis((object) $this->Data);
+        $insert = $this->Read->Execute()->insert();
+        $this->Result = $this->Read->Execute()->MaxFild("impressora_id");
+        return $insert;
+    }
+    
+    /**
+     * Atualiza impressora no sistema;
+     * 
+     * @param array $Data
+     * @return boolean
+     */
+    public function ExeUpdate($Data) {
+        $this->Data = $Data;
+        $this->setData();
+        $this->Read->setThis((object) $this->Data);
+        return $this->Read->Execute()->update(null, "impressora_id");
+    }
+    
+    /**
+     * Atualiza o status da impressora no sistema;
+     * 
+     * @param int $impressora_id
+     * @param boolean $impressora_status
+     */
+    public function ExeStatus($impressora_id, $impressora_status) {
+        $this->Read->Execute()->update("impressora_id=$impressora_id&impressora_status=$impressora_status", "impressora_id");
+    }
+
+    /**
+     * Deleta impressora se não existir contadores
+     * 
+     * @param int $fk_impressora
+     * @return boolean
+     */
+    public function ExeDelete($fk_impressora) {
+        $AppContadores = new AppContadores();
+        $AppContadores->setFk_impressora($fk_impressora);
+        $AppContadores->Execute()->Query("#fk_impressora#");
+        if ($AppContadores->Execute()->getResult()):
+            WSErro("Impossivel excluir impressora, já existem contadores registrados!", WS_ERROR);
+        else:
+            $this->Read->Execute()->find("impressora_id");
+            return $this->Read->Execute()->delete();
+        endif;
+    }
+    
+    /**
+     * Retorna impressora com serial informado
+     * 
+     * @param String $impressora_serial
+     * @return object:impressora
+     */
+    public function FindSerial($impressora_serial) {
+        $this->Read->setImpressora_serial($impressora_serial);
+        $this->Read->Execute()->Query("#impressora_serial#");
+        return (!empty($this->Read->Execute()->getResult()[0]) ? $this->Read->Execute()->getResult()[0] : null);
+    }
+    
+    /**
+     * Retorna impressora com id informado
+     * 
+     * @param int $impressora_id
+     * @return object:impressora
+     */
+    public function FindId($impressora_id) {
+        $this->Read->setImpressora_id($impressora_id);
+        $this->Read->Execute()->Query("#impressora_id#");
+        return (!empty($this->Read->Execute()->getResult()[0]) ? $this->Read->Execute()->getResult()[0] : null);
+    }
+
+    /**
      * Encontra a descricao do modelo da impressora, com base no chave estrangeira.
      * 
      * @param int $modelo_id
@@ -74,6 +154,30 @@ class AdminImpressoras {
         $AppModelo = new AppModelo();
         $AppModelo->Execute()->find("modelo_id=$modelo_id");
         return $AppModelo->Execute()->getResult()->modelo_descricao;
+    }
+
+    /**
+     * Encontra descricao do posto com base na chave estrangeira
+     * 
+     * @param int $postos_id
+     * @return String
+     */
+    public function Posto($postos_id) {
+        $AppPostos = new AppPostos();
+        $AppPostos->Execute()->find("postos_id=$postos_id");
+        return $AppPostos->Execute()->getResult()->postos_nome;
+    }
+
+    /**
+     * Encontra descricao da taxa com base na chave estrangeira
+     * 
+     * @param int $taxa_id
+     * @return String
+     */
+    public function Taxa($taxa_id) {
+        $AppTaxaImpress = new AppTaxaImpress();
+        $AppTaxaImpress->Execute()->find("taxa_id=$taxa_id");
+        return $AppTaxaImpress->Execute()->getResult()->taxa_descricao;
     }
 
     /**

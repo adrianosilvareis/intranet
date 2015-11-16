@@ -17,7 +17,13 @@ class AdminPostos {
     function __construct() {
         $this->Read = new AppPostos();
     }
-
+    
+    /**
+     * Executa a criacao dos postos no sistema
+     * 
+     * @param array $Data
+     * @return boolean
+     */
     public function ExeCreate($Data) {
         $this->Data = $Data;
         $this->setData();
@@ -27,6 +33,12 @@ class AdminPostos {
         return $insert;
     }
 
+    /**
+     * Executa a atualização dos postos no sistema
+     * 
+     * @param array $Data
+     * @return boolean
+     */
     public function ExeUpdate($Data) {
         $this->Data = $Data;
         $this->setData();
@@ -38,11 +50,24 @@ class AdminPostos {
         endif;
     }
 
+    /**
+     * Atualiza o status do posto no sistema
+     * 
+     * @param int $postoId
+     * @param booelan $postoStatus
+     * @return boolean
+     */
     public function ExeStatus($postoId, $postoStatus) {
         $update = $this->Read->Execute()->update("postos_id={$postoId}&postos_ativo=$postoStatus", "postos_id");
         return $update;
     }
 
+    /**
+     * Deleta o posto e trasfere as impressoras para um posto desativado.
+     * 
+     * @param int $fk_postos
+     * @return boolean
+     */
     public function ExeDelete($fk_postos) {
         $AppImpressora = new AppImpressora();
         $AppImpressora->setFk_postos($fk_postos);
@@ -65,37 +90,70 @@ class AdminPostos {
             WSErro("O posto <b>DESATIVADO</b> não pode ser deletado!", WS_ERROR);
         endif;
     }
-
+    
+    /**
+     * Lista todos os postos no sistema, quando não é admin.
+     */
     public function Lista() {
         $this->Read->Execute()->Query("postos_ativo = 1");
         $this->Result = $this->Read->Execute()->getResult();
         $this->Executar();
     }
-
+    
+    /**
+     * Lista todos os postos do sistema quando é admin.
+     */
     public function ListAdmin() {
         $this->Read->Execute()->FullRead("SELECT * FROM app_postos ORDER BY postos_ativo");
         $this->Result = $this->Read->Execute()->getResult();
         $this->Executar();
     }
-
+    
+    /**
+     * Retorna o posto com base no id
+     * 
+     * @param int $postoId
+     * @return object:posto
+     */
     public function getPostoId($postoId) {
         $this->Read->Execute()->find("postos_id={$postoId}");
         return $this->Read->Execute()->getResult();
     }
-
+    
+    /**
+     * Retorna o posto com base no numero informado
+     * 
+     * @param int $postoNumero
+     * @return object:posto
+     */
     public function getPostoNumero($postoNumero) {
         $this->Read->Execute()->find("postos_numero={$postoNumero}");
         return $this->Read->Execute()->getResult();
     }
-
+    
+    /**
+     * Lista em array de impressoras que já foram registradas contadores do mês
+     * 
+     * @return List:impressoras
+     */
     public function getConcluidos() {
         return $this->Conc;
     }
 
+    /**
+     * Lista em array de impressoras que não foram registradas contadores do mês
+     * 
+     * @return List:impressoras
+     */
     public function getRestantes() {
         return $this->Rest;
     }
-
+    
+    /**
+     * Lista em array de todas as impressoras do sistema
+     * 
+     * @return List:impressoras
+     */
     public function getResult() {
         return $this->Result;
     }
@@ -109,9 +167,13 @@ class AdminPostos {
         $this->Data = array_map('strip_tags', $this->Data);
         $this->Data = array_map('trim', $this->Data);
     }
-
+    
+    /**
+     * lista as impressoras e executa a contagem por posto
+     * 
+     * Obs.: Método precisa ser melhorado
+     */
     public function Executar() {
-
         $AppImpressora = new AppImpressora();
         foreach ($this->Result as $posto) {
             //encontra todas as impressoras deste posto

@@ -50,45 +50,54 @@ $Read = new AppPostos();
 $Read->Execute()->FullRead("SELECT * FROM app_modelo ORDER BY modelo_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 ?>
 <article>
-    <table class="table table-striped text-center">
-        <thead>
-            <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Nome</th>
-                <th class="text-center">Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $i = 1;
-            foreach ($Read->Execute()->getResult() as $mod):
-                extract((array) $mod);
-                ?>
+    <?php
+    if (!$Read->Execute()->getResult()):
+        $Pager->ReturnPage();
+        WSErro("Desculpa, ainda não temos modelo cadastrados", WS_INFOR);
+    else:
+        ?>
+        <table class="table table-striped text-center">
+            <thead>
                 <tr>
-                    <td><?= $i++; ?></td>
-                    <td><?= $modelo_descricao; ?></td>
-                    <td><?= $modelo_status; ?></td>
-                    <td>
-                        <ul class="post_actions plugin">
-                            <li><a class="act_edit" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/update&modeloId=<?= $modelo_id; ?>" title="Editar">Editar</a></li>
-                            <?php if (!$modelo_status): ?>
-                                <li><a class="act_ative" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=active/<?= $modelo_id; ?>" title="Ativar">Ativar</a></li>
-                            <?php else: ?>
-                                <li><a class="act_inative" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=inative/<?= $modelo_id; ?>" title="Inativar">Inativar</a></li>
-                            <?php endif; ?>
-                            <!--<li><a class="act_delete" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=delete/<?= $modelo_id; ?>" title="Excluir">Deletar</a></li>;-->
-                        </ul>
-                    </td>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Status</th>
+                    <th>Actions</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php
-            endforeach;
-            ?>
-        </tbody>
-    </table>
+                $i = 1;
+                foreach ($Read->Execute()->getResult() as $mod):
+                    extract((array) $mod);
+                    ?>
+                    <tr>
+                        <td><?= $i++; ?></td>
+                        <td><?= $modelo_descricao; ?></td>
+                        <td><?= $modelo_status; ?></td>
+                        <td>
+                            <ul class="post_actions plugin">
+                                <li><a class="act_edit" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/update&modeloId=<?= $modelo_id; ?>" title="Editar">Editar</a></li>
+                                <?php if (!$modelo_status): ?>
+                                    <li><a class="act_ative" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=active/<?= $modelo_id; ?>" title="Ativar">Ativar</a></li>
+                                <?php else: ?>
+                                    <li><a class="act_inative" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=inative/<?= $modelo_id; ?>" title="Inativar">Inativar</a></li>
+                                <?php endif; ?>
+                    <!--<li><a class="act_delete" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=delete/<?= $modelo_id; ?>" title="Excluir">Deletar</a></li>;-->
+                            </ul>
+                        </td>
+                    </tr>
+                    <?php
+                endforeach;
+                ?>
+            </tbody>
+        </table>
+
+    <?php endif; ?>
 
     <div class="row">
         <?php
-        $Pager->ExePaginator("app_postos");
+        $Pager->ExePaginator("app_modelo");
         echo $Pager->getPaginator();
         ?>
     </div>

@@ -1,33 +1,33 @@
 <?php
-if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminPostos.class.php")):
-    include PLUGIN_PATH . "\contadores-de-impressao\_models\AdminPostos.class.php";
+if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminTaxas.class.php")):
+    include PLUGIN_PATH . "\contadores-de-impressao\_models\AdminTaxas.class.php";
 endif;
 
 $action = filter_input(INPUT_GET, "action", FILTER_DEFAULT);
 
 if (!empty($action)):
-    $AdminPostos = new AdminPostos();
+    $AdminTaxas = new AdminTaxas();
 
     $toaction = explode("/", $action);
 
-    $posto = $AdminPostos->getPostoId($toaction[1]);
+    $taxa = $AdminTaxas->FindId($toaction[1]);
 
-    if (!empty($posto)):
+    if (!empty($taxa)):
         switch ($toaction[0]):
 
             case "active":
-                $AdminPostos->ExeStatus($toaction[1], 1);
-                WSErro("Posto <b>$posto->postos_nome</b> ativo com sucesso!", WS_ACCEPT);
+                $AdminTaxas->ExeStatus($toaction[1], 1);
+                WSErro("Taxa de impressão <b>$taxa->taxa_descricao</b> ativo com sucesso!", WS_ACCEPT);
                 break;
 
             case "inative":
-                $AdminPostos->ExeStatus($toaction[1], 0);
-                WSErro("Posto <b>$posto->postos_nome</b> desativado com sucesso!", WS_ACCEPT);
+                $AdminTaxas->ExeStatus($toaction[1], 0);
+                WSErro("Taxa de impressão <b>$taxa->taxa_descricao</b> desativado com sucesso!", WS_ACCEPT);
                 break;
 
             case "delete":
-                if ($AdminPostos->ExeDelete($toaction[1])):
-                    WSErro("Posto <b>$posto->postos_nome</b> deletado com sucesso!", WS_ACCEPT);
+                if ($AdminTaxas->ExeDelete($toaction[1])):
+                    WSErro("Taxa de impressão <b>$taxa->taxa_descricao</b> deletado com sucesso!", WS_ACCEPT);
                 else:
                     WSErro("Erro ao deletar", WS_ERROR);
                 endif;
@@ -38,62 +38,68 @@ if (!empty($action)):
                 break;
         endswitch;
     else:
-        WSErro("O posto informado não pode ser encontrado!", WS_INFOR);
+        WSErro("A taxa informada não pode ser encontrado!", WS_INFOR);
     endif;
 endif;
 
 $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
-$Pager = new Pager(IMP_INCLUDE . "admin/&exe=postos/index&page=");
+$Pager = new Pager(IMP_INCLUDE . "admin/&exe=taxas/index&page=");
 $Pager->ExePager($getPage, 15);
 
 $Read = new AppPostos();
-$Read->Execute()->FullRead("SELECT * FROM app_postos ORDER BY postos_ativo LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+$Read->Execute()->FullRead("SELECT * FROM app_taxa_impress ORDER BY taxa_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 ?>
 <article>
-    <table class="table table-striped text-center">
-        <thead>
-            <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Nome</th>
-                <th class="text-center">Numero</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Impressoras</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $i = 1;
-            foreach ($Read->Execute()->getResult() as $posto):
-                extract((array) $posto);
-
-                $postos_cont = $Read->Execute()->FullRead("SELECT count(impressora_id) as 'postos_cont' FROM app_impressora WHERE fk_postos = $postos_id")[0]->postos_cont;
-                ?>
-                <tr class="<?php if (!$postos_cont): echo "danger text-danger"; endif; ?>">
-                    <td><?= $i++; ?></td>
-                    <td><?= $postos_nome; ?></td>
-                    <td><?= $postos_numero; ?></td>
-                    <td><?= $postos_cont; ?></td>
-                    <td>
-                        <ul class="post_actions plugin">
-                            <li><a class="act_edit" href="<?= IMP_INCLUDE ?>admin/&exe=postos/update&postoId=<?= $postos_id; ?>" title="Editar">Editar</a></li>
-                            <?php if (!$postos_ativo): ?>
-                                <li><a class="act_ative" href="<?= IMP_INCLUDE ?>admin/&exe=postos/index&action=active/<?= $postos_id; ?>" title="Ativar">Ativar</a></li>
-                            <?php else: ?>
-                                <li><a class="act_inative" href="<?= IMP_INCLUDE ?>admin/&exe=postos/index&action=inative/<?= $postos_id; ?>" title="Inativar">Inativar</a></li>
-    <?php endif; ?>
-                            <li><a class="act_delete" href="<?= IMP_INCLUDE ?>admin/&exe=postos/index&action=delete/<?= $postos_id; ?>" title="Excluir">Deletar</a></li>
-                        </ul>
-                    </td>
+    <?php
+    if (!$Read->Execute()->getResult()):
+        $Pager->ReturnPage();
+        WSErro("Desculpa, ainda não temos taxa cadastrados", WS_INFOR);
+    else:
+        ?>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Valor</th>
+                    <th class="text-center">Status</th>
+                    <th>Actions</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php
-            endforeach;
-            ?>
-        </tbody>
-    </table>
+                $i = 1;
+                foreach ($Read->Execute()->getResult() as $mod):
+                    extract((array) $mod);
+                    ?>
+                    <tr>
+                        <td><?= $i++; ?></td>
+                        <td><?= $taxa_descricao; ?></td>
+                        <td><?= $taxa_valor; ?></td>
+                        <td><?= $taxa_status; ?></td>
+                        <td>
+                            <ul class="post_actions plugin">
+                                <li><a class="act_edit" href="<?= IMP_INCLUDE ?>admin/&exe=taxas/update&taxaId=<?= $taxa_id; ?>" title="Editar">Editar</a></li>
+                                <?php if (!$taxa_status): ?>
+                                    <li><a class="act_ative" href="<?= IMP_INCLUDE ?>admin/&exe=taxas/index&action=active/<?= $taxa_id; ?>" title="Ativar">Ativar</a></li>
+                                <?php else: ?>
+                                    <li><a class="act_inative" href="<?= IMP_INCLUDE ?>admin/&exe=taxas/index&action=inative/<?= $taxa_id; ?>" title="Inativar">Inativar</a></li>
+                                <?php endif; ?>
+                            <!--<li><a class="act_delete" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=delete/<?= $taxa_id; ?>" title="Excluir">Deletar</a></li>;-->
+                            </ul>
+                        </td>
+                    </tr>
+                    <?php
+                endforeach;
+                ?>
+            </tbody>
+        </table>
+
+    <?php endif; ?>
 
     <div class="row">
         <?php
-        $Pager->ExePaginator("app_postos");
+        $Pager->ExePaginator("app_taxa_impress");
         echo $Pager->getPaginator();
         ?>
     </div>
