@@ -11,6 +11,7 @@ class AppModelo extends Beans {
 
     private $modelo_id;
     private $modelo_descricao;
+    private $modelo_status;
 
     function __construct() {
         $this->Controle = new Controle('app_modelo');
@@ -24,6 +25,7 @@ class AppModelo extends Beans {
     public function getThis() {
         $this->Controle->setDados(array_filter([
             'modelo_descricao' => $this->getModelo_descricao(),
+            'modelo_status' => $this->getModelo_status(),
             'modelo_id' => $this->getModelo_id()
         ]));
         return $this->Controle->getDados();
@@ -37,6 +39,7 @@ class AppModelo extends Beans {
     public function setThis($object) {
         $this->setModelo_id((isset($object->modelo_id) ? $object->modelo_id : null));
         $this->setModelo_descricao((isset($object->modelo_descricao) ? $object->modelo_descricao : null));
+        $this->setModelo_status((isset($object->modelo_status) ? $object->modelo_status : null));
     }
 
     /**
@@ -68,6 +71,14 @@ class AppModelo extends Beans {
 
     function setModelo_descricao($modelo_descricao) {
         $this->modelo_descricao = $modelo_descricao;
+    }
+    
+    function getModelo_status() {
+        return $this->modelo_status;
+    }
+
+    function setModelo_status($modelo_status) {
+        $this->modelo_status = $modelo_status;
     }
 
 }

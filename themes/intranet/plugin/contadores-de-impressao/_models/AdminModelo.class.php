@@ -24,7 +24,15 @@ class AdminModelo {
         $this->Result = $this->Read->Execute()->MaxFild("modelo_id");
         return $insert;
     }
-
+    
+    public function ExeDelete(){
+        //Esta função não deve ser executada visto que as impressoras não mudas de modelo.
+    }
+    
+    public function ExeStatus($Modelo_id, $Modelo_status){
+        return $this->Read->Execute()->update("modelo_id=$Modelo_id&modelo_status=$Modelo_status", "modelo_id");
+    }
+    
     public function ExeUpdate($Dados) {
         $this->Data = $Dados;
         $this->setDados();
@@ -35,6 +43,12 @@ class AdminModelo {
     public function setDados() {
         $this->Data = array_map('strip_tags', $this->Data);
         $this->Data = array_map('trim', $this->Data);
+    }
+
+    public function FindId($Id) {
+        $this->Read->setModelo_id($Id);
+        $this->Read->Execute()->Query("#modelo_id#");
+        return (!empty($this->Read->Execute()->getResult()[0]) ? $this->Read->Execute()->getResult()[0] : null);
     }
 
     public function FindNome($Nome) {

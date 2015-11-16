@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS `app_modelo`;
 CREATE TABLE `app_modelo` (
   `modelo_id` int(11) NOT NULL AUTO_INCREMENT,
   `modelo_descricao` varchar(255) DEFAULT NULL,
+  `modelo_status` boolean DEFAULT NULL,
   PRIMARY KEY (`modelo_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -13,7 +14,7 @@ CREATE TABLE `app_modelo` (
 # Data for table "modelo"
 #
 
-INSERT INTO `app_modelo` VALUES (1,'LaserJet pro 400 m401 dne '),(2,'Laserjet pro 400 m425 (Mult)'),(3,'Laserjet 100 Color mfp m175a'),(4,'Laserjet 2055'),(5,'Laserjet 1536 multi'),(6,'HP Laser Jet Pro P1102w');
+INSERT INTO `app_modelo` VALUES (1,'LaserJet pro 400 m401 dne', true),(2,'Laserjet pro 400 m425 (Mult)', true),(3,'Laserjet 100 Color mfp m175a', true),(4,'Laserjet 2055', true),(5,'Laserjet 1536 multi', true),(6,'HP Laser Jet Pro P1102w', true);
 
 #
 # Structure for table "postos"

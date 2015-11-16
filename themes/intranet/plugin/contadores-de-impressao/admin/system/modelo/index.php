@@ -10,24 +10,24 @@ if (!empty($action)):
 
     $toaction = explode("/", $action);
 
-    $posto = $AdminModelo->getPostoId($toaction[1]);
+    $modelo = $AdminModelo->FindId($toaction[1]);
 
-    if (!empty($posto)):
+    if (!empty($modelo)):
         switch ($toaction[0]):
 
             case "active":
-                $AdminPostos->ExeStatus($toaction[1], 1);
-                WSErro("Posto <b>$posto->postos_nome</b> ativo com sucesso!", WS_ACCEPT);
+                $AdminModelo->ExeStatus($toaction[1], 1);
+                WSErro("Modelo de impressão <b>$modelo->modelo_descricao</b> ativo com sucesso!", WS_ACCEPT);
                 break;
 
             case "inative":
-                $AdminPostos->ExeStatus($toaction[1], 0);
-                WSErro("Posto <b>$posto->postos_nome</b> desativado com sucesso!", WS_ACCEPT);
+                $AdminModelo->ExeStatus($toaction[1], 0);
+                WSErro("Modelo de impressão <b>$modelo->modelo_descricao</b> desativado com sucesso!", WS_ACCEPT);
                 break;
 
             case "delete":
-                if ($AdminPostos->ExeDelete($toaction[1])):
-                    WSErro("Posto <b>$posto->postos_nome</b> deletado com sucesso!", WS_ACCEPT);
+                if ($AdminModelo->ExeDelete($toaction[1])):
+                    WSErro("Modelo de impressão <b>$modelo->modelo_descricao</b> deletado com sucesso!", WS_ACCEPT);
                 else:
                     WSErro("Erro ao deletar", WS_ERROR);
                 endif;
@@ -38,16 +38,16 @@ if (!empty($action)):
                 break;
         endswitch;
     else:
-        WSErro("O posto informado não pode ser encontrado!", WS_INFOR);
+        WSErro("O modelo informado não pode ser encontrado!", WS_INFOR);
     endif;
 endif;
 
 $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
-$Pager = new Pager(IMP_INCLUDE . "admin/&exe=postos/index&page=");
+$Pager = new Pager(IMP_INCLUDE . "admin/&exe=modelo/index&page=");
 $Pager->ExePager($getPage, 15);
 
 $Read = new AppPostos();
-$Read->Execute()->FullRead("SELECT * FROM app_postos ORDER BY postos_ativo LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+$Read->Execute()->FullRead("SELECT * FROM app_modelo ORDER BY modelo_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 ?>
 <article>
     <table class="table table-striped text-center">
@@ -55,33 +55,28 @@ $Read->Execute()->FullRead("SELECT * FROM app_postos ORDER BY postos_ativo LIMIT
             <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Nome</th>
-                <th class="text-center">Numero</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Impressoras</th>
             </tr>
         </thead>
         <tbody>
             <?php
             $i = 1;
-            foreach ($Read->Execute()->getResult() as $posto):
-                extract((array) $posto);
-
-                $postos_cont = $Read->Execute()->FullRead("SELECT count(impressora_id) as 'postos_cont' FROM app_impressora WHERE fk_postos = $postos_id")[0]->postos_cont;
+            foreach ($Read->Execute()->getResult() as $mod):
+                extract((array) $mod);
                 ?>
-                <tr class="<?php if (!$postos_cont): echo "danger text-danger"; endif; ?>">
+                <tr>
                     <td><?= $i++; ?></td>
-                    <td><?= $postos_nome; ?></td>
-                    <td><?= $postos_numero; ?></td>
-                    <td><?= $postos_cont; ?></td>
+                    <td><?= $modelo_descricao; ?></td>
+                    <td><?= $modelo_status; ?></td>
                     <td>
                         <ul class="post_actions plugin">
-                            <li><a class="act_edit" href="<?= IMP_INCLUDE ?>admin/&exe=postos/update&postoId=<?= $postos_id; ?>" title="Editar">Editar</a></li>
-                            <?php if (!$postos_ativo): ?>
-                                <li><a class="act_ative" href="<?= IMP_INCLUDE ?>admin/&exe=postos/index&action=active/<?= $postos_id; ?>" title="Ativar">Ativar</a></li>
+                            <li><a class="act_edit" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/update&modeloId=<?= $modelo_id; ?>" title="Editar">Editar</a></li>
+                            <?php if (!$modelo_status): ?>
+                                <li><a class="act_ative" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=active/<?= $modelo_id; ?>" title="Ativar">Ativar</a></li>
                             <?php else: ?>
-                                <li><a class="act_inative" href="<?= IMP_INCLUDE ?>admin/&exe=postos/index&action=inative/<?= $postos_id; ?>" title="Inativar">Inativar</a></li>
-    <?php endif; ?>
-                            <li><a class="act_delete" href="<?= IMP_INCLUDE ?>admin/&exe=postos/index&action=delete/<?= $postos_id; ?>" title="Excluir">Deletar</a></li>
+                                <li><a class="act_inative" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=inative/<?= $modelo_id; ?>" title="Inativar">Inativar</a></li>
+                            <?php endif; ?>
+                            <!--<li><a class="act_delete" href="<?= IMP_INCLUDE ?>admin/&exe=modelo/index&action=delete/<?= $modelo_id; ?>" title="Excluir">Deletar</a></li>;-->
                         </ul>
                     </td>
                 </tr>
