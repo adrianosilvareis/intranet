@@ -46,5 +46,5 @@
 
 <?php
 //coluna direita
-//$cat = Check::CatByName("siderbar-left");
+$cat = Check::CatByName("siderbar-left");
 require("inc/siderbar.inc.php");

@@ -1,4 +1,13 @@
 <?php
+/**
+ * ****************************************
+ * ***** Pagina de redirecionamento *******
+ * **************************************** 
+ */
+
+/**
+ * Executa o redirecionamento para os links e faz a contagem de views
+ */
 
 echo "redirecionamento...<br>";
 
