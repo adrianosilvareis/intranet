@@ -10,16 +10,44 @@ $FeExames->Execute()->findAll();
 ?>
 
 <div class="panel panel-default">
-    
-    <div class="well well-sm btn-group">
-        <h3 class="">Painel</h3>
-        <a href="#" title="Novo" class="btn btn-danger glyphicon glyphicon-plus"></a>
-        <a href="#" title="Editar" class="btn btn-danger glyphicon glyphicon-pencil"></a>
-        <a href="#" title="Remover" class="btn btn-danger glyphicon glyphicon-trash"></a>
-        <a href="#" title="Pagina usuario" class="btn btn-danger glyphicon glyphicon-user"></a>
-        <a href="#" title="Confirmação" class="btn btn-danger glyphicon glyphicon-ok"></a>
+
+    <div class="btn-group">
+        <a href="javascript:abrir()" title="Novo" class="btn btn-danger glyphicon glyphicon-plus"></a>
+        <a title="Pagina usuario" class="btn btn-danger glyphicon glyphicon-user"></a>
     </div>
-    
+    <hr>
+
+    <!--tem que melhorar parei aqui-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#form").hide();
+        });
+
+        function abrir() {
+            $("#form").show();
+        }
+    </script>
+
+    <form class="form form-horizontal" method="post" id="form">
+        <div class="form-group">
+            <label>Nome:</label>
+            <input class="form-control" type="text" name="nome" placeholder="nome"/>
+        </div>
+        <div class="form-group">
+            <label>Telefone:</label>
+            <input class="form-control" type="tel" name="telefone" placeholder="telefone"/>
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input class="form-control" type="email" name="email" placeholder="email"/>
+        </div>
+        <div class="form-group">
+            <label>Idade:</label>
+            <input class="form-control" type="text" name="idade" placeholder="idade"/>
+        </div>
+        <input type="submit" name="form" value="enviar"/>
+    </form>
+
     <?php
     if (!$FeExames->Execute()->getResult()):
         WSErro("Nenhum Solicitação foi encontrada no momento!", WS_INFOR);
@@ -36,6 +64,7 @@ $FeExames->Execute()->findAll();
                     <th class="text-center">O.S Paciente Teste</th>
                     <th class="text-center">Assinado por</th>
                     <th class="text-center">Fechado em</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,6 +81,13 @@ $FeExames->Execute()->findAll();
                         <td><?= $ex_paciente_os; ?></td>
                         <td><?= $AdminExames->Usuario($ws_users); ?></td>
                         <td><?= date("d/m/Y H:i:s", strtotime($ex_data_fechamento)); ?></td>
+                        <td>
+                            <div class="btn-group">
+                                <a title="Editar" class="btn btn-danger glyphicon glyphicon-pencil"></a>
+                                <a title="Confirmação" class="btn btn-danger glyphicon glyphicon-ok"></a>
+                                <a title="Remover" class="btn btn-danger glyphicon glyphicon-trash"></a>
+                            </div>
+                        </td>
                     </tr>
                     <?php
                 endforeach;
