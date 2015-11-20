@@ -153,12 +153,12 @@
                     <select name="post_author">
                         <option value="<?= $_SESSION['userlogin']['user_id'] ?>"> <?= "{$_SESSION['userlogin']['user_name']} {$_SESSION['userlogin']['user_lastname']}"; ?> </option>
                         <?php
-                        $ReadAut = new WsUsers;
+                        $ReadAut = new WsUsers();
                         $ReadAut->setUser_id($_SESSION['userlogin']['user_id']);
                         $ReadAut->setUser_level(2);
                         $ReadAut->Execute()->Query("user_id != :user_id AND user_level >= :user_level ORDER BY user_name ASC");
                         if ($ReadAut->Execute()->getRowCount() >= 1):
-                            foreach ($ReadAut->getResult() as $aut):
+                            foreach ($ReadAut->Execute()->getResult() as $aut):
                                 echo "<option ";
 
                                 if ($post['post_author'] == $aut->user_id):
@@ -171,7 +171,7 @@
                         ?>
                     </select>
                 </label>
-
+                
             </div><!--/line-->
 
             <div class="label gbform" id="gbfoco">

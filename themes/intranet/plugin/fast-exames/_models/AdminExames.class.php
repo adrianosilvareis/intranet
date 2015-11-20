@@ -5,7 +5,7 @@ class AdminExames {
     private $Read;
     private $Data;
     private $Result;
-    
+
     function __construct() {
         $this->Read = new FeExames();
     }
@@ -22,24 +22,29 @@ class AdminExames {
     function getResult() {
         return $this->Result;
     }
-    
+
+    public function FindId($exameId) {
+        $this->Read->Execute()->find("ex_id=$exameId");
+        return $this->Read->Execute()->getResult();
+    }
+
     /**
      * ****************************************
      * ************* FOREIGN KEY **************
      * ****************************************
      */
-    public function Setor($Setor){
+    public function Setor($Setor) {
         $FeSetor = new FeSetor();
         $FeSetor->setSet_id($Setor);
         return (!empty($FeSetor->Execute()->find()) ? $FeSetor->Execute()->find()->set_descricao : null);
     }
-    
-    public function Usuario($User){
+
+    public function Usuario($User) {
         $WsUsers = new WsUsers();
         $WsUsers->setUser_id($User);
         return (!empty($WsUsers->Execute()->find()) ? $WsUsers->Execute()->find()->user_name : null);
     }
-    
+
     /**
      * ****************************************
      * ************** PRIVATES ****************

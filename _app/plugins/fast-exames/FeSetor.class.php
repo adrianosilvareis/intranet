@@ -12,6 +12,7 @@ class FeSetor {
     private $set_id;
     private $set_descricao;
     private $set_execucao;
+    private $set_solicita;
     private $set_status;
 
     function __construct() {
@@ -27,6 +28,7 @@ class FeSetor {
         $this->Controle->setDados(array_filter([
             'set_descricao' => $this->getSet_descricao(),
             'set_execucao' => $this->getSet_execucao(),
+            'set_solicita' => $this->getSet_solicita(),
             'set_status' => $this->getSet_status(),
             'set_id' => $this->getSet_id()
         ]));
@@ -42,6 +44,7 @@ class FeSetor {
         $this->set_id((isset($object->set_id) ? $object->set_id : null));
         $this->set_status((isset($object->set_status) ? $object->set_status : null));
         $this->set_execucao((isset($object->set_execucao) ? $object->set_execucao : null));
+        $this->set_solicita((isset($object->set_solicita) ? $object->set_solicita : null));
         $this->set_descricao((isset($object->set_descricao) ? $object->set_descricao : null));
     }
 
@@ -60,6 +63,7 @@ class FeSetor {
      * ************** GET & SET ***************
      * ****************************************
      */
+    
     function getSet_id() {
         return $this->set_id;
     }
@@ -70,6 +74,10 @@ class FeSetor {
 
     function getSet_execucao() {
         return $this->set_execucao;
+    }
+
+    function getSet_solicita() {
+        return $this->set_solicita;
     }
 
     function getSet_status() {
@@ -86,6 +94,10 @@ class FeSetor {
 
     function setSet_execucao($set_execucao) {
         $this->set_execucao = $set_execucao;
+    }
+
+    function setSet_solicita($set_solicita) {
+        $this->set_solicita = $set_solicita;
     }
 
     function setSet_status($set_status) {

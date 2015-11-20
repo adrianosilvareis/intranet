@@ -44,7 +44,7 @@ class Check {
 
         return strtolower(utf8_encode(self::$Data));
     }
-    
+
     /**
      * <b>Tranforma Data:</b> Transforma uma data no formato DD/MM/YY em uma data no formato TIMESTAMP!
      * @param STRING $Name = Data em (d/m/Y) ou (d/m/Y H:i:s)
@@ -183,14 +183,12 @@ class Check {
             $tab = 'framework';
         elseif (strpos($msg, "app_youtube") || strpos($msg, "app_niver")):
             $tab = 'aplicacao';
-        elseif (strpos($msg, "app_cidades")):
-            $tab = 'cidades';
-        elseif (strpos($msg, "app_estados")):
-            $tab = 'estados';
-        elseif (strpos($msg, "app_cidades")):
-            $tab = 'cidades';
-        elseif (strpos($msg, "app_postos")):
+        elseif (strpos($msg, "app_cidades") || strpos($msg, "app_estados")):
+            $tab = 'endereco';
+        elseif (strpos($msg, "app_postos") || strpos($msg, "app_contadores") || strpos($msg, "app_impressora") || strpos($msg, "app_modelo") || strpos($msg, "app_taxa_impress")):
             $tab = 'plugin_impress';
+        elseif (strpos($msg, "fe_exames") || strpos($msg, "fe_material") || strpos($msg, "fe_metodo") || strpos($msg, "fe_setor")):
+            $tab = 'plugin_fast_exames';
         endif;
 
         if (!empty($tab)):

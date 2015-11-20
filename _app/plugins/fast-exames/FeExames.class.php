@@ -24,6 +24,7 @@ class FeExames extends Beans {
     private $ex_data_fechamento;
     private $ex_paciente_os;
     private $ws_users;
+    private $ws_users_soli;
     private $fe_setor_soli;
     private $fe_setor_exec;
     private $fe_metodo;
@@ -54,6 +55,7 @@ class FeExames extends Beans {
             'ex_data_fechamento' => $this->getEx_data_fechamento(),
             'ex_paciente_os' => $this->getEx_paciente_os(),
             'ws_users' => $this->getWs_users(),
+            'ws_users_soli' => $this->getWs_users_soli(),
             'fe_setor_soli' => $this->getFe_setor_soli(),
             'fe_setor_exec' => $this->getFe_setor_exec(),
             'fe_metodo' => $this->getFe_metodo(),
@@ -70,12 +72,10 @@ class FeExames extends Beans {
      */
     public function setThis($object) {
         $this->setEx_id((isset($object->ex_id) ? $object->ex_id : null));
-        $this->setEx_material((isset($object->ex_material) ? $object->ex_material : null));
         $this->setEx_descricao((isset($object->ex_descricao) ? $object->ex_descricao : null));
         $this->setEx_sinonimia((isset($object->ex_sinonimia) ? $object->ex_sinonimia : null));
         $this->setEx_unidade((isset($object->ex_unidade) ? $object->ex_unidade : null));
         $this->setEx_valor_referencia((isset($object->ex_valor_referencia) ? $object->ex_valor_referencia : null));
-        $this->setEx_metodo((isset($object->ex_metodo) ? $object->ex_metodo : null));
         $this->setEx_prazo((isset($object->ex_prazo) ? $object->ex_prazo : null));
         $this->setEx_info_coleta((isset($object->ex_info_coleta) ? $object->ex_info_coleta : null));
         $this->setEx_info_interferentes((isset($object->ex_info_interferentes) ? $object->ex_info_interferentes : null));
@@ -85,9 +85,12 @@ class FeExames extends Beans {
         $this->setEx_data_abertura((isset($object->ex_data_abertura) ? $object->ex_data_abertura : null));
         $this->setEx_data_fechamento((isset($object->ex_data_fechamento) ? $object->ex_data_fechamento : null));
         $this->setEx_paciente_os((isset($object->ex_paciente_os) ? $object->ex_paciente_os : null));
-        $this->setEx_assinatura((isset($object->ex_assinatura) ? $object->ex_assinatura : null));
-        $this->setEx_solicitante((isset($object->ex_solicitante) ? $object->ex_solicitante : null));
-        $this->setEx_setor_execucao((isset($object->ex_setor_execucao) ? $object->ex_setor_execucao : null));
+        $this->setWs_users((isset($object->ws_users) ? $object->ws_users : null));
+        $this->setWs_users_soli((isset($object->ws_users_soli) ? $object->ws_users_soli : null));
+        $this->setFe_setor_soli((isset($object->fe_setor_soli) ? $object->fe_setor_soli : null));
+        $this->setFe_setor_exec((isset($object->fe_setor_exec) ? $object->fe_setor_exec : null));
+        $this->setFe_metodo((isset($object->fe_metodo) ? $object->fe_metodo : null));
+        $this->setFe_material((isset($object->fe_material) ? $object->fe_material : null));
     }
 
     /**
@@ -166,6 +169,10 @@ class FeExames extends Beans {
         return $this->ws_users;
     }
 
+    function getWs_users_soli() {
+        return $this->ws_users_soli;
+    }
+
     function getFe_setor_soli() {
         return $this->fe_setor_soli;
     }
@@ -242,6 +249,10 @@ class FeExames extends Beans {
         $this->ws_users = $ws_users;
     }
 
+    function setWs_users_soli($ws_users_soli) {
+        $this->ws_users_soli = $ws_users_soli;
+    }
+
     function setFe_setor_soli($fe_setor_soli) {
         $this->fe_setor_soli = $fe_setor_soli;
     }
@@ -257,7 +268,5 @@ class FeExames extends Beans {
     function setFe_material($fe_material) {
         $this->fe_material = $fe_material;
     }
-
-
 
 }
