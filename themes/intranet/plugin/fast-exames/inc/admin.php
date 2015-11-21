@@ -195,8 +195,6 @@ endif;
         endif;
         ?>
 
-
-
     </div>
 
     <div class = "panel panel-default" id = "list">

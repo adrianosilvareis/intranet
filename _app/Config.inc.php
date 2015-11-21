@@ -81,6 +81,19 @@ function __autoload($Class_name) {
     endif;
 }
 
+function Plugins() {
+    $lista = ['contadores-de-impressao', 'fast-exames'];
+
+    $result = array();
+    foreach ($lista as $plugin):
+        $Data['title'] = strtolower(str_replace('-', ' ', $plugin));
+        $Data['url'] = HOME . "/plugin/" . $plugin;
+        $result[] = $Data;
+    endforeach;
+    
+    return $result;
+}
+
 //ES ERROR :: Exibe os erros lançados :: FRONT
 function WSErro($ErrMsg, $ErrNo, $ErrDie = null) {
     $CssClass = ($ErrNo == E_USER_NOTICE ? WS_INFOR : ($ErrNo == E_USER_WARNING ? WS_ALERT : ($ErrNo == E_USER_ERROR ? WS_ERROR : $ErrNo)));

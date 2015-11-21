@@ -21,7 +21,7 @@
                             <li><a href="<?= HOME ?>/membros/equipe-de-ti/">Equipe de TI</a></li>
 
                             <!-- dropdown -->
-                            <li class="dropdown"> 
+                            <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="active"><a>Grupo</a></li>
@@ -38,6 +38,16 @@
                                     <li><a href="/view/redirect/sft_redirect.html" target="_blank">SFT - Tommasi</a></li>
                                     <li><a href="/ftp">Qualidade</a></li>
                                     <li><a href="<?= HOME ?>/pages/aniversarios">Aniversariantes</a></li>
+                                    <li class="active"><a>Plugins</a></li>
+                                    <?php
+                                    /**
+                                     * Plugins
+                                     */
+                                    $lista = Plugins();
+                                    foreach ($lista as $plugin):
+                                        echo "<li><a class=\"text-capitalize\" href=\"{$plugin['url']}\">{$plugin['title']}</a></li>";
+                                    endforeach;
+                                    ?>
                                 </ul>
                             </li>
                         </ul>
