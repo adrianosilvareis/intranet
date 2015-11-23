@@ -13,7 +13,7 @@ class Login {
     private $Senha;
     private $Error;
     private $Result;
-    
+
     /**
      * <b>Informar Level:</b> Informe o nível de acesso mínimo para a área a ser protegida.
      * @param INT $Level = nível mínimo para acesso
@@ -21,7 +21,7 @@ class Login {
     function __construct($Level) {
         $this->Level = (int) $Level;
     }
-    
+
     /**
      * <b>Efetuar Login:</b> Envelope um array atribuitivo com Índices STRING user [email], STRING pass.
      * Ao passar este array na ExeLogin() os dados são verificados e o login é feito!
@@ -41,6 +41,10 @@ class Login {
         return $this->Result;
     }
 
+    function setLevel($Level) {
+        $this->Level = $Level;
+    }
+
     public function CheckLogin() {
         if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin']['user_level'] < $this->Level):
             unset($_SESSION['userlogin']);
@@ -50,12 +54,11 @@ class Login {
         endif;
     }
 
- /**
-  * ****************************************
-  * *************** PRIVATES ***************
-  * ****************************************
-  */
-
+    /**
+     * ****************************************
+     * *************** PRIVATES ***************
+     * ****************************************
+     */
     private function setLogin() {
         if (!$this->Email || !$this->Senha || !Check::Email($this->Email)):
             $this->Error = ['Informe seu email e senha para efetuar seu login', WS_INFOR];

@@ -2,8 +2,8 @@ $(function() {
     //SHADOWBOX
     //Shadowbox.init();
 
-    //MASCARAS
-    $(".formDate").mask("99/99/9999 99:99:99", {placeholder: " "});
+        //MASCARAS
+        $(".formDate").mask("99/99/9999 99:99:99", {placeholder: " "});
 
 
     //TinyMCE

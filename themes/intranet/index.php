@@ -1,6 +1,6 @@
 <hr>
 <div class="col-md-9">
-
+    
     <?php
     $cat = Check::CatByName("destaque");
     $c = 0;

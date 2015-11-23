@@ -1,4 +1,25 @@
 <div class="section bg-sucesso">
+    <?php
+    $Login = new Login(1);
+
+    if ($Login->CheckLogin()):
+        ?>
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li class="navbar-brand">Olá <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>
+                    <li class="active"><a href="<?= HOME ?>">Home</a></li>
+                    <li><a href="<?= HOME ?>/admin/painel.php?exe=users/profile">Profile</a></li>
+                    <li><a href="<?= HOME ?>/admin/painel.php?logoff=true">Logoff</a></li>
+
+                </ul>
+            </div>
+        </nav>
+        <?php
+    endif;
+    ?>
+
+
     <div class="container">
         <header>
 
@@ -86,18 +107,14 @@
                             <h1 class="text-center text-primary">Administrar Site</h1>
                             <hr>
                             <?php
-                            $login = new Login(3);
-
-//                            if ($login->CheckLogin()):
-//                                header('Location: admin/painel.php');
-//                            endif;
-
                             $dataLogin = filter_input_array(INPUT_POST, FILTER_DEFAULT);
                             if (!empty($dataLogin['AdminLogin'])):
 
-                                $login->ExeLogin($dataLogin);
-                                if (!$login->getResult()):
-                                    WSErro($login->getError()[0], $login->getError()[1]);
+                                $Login = new Login(1);
+
+                                $Login->ExeLogin($dataLogin);
+                                if (!$Login->getResult()):
+                                    WSErro($Login->getError()[0], $Login->getError()[1]);
                                 else:
                                     header("Location: " . HOME . "/admin/painel.php");
                                 endif;

@@ -3,7 +3,7 @@ ob_start();
 session_start();
 require('../_app/Config.inc.php');
 
-$Login = new Login(3);
+$Login = new Login(1);
 $logoff = filter_input(INPUT_GET, 'logoff', FILTER_VALIDATE_BOOLEAN);
 $getexe = filter_input(INPUT_GET, 'exe', FILTER_DEFAULT);
 Check::UserOnline();
@@ -18,6 +18,10 @@ endif;
 if ($logoff):
     unset($_SESSION['userlogin']);
     header('Location: index.php?exe=logoff');
+endif;
+
+if ($userlogin['user_level'] < 3):
+    header('Location: ' . HOME);
 endif;
 ?>
 <!DOCTYPE html>
@@ -75,14 +79,14 @@ endif;
                                 <li><a href="painel.php?exe=categories/index">Listar / Editar Categorias</a></li>
                             </ul>
                         </li>
-                        
+
                         <li class="li<?php if (in_array('youtube', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Videos Youtube</a>
                             <ul class="sub">
                                 <li><a href="painel.php?exe=youtube/create">Criar Videos</a></li>
                                 <li><a href="painel.php?exe=youtube/index">Listar / Editar Videos</a></li>
                             </ul>
                         </li>
-                        
+
                         <!-- adicionar novas categorias aqui-->
 
                         <li class="li"><a href="../" target="_blank" class="opensub">Ver Site</a></li>

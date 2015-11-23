@@ -20,8 +20,8 @@ require('../_app/Config.inc.php');
                 <h1>Administrar Site</h1>
 
                 <?php
-                $login = new Login(3);
-
+                $login = new Login(1);
+                
                 if ($login->CheckLogin()):
                     header('Location: painel.php');
                 endif;
@@ -37,7 +37,7 @@ require('../_app/Config.inc.php');
                     endif;
 
                 endif;
-
+                
                 $get = filter_input(INPUT_GET, 'exe', FILTER_DEFAULT);
                 if (!empty($get)):
                     if ($get == 'restrito'):

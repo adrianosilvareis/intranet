@@ -261,7 +261,9 @@ class Seo {
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/lib/bootstrap/css/bootstrap2.css'>" . "\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . '/themes/' . THEME . "/css/default.css'/>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/lib/jquery/jquery-min.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/lib/jquery-mask/jmask.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/lib/bootstrap/js/bootstrap.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . '/themes/' . THEME . "/js/intranet.js'></script>" . "\n";
 
         $this->Tags = null;
     }
