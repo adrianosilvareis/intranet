@@ -10,17 +10,17 @@
             <header>
                 <h1>Fast Exames</h1>
             </header>
-            
+
             <?php
-            if ($Login->CheckLogin()):
-                include 'inc/admin.php';
+            if (!empty($_SESSION['userlogin']) && $_SESSION['userlogin']['user_level'] >= 3):
+                include 'admin/index.php';
+            elseif (!empty($_SESSION['userlogin']) && $_SESSION['userlogin']['user_level'] >= 2):
+                include 'inc/user.php';
+            elseif (!empty($_SESSION['userlogin']) && $_SESSION['userlogin']['user_level'] == 1):
+                WSErro("<b>Área Restrita!</b> Você não tem permissão para acessar esta área.", WS_INFOR);
             else:
-                $Login->setLevel(2);
-                if ($Login->CheckLogin()):
-                    include 'inc/user.php';
-                else:
-                    WSErro("<b>Área Restrita!</b> Efetue login para acessar.", WS_INFOR);
-                endif;
+                $Login->CheckLogin();
+                WSErro("<b>Área Restrita!</b> Efetue login para acessar.", WS_INFOR);
             endif;
             ?>
         </div>
