@@ -9,13 +9,11 @@ $AdminExames = new AdminExames();
 $FeExames = new FeExames();
 $FeExames->Execute()->findAll();
 
-if(!empty($Dados)):
+if (!empty($Dados)):
     $Dados['ex_data_abertura'] = Check::Data($Dados['ex_data_abertura']);
     $Dados['ex_data_fechamento'] = Check::Data($Dados['ex_data_fechamento']);
     var_dump($Dados);
 endif;
-
-
 ?>
 
 <div class="panel panel-default">
@@ -23,6 +21,7 @@ endif;
     <div class="btn-group">
         <a href="javascript:down()" title="Novo" class="btn btn-danger glyphicon glyphicon-plus"></a>
         <a href="javascript:up()" title="Pagina usuario" class="btn btn-danger glyphicon glyphicon-list"></a>
+        <a href="<?= FAST_INCLUDE ?>admin/" title="Gerenciamento" class="btn btn-danger glyphicon glyphicon-cog"></a>
     </div>
 
     <!--tem que melhorar parei aqui-->
@@ -139,11 +138,11 @@ endif;
     </div>
 
     <div class = "panel panel-default" id = "list">
-        <?php
-        if (!$FeExames->Execute()->getResult()):
-            WSErro("Nenhum Solicitação foi encontrada no momento!", WS_INFOR);
-        else:
-            ?>
+<?php
+if (!$FeExames->Execute()->getResult()):
+    WSErro("Nenhum Solicitação foi encontrada no momento!", WS_INFOR);
+else:
+    ?>
             <table class="table table-striped text-center">
                 <thead>
                     <tr>
@@ -158,10 +157,10 @@ endif;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    foreach ($FeExames->Execute()->getResult() as $exames):
-                        extract((array) $exames);
-                        ?>
+    <?php
+    foreach ($FeExames->Execute()->getResult() as $exames):
+        extract((array) $exames);
+        ?>
                         <tr>
                             <td><?= $AdminExames->Setor($fe_setor_soli); ?></td>
                             <td><?= date("d/m/Y H:i:s", strtotime($ex_data_abertura)); ?></td>
@@ -172,12 +171,12 @@ endif;
                             <td><?= $AdminExames->Usuario($ws_users); ?></td>
                             <td><?= date("d/m/Y H:i:s", strtotime($ex_data_fechamento)); ?></td>
                         </tr>
-                        <?php
-                    endforeach;
-                    ?>
+        <?php
+    endforeach;
+    ?>
                 </tbody>
             </table>
-        <?php endif; ?>
+<?php endif; ?>
     </div>
 
 </div>
