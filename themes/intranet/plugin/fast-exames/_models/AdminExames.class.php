@@ -19,6 +19,10 @@ class AdminExames {
         return $insert;
     }
 
+    public function ExeStatus($ExameId, $Exame_status) {
+        return $this->Read->Execute()->update("ex_id=$ExameId&ex_status=$Exame_status", "ex_id");
+    }
+
     function getResult() {
         return $this->Result;
     }
@@ -43,6 +47,18 @@ class AdminExames {
         $WsUsers = new WsUsers();
         $WsUsers->setUser_id($User);
         return (!empty($WsUsers->Execute()->find()) ? $WsUsers->Execute()->find()->user_name : null);
+    }
+
+    public function Metodo($Metodo) {
+        $FeMetodo = new FeMetodo();
+        $FeMetodo->setMet_id($Metodo);
+        return (!empty($FeMetodo->Execute()->find()) ? $FeMetodo->Execute()->find()->met_descricao : null);
+    }
+
+    public function Material($Material) {
+        $FeMaterial = new FeMaterial();
+        $FeMaterial->setMat_id($Material);
+        return (!empty($FeMaterial->Execute()->find()) ? $FeMaterial->Execute()->find()->mat_descricao : null);
     }
 
     /**

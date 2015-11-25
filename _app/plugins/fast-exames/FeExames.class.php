@@ -16,6 +16,7 @@ class FeExames extends Beans {
     private $ex_valor_referencia;
     private $ex_prazo;
     private $ex_info_coleta;
+    private $ex_info_paciente;
     private $ex_info_interferentes;
     private $ex_info_encaminhamento;
     private $ex_valor;
@@ -47,6 +48,7 @@ class FeExames extends Beans {
             'ex_valor_referencia' => $this->getEx_valor_referencia(),
             'ex_prazo' => $this->getEx_prazo(),
             'ex_info_coleta' => $this->getEx_info_coleta(),
+            'ex_info_paciente' => $this->getEx_info_paciente(),
             'ex_info_interferentes' => $this->getEx_info_interferentes(),
             'ex_info_encaminhamento' => $this->getEx_info_encaminhamento(),
             'ex_valor' => $this->getEx_valor(),
@@ -78,6 +80,7 @@ class FeExames extends Beans {
         $this->setEx_valor_referencia((isset($object->ex_valor_referencia) ? $object->ex_valor_referencia : null));
         $this->setEx_prazo((isset($object->ex_prazo) ? $object->ex_prazo : null));
         $this->setEx_info_coleta((isset($object->ex_info_coleta) ? $object->ex_info_coleta : null));
+        $this->setEx_info_paciente((isset($object->ex_info_paciente) ? $object->ex_info_paciente : null));
         $this->setEx_info_interferentes((isset($object->ex_info_interferentes) ? $object->ex_info_interferentes : null));
         $this->setEx_info_encaminhamento((isset($object->ex_info_encaminhamento) ? $object->ex_info_encaminhamento : null));
         $this->setEx_valor((isset($object->ex_valor) ? $object->ex_valor : null));
@@ -108,7 +111,6 @@ class FeExames extends Beans {
      * ************** GET & SET ***************
      * ****************************************
      */
-    
     function getEx_id() {
         return $this->ex_id;
     }
@@ -135,6 +137,10 @@ class FeExames extends Beans {
 
     function getEx_info_coleta() {
         return $this->ex_info_coleta;
+    }
+
+    function getEx_info_paciente() {
+        return $this->ex_info_paciente;
     }
 
     function getEx_info_interferentes() {
@@ -215,6 +221,10 @@ class FeExames extends Beans {
 
     function setEx_info_coleta($ex_info_coleta) {
         $this->ex_info_coleta = $ex_info_coleta;
+    }
+
+    function setEx_info_paciente($ex_info_paciente) {
+        $this->ex_info_paciente = $ex_info_paciente;
     }
 
     function setEx_info_interferentes($ex_info_interferentes) {
