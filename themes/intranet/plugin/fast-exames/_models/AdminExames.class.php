@@ -60,6 +60,12 @@ class AdminExames {
         $FeMaterial->setMat_id($Material);
         return (!empty($FeMaterial->Execute()->find()) ? $FeMaterial->Execute()->find()->mat_descricao : null);
     }
+    
+    public function Acao($Acao){
+        $FeAcoes = new FeAcoes();
+        $FeAcoes->setAcaoId($Acao);
+        return (!empty($FeAcoes->Execute()->find()) ? $FeAcoes->Execute()->find()->acao_descricao : null);
+    }
 
     /**
      * ****************************************

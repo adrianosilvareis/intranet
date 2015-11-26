@@ -1,24 +1,24 @@
 <?php
-if (file_exists(FAST_PATH . "_models/AdminMetodo.class.php")):
-    require_once FAST_PATH . "_models/AdminMetodo.class.php";
+if (file_exists(FAST_PATH . "_models/AdminAcoes.class.php")):
+    require_once FAST_PATH . "_models/AdminAcoes.class.php";
 endif;
 
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-$AdminMetodo = new AdminMetodo();
+$AdminAcoes = new AdminAcoes();
 
 if (!empty($Dados) && !is_array("", $Dados)):
-    $AdminMetodo->ExeCreate($Dados);
+    $AdminAcoes->ExeCreate($Dados);
 endif;
 ?>
-<h1 class="text-center">Metodos</h1>
+<h1 class="text-center">Ações</h1>
 <form method="post" class="form">
 
     <div class="row bg-primary">
 
         <div class="form-group col-md-12">
             <label>Descrição:</label>
-            <input required="true" class="form-control" title="Descrição" type="text" name="met_descricao" placeholder="Descrição" value="<?= $Dados['met_descricao']; ?>">
-        </div>
+            <input required="true" class="form-control" title="Descrição" type="text" name="acao_descricao" placeholder="Descrição" value="<?= $Dados['acao_descricao']; ?>">
+        </div>        
 
     </div>
     <hr>

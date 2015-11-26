@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS fe_exames (
 ex_id INT NOT NULL AUTO_INCREMENT,
 ex_descricao VARCHAR(50), 
+ex_minemonico VARCHAR(50), 
 ex_sinonimia VARCHAR(50), 
 ex_unidade VARCHAR(50), 
 ex_valor_referencia VARCHAR(50), 
@@ -20,6 +21,7 @@ fe_setor_soli INT,
 fe_setor_exec INT, 
 fe_material INT, 
 fe_metodo INT, 
+fe_acoes INT, 
 PRIMARY KEY (ex_id));
 
 CREATE TABLE IF NOT EXISTS fe_setor(
@@ -41,3 +43,9 @@ CREATE TABLE IF NOT EXISTS fe_metodo(
     met_descricao  VARCHAR(50),
     met_status BOOLEAN, 
 PRIMARY KEY (met_id ));
+
+CREATE TABLE IF NOT EXISTS fe_acoes(
+    acao_id INT NOT NULL AUTO_INCREMENT,
+    acao_descricao  VARCHAR(50),
+    acao_status BOOLEAN, 
+PRIMARY KEY (acao_id ));

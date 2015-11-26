@@ -1,8 +1,8 @@
 <?php
-$FeMetodo = new FeMetodo();
-$FeMetodo->Execute()->findAll();
-if (!$FeMetodo->Execute()->getResult()):
-    WSErro("Nenhum metodo cadastrado!", WS_INFOR);
+$FeAcoes = new FeAcoes();
+$FeAcoes->Execute()->findAll();
+if (!$FeAcoes->Execute()->getResult()):
+    WSErro("Nenhum ação cadastrado!", WS_INFOR);
 else:
     ?>
     <table class="table table-striped">
@@ -15,12 +15,12 @@ else:
         </thead>
         <tbody>
             <?php
-            foreach ($FeMetodo->Execute()->getResult() as $metodo):
-                extract((array) $metodo);
+            foreach ($FeAcoes->Execute()->getResult() as $acoes):
+                extract((array) $acoes);
                 ?>    
                 <tr>
-                    <td><?= $met_descricao; ?></td>
-                    <td><?= ($met_status ? "Ativo" : "Desativado"); ?></td>
+                    <td><?= $acao_descricao; ?></td>
+                    <td><?= ($acao_status ? "Ativo" : "Desativado"); ?></td>
                     <td><?= 'editar/desativar' ?></td>
                 </tr>
                 <?php

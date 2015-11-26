@@ -55,7 +55,7 @@
             $TotalViews = $read->getResult()[0]->TotalViews;
 
             $read->setTable('ws_siteviews_agent');
-            $read->FullRead("SELECT * FROM ws_siteviews_agent ORDER BY agent_views DESC LIMIT 3");
+            $read->FullRead("SELECT * FROM ws_siteviews_agent ORDER BY agent_views DESC LIMIT 4");
             if (!$read->getResult()):
                 WSErro("Oppsss, Ainda não existem estatísticas de navegadores!", WS_INFOR);
             else:

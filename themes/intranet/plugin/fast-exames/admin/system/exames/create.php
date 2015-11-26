@@ -16,11 +16,16 @@ endif;
 <h1 class="text-center">Formulario de requisição de exame</h1>
 <form method="post" class="form">
 
-    <div class="row bg-primary">
+    <div class="row bg-info">
 
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
             <label>Descrição:</label>
             <input required="true" class="form-control" title="Descrição" type="text" name="ex_descricao" placeholder="Descrição" value="<?= $Dados['ex_descricao']; ?>">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Minemônico:</label>
+            <input required="true" class="form-control" title="Minemônico" type="text" name="ex_minemonico" placeholder="Minemônico" value="<?= $Dados['ex_minemonico']; ?>">
         </div>
 
         <div class="form-group col-md-12">
@@ -28,9 +33,22 @@ endif;
             <textarea class="form-control" title="Sinonimia" name="ex_sinonimia" placeholder="Sinonimia"><?= $Dados['ex_sinonimia']; ?></textarea>
         </div>
 
-    </div>
-
-    <div class="row bg-primary">
+        <div class="form-group col-md-12">
+            <label>Ação a executar:</label>
+            <select  required="true" title="Ação a executar" name="fe_acoes" class="form-control">
+                <option value="">Selecione uma ação</option>
+                <?php
+                $FeAcoes = new FeAcoes();
+                $FeAcoes->setAcao_status(true);
+                $FeAcoes->Execute()->Query("#acao_status#");
+                foreach ($FeSetor->Execute()->getResult() as $setor):
+                    extract((array) $setor);
+                    $select = ($Dados['fe_acoes'] == $set_id ? 'selected=true' : '');
+                    echo "<option value=\"{$acao_id}\" {$select}>{$acao_descricao}</option>";
+                endforeach;
+                ?>
+            </select>
+        </div>
 
         <div class="form-group col-md-6">
             <label>Solicitante:</label>
@@ -67,9 +85,6 @@ endif;
             </select>
         </div>
 
-    </div>
-
-    <div class="row bg-primary">
         <div class="form-group col-md-4">
             <label>Unidade:</label>
             <input class="form-control" title="Unidade" type="text" name="ex_unidade" placeholder="Unidade" value="<?= $Dados['ex_unidade']; ?>">
@@ -84,9 +99,7 @@ endif;
             <label>Valor:</label>
             <input required="true" class="form-control" title="Valor" type="text" name="ex_valor" placeholder="Valor" value="<?= $Dados['ex_valor']; ?>">
         </div>
-    </div>
 
-    <div class="row bg-primary">
         <div class="form-group col-md-6">
             <label>Método:</label>
             <select  required="true" title="Método" name="fe_metodo" class="form-control">
@@ -120,18 +133,12 @@ endif;
                 ?>
             </select>
         </div>
-    </div>
-
-    <div class="row bg-primary">
 
         <div class="form-group col-md-12">
             <label>Vr:</label>
             <textarea required="true" class="form-control" title="Valor de Referencia" name="ex_valor_referencia" placeholder="Valor de Referencia"><?= $Dados['ex_valor_referencia']; ?></textarea>
         </div>
 
-    </div>
-
-    <div class="row bg-primary">
         <div class="form-group col-md-6">
             <label>Informação Paciente:</label>
             <textarea class="form-control" title="Info Paciente" name="ex_info_paciente" placeholder="Info Paciente"><?= $Dados['ex_info_paciente']; ?></textarea>
@@ -154,5 +161,6 @@ endif;
     </div>
 
     <hr>
-    <input type="submit" class="btn btn-success" value="Registrar"/>
+    <input type="submit" class="btn btn-success btn-block" value="Solicitar"/>
+
 </form>

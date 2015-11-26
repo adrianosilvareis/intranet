@@ -11,6 +11,7 @@ class FeExames extends Beans {
 
     private $ex_id;
     private $ex_descricao;
+    private $ex_minemonico;
     private $ex_sinonimia;
     private $ex_unidade;
     private $ex_valor_referencia;
@@ -43,6 +44,7 @@ class FeExames extends Beans {
     public function getThis() {
         $this->Controle->setDados(array_filter([
             'ex_descricao' => $this->getEx_descricao(),
+            'ex_minemonico' => $this->getEx_minemonico(),
             'ex_sinonimia' => $this->getEx_sinonimia(),
             'ex_unidade' => $this->getEx_unidade(),
             'ex_valor_referencia' => $this->getEx_valor_referencia(),
@@ -75,6 +77,7 @@ class FeExames extends Beans {
     public function setThis($object) {
         $this->setEx_id((isset($object->ex_id) ? $object->ex_id : null));
         $this->setEx_descricao((isset($object->ex_descricao) ? $object->ex_descricao : null));
+        $this->setEx_minemonico((isset($object->ex_minemonico) ? $object->ex_minemonico : null));
         $this->setEx_sinonimia((isset($object->ex_sinonimia) ? $object->ex_sinonimia : null));
         $this->setEx_unidade((isset($object->ex_unidade) ? $object->ex_unidade : null));
         $this->setEx_valor_referencia((isset($object->ex_valor_referencia) ? $object->ex_valor_referencia : null));
@@ -117,6 +120,10 @@ class FeExames extends Beans {
 
     function getEx_descricao() {
         return $this->ex_descricao;
+    }
+
+    function getEx_minemonico() {
+        return $this->ex_minemonico;
     }
 
     function getEx_sinonimia() {
@@ -201,6 +208,10 @@ class FeExames extends Beans {
 
     function setEx_descricao($ex_descricao) {
         $this->ex_descricao = $ex_descricao;
+    }
+
+    function setEx_minemonico($ex_minemonico) {
+        $this->ex_minemonico = $ex_minemonico;
     }
 
     function setEx_sinonimia($ex_sinonimia) {

@@ -54,6 +54,13 @@ endif;
                 </ul>
             </li>
 
+            <li class="li<?php if (in_array('acoes', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Ações</a>
+                <ul class="sub">
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=acoes/create">Criar Setores</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=acoes/index">Listar / Editar Setores</a></li>
+                </ul>
+            </li>
+
             <!-- adicionar novas categorias aqui-->
 
             <li class="li"><a href="<?= FAST_INCLUDE ?>" class="opensub">Ver Site</a></li>
@@ -61,7 +68,7 @@ endif;
     </nav>
 </header>
 
-<div class="panel">
+<div class="well">
     <?php
     //QUERY STRING
     if (!empty($getexe)):

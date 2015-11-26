@@ -140,17 +140,16 @@ class Check {
 
         return $deleteUserOnline->Execute()->getRowCount();
     }
-    
+
     /**
      * <b>Usuário Logado</b> Ao executar este HELPER, ele retorna o usuário que esta logado no momento.
      * 
      * @return obejct ws_user
      */
-    public static function UserLogin() {
-        if (!empty($_SESSION['userlogin'])):
+    public static function UserLogin($Level = null) {
+        if (!empty($_SESSION['userlogin']) && !$Level || !empty($_SESSION['userlogin']) && $_SESSION['userlogin']['user_level'] >= $Level):
             return $_SESSION['userlogin'];
         else:
-            unset($_SESSION['userlogin']);
             return false;
         endif;
     }
