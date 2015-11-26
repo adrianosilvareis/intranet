@@ -200,7 +200,7 @@ class Check {
             $tab = 'endereco';
         elseif (strpos($msg, "app_postos") || strpos($msg, "app_contadores") || strpos($msg, "app_impressora") || strpos($msg, "app_modelo") || strpos($msg, "app_taxa_impress")):
             $tab = 'plugin_impress';
-        elseif (strpos($msg, "fe_exames") || strpos($msg, "fe_material") || strpos($msg, "fe_metodo") || strpos($msg, "fe_setor")):
+        elseif (strpos($msg, "fe_exames") || strpos($msg, "fe_material") || strpos($msg, "fe_metodo") || strpos($msg, "fe_setor") || strpos($msg, "fe_acoes")):
             $tab = 'plugin_fast_exames';
         endif;
 
