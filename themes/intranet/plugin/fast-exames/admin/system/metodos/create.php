@@ -1,3 +1,4 @@
+<h1>Cria Metodos:</h1>
 <?php
 if (file_exists(FAST_PATH . "_models/AdminMetodo.class.php")):
     require_once FAST_PATH . "_models/AdminMetodo.class.php";
@@ -6,11 +7,20 @@ endif;
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 $AdminMetodo = new AdminMetodo();
 
-if (!empty($Dados) && !is_array("", $Dados)):
-    $AdminMetodo->ExeCreate($Dados);
+if (!empty($Dados) && !in_array("", $Dados)):
+    $Dados['met_status'] = ($Dados['sendPostForm'] == "Cadastrar" ? "0" : "1");
+
+    if ($AdminMetodo->FindName($Dados['met_descricao'])):
+        WSErro("Metodo já cadastrado no sistema!", WS_ALERT);
+    elseif ($AdminMetodo->ExeCreate($Dados)):
+        //redireciona para update
+        WSErro("Metodo cadastrado com sucesso!", WS_ACCEPT);
+    else:
+        WSErro("Erro ao cadastrar!", WS_ERROR);
+    endif;
 endif;
 ?>
-<h1 class="text-center">Metodos</h1>
+
 <form method="post" class="form">
 
     <div class="row bg-primary">
@@ -23,7 +33,7 @@ endif;
     </div>
     <hr>
     <div class="btn-group">
-        <input type="submit" class="btn btn-primary btn-block" name="cadastrar "value="Cadastrar"/>
-        <input type="submit" class="btn btn-success btn-block" name="cadastrar Ativo"value="Cadastrar Ativo"/>
+        <input type="submit" class="btn btn-primary btn-block" name="sendPostForm"value="Cadastrar"/>
+        <input type="submit" class="btn btn-success btn-block" name="sendPostForm"value="Cadastrar Ativo"/>
     </div>
 </form>

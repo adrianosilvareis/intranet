@@ -31,6 +31,7 @@ class FeExames extends Beans {
     private $fe_setor_exec;
     private $fe_metodo;
     private $fe_material;
+    private $fe_acoes;
 
     function __construct() {
         $this->Controle = new Controle('fe_exames');
@@ -64,6 +65,7 @@ class FeExames extends Beans {
             'fe_setor_exec' => $this->getFe_setor_exec(),
             'fe_metodo' => $this->getFe_metodo(),
             'fe_material' => $this->getFe_material(),
+            'fe_acoes' => $this->getFe_acoes(),
             'ex_id' => $this->getEx_id()
         ]));
         return $this->Controle->getDados();
@@ -97,6 +99,7 @@ class FeExames extends Beans {
         $this->setFe_setor_exec((isset($object->fe_setor_exec) ? $object->fe_setor_exec : null));
         $this->setFe_metodo((isset($object->fe_metodo) ? $object->fe_metodo : null));
         $this->setFe_material((isset($object->fe_material) ? $object->fe_material : null));
+        $this->setFe_acoes((isset($object->fe_acoes) ? $object->fe_acoes : null));
     }
 
     /**
@@ -202,6 +205,10 @@ class FeExames extends Beans {
         return $this->fe_material;
     }
 
+    function getFe_acoes() {
+        return $this->fe_acoes;
+    }
+
     function setEx_id($ex_id) {
         $this->ex_id = $ex_id;
     }
@@ -288,6 +295,10 @@ class FeExames extends Beans {
 
     function setFe_material($fe_material) {
         $this->fe_material = $fe_material;
+    }
+
+    function setFe_acoes($fe_acoes) {
+        $this->fe_acoes = $fe_acoes;
     }
 
 }

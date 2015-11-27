@@ -1,3 +1,4 @@
+<h1>Cria Materiais:</h1>
 <?php
 if (file_exists(FAST_PATH . "_models/AdminMaterial.class.php")):
     require_once FAST_PATH . "_models/AdminMaterial.class.php";
@@ -6,11 +7,20 @@ endif;
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 $AdminMaterial = new AdminMaterial();
 
-if (!empty($Dados) && !is_array("", $Dados)):
-    $AdminMaterial->ExeCreate($Dados);
+if (!empty($Dados) && !in_array("", $Dados)):
+    $Dados['mat_status'] = ($Dados['sendPostForm'] == "Cadastrar" ? "0" : "1");
+    unset($Dados['sendPostForm']);
+
+    if ($AdminMaterial->FindName($Dados['mat_descricao'])):
+        WSErro("Material já cadastrado no sistema!", WS_ALERT);
+    elseif ($AdminMaterial->ExeCreate($Dados)):
+        //redireciona para update
+        WSErro("Material cadastrado com sucesso!", WS_ACCEPT);
+    else:
+        WSErro("Erro ao cadastrar material!", WS_ERROR);
+    endif;
 endif;
 ?>
-<h1 class="text-center">Materiais</h1>
 <form method="post" class="form">
 
     <div class="row bg-primary">
@@ -23,7 +33,7 @@ endif;
     </div>
     <hr>
     <div class="btn-group">
-        <input type="submit" class="btn btn-primary btn-block" name="cadastrar "value="Cadastrar"/>
-        <input type="submit" class="btn btn-success btn-block" name="cadastrar Ativo"value="Cadastrar Ativo"/>
+        <input type="submit" class="btn btn-primary btn-block" name="sendPostForm" value="Cadastrar"/>
+        <input type="submit" class="btn btn-success btn-block" name="sendPostForm" value="Cadastrar Ativo"/>
     </div>
 </form>

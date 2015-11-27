@@ -41,11 +41,11 @@ class FeSetor {
      * @param stdClass $object
      */
     public function setThis($object) {
-        $this->set_id((isset($object->set_id) ? $object->set_id : null));
-        $this->set_status((isset($object->set_status) ? $object->set_status : null));
-        $this->set_execucao((isset($object->set_execucao) ? $object->set_execucao : null));
-        $this->set_solicita((isset($object->set_solicita) ? $object->set_solicita : null));
-        $this->set_descricao((isset($object->set_descricao) ? $object->set_descricao : null));
+        $this->setSet_id((isset($object->set_id) ? $object->set_id : null));
+        $this->setSet_status((isset($object->set_status) ? $object->set_status : null));
+        $this->setSet_execucao((isset($object->set_execucao) ? $object->set_execucao : null));
+        $this->setSet_solicita((isset($object->set_solicita) ? $object->set_solicita : null));
+        $this->setSet_descricao((isset($object->set_descricao) ? $object->set_descricao : null));
     }
 
     /**
@@ -63,7 +63,6 @@ class FeSetor {
      * ************** GET & SET ***************
      * ****************************************
      */
-    
     function getSet_id() {
         return $this->set_id;
     }
