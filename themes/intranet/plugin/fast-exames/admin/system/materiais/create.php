@@ -14,7 +14,7 @@ if (!empty($Dados) && !in_array("", $Dados)):
     if ($AdminMaterial->FindName($Dados['mat_descricao'])):
         WSErro("Material já cadastrado no sistema!", WS_ALERT);
     elseif ($AdminMaterial->ExeCreate($Dados)):
-        //redireciona para update
+        header("Location: " . FAST_INCLUDE . "admin/&exe=materiais/update&materialId=" . $AdminMaterial->getResult() . "&create=true");
         WSErro("Material cadastrado com sucesso!", WS_ACCEPT);
     else:
         WSErro("Erro ao cadastrar material!", WS_ERROR);

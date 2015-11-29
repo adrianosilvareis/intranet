@@ -21,7 +21,7 @@ if (!empty($Dados) && !in_array("", $Dados)):
     endif;
 endif;
 ?>
-<form method="post" class="form">
+<form method="post" class="form" id="form">
 
     <div class="row bg-primary">
 

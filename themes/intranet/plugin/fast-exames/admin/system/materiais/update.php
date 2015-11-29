@@ -16,12 +16,12 @@ if (!empty($Dados) && !in_array("", $Dados)):
     unset($Dados['sendPostForm']);
 
     if ($AdminMaterial->ExeUpdate($Dados)):
-        WSErro("Ação atualizada com sucesso!", WS_ACCEPT);
+        WSErro("Material atualizada com sucesso!", WS_ACCEPT);
     else:
         WSErro("Erro ao atualizar!", WS_ERROR);
     endif;
 elseif (!$AdminMaterial->FindId($materialId)):
-    WSErro("Ação não encontrada!", WS_INFOR);
+    WSErro("Material não encontrada!", WS_INFOR);
 else:
     $Dados = (array) $AdminMaterial->FindId($materialId);
 endif;
@@ -31,7 +31,7 @@ if (!empty($create)):
 endif;
 
 ?>
-<form method="post" class="form">
+<form method="post" class="form" id="form">
 
     <div class="row bg-primary">
 

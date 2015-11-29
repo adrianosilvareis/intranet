@@ -31,6 +31,29 @@ class AdminMetodo {
         return $insert;
     }
 
+    public function ExeUpdate($Data) {
+        $this->Data = $Data;
+        $this->setData();
+
+        $this->Read->setThis((object) $this->Data);
+        if ($this->Read->Execute()->update(NULL, "met_id") || $this->ExeStatus($this->Data['met_id'], $this->Data['met_status'])):
+            return true;
+        else:
+            return false;
+        endif;
+    }
+
+    public function ExeDelete($met_id) {
+        $FeExames = new FeExames();
+        $FeExames->setFe_metodo($met_id);
+        $FeExames->Execute()->Query("#fe_metodo#");
+        
+        if (!$FeExames->Execute()->getResult()):
+            $this->Read->setMet_id($met_id);
+            return $this->Read->Execute()->delete();
+        endif;
+    }
+
     /**
      * Atualiza status dos metodos do sistema
      * 
@@ -39,7 +62,7 @@ class AdminMetodo {
      * @return boolean
      */
     public function ExeStatus($MetodoId, $MetodoStatus) {
-        return $this->Read->Execute()->update("met_id$MetodoId&met_status=$MetodoStatus", "met_id");
+        return $this->Read->Execute()->update("met_id=$MetodoId&met_status=$MetodoStatus", "met_id");
     }
 
     /**
@@ -63,11 +86,22 @@ class AdminMetodo {
     }
 
     /**
+     * Retorna metodo com id informado
+     * 
+     * @param int $met_id
+     * @return object
+     */
+    public function FindId($met_id) {
+        $this->Read->setMet_id($met_id);
+        return $this->Read->Execute()->find();
+    }
+
+    /**
      * ****************************************
      * ************** PRIVATES ****************
      * ****************************************
      */
-    
+
     /**
      * Tratamento de entrada de dados
      * 

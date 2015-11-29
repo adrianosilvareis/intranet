@@ -31,7 +31,7 @@ if (!empty($create)):
 endif;
 
 ?>
-<form method="post" class="form">
+<form method="post" class="form" id="form">
 
     <div class="row bg-primary">
 

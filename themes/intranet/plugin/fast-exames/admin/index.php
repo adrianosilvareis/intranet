@@ -28,36 +28,36 @@ endif;
         <ul>
             <li class="li<?php if (in_array('exames', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Exames</a>
                 <ul class="sub">
-                    <li><a href="<?= FAST_INCLUDE ?>admin/exames/&exe=exames/create">Criar Exames</a></li>
-                    <li><a href="<?= FAST_INCLUDE ?>admin/exames/&exe=exames/index">Listar / Editar Exames</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/exames/&exe=exames/create#form">Criar Exames</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/exames/&exe=exames/index#form">Listar / Editar Exames</a></li>
                 </ul>
             </li>
 
             <li class="li<?php if (in_array('materiais', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Materiais</a>
                 <ul class="sub">
-                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=materiais/create">Criar Materiais</a></li>
-                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=materiais/index">Listar / Editar Materiais</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=materiais/create#form">Criar Materiais</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=materiais/index#form">Listar / Editar Materiais</a></li>
                 </ul>
             </li>
 
             <li class="li<?php if (in_array('metodos', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Metodos</a>
                 <ul class="sub">
-                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=metodos/create">Criar Metodos</a></li>
-                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=metodos/index">Listar / Editar Metodos</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=metodos/create#form">Criar Metodos</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=metodos/index#form">Listar / Editar Metodos</a></li>
                 </ul>
             </li>
 
             <li class="li<?php if (in_array('setores', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Setores</a>
                 <ul class="sub">
-                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=setores/create">Criar Setores</a></li>
-                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=setores/index">Listar / Editar Setores</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=setores/create#form">Criar Setores</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=setores/index#form">Listar / Editar Setores</a></li>
                 </ul>
             </li>
 
             <li class="li<?php if (in_array('acoes', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Ações</a>
                 <ul class="sub">
-                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=acoes/create">Criar Setores</a></li>
-                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=acoes/index">Listar / Editar Setores</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=acoes/create#form">Criar Setores</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=acoes/index#form">Listar / Editar Setores</a></li>
                 </ul>
             </li>
 

@@ -25,8 +25,33 @@ class AdminSetor {
         return $insert;
     }
 
+    function ExeUpdate($Data) {
+        $this->Data = $Data;
+        $this->setData();
+
+        $this->Read->setThis((object) $this->Data);
+        return $this->Read->Execute()->update(
+                        "set_id={$this->Read->getSet_id()}"
+                        . "&set_descricao={$this->Read->getSet_descricao()}"
+                        . "&set_execucao={$this->Read->getSet_execucao()}"
+                        . "&set_solicita={$this->Read->getSet_solicita()}"
+                        . "&set_status={$this->Read->getSet_solicita()}", "set_id");
+    }
+
     function ExeStatus($SetorId, $SetorStatus) {
         return $this->Read->Execute()->update("set_id=$SetorId&set_status=$SetorStatus", "set_id");
+    }
+
+    function ExeDelete($set_id) {
+        $FeExames = new FeExames();
+        $FeExames->setFe_setor_exec($set_id);
+        $FeExames->setFe_setor_soli($set_id);
+        $FeExames->Execute()->Query("(#fe_setor_soli# OR #fe_setor_exec#)");
+        
+        if (!$FeExames->Execute()->getResult()):
+            $this->Read->setSet_id($set_id);
+            return $this->Read->Execute()->delete();
+        endif;
     }
 
     function getResult() {
@@ -38,12 +63,17 @@ class AdminSetor {
         return $this->Read->Execute()->Query("#set_descricao#");
     }
 
+    function FindId($set_id) {
+        $this->Read->setSet_id($set_id);
+        return $this->Read->Execute()->find();
+    }
+
     /**
      * ****************************************
      * *************** PRIVATES ***************
      * ****************************************
      */
-    
+
     /**
      * Tratamento de entrada de dados
      * 

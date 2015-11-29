@@ -72,13 +72,13 @@ else:
                     <td><?= $mat_descricao; ?></td>
                     <td>
                         <ul class="post_actions plugin">
-                            <li><a class="act_edit" href="<?= FAST_INCLUDE ?>admin/&exe=materiais/update&materialId=<?= $mat_id; ?>" title="Editar">Editar</a></li>
+                            <li><a class="act_edit" href="<?= FAST_INCLUDE ?>admin/&exe=materiais/update&materialId=<?= $mat_id; ?>#form" title="Editar">Editar</a></li>
                             <?php if (!$mat_status): ?>
-                                <li><a class="act_ative" href="<?= FAST_INCLUDE ?>admin/&exe=materiais/index&action=active/<?= $mat_id; ?>" title="Ativar">Ativar</a></li>
+                                <li><a class="act_ative" href="<?= FAST_INCLUDE ?>admin/&exe=materiais/index&action=active/<?= $mat_id; ?>#form" title="Ativar">Ativar</a></li>
                             <?php else: ?>
-                                <li><a class="act_inative" href="<?= FAST_INCLUDE ?>admin/&exe=materiais/index&action=inative/<?= $mat_id; ?>" title="Inativar">Inativar</a></li>
+                                <li><a class="act_inative" href="<?= FAST_INCLUDE ?>admin/&exe=materiais/index&action=inative/<?= $mat_id; ?>#form" title="Inativar">Inativar</a></li>
                             <?php endif; ?>
-                            <li><a class="act_delete" href="<?= FAST_INCLUDE ?>admin/&exe=materiais/index&action=delete/<?= $mat_id; ?>" title="Excluir">Deletar</a></li>
+                            <li><a class="act_delete" href="<?= FAST_INCLUDE ?>admin/&exe=materiais/index&action=delete/<?= $mat_id; ?>#form" title="Excluir">Deletar</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -89,7 +89,7 @@ else:
     </table>
 <?php endif; ?>
 
-<div class="row">
+<div class="row" id="form">
     <?php
     $Pager->ExePaginator("fe_acoes");
     echo $Pager->getPaginator();

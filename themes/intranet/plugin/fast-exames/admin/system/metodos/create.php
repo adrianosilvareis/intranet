@@ -13,7 +13,7 @@ if (!empty($Dados) && !in_array("", $Dados)):
     if ($AdminMetodo->FindName($Dados['met_descricao'])):
         WSErro("Metodo já cadastrado no sistema!", WS_ALERT);
     elseif ($AdminMetodo->ExeCreate($Dados)):
-        //redireciona para update
+        header("Location: " . FAST_INCLUDE . "admin/&exe=metodos/update&metodoId=" . $AdminMetodo->getResult() . "&create=true");
         WSErro("Metodo cadastrado com sucesso!", WS_ACCEPT);
     else:
         WSErro("Erro ao cadastrar!", WS_ERROR);
@@ -21,7 +21,7 @@ if (!empty($Dados) && !in_array("", $Dados)):
 endif;
 ?>
 
-<form method="post" class="form">
+<form method="post" class="form" id="form">
 
     <div class="row bg-primary">
 
