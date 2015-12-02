@@ -46,7 +46,7 @@ Folha de estilo para alterações especificas
 #navtab nav ul .li .opensub{float: left; padding: 10px 20px; color: #fff; background: #005875; font-size: 14px; font-weight: 600; border-bottom: 1px solid #777777;}
 #navtab nav ul .li .opensub:hover{background: #F2F2F2;}
 #navtab nav ul li:hover .sub{display: block;}
-#navtab nav ul .li .sub{position: absolute; top: 33px; width: 960px;}
+#navtab nav ul .li .sub{position: absolute; top: 33px; width: 400px;}
 #navtab nav ul .li .sub li{float: left; font-size: 12px; text-transform: uppercase; margin-right: 20px;}
 #navtab nav ul .li .sub li a{float: left; font-weight: bold; color: #999; padding: 17px 10px;}
 #navtab nav ul .li .sub li a:hover{color: #333;}

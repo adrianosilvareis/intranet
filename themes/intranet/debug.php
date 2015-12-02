@@ -1,5 +1,4 @@
 <?php
-var_dump($_SESSION['userlogin']);
-
-var_dump(Check::UserLogin(4));
+ $AppImpressora = new AppImpressora();
+ var_dump($AppImpressora);
 ?>

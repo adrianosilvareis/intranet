@@ -20,8 +20,9 @@ define('SITENAME', 'Intranet Tommasi');
 define('SITEDESC', '&copy; 2015 Adriano Reis | Todos os direitos reservados.');
 
 //DEFINE A HOME DO SITE #########################
+$SERVER = filter_input_array(INPUT_SERVER, FILTER_DEFAULT);
 define('NAME', '/intranet');
-define('HTTP_HOST', 'http://' . $_SERVER['HTTP_HOST']);
+define('HTTP_HOST', 'http://' . $SERVER['HTTP_HOST']);
 define('HOME', HTTP_HOST . NAME);
 define('THEME', 'intranet');
 define('REQUIRE_PATH', 'themes' . DIRECTORY_SEPARATOR . THEME);
@@ -42,38 +43,24 @@ define("WS_ERROR", 'error');
 
 //AUTO LOAD DE CALSSES ####################
 function __autoload($Class_name) {
-
     /*
      * ****************************************
      * ********* DIRETORIOS PRINCIPAIS ********
      * ****************************************
      */
     $cDir = ['Conn', 'Helpers', 'Beans', 'Models', 'library'];
+    $pDir = ['contadores-de-impressao', 'qualidade', 'fast-exames']; 
     $iDir = null;
 
     foreach ($cDir as $dirName):
         $file = __DIR__ . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class_name . ".class.php";
-        if (!$iDir && file_exists($file) && !is_dir($file)):
-            require_once($file);
-            $iDir = true;
-        endif;
+        $iDir = AUTO($iDir, $file);
     endforeach;
 
-    /*
-     * ****************************************
-     * ************* PLUGINS ******************
-     * ****************************************
-     */
-    $pDir = ['contadores-de-impressao', 'qualidade', 'fast-exames'];
-    if (!$iDir):
-        foreach ($pDir as $dirName):
-            $file = __DIR__ . DIRECTORY_SEPARATOR . "plugins" . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class_name . ".class.php";
-            if (!$iDir && file_exists($file) && !is_dir($file)):
-                require_once($file);
-                $iDir = true;
-            endif;
-        endforeach;
-    endif;
+    foreach ($pDir as $pdirName):
+        $file = __DIR__ . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR . $pdirName . DIRECTORY_SEPARATOR . $Class_name . ".class.php";
+        $iDir = AUTO($iDir, $file);
+    endforeach;
 
     if (!$iDir):
         trigger_error("Não foi possivel inclur {$Class_name} .class.php", E_USER_ERROR);
@@ -81,6 +68,15 @@ function __autoload($Class_name) {
     endif;
 }
 
+function AUTO($iDir, $file) {
+    if (!$iDir && file_exists($file) && !is_dir($file)):
+        require_once($file);
+        $iDir = true;
+    endif;
+    return $iDir;
+}
+
+//Plugins listas:: Lista links 
 function Plugins() {
     $lista = ['contadores-de-impressao', 'fast-exames'];
 
@@ -90,7 +86,7 @@ function Plugins() {
         $Data['url'] = HOME . "/plugin/" . $plugin;
         $result[] = $Data;
     endforeach;
-    
+
     return $result;
 }
 

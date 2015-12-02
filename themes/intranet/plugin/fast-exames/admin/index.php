@@ -28,8 +28,8 @@ endif;
         <ul>
             <li class="li<?php if (in_array('exames', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Exames</a>
                 <ul class="sub">
-                    <li><a href="<?= FAST_INCLUDE ?>admin/exames/&exe=exames/create#form">Criar Exames</a></li>
-                    <li><a href="<?= FAST_INCLUDE ?>admin/exames/&exe=exames/index#form">Listar / Editar Exames</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=exames/create#form">Criar Exames</a></li>
+                    <li><a href="<?= FAST_INCLUDE ?>admin/&exe=exames/index#form">Listar / Editar Exames</a></li>
                 </ul>
             </li>
 

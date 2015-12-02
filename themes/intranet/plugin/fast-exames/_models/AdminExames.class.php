@@ -15,7 +15,7 @@ class AdminExames {
     function __construct() {
         $this->Read = new FeExames();
     }
-    
+
     /**
      * Cadastra o Exame no sistema
      * 
@@ -32,6 +32,20 @@ class AdminExames {
     }
     
     /**
+     * Atualiza as solicitações de exames
+     * 
+     * @param array $Data
+     * @return boolean
+     */
+    public function ExeUpdate($Data) {
+        $this->Data = $Data;
+        $this->setData();
+
+        $this->Read->setThis((object) $this->Data);
+        return $this->update();
+    }
+
+    /**
      * Atualiza o status do exame no sistema
      * 
      * @param int $ExameId
@@ -41,7 +55,18 @@ class AdminExames {
     public function ExeStatus($ExameId, $Exame_status) {
         return $this->Read->Execute()->update("ex_id=$ExameId&ex_status=$Exame_status", "ex_id");
     }
-    
+
+    /**
+     * Cancela ou ativa uma solicitação
+     * 
+     * @param int $ExameId
+     * @param boolean $ExameCancelado
+     * @return boolean
+     */
+    public function ExeCancelar($ExameId, $ExameCancelado) {
+        return $this->Read->Execute()->update("ex_id=$ExameId&ex_cancelado=$ExameCancelado", "ex_id");
+    }
+
     /**
      * retorna o resultado das operações realizadas na class
      * 
@@ -50,7 +75,7 @@ class AdminExames {
     function getResult() {
         return $this->Result;
     }
-    
+
     /**
      * Retorna um objeto Exame com Id informado
      * 
@@ -67,7 +92,7 @@ class AdminExames {
      * ************* FOREIGN KEY **************
      * ****************************************
      */
-    
+
     /**
      * Retorna descrição do setor com Id informado
      * 
@@ -79,7 +104,7 @@ class AdminExames {
         $FeSetor->setSet_id($Setor);
         return (!empty($FeSetor->Execute()->find()) ? $FeSetor->Execute()->find()->set_descricao : null);
     }
-    
+
     /**
      * Retorna descrição do usuario com Id informado
      * 
@@ -103,7 +128,7 @@ class AdminExames {
         $FeMetodo->setMet_id($Metodo);
         return (!empty($FeMetodo->Execute()->find()) ? $FeMetodo->Execute()->find()->met_descricao : null);
     }
-    
+
     /**
      * Retorna descrição do material com Id informado
      * 
@@ -115,16 +140,16 @@ class AdminExames {
         $FeMaterial->setMat_id($Material);
         return (!empty($FeMaterial->Execute()->find()) ? $FeMaterial->Execute()->find()->mat_descricao : null);
     }
-    
+
     /**
      * Retorna descrição do ação com Id informado
      * 
      * @param int $Acao
      * @return string
      */
-    public function Acao($Acao){
+    public function Acao($Acao) {
         $FeAcoes = new FeAcoes();
-        $FeAcoes->setAcaoId($Acao);
+        $FeAcoes->setAcao_id($Acao);
         return (!empty($FeAcoes->Execute()->find()) ? $FeAcoes->Execute()->find()->acao_descricao : null);
     }
 
@@ -142,6 +167,14 @@ class AdminExames {
     private function setData() {
         $this->Data = array_map("strip_tags", $this->Data);
         $this->Data = array_map("trim", $this->Data);
+        $this->Data['ex_status'] = (!empty($this->Data['ex_status']) ? $this->Data['ex_status'] : "0");
+        $this->Data['ex_cancelado'] = (!empty($this->Data['ex_cancelado']) ? $this->Data['ex_cancelado'] : "0");
+    }
+
+    private function update() {
+        if ($this->Read->Execute()->update(null, 'ex_id') || $this->ExeCancelar($this->Data['ex_id'], $this->Data['ex_cancelado']) || $this->ExeStatus($this->Data['ex_id'], $this->Data['ex_status'])):
+            return true;
+        endif;
     }
 
 }

@@ -1,3 +1,4 @@
+<h1 id="form">Criar Solicitação de exames</h1>
 <?php
 if (file_exists(FAST_PATH . "_models/AdminExames.class.php")):
     require_once FAST_PATH . "_models/AdminExames.class.php";
@@ -5,15 +6,25 @@ endif;
 
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 $AdminExames = new AdminExames();
+
+
+$FeAcoes = new FeAcoes();
 $FeSetor = new FeSetor();
+$FeMetodo = new FeMetodo();
+$FeMaterial = new FeMaterial();
 
 if (!empty($Dados)):
     $Dados['ws_users_soli'] = Check::UserLogin()['user_id'];
     $Dados['ex_data_abertura'] = date('Y-m-d H:i:s');
-    $AdminExames->ExeCreate($Dados);
+
+    if ($AdminExames->ExeCreate($Dados)):
+        WSErro("Solicitação cadastrada com sucesso!", WS_ACCEPT);
+        header("Location: " . FAST_INCLUDE . "admin/&exe=exames/update&examesId=" . $AdminExames->getResult() . "&create=true");
+    else:
+        WSErro("Erro ao cadastrar solicitação!", WS_ERROR);
+    endif;
 endif;
 ?>
-<h1 class="text-center">Formulario de requisição de exame</h1>
 <form method="post" class="form">
 
     <div class="row bg-info">
@@ -38,12 +49,11 @@ endif;
             <select  required="true" title="Ação a executar" name="fe_acoes" class="form-control">
                 <option value="">Selecione uma ação</option>
                 <?php
-                $FeAcoes = new FeAcoes();
                 $FeAcoes->setAcao_status(true);
                 $FeAcoes->Execute()->Query("#acao_status#");
-                foreach ($FeSetor->Execute()->getResult() as $setor):
-                    extract((array) $setor);
-                    $select = ($Dados['fe_acoes'] == $set_id ? 'selected=true' : '');
+                foreach ($FeAcoes->Execute()->getResult() as $acao):
+                    extract((array) $acao);
+                    $select = ($Dados['fe_acoes'] == $acao_id ? 'selected=true' : '');
                     echo "<option value=\"{$acao_id}\" {$select}>{$acao_descricao}</option>";
                 endforeach;
                 ?>
@@ -105,7 +115,6 @@ endif;
             <select  required="true" title="Método" name="fe_metodo" class="form-control">
                 <option value="">Selecione um método</option>
                 <?php
-                $FeMetodo = new FeMetodo();
                 $FeMetodo->setMet_status(true);
                 $FeMetodo->Execute()->Query("#met_status#");
                 foreach ($FeMetodo->Execute()->getResult() as $metodo):
@@ -122,7 +131,6 @@ endif;
             <select  required="true" title="Material" name="fe_material" class="form-control">
                 <option value="">Selecione um material</option>
                 <?php
-                $FeMaterial = new FeMaterial();
                 $FeMaterial->setMat_status(true);
                 $FeMaterial->Execute()->Query("#mat_status#");
                 foreach ($FeMaterial->Execute()->getResult() as $material):
@@ -158,9 +166,14 @@ endif;
             <label>Informação Interferentes:</label>
             <textarea class="form-control" title="Info Interferentes" name="ex_info_interferentes" placeholder="Info Interferentes"><?= $Dados['ex_info_interferentes']; ?></textarea>
         </div>
+        
+        <div class="form-group col-md-12">
+            <label>Observações:</label>
+            <textarea class="form-control" title="Observações internas" name="ex_observacao" placeholder="Observações internas"><?= $Dados['ex_observacao']; ?></textarea>
+        </div>
     </div>
 
     <hr>
-    <input type="submit" class="btn btn-success btn-block" value="Solicitar"/>
+    <input type="submit" class="btn btn-success btn-block btn-lg" value="Solicitar"/>
 
 </form>
