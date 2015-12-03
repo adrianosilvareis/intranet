@@ -9,7 +9,11 @@
                 <ul class="nav navbar-nav">
                     <li class="navbar-brand">Olá <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>
                     <li class="active"><a href="<?= HOME ?>">Home</a></li>
-                    <li><a href="<?= HOME ?>/admin/painel.php?exe=users/profile">Profile</a></li>
+                    <?php if (Check::UserLogin(3)): ?>
+                        <li><a href="<?= HOME ?>/admin/painel.php?exe=users/profile">Profile</a></li>
+                    <?php else: ?>
+                        <li><a href="<?= HOME ?>/profile">Profile</a></li>
+                    <?php endif; ?>
                     <li><a href="<?= HOME ?>/admin/painel.php?logoff=true">Logoff</a></li>
 
                 </ul>

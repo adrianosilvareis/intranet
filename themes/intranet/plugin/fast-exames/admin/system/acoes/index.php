@@ -51,6 +51,7 @@ $FeAcoes = new FeAcoes();
 $FeAcoes->Execute()->FullRead("SELECT * FROM fe_acoes ORDER BY acao_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 
 if (!$FeAcoes->Execute()->getResult()):
+    $Pager->ReturnPage();
     WSErro("Nenhum ação cadastrado!", WS_INFOR);
 else:
     ?>

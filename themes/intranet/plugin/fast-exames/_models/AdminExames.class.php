@@ -30,7 +30,7 @@ class AdminExames {
         $this->Result = $this->Read->Execute()->MaxFild("ex_id");
         return $insert;
     }
-    
+
     /**
      * Atualiza as solicitações de exames
      * 
@@ -172,7 +172,12 @@ class AdminExames {
     }
 
     private function update() {
-        if ($this->Read->Execute()->update(null, 'ex_id') || $this->ExeCancelar($this->Data['ex_id'], $this->Data['ex_cancelado']) || $this->ExeStatus($this->Data['ex_id'], $this->Data['ex_status'])):
+
+        $update = $this->Read->Execute()->update(null, 'ex_id');
+        $cancelar = $this->ExeCancelar($this->Data['ex_id'], $this->Data['ex_cancelado']);
+        $status = $this->ExeStatus($this->Data['ex_id'], $this->Data['ex_status']);
+
+        if ($update || $cancelar || $status):
             return true;
         endif;
     }

@@ -50,6 +50,7 @@ $FeMetodo = new FeMetodo();
 $FeMetodo->Execute()->FullRead("SELECT * FROM fe_metodo ORDER BY met_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 
 if (!$FeMetodo->Execute()->getResult()):
+    $Pager->ReturnPage();
     WSErro("Nenhum metodo cadastrado!", WS_INFOR);
 else:
     ?>

@@ -51,6 +51,7 @@ $FeMaterial = new FeMaterial();
 $FeMaterial->Execute()->FullRead("SELECT * FROM fe_material ORDER BY mat_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 
 if (!$FeMaterial->Execute()->getResult()):
+    $Pager->ReturnPage();
     WSErro("Nenhum material cadastrado!", WS_INFOR);
 else:
     ?>

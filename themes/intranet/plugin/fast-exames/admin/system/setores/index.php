@@ -50,6 +50,7 @@ $Pager->ExePager($getPage, 15);
 $FeSetor = new FeSetor();
 $FeSetor->Execute()->FullRead("SELECT * FROM fe_setor ORDER BY set_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 if (!$FeSetor->Execute()->getResult()):
+    $Pager->ReturnPage();
     WSErro("Nenhum setor cadastrado!", WS_INFOR);
 else:
     ?>
