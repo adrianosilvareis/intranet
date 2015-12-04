@@ -92,7 +92,7 @@ else:
 
 <div class="row" id="form">
     <?php
-    $Pager->ExePaginator("fe_acoes");
+    $Pager->ExePaginator("fe_material");
     echo $Pager->getPaginator();
     ?>
 </div>

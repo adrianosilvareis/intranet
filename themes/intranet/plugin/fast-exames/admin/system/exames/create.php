@@ -50,7 +50,7 @@ endif;
                 <option value="">Selecione uma ação</option>
                 <?php
                 $FeAcoes->setAcao_status(true);
-                $FeAcoes->Execute()->Query("#acao_status#");
+                $FeAcoes->Execute()->FullRead("SELECT * FROM fe_acoes WHERE acao_status = :acao_status ORDER by acao_descricao");
                 foreach ($FeAcoes->Execute()->getResult() as $acao):
                     extract((array) $acao);
                     $select = ($Dados['fe_acoes'] == $acao_id ? 'selected=true' : '');
@@ -67,7 +67,7 @@ endif;
                 <?php
                 $FeSetor->setSet_status(true);
                 $FeSetor->setSet_solicita(true);
-                $FeSetor->Execute()->Query("#set_status# AND #set_solicita#");
+                $FeSetor->Execute()->FullRead("SELECT * FROM fe_setor WHERE set_status = :set_status AND set_solicita = :set_solicita ORDER by set_descricao");
                 foreach ($FeSetor->Execute()->getResult() as $setor):
                     extract((array) $setor);
                     $select = ($Dados['fe_setor_soli'] == $set_id ? 'selected=true' : '');
@@ -85,7 +85,7 @@ endif;
                 $FeSetor->setSet_status(true);
                 $FeSetor->setSet_solicita(null);
                 $FeSetor->setSet_execucao(true);
-                $FeSetor->Execute()->Query("#set_status# AND #set_execucao#");
+                $FeSetor->Execute()->FullRead("SELECT * FROM fe_setor WHERE set_status = :set_status AND set_execucao = :set_execucao ORDER by set_descricao");
                 foreach ($FeSetor->Execute()->getResult() as $setor):
                     extract((array) $setor);
                     $select = ($Dados['fe_setor_exec'] == $set_id ? 'selected=true' : '');
@@ -116,7 +116,7 @@ endif;
                 <option value="">Selecione um método</option>
                 <?php
                 $FeMetodo->setMet_status(true);
-                $FeMetodo->Execute()->Query("#met_status#");
+                $FeMetodo->Execute()->FullRead("SELECT * FROM fe_metodo WHERE met_status=:met_status ORDER BY met_descricao");
                 foreach ($FeMetodo->Execute()->getResult() as $metodo):
                     extract((array) $metodo);
                     $select = ($Dados['fe_metodo'] == $met_id ? 'selected=true' : '');
@@ -133,6 +133,7 @@ endif;
                 <?php
                 $FeMaterial->setMat_status(true);
                 $FeMaterial->Execute()->Query("#mat_status#");
+                $FeMaterial->Execute()->FullRead("SELECT * FROM fe_material WHERE mat_status=:mat_status ORDER BY mat_descricao");
                 foreach ($FeMaterial->Execute()->getResult() as $material):
                     extract((array) $material);
                     $select = ($Dados['fe_material'] == $mat_id ? 'selected=true' : '');

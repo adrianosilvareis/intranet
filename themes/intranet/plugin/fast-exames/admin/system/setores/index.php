@@ -99,7 +99,7 @@ else:
 
 <div class="row" id="form">
     <?php
-    $Pager->ExePaginator("fe_acoes");
+    $Pager->ExePaginator("fe_setor");
     echo $Pager->getPaginator();
     ?>
 </div>
