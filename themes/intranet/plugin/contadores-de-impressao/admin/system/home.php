@@ -1,3 +1,122 @@
+<article id="form">
 <?php
+include PLUGIN_PATH . "\contadores-de-impressao\_models\AdminContadores.class.php";
+include PLUGIN_PATH . "\contadores-de-impressao\_models\AdminImpressoras.class.php";
 
+$action = filter_input(INPUT_GET, "action", FILTER_DEFAULT);
+$AdminContadores = new AdminContadores();
+$AdminImpressoras = new AdminImpressoras();
 
+if (!empty($action)):
+
+    $toaction = explode("/", $action);
+
+    $contador = ($AdminContadores->FindId($toaction[1]) ? $AdminContadores->FindId($toaction[1])[0] : false);
+
+    if (!empty($contador)):
+        switch ($toaction[0]):
+
+            case "active":
+                $AdminContadores->ExeStatus($toaction[1], 1);
+                WSErro("Contador da impressora <b>$contador->impressora_serial</b> ativo com sucesso!", WS_ACCEPT);
+                break;
+
+            case "inative":
+                $AdminContadores->ExeStatus($toaction[1], 0);
+                WSErro("Contador da impressora <b>$contador->impressora_serial</b> desativado com sucesso!", WS_ACCEPT);
+                break;
+
+            case "delete":
+                if ($AdminContadores->ExeDelete($toaction[1])):
+                    WSErro("Contador da impressora <b>$contador->impressora_serial</b> deletado com sucesso!", WS_ACCEPT);
+                else:
+                    WSErro("Erro ao deletar", WS_ERROR);
+                endif;
+                break;
+
+            default :
+                WSErro("Opss! opção invalida.", WS_ERROR);
+                break;
+        endswitch;
+    else:
+        WSErro("O contador informada não pode ser encontrado!", WS_INFOR);
+    endif;
+endif;
+
+$getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
+$Pager = new Pager(IMP_INCLUDE . "admin/&page=");
+$Pager->ExePager($getPage, 30);
+
+$search = filter_input(INPUT_POST, "search", FILTER_DEFAULT);
+$where = (!empty($search) ? "WHERE impressora_serial like \"%$search%\" " : "");
+
+$Read = new AppContadores();
+if (!empty($search)):
+    $Read->Execute()->FullRead("SELECT i.*, c.* FROM app_contadores c JOIN app_impressora i ON(c.fk_impressora = i.impressora_id) WHERE impressora_serial like '%$search%'");
+else:
+    $Read->Execute()->FullRead("SELECT i.*, c.* FROM app_contadores c JOIN app_impressora i ON(c.fk_impressora = i.impressora_id) ORDER BY contadores_data LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+endif;
+?>
+
+    <form name="search" method="post" class="form-inline">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Entre com serial" name="search" value="<?= $search; ?>">
+                <span class="input-group-btn">
+                    <input class="btn btn-success" type="submit" value="Go">
+                </span>
+            </div>
+        </div>
+    </form>
+
+    <?php
+    if (!$Read->Execute()->getResult()):
+        $Pager->ReturnPage();
+        WSErro("Desculpa, não encontramos nenhuma impressora!", WS_INFOR);
+    else:
+        ?>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th class="text-center">Serial</th>
+                    <th class="text-center">Posto</th>
+                    <th class="text-center">Modelo</th>
+                    <th class="text-center">Contador</th>
+                    <th class="text-center">Data</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($Read->Execute()->getResult() as $imp):
+                    extract((array) $imp);
+                    ?>
+                    <tr style="font-size: 0.9em;">
+                        <td><?= $impressora_serial; ?></td>
+                        <td><?= $AdminImpressoras->Posto($fk_postos); ?></td>
+                        <td><?= $AdminImpressoras->Modelo($fk_modelo); ?></td>
+                        <td><?= $contadores_contador; ?></td>
+                        <td><?= date("d-m-Y", strtotime($contadores_data)); ?></td>
+
+                        <td>
+                            <ul class="post_actions plugin">
+                                <li><a class="act_edit" href="<?= IMP_INCLUDE ?>admin/&exe=contadores/update&contadorId=<?= $contadores_id; ?>" title="Editar">Editar</a></li>
+                                <li><a class="act_delete" href="<?= IMP_INCLUDE ?>admin/&action=delete/<?= $contadores_id; ?>#form" title="Excluir">Deletar</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <?php
+                endforeach;
+                ?>
+            </tbody>
+        </table>
+    <?php
+    endif;
+    ?>
+    <div class="row">
+        <?php
+        $Pager->ExePaginator("app_contadores");
+        echo (!empty($search) ? "" : $Pager->getPaginator());
+        ?>
+    </div>
+</article>
