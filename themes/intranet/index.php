@@ -1,6 +1,6 @@
 <hr>
 <div class="col-md-9">
-    
+
     <?php
     $cat = Check::CatByName("destaque");
     $c = 0;
@@ -19,10 +19,10 @@
                 foreach ($Read->Execute()->getResult() as $bar):
                     $bar->datetime = date('Y-m-d', strtotime($bar->post_date));
                     $bar->pubdate = date("d/m/Y H:i", strtotime($bar->post_date));
-                    $bar->post_content = Check::Words($bar->post_content, 6);
+                    $bar->post_content = Check::Words($bar->post_content, 30);
                     $bar->class = ($c == 0 ? "item active" : "item");
                     if (!$bar->post_url):
-                        $bar->post_url = "#HOME#/artigo/#post_name#";
+                        $bar->post_url = "#HOME#/artigo/$bar->post_name";
                     endif;
                     $View->Show((array) $bar, $siderbar);
                     $c++;
@@ -39,9 +39,11 @@
     <?php
     endif;
     ?>
-    
+
     <?php include "inc/apresentacao.inc.html"; ?>
-    
+
+    <?php include "inc/parabens.inc.php"; ?>
+
 </div>
 
 <?php

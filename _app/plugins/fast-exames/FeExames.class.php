@@ -15,6 +15,7 @@ class FeExames extends Beans {
     private $ex_sinonimia;
     private $ex_unidade;
     private $ex_valor_referencia;
+    private $ex_metodo;
     private $ex_prazo;
     private $ex_info_coleta;
     private $ex_info_paciente;
@@ -49,6 +50,7 @@ class FeExames extends Beans {
             'ex_sinonimia' => $this->getEx_sinonimia(),
             'ex_unidade' => $this->getEx_unidade(),
             'ex_valor_referencia' => $this->getEx_valor_referencia(),
+            'ex_metodo' => $this->getEx_metodo(),
             'ex_prazo' => $this->getEx_prazo(),
             'ex_info_coleta' => $this->getEx_info_coleta(),
             'ex_info_paciente' => $this->getEx_info_paciente(),
@@ -83,6 +85,7 @@ class FeExames extends Beans {
         $this->setEx_sinonimia((isset($object->ex_sinonimia) ? $object->ex_sinonimia : null));
         $this->setEx_unidade((isset($object->ex_unidade) ? $object->ex_unidade : null));
         $this->setEx_valor_referencia((isset($object->ex_valor_referencia) ? $object->ex_valor_referencia : null));
+        $this->setEx_metodo((isset($object->ex_metodo) ? $object->ex_metodo : null));
         $this->setEx_prazo((isset($object->ex_prazo) ? $object->ex_prazo : null));
         $this->setEx_info_coleta((isset($object->ex_info_coleta) ? $object->ex_info_coleta : null));
         $this->setEx_info_paciente((isset($object->ex_info_paciente) ? $object->ex_info_paciente : null));
@@ -139,6 +142,10 @@ class FeExames extends Beans {
 
     function getEx_valor_referencia() {
         return $this->ex_valor_referencia;
+    }
+
+    function getEx_metodo() {
+        return $this->ex_metodo;
     }
 
     function getEx_prazo() {
@@ -233,6 +240,10 @@ class FeExames extends Beans {
         $this->ex_valor_referencia = $ex_valor_referencia;
     }
 
+    function setEx_metodo($ex_metodo) {
+        $this->ex_metodo = $ex_metodo;
+    }
+
     function setEx_prazo($ex_prazo) {
         $this->ex_prazo = $ex_prazo;
     }
@@ -300,5 +311,7 @@ class FeExames extends Beans {
     function setFe_acoes($fe_acoes) {
         $this->fe_acoes = $fe_acoes;
     }
+
+
 
 }

@@ -124,14 +124,14 @@ endif;
                             </h3>
                         </hgroup>
 
-                        <ul>
+                        <ul style="list-style: none; margin-left: 250px; margin-right: 250px;">
                             <?php
                             $gb = 0;
                             foreach ($ReadGb->Execute()->getResult() as $gallery):
                                 $gb++;
                                 extract((array) $gallery);
                                 ?>
-                                <li>
+                                <li style="float: left;">
                                     <div class="img">
                                         <a href="<?= HOME ?>/uploads/<?= $gallery_image; ?>" rel="shadowbox[<?= $post_id; ?>]" title="Imagem <?= $gb; ?> do post <?= $post_title; ?>">
                                             <?= Check::Image('uploads' . DIRECTORY_SEPARATOR . $gallery_image, "Imagem {$gb} do post {$post_title}", 120, 80) ?>

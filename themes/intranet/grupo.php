@@ -36,10 +36,10 @@ endif;
                         $grupo_p = $View->Load('grupo_p');
                         $i = 0;
                         foreach ($Read->Execute()->getResult() as $item):
-                            if ($i % 4 == 0 && $i != 0):
-                                echo "</div>\n";
-                                echo "<div class='row'>\n";
-                            endif;
+//                            if ($i % 4 == 0 && $i != 0):
+//                                echo "</div>\n";
+//                                echo "<div class='row'>\n";
+//                            endif;
                             $item->post_title = Check::Words($item->post_title, 4);
                             $item->datetime = date('Y-m-d', strtotime($item->post_date));
                             $item->pubdate = date("d/m/Y H:i", strtotime($item->post_date));

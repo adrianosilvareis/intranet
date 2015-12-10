@@ -1,4 +1,8 @@
 <?php
- $AppImpressora = new AppImpressora();
- var_dump($AppImpressora);
-?>
+
+include __DIR__ . "/plugin/qualidade/checkFtp.class.php";
+
+CheckFtp::setTeste("TESTE");
+CheckFtp::getTeste();
+
+CheckFtp::debug();

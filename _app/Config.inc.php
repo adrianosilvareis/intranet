@@ -21,6 +21,7 @@ define('SITEDESC', '&copy; 2015 Adriano Reis | Todos os direitos reservados.');
 
 //DEFINE A HOME DO SITE #########################
 $SERVER = filter_input_array(INPUT_SERVER, FILTER_DEFAULT);
+define('DOCUMENT_ROOT', $SERVER['DOCUMENT_ROOT']);
 define('NAME', '/intranet');
 define('HTTP_HOST', 'http://' . $SERVER['HTTP_HOST']);
 define('HOME', HTTP_HOST . NAME);
