@@ -71,6 +71,13 @@ Folha de estilo para alterações especificas
     height: 45px;
 }
 
+.ftp-icon{
+    overflow:hidden; font-size: 0.9em;
+    
+}
+.ftp-icon:hover{
+    overflow: visible;
+}
 
 /*404*/
 .page_notfound header{text-align: center;}

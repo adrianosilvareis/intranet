@@ -14,8 +14,9 @@ class Ftp {
     private $Home;
     private $url;
     private $Link;
+    private $Type;
     private $File;
-    
+
     function __construct() {
         $this->setLocal();
         $this->Home = HOME . '/ftp';
@@ -24,39 +25,110 @@ class Ftp {
         $this->url = $this->Home . '/' . implode("/", $this->Local);
     }
 
+    /**
+     * Avalia se o caminho informado é um diretorio
+     * 
+     * @param string $Dir
+     * @param string $File
+     * @return boolean
+     */
     function checkDir($Dir = null, $File = null) {
-        $this->Dir = (!empty($Dir) ? $Dir : $this->Dir);
-        $this->Dir = (!empty($File) ? $this->Dir . '//' . $File : $this->Dir);
-        if (file_exists($this->Dir) && is_dir($this->Dir)):
+        $diretorio = (!empty($Dir) ? $Dir : $this->Dir);
+        $diretorio = (!empty($File) ? $diretorio . '//' . $File : $diretorio);
+        if (file_exists($diretorio) && is_dir($diretorio)):
             return true;
         else:
             return false;
         endif;
     }
-    
-    function getIcon(){
+
+    /**
+     * retorna o icone pronto
+     * 
+     * @param string $File
+     * @param string $Type
+     */
+    function getIcon($File, $Dir = null, $Type = null) {
+        $this->File = $File;
+        $this->Type = (!empty($Type) ? $Type : $this->getType());
+        $Icon = $this->getIcone();
+        $url = ($Dir ? "$this->Link/$this->File" : "$this->url/$this->File");
         
+        echo "<div class='col-md-2 ftp-icon'>\n"
+        . "<a href='$url' " . (!$Dir ? 'target="_blank"' : '') . ">\n"
+        . "<img src='$Icon' class='img-responsive' alt='{$File}' title='$File'>\n"
+        . "</a>\n"
+        . str_replace("_", "-", $File)
+        . "</div>\n";
     }
 
+    /**
+     * 
+     * @param string $Link
+     */
     function setLink($Link) {
         $this->Link = $Link . "/&ftp=" . implode("/", $this->Local);
     }
 
+    /**
+     * Retorna o caminho da pasta que esta no momento.
+     * 
+     * @return string
+     */
     function getDir() {
         return $this->Dir;
     }
 
+    /**
+     * Retorna a arvore da navegação em pastas
+     * 
+     * @return array
+     */
     function getLocal() {
         return $this->Local;
     }
-    
-//    private
+
+    /**
+     * ****************************************
+     * ************* PRIVATES *****************
+     * ****************************************
+     */
+
+    /**
+     * recebe a url da pasta que esta e mapeia em uma array
+     */
     private function setLocal() {
         $this->Local = explode("/", filter_input(INPUT_GET, "ftp", FILTER_DEFAULT));
         if ($this->Local[0] == ''):
             array_shift($this->Local);
         endif;
         $this->Local = array_filter($this->Local);
+    }
+
+    /**
+     * Retorna o tipo de arquivo armazenado em File
+     * 
+     * @return string type
+     */
+    private function getType() {
+        $tipo = explode(".", $this->File);
+        return array_pop($tipo);
+    }
+
+    /**
+     * Retorna o caminho do icone com base no tipo
+     * 
+     * @return string url
+     */
+    private function getIcone() {
+        $FileIcon = "C:/xampp/htdocs/intranet/themes/intranet/images/ftpIcons/$this->Type.png";
+        if (!file_exists($FileIcon)):
+            $icon = HOME . "/" . REQUIRE_PATH . "/images/ftpIcons/arquivos.png";
+        else:
+            $icon = HOME . "/" . REQUIRE_PATH . "/images/ftpIcons/$this->Type.png";
+        endif;
+
+        return $icon;
     }
 
 }
