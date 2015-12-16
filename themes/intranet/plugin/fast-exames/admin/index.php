@@ -40,12 +40,12 @@ endif;
                 </ul>
             </li>
 
-            <li class="li<?php if (in_array('metodos', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Metodos</a>
+<!--            <li class="li<?php if (in_array('metodos', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Metodos</a>
                 <ul class="sub">
                     <li><a href="<?= FAST_INCLUDE ?>admin/&exe=metodos/create#form">Criar Metodos</a></li>
                     <li><a href="<?= FAST_INCLUDE ?>admin/&exe=metodos/index#form">Listar / Editar Metodos</a></li>
                 </ul>
-            </li>
+            </li>-->
 
             <li class="li<?php if (in_array('setores', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Setores</a>
                 <ul class="sub">

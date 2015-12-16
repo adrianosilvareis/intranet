@@ -12,9 +12,9 @@
 
         if ($ClienteData && $ClienteData['SendPostForm']):
             unset($ClienteData['SendPostForm']);
+        
             extract($ClienteData);
-
-            require('_models/AdminUsers.class.php');
+            require('admin/_models/AdminUsers.class.php');
             $cadastra = new AdminUsers;
             $ClienteData['user_level'] = null;
             $cadastra->ExeUpdate($UserId, $ClienteData);
@@ -72,6 +72,7 @@
                 <input
                     type="password"
                     name="user_password"
+                    required="true"
                     value=""
                     title="Informe sua senha [ de 6 a 12 caracteres! ]"
                     pattern = ".{6,12}"

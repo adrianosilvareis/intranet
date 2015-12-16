@@ -112,18 +112,7 @@ endif;
 
         <div class="form-group col-md-6">
             <label>Método:</label>
-            <select  required="true" title="Método" name="fe_metodo" class="form-control">
-                <option value="">Selecione um método</option>
-                <?php
-                $FeMetodo->setMet_status(true);
-                $FeMetodo->Execute()->FullRead("SELECT * FROM fe_metodo WHERE met_status=:met_status ORDER BY met_descricao");
-                foreach ($FeMetodo->Execute()->getResult() as $metodo):
-                    extract((array) $metodo);
-                    $select = ($Dados['fe_metodo'] == $met_id ? 'selected=true' : '');
-                    echo "<option value=\"{$met_id}\" {$select}>{$met_descricao}</option>";
-                endforeach;
-                ?>
-            </select>
+            <input required="true" class="form-control" title="Valor" type="text" name="ex_metodo" placeholder="Metodo" value="<?= $Dados['ex_metodo']; ?>">
         </div>
 
         <div class="form-group col-md-6">
@@ -167,7 +156,7 @@ endif;
             <label>Informação Interferentes:</label>
             <textarea class="form-control" title="Info Interferentes" name="ex_info_interferentes" placeholder="Info Interferentes"><?= $Dados['ex_info_interferentes']; ?></textarea>
         </div>
-        
+
         <div class="form-group col-md-12">
             <label>Observações:</label>
             <textarea class="form-control" title="Observações internas" name="ex_observacao" placeholder="Observações internas"><?= $Dados['ex_observacao']; ?></textarea>

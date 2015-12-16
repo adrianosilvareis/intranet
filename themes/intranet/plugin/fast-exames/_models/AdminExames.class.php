@@ -40,7 +40,7 @@ class AdminExames {
     public function ExeUpdate($Data) {
         $this->Data = $Data;
         $this->setData();
-
+        
         $this->Read->setThis((object) $this->Data);
         return $this->update();
     }
@@ -167,12 +167,23 @@ class AdminExames {
     private function setData() {
         $this->Data = array_map("strip_tags", $this->Data);
         $this->Data = array_map("trim", $this->Data);
+        
+        //retira excesso de espaços destes campos
+        $this->Data['ex_valor_referencia'] = str_replace('-', ' ', Check::Name($this->Data['ex_valor_referencia']));
+        $this->Data['ex_info_paciente'] = str_replace('-', ' ', Check::Name($this->Data['ex_info_paciente']));
+        $this->Data['ex_info_coleta'] = str_replace('-', ' ', Check::Name($this->Data['ex_info_coleta']));
+        $this->Data['ex_info_interferentes'] = str_replace('-', ' ', Check::Name($this->Data['ex_info_interferentes']));
+        $this->Data['ex_info_encaminhamento'] = str_replace('-', ' ', Check::Name($this->Data['ex_info_encaminhamento']));
+        $this->Data['ex_observacao'] = str_replace('-', ' ', Check::Name($this->Data['ex_observacao']));
+        $this->Data['ex_descricao'] = str_replace('-', ' ', Check::Name($this->Data['ex_descricao']));
+        $this->Data['ex_sinonimia'] = str_replace('-', ' ', Check::Name($this->Data['ex_sinonimia']));
+
         $this->Data['ex_status'] = (!empty($this->Data['ex_status']) ? $this->Data['ex_status'] : "0");
         $this->Data['ex_cancelado'] = (!empty($this->Data['ex_cancelado']) ? $this->Data['ex_cancelado'] : "0");
     }
 
     private function update() {
-
+               
         $update = $this->Read->Execute()->update(null, 'ex_id');
         $cancelar = $this->ExeCancelar($this->Data['ex_id'], $this->Data['ex_cancelado']);
         $status = $this->ExeStatus($this->Data['ex_id'], $this->Data['ex_status']);

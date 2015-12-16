@@ -1,4 +1,4 @@
-<h1>Cria Setores</h1>;
+<h1>Cria Setores</h1>
 
 <?php
 if (file_exists(FAST_PATH . "_models/AdminSetor.class.php")):

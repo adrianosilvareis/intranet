@@ -12,6 +12,7 @@ class Ftp {
     private $Local;
     private $Base;
     private $Home;
+    private $Inicio;
     private $url;
     private $Link;
     private $Type;
@@ -52,8 +53,9 @@ class Ftp {
         $this->File = $File;
         $this->Type = (!empty($Type) ? $Type : $this->getType());
         $Icon = $this->getIcone();
+        $this->Link = $this->Inicio . implode("/", $this->Local);
         $url = ($Dir ? "$this->Link/$this->File" : "$this->url/$this->File");
-        
+
         echo "<div class='col-md-2 ftp-icon'>\n"
         . "<a href='$url' " . (!$Dir ? 'target="_blank"' : '') . ">\n"
         . "<img src='$Icon' class='img-responsive' alt='{$File}' title='$File'>\n"
@@ -62,12 +64,17 @@ class Ftp {
         . "</div>\n";
     }
 
-    /**
-     * 
-     * @param string $Link
-     */
-    function setLink($Link) {
-        $this->Link = $Link . "/&ftp=" . implode("/", $this->Local);
+    function setInicio($inicio) {
+        $this->Inicio = $inicio;
+    }
+
+    function getNav() {
+        $nav = "<a href=\"$this->Inicio\" title=\"inicio\" ><strong>Inicio</strong></a> / ";
+        foreach ($this->Local as $value) {
+            $nav .= "<a href=\"$this->Inicio/$value\" title=\"$value\" ><strong>$value</strong></a> / ";
+        }
+
+        echo $nav;
     }
 
     /**

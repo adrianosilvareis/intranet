@@ -12,7 +12,6 @@ $AdminExames = new AdminExames();
 
 $FeAcoes = new FeAcoes();
 $FeSetor = new FeSetor();
-$FeMetodo = new FeMetodo();
 $FeMaterial = new FeMaterial();
 
 if (!empty($Dados) && !empty($Dados['sendPostForm'])):
@@ -142,18 +141,7 @@ endif;
 
         <div class="form-group col-md-6">
             <label>Método:</label>
-            <select  required="true" title="Método" name="fe_metodo" class="form-control">
-                <option value="">Selecione um método</option>
-                <?php
-                $FeMetodo->setMet_status(true);
-                $FeMetodo->Execute()->Query("#met_status#");
-                foreach ($FeMetodo->Execute()->getResult() as $metodo):
-                    extract((array) $metodo);
-                    $select = ($Dados['fe_metodo'] == $met_id ? 'selected=true' : '');
-                    echo "<option value=\"{$met_id}\" {$select}>{$met_descricao}</option>";
-                endforeach;
-                ?>
-            </select>
+            <input required="true" class="form-control" title="Valor" type="text" name="ex_metodo" placeholder="Metodo" value="<?= $Dados['ex_metodo']; ?>">
         </div>
 
         <div class="form-group col-md-6">

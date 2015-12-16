@@ -7,7 +7,7 @@
         <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <ul class="nav navbar-nav">
-                    <li class="navbar-brand">Olá <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>
+                    <li class="navbar-brand">Olá, <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>
                     <li class="active"><a href="<?= HOME ?>">Home</a></li>
                     <?php if (Check::UserLogin(3)): ?>
                         <li><a href="<?= HOME ?>/admin/painel.php?exe=users/profile">Profile</a></li>
@@ -61,7 +61,7 @@
                                     <li role="separator" class="divider"></li>
                                     <li class="active"><a>Aplicativos</a></li>
                                     <li><a href="/view/redirect/sft_redirect.html" target="_blank">SFT - Tommasi</a></li>
-                                    <li><a href="/ftp">Qualidade</a></li>
+                                    <li><a href="<?= HOME ?>/pages/qualidade">Qualidade</a></li>
                                     <li><a href="<?= HOME ?>/pages/aniversarios">Aniversariantes</a></li>
                                     <li class="active"><a>Plugins</a></li>
                                     <?php

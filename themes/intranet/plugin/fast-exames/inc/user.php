@@ -8,7 +8,6 @@ $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 $AdminExames = new AdminExames();
 $FeAcoes = new FeAcoes();
 $FeSetor = new FeSetor();
-$FeMetodo = new FeMetodo();
 $FeMaterial = new FeMaterial();
 $FeExames = new FeExames();
 
@@ -156,18 +155,7 @@ endif;
 
                 <div class="form-group col-md-6">
                     <label>Método:</label>
-                    <select  required="true" title="Método" name="fe_metodo" class="form-control">
-                        <option value="">Selecione um método</option>
-                        <?php
-                        $FeMetodo->setMet_status(true);
-                        $FeMetodo->Execute()->Query("#met_status#");
-                        foreach ($FeMetodo->Execute()->getResult() as $metodo):
-                            extract((array) $metodo);
-                            $select = ($Dados['fe_metodo'] == $met_id ? 'selected=true' : '');
-                            echo "<option value=\"{$met_id}\" {$select}>{$met_descricao}</option>";
-                        endforeach;
-                        ?>
-                    </select>
+                    <input required="true" class="form-control" title="Valor" type="text" name="ex_metodo" placeholder="Metodo" value="<?= $Dados['ex_metodo']; ?>">
                 </div>
 
                 <div class="form-group col-md-6">
@@ -236,12 +224,12 @@ endif;
                     <tr>
                         <th class="text-center">Exame</th>
                         <th class="text-center">Solicitante</th>
-                        <th class="text-center">Aberto em</th>
                         <th class="text-center">Setor</th>
                         <th class="text-center">Status</th>
+                        <th class="text-center">Aberto em</th>
+                        <th class="text-center">Fechado em</th>
                         <th class="text-center">O.S Paciente Teste</th>
                         <th class="text-center">Assinado por</th>
-                        <th class="text-center">Fechado em</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -252,12 +240,12 @@ endif;
                         <tr>
                             <td><?= $ex_descricao; ?></td>
                             <td><?= $AdminExames->Setor($fe_setor_soli); ?></td>
-                            <td><?= date("d/m/Y H:i:s", strtotime($ex_data_abertura)); ?></td>
                             <td><?= $AdminExames->Setor($fe_setor_exec); ?></td>
                             <td><?= ($ex_status ? "concluido" : "em processamento") ?></td>
+                            <td><?= date("d/m/Y H:i:s", strtotime($ex_data_abertura)); ?></td>
+                            <td><?= ($ex_status ? date("d/m/Y H:i:s", strtotime($ex_data_fechamento)) : ""); ?></td>
                             <td><?= $ex_paciente_os; ?></td>
                             <td><?= (!empty($ws_users) ? $AdminExames->Usuario($ws_users) : ""); ?></td>
-                            <td><?= ($ex_status ? date("d/m/Y H:i:s", strtotime($ex_data_fechamento)) : ""); ?></td>
                         </tr>
                         <?php
                     endforeach;

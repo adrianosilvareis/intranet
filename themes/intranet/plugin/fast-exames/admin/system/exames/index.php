@@ -99,9 +99,9 @@ else:
                                 <li><a class="act_inative" href="<?= FAST_INCLUDE ?>admin/&exe=exames/index&action=inative/<?= $ex_id; ?>#form" title="Abrir">Inativar</a></li>
                             <?php endif; ?>
                             <?php if (!$ex_cancelado): ?>
-                                <li><a class="act_delete" href="<?= FAST_INCLUDE ?>admin/&exe=exames/index&action=delete/<?= $ex_id; ?>#form" title="Excluir">Deletar</a></li>
+                                <li><a class="act_delete" href="<?= FAST_INCLUDE ?>admin/&exe=exames/index&action=delete/<?= $ex_id; ?>#form" title="Inativar">Deletar</a></li>
                             <?php else: ?>
-                                <li><a class="act_accept" href="<?= FAST_INCLUDE ?>admin/&exe=exames/index&action=undelete/<?= $ex_id; ?>#form" title="Excluir">Deletar</a></li>
+                                <li><a class="act_accept" href="<?= FAST_INCLUDE ?>admin/&exe=exames/index&action=undelete/<?= $ex_id; ?>#form" title="Ativar">Deletar</a></li>
                             <?php endif; ?>
                         </ul>
                     </td>
