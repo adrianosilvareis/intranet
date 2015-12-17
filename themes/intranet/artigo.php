@@ -134,7 +134,7 @@ endif;
                                 <li style="float: left;">
                                     <div class="img">
                                         <a href="<?= HOME ?>/uploads/<?= $gallery_image; ?>" rel="shadowbox[<?= $post_id; ?>]" title="Imagem <?= $gb; ?> do post <?= $post_title; ?>">
-                                            <?= Check::Image('uploads' . DIRECTORY_SEPARATOR . $gallery_image, "Imagem {$gb} do post {$post_title}", 120, 80) ?>
+                                            <?= Check::Image('uploads' . DIRECTORY_SEPARATOR . $gallery_image, "Imagem {$gb} do post {$post_title}", 180, 120) ?>
                                         </a>
                                     </div>
                                 </li>

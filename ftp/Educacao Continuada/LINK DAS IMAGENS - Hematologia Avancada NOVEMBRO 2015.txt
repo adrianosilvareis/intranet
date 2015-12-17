@@ -1,1 +1,0 @@
-https://vs130.pncq.org.br/WebDatabaseClient/dbWebViewer.aspx?NISServerName=vs130.pncq.org.br&DBGUID=bf21c123-e68a-4b70-a580-503517d4744e&DBNAME=Test&ImageGUID=c9e56c3b-eb58-4140-9809-19c988ad73c4&ImageName=OP-%20HEMA%2003042015-10
