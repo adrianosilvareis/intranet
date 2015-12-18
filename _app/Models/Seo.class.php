@@ -160,6 +160,11 @@ class Seo {
             case 'index':
                 $this->Data = [SITENAME . ' - ' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                 break;
+            
+            //SEO:: INDEX
+            case 'sobre':
+                $this->Data = [SITENAME . ' - ' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                break;
 
             //SEO:: PAGES
             case 'pages':

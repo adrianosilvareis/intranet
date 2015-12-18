@@ -99,6 +99,25 @@ class Check {
         endif;
     }
 
+     /**
+     * <b>Obter post:</b> Informe o name (url) de uma categoria para obter o ID da mesma.
+     * @param STRING $post_name = URL da postagem
+     * @return INT $post_id = id do post informada
+     */
+    public static function PostByName($PostByName) {
+
+        $Read = new WsPosts();
+        $Read->setPost_name($PostByName);
+
+        $query = $Read->Execute()->Query('#post_name#');
+        if ($Read->Execute()->getResult()):
+            return (int) $query[0]->post_id;
+        else:
+            WSErro("O post <b>{$PostByName}</b> não foi encontrado!", WS_ERROR);
+            return null;
+        endif;
+    }
+    
     /**
      * <b>Contagem de Views:</b> Realiza uma contagem ao post informado.
      * @param INT $post_id

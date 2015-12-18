@@ -97,7 +97,7 @@
 
             <label class="label">
                 <span class="field">Site Url:</span>
-                <input type="url" name="post_url" value="<?php if (isset($post['post_url'])) echo $post['post_url']; ?>" placeholder="http://www.site.com.br"/>
+                <input type="text" name="post_url" value="<?php if (isset($post['post_url'])) echo $post['post_url']; ?>" placeholder="http://www.site.com.br"/>
             </label>
 
             <label class="label">
