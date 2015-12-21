@@ -18,6 +18,13 @@
     $Ordem = "post_views";
     include "inc/noticias_tres.inc.php";
     ?>
+
+    <?php
+    $Titulo = "Nota Fiscal";
+    $Categoria = "nota-fiscal";
+    $Ordem = "post_views";
+    include "inc/noticias_tres.inc.php";
+    ?>
     
 </div>
 

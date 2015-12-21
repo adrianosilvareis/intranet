@@ -28,6 +28,7 @@ class AdminExames {
         $this->Read->setThis((object) $this->Data);
         $insert = $this->Read->Execute()->insert();
         $this->Result = $this->Read->Execute()->MaxFild("ex_id");
+        $this->enviarMensagem($insert);
         return $insert;
     }
 
@@ -40,7 +41,7 @@ class AdminExames {
     public function ExeUpdate($Data) {
         $this->Data = $Data;
         $this->setData();
-        
+
         $this->Read->setThis((object) $this->Data);
         return $this->update();
     }
@@ -167,7 +168,7 @@ class AdminExames {
     private function setData() {
         $this->Data = array_map("strip_tags", $this->Data);
         $this->Data = array_map("trim", $this->Data);
-        
+
         //retira excesso de espaços destes campos
         $this->Data['ex_valor_referencia'] = str_replace('-', ' ', Check::Name($this->Data['ex_valor_referencia']));
         $this->Data['ex_info_paciente'] = str_replace('-', ' ', Check::Name($this->Data['ex_info_paciente']));
@@ -183,13 +184,37 @@ class AdminExames {
     }
 
     private function update() {
-               
+
         $update = $this->Read->Execute()->update(null, 'ex_id');
         $cancelar = $this->ExeCancelar($this->Data['ex_id'], $this->Data['ex_cancelado']);
         $status = $this->ExeStatus($this->Data['ex_id'], $this->Data['ex_status']);
 
         if ($update || $cancelar || $status):
             return true;
+        endif;
+    }
+/*
+ *   'user_name' => string 'Adriano' (length=7)
+  'user_lastname' => string 'Reis' (length=4)
+ */
+    function enviarMensagem($insert) {
+        $Contato['Assunto'] = "Mensagem automatica FAST_EXAMES";
+        $Contato['DestinoNome'] = MAILNAME;
+        $Contato['DestinoEmail'] = "cpd@tommasi.com.br";
+        $Contato['RemetenteEmail'] = Check::UserLogin()['user_email'];
+        $Contato['RemetenteNome'] =Check::UserLogin()['user_name'] . " " . Check::UserLogin()['user_lastname'];
+        $Contato['Mensagem'] = "Olá<br>"
+                . "Temos um exame que precisa de atenção <b>{$this->Data['ex_descricao']}</b><br>"
+                . "<b>{$this->Acao($this->Data['fe_acoes'])}</b><br>"
+                . "Solicitado por: <b>" . Check::UserLogin()['user_name'] . " " . Check::UserLogin()['user_lastname'] . "</b>"
+                . "<hr>"
+                . ($insert ? "Exame gravado com sucesso!" : "Tentativa falha de registrar esta alteração!")
+                . "Favor verificar o FAST-EXAMES<br>";
+        
+        $SendMail = new Email;
+        $SendMail->Enviar($Contato);
+        if ($SendMail->getError()):
+            WSErro($SendMail->getError()[0], $SendMail->getError()[1]);
         endif;
     }
 

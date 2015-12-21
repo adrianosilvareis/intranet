@@ -39,7 +39,7 @@ if (!empty($Dados) && !in_array("", $Dados)):
         WSErro("A solicitação não foi salva!", WS_ERROR);
     elseif ($AdminExames->ExeCreate($Dados)):
         WSErro("Solicitação cadastrada com sucesso!", WS_ACCEPT);
-        header("Location: " . FAST_INCLUDE);
+        $Dados = null;
     else:
         WSErro("Erro ao cadastrar solicitação!", WS_ERROR);
     endif;

@@ -39,7 +39,8 @@ class AdminImpressoras {
      * Libera todas as impressoras para um novo lote de registros.
      */
     public function ExeUnlock() {
-        $this->Read->Execute()->findAll();
+        $this->Read->setImpressora_status(1);
+        $this->Read->Execute()->Query("#impressora_status#");
 
         foreach ($this->Read->Execute()->getResult() as $imp):
             $this->Read->setThis($imp);

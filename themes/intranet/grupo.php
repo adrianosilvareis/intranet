@@ -23,8 +23,8 @@ endif;
                 $Pager->ExePager($getPage, 12);
 
                 $Read = new WsPosts();
-                $Read->Execute()->Query("post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat) ORDER BY post_date, post_views DESC LIMIT :limit OFFSET :offset", "cat={$category_id}&limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
-
+                $Read->Execute()->Query("post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat) ORDER BY post_views DESC LIMIT :limit OFFSET :offset", "cat={$category_id}&limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+                
                 if (!$Read->Execute()->getResult()):
                     $Pager->ReturnPage();
                     WSErro("Desculpe, ainda não temos artigos cadastrado nesta categoria!", WS_INFOR);
@@ -36,10 +36,6 @@ endif;
                         $grupo_p = $View->Load('grupo_p');
                         $i = 0;
                         foreach ($Read->Execute()->getResult() as $item):
-//                            if ($i % 4 == 0 && $i != 0):
-//                                echo "</div>\n";
-//                                echo "<div class='row'>\n";
-//                            endif;
                             $item->post_title = Check::Words($item->post_title, 4);
                             $item->datetime = date('Y-m-d', strtotime($item->post_date));
                             $item->pubdate = date("d/m/Y H:i", strtotime($item->post_date));
@@ -52,7 +48,7 @@ endif;
 
             </div>
             <?php
-            $Pager->ExePaginator("ws_posts", "post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat)", "cat={$category_id}");
+            $Pager->ExePaginator("ws_posts", "post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat) ORDER BY post_views", "cat={$category_id}");
             echo $Pager->getPaginator();
             ?>
         </div>
