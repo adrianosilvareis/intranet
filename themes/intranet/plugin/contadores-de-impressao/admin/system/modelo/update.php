@@ -23,9 +23,9 @@ if (isset($Dados) && $Dados['SendPostForm']):
         endif;
     endif;
 else:
-    $AppModelo = new AppModelo();
-    $AppModelo->Execute()->find("modelo_id=$modeloId");
-    $Dados = (array) $AppModelo->Execute()->getResult();
+    $ImpModelo = new ImpModelo();
+    $ImpModelo->Execute()->find("modelo_id=$modeloId");
+    $Dados = (array) $ImpModelo->Execute()->getResult();
 endif;
 
 $checkCreate = filter_input(INPUT_GET, 'create', FILTER_VALIDATE_BOOLEAN);

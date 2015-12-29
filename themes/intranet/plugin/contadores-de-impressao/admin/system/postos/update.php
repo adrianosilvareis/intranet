@@ -25,9 +25,9 @@ if (isset($Dados) && $Dados['SendPostForm']):
         endif;
     endif;
 else:
-    $AppPostos = new AppPostos();
-    $AppPostos->Execute()->find("postos_id=$postoId");
-    $Dados = (array) $AppPostos->Execute()->getResult();
+    $ImpPostos = new ImpPostos();
+    $ImpPostos->Execute()->find("postos_id=$postoId");
+    $Dados = (array) $ImpPostos->Execute()->getResult();
 endif;
 
 $checkCreate = filter_input(INPUT_GET, 'create', FILTER_VALIDATE_BOOLEAN);

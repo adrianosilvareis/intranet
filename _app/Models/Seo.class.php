@@ -271,11 +271,11 @@ class Seo {
         $this->seoTags .= "<script src='" . HOME . '/themes/' . THEME . "/js/intranet.js'></script>" . "\n";
         
         
-        $this->seoTags .= "<link rel='stylesheet' href='../_cdn/shadowbox/shadowbox.css'>" . "\n";
-        $this->seoTags .= "<script src='../_cdn/jcycle.js'></script>" . "\n";
-        $this->seoTags .= "<script src='../_cdn/shadowbox/shadowbox.js'></script>" . "\n";
-        $this->seoTags .= "<script src='../_cdn/_plugins.conf.js'></script>" . "\n";
-        $this->seoTags .= "<script src='../_cdn/_scripts.conf.js'></script>" . "\n";
+        $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_cdn/shadowbox/shadowbox.css'>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_cdn/jcycle.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_cdn/shadowbox/shadowbox.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_cdn/_plugins.conf.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_cdn/_scripts.conf.js'></script>" . "\n";
            
         $this->Tags = null;
     }

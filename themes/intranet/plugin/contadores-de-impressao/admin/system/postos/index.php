@@ -46,8 +46,8 @@ $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
 $Pager = new Pager(IMP_INCLUDE . "admin/&exe=postos/index&page=");
 $Pager->ExePager($getPage, 15);
 
-$Read = new AppPostos();
-$Read->Execute()->FullRead("SELECT * FROM app_postos ORDER BY postos_ativo LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+$Read = new ImpPostos();
+$Read->Execute()->FullRead("SELECT * FROM imp_postos ORDER BY postos_ativo LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 ?>
 <article>
     <?php
@@ -72,7 +72,7 @@ $Read->Execute()->FullRead("SELECT * FROM app_postos ORDER BY postos_ativo LIMIT
                 foreach ($Read->Execute()->getResult() as $posto):
                     extract((array) $posto);
 
-                    $postos_cont = $Read->Execute()->FullRead("SELECT count(impressora_id) as 'postos_cont' FROM app_impressora WHERE fk_postos = $postos_id")[0]->postos_cont;
+                    $postos_cont = $Read->Execute()->FullRead("SELECT count(impressora_id) as 'postos_cont' FROM imp_impressora WHERE fk_postos = $postos_id")[0]->postos_cont;
                     ?>
                     <tr class="<?php
                     if (!$postos_cont): echo "danger text-danger";
@@ -103,7 +103,7 @@ $Read->Execute()->FullRead("SELECT * FROM app_postos ORDER BY postos_ativo LIMIT
     
     <div class="row">
         <?php
-        $Pager->ExePaginator("app_postos");
+        $Pager->ExePaginator("imp_postos");
         echo $Pager->getPaginator();
         ?>
     </div>

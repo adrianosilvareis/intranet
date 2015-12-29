@@ -25,9 +25,9 @@ if (isset($Dados) && $Dados['SendPostForm']):
         endif;
     endif;
 else:
-    $AppTaxa = new AppTaxaImpress();
-    $AppTaxa->Execute()->find("taxa_id=$taxaId");
-    $Dados = (array) $AppTaxa->Execute()->getResult();
+    $ImpTaxa = new ImpTaxaImpress();
+    $ImpTaxa->Execute()->find("taxa_id=$taxaId");
+    $Dados = (array) $ImpTaxa->Execute()->getResult();
 endif;
 
 $checkCreate = filter_input(INPUT_GET, 'create', FILTER_VALIDATE_BOOLEAN);

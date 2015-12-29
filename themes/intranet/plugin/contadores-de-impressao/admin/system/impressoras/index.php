@@ -49,11 +49,11 @@ $Pager->ExePager($getPage, 15);
 $search = filter_input(INPUT_POST, "search", FILTER_DEFAULT);
 $where = (!empty($search) ? "WHERE impressora_serial like \"%$search%\" " : "");
 
-$Read = new AppImpressora();
+$Read = new ImpImpressora();
 if (!empty($search)):
-    $Read->Execute()->FullRead("SELECT * FROM app_impressora WHERE impressora_serial like '%$search%'");
+    $Read->Execute()->FullRead("SELECT * FROM imp_impressora WHERE impressora_serial like '%$search%'");
 else:
-    $Read->Execute()->FullRead("SELECT * FROM app_impressora ORDER BY impressora_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+    $Read->Execute()->FullRead("SELECT * FROM imp_impressora ORDER BY impressora_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 endif;
 ?>
 <article>
@@ -121,7 +121,7 @@ endif;
     ?>
     <div class="row">
         <?php
-        $Pager->ExePaginator("app_impressora");
+        $Pager->ExePaginator("imp_impressora");
         echo (!empty($search) ? "" : $Pager->getPaginator());
         ?>
     </div>

@@ -14,7 +14,7 @@ class AdminContadores {
     private $Read;
 
     function __construct() {
-        $this->Read = new AppContadores();
+        $this->Read = new ImpContadores();
     }
 
     /**

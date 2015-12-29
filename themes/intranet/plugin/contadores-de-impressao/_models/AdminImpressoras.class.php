@@ -16,8 +16,8 @@ class AdminImpressoras {
     private $Imp;
 
     function __construct($postos = null) {
-        $this->Read = new AppImpressora();
-        $this->Registro = new AppContadores();
+        $this->Read = new ImpImpressora();
+        $this->Registro = new ImpContadores();
 
         if (!empty($postos)):
             $this->Result = $this->Read->Execute()->Query("impressora_status = 0 AND fk_postos = $postos");
@@ -51,7 +51,7 @@ class AdminImpressoras {
     /**
      * Cria o registro de contadores.
      * 
-     * @param AppImpressora $Data
+     * @param ImpImpressora $Data
      */
     public function ExeRegister($Data) {
         $this->Data = $Data;
@@ -110,10 +110,10 @@ class AdminImpressoras {
      * @return boolean
      */
     public function ExeDelete($fk_impressora) {
-        $AppContadores = new AppContadores();
-        $AppContadores->setFk_impressora($fk_impressora);
-        $AppContadores->Execute()->Query("#fk_impressora#");
-        if ($AppContadores->Execute()->getResult()):
+        $ImpContadores = new ImpContadores();
+        $ImpContadores->setFk_impressora($fk_impressora);
+        $ImpContadores->Execute()->Query("#fk_impressora#");
+        if ($ImpContadores->Execute()->getResult()):
             WSErro("Impossivel excluir impressora, já existem contadores registrados!", WS_ERROR);
         else:
             $this->Read->Execute()->find("impressora_id");
@@ -152,9 +152,9 @@ class AdminImpressoras {
      * @return String
      */
     public function Modelo($modelo_id) {
-        $AppModelo = new AppModelo();
-        $AppModelo->Execute()->find("modelo_id=$modelo_id");
-        return $AppModelo->Execute()->getResult()->modelo_descricao;
+        $ImpModelo = new ImpModelo();
+        $ImpModelo->Execute()->find("modelo_id=$modelo_id");
+        return $ImpModelo->Execute()->getResult()->modelo_descricao;
     }
 
     /**
@@ -164,9 +164,9 @@ class AdminImpressoras {
      * @return String
      */
     public function Posto($postos_id) {
-        $AppPostos = new AppPostos();
-        $AppPostos->Execute()->find("postos_id=$postos_id");
-        return $AppPostos->Execute()->getResult()->postos_nome;
+        $ImpPostos = new ImpPostos();
+        $ImpPostos->Execute()->find("postos_id=$postos_id");
+        return $ImpPostos->Execute()->getResult()->postos_nome;
     }
 
     /**
@@ -176,9 +176,9 @@ class AdminImpressoras {
      * @return String
      */
     public function Taxa($taxa_id) {
-        $AppTaxaImpress = new AppTaxaImpress();
-        $AppTaxaImpress->Execute()->find("taxa_id=$taxa_id");
-        return $AppTaxaImpress->Execute()->getResult()->taxa_descricao;
+        $ImpTaxaImpress = new ImpTaxaImpress();
+        $ImpTaxaImpress->Execute()->find("taxa_id=$taxa_id");
+        return $ImpTaxaImpress->Execute()->getResult()->taxa_descricao;
     }
 
     /**

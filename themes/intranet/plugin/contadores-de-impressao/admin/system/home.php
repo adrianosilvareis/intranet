@@ -52,16 +52,16 @@
     $search = filter_input(INPUT_POST, "search", FILTER_DEFAULT);
     $where = (!empty($search) ? "WHERE impressora_serial like \"%$search%\" " : "");
 
-    $Read = new AppContadores();
+    $Read = new ImpContadores();
 
     $year = date("Y");
     $month = date("m") - 3;
     $day = 1;
 
     if (!empty($search)):
-        $Read->Execute()->FullRead("SELECT i.*, c.* FROM app_contadores c JOIN app_impressora i ON(c.fk_impressora = i.impressora_id) WHERE impressora_serial like '%$search%'");
+        $Read->Execute()->FullRead("SELECT i.*, c.* FROM imp_contadores c JOIN imp_impressora i ON(c.fk_impressora = i.impressora_id) WHERE impressora_serial like '%$search%'");
     else:
-        $Read->Execute()->FullRead("SELECT i.*, c.* FROM app_contadores c JOIN app_impressora i ON(c.fk_impressora = i.impressora_id) WHERE c.contadores_data >= '$year-$month-$day' ORDER BY contadores_data DESC");
+        $Read->Execute()->FullRead("SELECT i.*, c.* FROM imp_contadores c JOIN imp_impressora i ON(c.fk_impressora = i.impressora_id) WHERE c.contadores_data >= '$year-$month-$day' ORDER BY contadores_data DESC");
     endif;
     ?>
 

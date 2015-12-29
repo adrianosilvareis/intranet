@@ -13,7 +13,7 @@ class AdminModelo {
     private $Result;
 
     public function __construct() {
-        $this->Read = new AppModelo();
+        $this->Read = new ImpModelo();
     }
     
     /**

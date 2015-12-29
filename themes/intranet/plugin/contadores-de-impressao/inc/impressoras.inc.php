@@ -1,10 +1,10 @@
 <?php
-$AppPostos = new AppPostos();
-$AppPostos->Execute()->find("postos_id={$Link->getLocal()[2]}");
+$ImpPostos = new ImpPostos();
+$ImpPostos->Execute()->find("postos_id={$Link->getLocal()[2]}");
 ?>
 
 <a style="float: right;" class="btn btn-info" href="<?= IMP_INCLUDE ?>">Voltar</a>
-<h2><small><?= $AppPostos->Execute()->getResult()->postos_nome; ?></small></h2>
+<h2><small><?= $ImpPostos->Execute()->getResult()->postos_nome; ?></small></h2>
 
 <?php
 if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminImpressoras.class.php")):

@@ -45,15 +45,15 @@ endif;
             <div class="row">
 
                 <?php
-                $AppPostos = new AppPostos();
-                $AppPostos->Execute()->findAll();
+                $ImpPostos = new ImpPostos();
+                $ImpPostos->Execute()->findAll();
                 ?>
                 <div class="form-group col-md-4">
                     <label>Posto:</label>
                     <select class="form-control" name="fk_postos">
                         <option value=""> Selecione um posto: </option>
                         <?php
-                        foreach ($AppPostos->Execute()->getResult() as $posto):
+                        foreach ($ImpPostos->Execute()->getResult() as $posto):
                             extract((array) $posto);
                             echo "<option value=\"$postos_id\" "
                                     . ($Dados['fk_postos'] == $postos_id ? "selected=true" : "")
@@ -65,15 +65,15 @@ endif;
                 </div>
 
                 <?php
-                $AppModelo = new AppModelo();
-                $AppModelo->Execute()->findAll();
+                $ImpModelo = new ImpModelo();
+                $ImpModelo->Execute()->findAll();
                 ?>
                 <div class="form-group col-md-4">
                     <label>Modelo:</label>
                     <select class="form-control" name="fk_modelo">
                         <option value=""> Selecione um modelo: </option>
                         <?php
-                        foreach ($AppModelo->Execute()->getResult() as $modelo):
+                        foreach ($ImpModelo->Execute()->getResult() as $modelo):
                             extract((array) $modelo);
                             echo "<option value=\"$modelo_id\" "
                                     . ($Dados['fk_modelo'] == $modelo_id ? "selected=true" : "")
@@ -85,15 +85,15 @@ endif;
                 </div>
 
                 <?php
-                $AppTaxa = new AppTaxaImpress();
-                $AppTaxa->Execute()->findAll();
+                $ImpTaxa = new ImpTaxaImpress();
+                $ImpTaxa->Execute()->findAll();
                 ?>
                 <div class="form-group col-md-4">
                     <label>Taxa:</label>
                     <select class="form-control" name="fk_taxa">
                         <option value=""> Selecione uma taxa: </option>
                         <?php
-                        foreach ($AppTaxa->Execute()->getResult() as $taxa):
+                        foreach ($ImpTaxa->Execute()->getResult() as $taxa):
                             extract((array) $taxa);
                             echo "<option value=\"$taxa_id\" "
                                     . ($Dados['fk_taxa'] == $taxa_id ? "selected=true" : "")

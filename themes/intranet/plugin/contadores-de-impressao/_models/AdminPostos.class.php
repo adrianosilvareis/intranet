@@ -15,7 +15,7 @@ class AdminPostos {
     private $Data;
 
     function __construct() {
-        $this->Read = new AppPostos();
+        $this->Read = new ImpPostos();
     }
     
     /**
@@ -69,7 +69,7 @@ class AdminPostos {
      * @return boolean
      */
     public function ExeDelete($fk_postos) {
-        $AppImpressora = new AppImpressora();
+        $AppImpressora = new ImpImpressora();
         $AppImpressora->setFk_postos($fk_postos);
         $AppImpressora->Execute()->Query("#fk_postos#");
 
@@ -104,7 +104,7 @@ class AdminPostos {
      * Lista todos os postos do sistema quando é admin.
      */
     public function ListAdmin() {
-        $this->Read->Execute()->FullRead("SELECT * FROM app_postos ORDER BY postos_ativo");
+        $this->Read->Execute()->FullRead("SELECT * FROM imp_postos ORDER BY postos_ativo");
         $this->Result = $this->Read->Execute()->getResult();
         $this->Executar();
     }
@@ -174,7 +174,7 @@ class AdminPostos {
      * Obs.: Método precisa ser melhorado
      */
     public function Executar() {
-        $AppImpressora = new AppImpressora();
+        $AppImpressora = new ImpImpressora();
         foreach ($this->Result as $posto) {
             //encontra todas as impressoras deste posto
             $impressoras = $AppImpressora->Execute()->Query("fk_postos = :posto", "posto=$posto->postos_id");

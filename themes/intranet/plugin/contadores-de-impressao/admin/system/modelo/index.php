@@ -46,8 +46,8 @@ $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
 $Pager = new Pager(IMP_INCLUDE . "admin/&exe=modelo/index&page=");
 $Pager->ExePager($getPage, 15);
 
-$Read = new AppPostos();
-$Read->Execute()->FullRead("SELECT * FROM app_modelo ORDER BY modelo_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+$Read = new ImpPostos();
+$Read->Execute()->FullRead("SELECT * FROM imp_modelo ORDER BY modelo_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 ?>
 <article>
     <?php
@@ -97,7 +97,7 @@ $Read->Execute()->FullRead("SELECT * FROM app_modelo ORDER BY modelo_status LIMI
 
     <div class="row">
         <?php
-        $Pager->ExePaginator("app_modelo");
+        $Pager->ExePaginator("imp_modelo");
         echo $Pager->getPaginator();
         ?>
     </div>

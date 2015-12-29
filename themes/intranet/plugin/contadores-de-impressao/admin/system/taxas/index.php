@@ -46,8 +46,8 @@ $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
 $Pager = new Pager(IMP_INCLUDE . "admin/&exe=taxas/index&page=");
 $Pager->ExePager($getPage, 15);
 
-$Read = new AppPostos();
-$Read->Execute()->FullRead("SELECT * FROM app_taxa_impress ORDER BY taxa_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+$Read = new ImpPostos();
+$Read->Execute()->FullRead("SELECT * FROM imp_taxa_impress ORDER BY taxa_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 ?>
 <article>
     <?php
@@ -99,7 +99,7 @@ $Read->Execute()->FullRead("SELECT * FROM app_taxa_impress ORDER BY taxa_status 
 
     <div class="row">
         <?php
-        $Pager->ExePaginator("app_taxa_impress");
+        $Pager->ExePaginator("imp_taxa_impress");
         echo $Pager->getPaginator();
         ?>
     </div>

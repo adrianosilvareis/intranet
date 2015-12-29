@@ -13,7 +13,7 @@ class AdminTaxas {
     private $Data;
 
     function __construct() {
-        $this->Read = new AppTaxaImpress();
+        $this->Read = new ImpTaxaImpress();
     }
 
     /**
