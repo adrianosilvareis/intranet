@@ -11,6 +11,7 @@ class FeSetor {
 
     private $set_id;
     private $set_descricao;
+    private $set_email;
     private $set_execucao;
     private $set_solicita;
     private $set_status;
@@ -27,6 +28,7 @@ class FeSetor {
     public function getThis() {
         $this->Controle->setDados(array_filter([
             'set_descricao' => $this->getSet_descricao(),
+            'set_email' => $this->getSet_email(),
             'set_execucao' => $this->getSet_execucao(),
             'set_solicita' => $this->getSet_solicita(),
             'set_status' => $this->getSet_status(),
@@ -46,6 +48,7 @@ class FeSetor {
         $this->setSet_execucao((isset($object->set_execucao) ? $object->set_execucao : null));
         $this->setSet_solicita((isset($object->set_solicita) ? $object->set_solicita : null));
         $this->setSet_descricao((isset($object->set_descricao) ? $object->set_descricao : null));
+        $this->setSet_email((isset($object->set_email) ? $object->set_email : null));
     }
 
     /**
@@ -71,6 +74,10 @@ class FeSetor {
         return $this->set_descricao;
     }
 
+    function getSet_email() {
+        return $this->set_email;
+    }
+
     function getSet_execucao() {
         return $this->set_execucao;
     }
@@ -89,6 +96,10 @@ class FeSetor {
 
     function setSet_descricao($set_descricao) {
         $this->set_descricao = $set_descricao;
+    }
+
+    function setSet_email($set_email) {
+        $this->set_email = $set_email;
     }
 
     function setSet_execucao($set_execucao) {

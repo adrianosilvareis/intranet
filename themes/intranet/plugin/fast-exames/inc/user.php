@@ -15,7 +15,7 @@ $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
 $Pager = new Pager(FAST_INCLUDE . "&page=");
 $Pager->ExePager($getPage, 15);
 
-$FeExames->Execute()->FullRead("SELECT * FROM fe_exames WHERE ex_cancelado = 0 ORDER BY ex_status, ex_data_abertura LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+$FeExames->Execute()->FullRead("SELECT * FROM fe_exames WHERE ex_cancelado = 0 ORDER BY ex_status, ex_data_abertura DESC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 
 //separa os dados que podem ser nulos
 $nulos = ["ex_info_encaminhamento" => $Dados['ex_info_encaminhamento'], "ex_info_interferentes" => $Dados['ex_info_interferentes'], "ex_info_coleta" => $Dados['ex_info_coleta'], "ex_info_paciente" => $Dados['ex_info_paciente'], "ex_observacao" => $Dados['ex_observacao'], "ex_unidade" => $Dados['ex_unidade'], "ex_sinonimia" => $Dados['ex_sinonimia']];
@@ -223,7 +223,6 @@ endif;
                 <thead>
                     <tr>
                         <th class="text-center">Exame</th>
-                        <th class="text-center">Solicitante</th>
                         <th class="text-center">Setor</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Aberto em</th>
@@ -238,8 +237,7 @@ endif;
                         extract((array) $exames);
                         ?>
                         <tr>
-                            <td><?= $ex_descricao; ?></td>
-                            <td><?= $AdminExames->Setor($fe_setor_soli); ?></td>
+                            <td><?= Check::Words($ex_descricao, 3); ?></td>
                             <td><?= $AdminExames->Setor($fe_setor_exec); ?></td>
                             <td><?= ($ex_status ? "concluido" : "em processamento") ?></td>
                             <td><?= date("d/m/Y H:i:s", strtotime($ex_data_abertura)); ?></td>

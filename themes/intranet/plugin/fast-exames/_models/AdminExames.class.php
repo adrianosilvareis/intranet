@@ -28,7 +28,7 @@ class AdminExames {
         $this->Read->setThis((object) $this->Data);
         $insert = $this->Read->Execute()->insert();
         $this->Result = $this->Read->Execute()->MaxFild("ex_id");
-        $this->enviarMensagem($insert);
+        $this->MensagemCadastra($insert);
         return $insert;
     }
 
@@ -43,7 +43,19 @@ class AdminExames {
         $this->setData();
 
         $this->Read->setThis((object) $this->Data);
-        return $this->update();
+        $update = $this->update();
+
+        if ($update && $this->Data['ex_status']):
+            $FeSetor = new FeSetor();
+            $FeSetor->setSet_id($Data['fe_setor_soli']);
+            $setor = $FeSetor->Execute()->find();
+
+            if (!empty($setor->set_email)):
+                $this->MensagemConcluido($setor->set_email);
+            endif;
+        endif;
+
+        return $update;
     }
 
     /**
@@ -193,16 +205,32 @@ class AdminExames {
             return true;
         endif;
     }
-/*
- *   'user_name' => string 'Adriano' (length=7)
-  'user_lastname' => string 'Reis' (length=4)
- */
-    function enviarMensagem($insert) {
+
+    private function MensagemConcluido($email) {
+        $Contato['Assunto'] = "Resposta automatica [FAST-EXAMES - {$this->Data['ex_descricao']}]";
+        $Contato['DestinoNome'] = MAILNAME;
+        $Contato['DestinoEmail'] = $email;
+        $Contato['RemetenteEmail'] = "cpd@tommasi.com.br";
+        $Contato['RemetenteNome'] = Check::UserLogin()['user_name'] . " " . Check::UserLogin()['user_lastname'];
+        $Contato['Mensagem'] = "Olá<br>"
+                . "<br>"
+                . "O exame <b>{$this->Data['ex_descricao']}</b> <br>"
+                . "recebeu a ação de <b>{$this->Acao($this->Data['fe_acoes'])}</b> com sucesso!<br>"
+                . "Responsável por executar a ação: <b>" . Check::UserLogin()['user_name'] . " " . Check::UserLogin()['user_lastname'] . "</b>."
+                . "<br>"
+                . "Att, Equipe de Ti<br>"
+                . "Qualquer dúvida, entre em contato com o CPD<br>"
+                . "Favor verificar o FAST-EXAMES<br>";
+
+        $this->enviarMensagem($Contato);
+    }
+
+    private function MensagemCadastra($insert) {
         $Contato['Assunto'] = "Mensagem automatica FAST_EXAMES";
         $Contato['DestinoNome'] = MAILNAME;
         $Contato['DestinoEmail'] = "cpd@tommasi.com.br";
         $Contato['RemetenteEmail'] = Check::UserLogin()['user_email'];
-        $Contato['RemetenteNome'] =Check::UserLogin()['user_name'] . " " . Check::UserLogin()['user_lastname'];
+        $Contato['RemetenteNome'] = Check::UserLogin()['user_name'] . " " . Check::UserLogin()['user_lastname'];
         $Contato['Mensagem'] = "Olá<br>"
                 . "Temos um exame que precisa de atenção <b>{$this->Data['ex_descricao']}</b><br>"
                 . "<b>{$this->Acao($this->Data['fe_acoes'])}</b><br>"
@@ -210,7 +238,11 @@ class AdminExames {
                 . "<hr>"
                 . ($insert ? "Exame gravado com sucesso!" : "Tentativa falha de registrar esta alteração!")
                 . "Favor verificar o FAST-EXAMES<br>";
-        
+
+        $this->enviarMensagem($Contato);
+    }
+
+    private function enviarMensagem($Contato) {
         $SendMail = new Email;
         $SendMail->Enviar($Contato);
         if ($SendMail->getError()):

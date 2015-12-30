@@ -30,6 +30,7 @@ PRIMARY KEY (ex_id));
 CREATE TABLE IF NOT EXISTS fe_setor(
     set_id INT NOT NULL AUTO_INCREMENT,
     set_descricao  VARCHAR(50),
+    set_email VARCHAR(50),
     set_execucao BOOLEAN, 
     set_solicita BOOLEAN,
     set_status BOOLEAN, 

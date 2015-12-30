@@ -82,7 +82,7 @@ else:
                 extract((array) $exames);
                 ?>    
                 <tr <?= ($ex_cancelado ? "class=\"danger\"" : "") ?>>
-                    <td><?= $ex_descricao; ?></td>
+                    <td><?= Check::Words($ex_descricao, 4); ?></td>
                     <td><?= $ex_minemonico; ?></td>
                     <td><?= $AdminExames->Setor($fe_setor_exec); ?></td>
                     <td><?= $AdminExames->Acao($fe_acoes); ?></td>
