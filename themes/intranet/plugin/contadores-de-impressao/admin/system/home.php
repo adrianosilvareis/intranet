@@ -84,7 +84,6 @@
 
     <?php
     if (!$Read->Execute()->getResult()):
-        $Pager->ReturnPage();
         WSErro("Desculpa, não encontramos nenhuma impressora!", WS_INFOR);
     else:
         ?>
