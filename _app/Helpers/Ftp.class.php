@@ -2,140 +2,130 @@
 
 /**
  * Ftp.class.php [Helpers]
- * Classe responsavel por manipular e validar arquivos no sistema
+ * Classe responsavel por manipular e validar dados de conexao FTP
  * 
- * @copyright (c) 2015, Adriano S. Reis Programador
+ * @copyright (c) 2016, Adriano S. Reis Programador
  */
 class Ftp {
 
+    private $Conn;
+    private $Host;
     private $Dir;
-    private $Local;
-    private $Base;
-    private $Home;
-    private $Inicio;
-    private $url;
-    private $Link;
-    private $Type;
-    private $File;
+    private $Pager;
+    private $Result;
+    private $Error;
 
-    function __construct() {
-        $this->setLocal();
-        $this->Home = HOME . '/ftp';
-        $this->Base = DOCUMENT_ROOT . DIRECTORY_SEPARATOR . THEME . DIRECTORY_SEPARATOR . 'ftp';
-        $this->Dir = $this->Base . DIRECTORY_SEPARATOR . implode("/", $this->Local);
-        $this->url = $this->Home . '/' . implode("/", $this->Local);
+    function __construct($Pager = null) {
+        $this->Pager = $Pager;
     }
 
-    /**
-     * Avalia se o caminho informado é um diretorio
-     * 
-     * @param string $Dir
-     * @param string $File
-     * @return boolean
-     */
-    function checkDir($Dir = null, $File = null) {
-        $diretorio = (!empty($Dir) ? $Dir : $this->Dir);
-        $diretorio = (!empty($File) ? $diretorio . '//' . $File : $diretorio);
-        if (file_exists($diretorio) && is_dir($diretorio)):
-            return true;
-        else:
-            return false;
+    function setConn($host) {
+        $this->Host = $host;
+        try {
+            $this->Conn = ftp_connect($this->Host);
+            $this->Result = true;
+        } catch (Error $e) {
+            $this->Conn = null;
+            $this->Result = false;
+            $this->Error = "Ocorreu um erro ao iniciar FTP: " . $e;
+            echo $this->Error;
+        }
+    }
+
+    function Download($local_file, $remote_file) {
+        
+        //cria pasta temp caso não exista
+        if (!file_exists(DOCUMENT_ROOT . NAME . '/ftp/temp')):
+            mkdir(DOCUMENT_ROOT . NAME . '/ftp/temp');
         endif;
+        
+        // open some file to write to
+        $handle = fopen(DOCUMENT_ROOT . NAME . '/ftp' . $local_file, 'w');
+
+        // try to download $remote_file and save it to $handle
+        if (ftp_fget($this->Conn, $handle, $remote_file, FTP_ASCII, 0)) {
+            echo "successfully written to $local_file\n";
+            return true;
+        } else {
+            echo "There was a problem while downloading $remote_file to $local_file\n";
+        }
     }
 
-    /**
-     * retorna o icone pronto
-     * 
-     * @param string $File
-     * @param string $Type
-     */
-    function getIcon($File, $Dir = null, $Type = null) {
-        $this->File = $File;
-        $this->Type = (!empty($Type) ? $Type : $this->getType());
-        $Icon = $this->getIcone();
-        $this->Link = $this->Inicio . implode("/", $this->Local);
-        $url = ($Dir ? "$this->Link/$this->File" : "$this->url/$this->File");
+    function getNav($dir = null) {
 
-        echo "<div class='col-md-2 ftp-icon'>\n"
-        . "<a href='$url' " . (!$Dir ? 'target="_blank"' : '') . ">\n"
-        . "<img src='$Icon' class='img-responsive' alt='{$File}' title='$File'>\n"
-        . "</a>\n"
-        . str_replace("_", "-", $File)
-        . "</div>\n";
-    }
+        $nav = "<a href=\"$this->Pager&ftp=.\" title=\"inicio\" ><strong>Inicio</strong></a> / ";
 
-    function setInicio($inicio) {
-        $this->Inicio = $inicio;
-    }
+        if (!empty($dir)) {
+            $link = explode("/", $dir);
 
-    function getNav() {
-        $nav = "<a href=\"$this->Inicio\" title=\"inicio\" ><strong>Inicio</strong></a> / ";
-        foreach ($this->Local as $value) {
-            $nav .= "<a href=\"$this->Inicio/$value\" title=\"$value\" ><strong>$value</strong></a> / ";
+            $c = 0;
+            foreach ($link as $key) {
+                if (!empty($key) && $key != "."):
+                    $url = "";
+                    for ($i = 0; $i <= $c; $i++) {
+                        $url .= $link[$i] . "/";
+                    }
+                    $nav .= "<a href=\"$this->Pager&ftp=$url\" title=\"$key\" ><strong>$key</strong></a> / ";
+                endif;
+                $c++;
+            }
         }
 
-        echo $nav;
+        return $nav;
     }
 
-    /**
-     * Retorna o caminho da pasta que esta no momento.
-     * 
-     * @return string
-     */
-    function getDir() {
-        return $this->Dir;
-    }
-
-    /**
-     * Retorna a arvore da navegação em pastas
-     * 
-     * @return array
-     */
-    function getLocal() {
-        return $this->Local;
-    }
-
-    /**
-     * ****************************************
-     * ************* PRIVATES *****************
-     * ****************************************
-     */
-
-    /**
-     * recebe a url da pasta que esta e mapeia em uma array
-     */
-    private function setLocal() {
-        $this->Local = explode("/", filter_input(INPUT_GET, "ftp", FILTER_DEFAULT));
-        if ($this->Local[0] == ''):
-            array_shift($this->Local);
-        endif;
-        $this->Local = array_filter($this->Local);
-    }
-
-    /**
-     * Retorna o tipo de arquivo armazenado em File
-     * 
-     * @return string type
-     */
-    private function getType() {
-        $tipo = explode(".", $this->File);
-        return array_pop($tipo);
-    }
-
-    /**
-     * Retorna o caminho do icone com base no tipo
-     * 
-     * @return string url
-     */
-    private function getIcone() {
-        $FileIcon = "C:/xampp/htdocs/intranet/themes/intranet/images/ftpIcons/$this->Type.png";
-        if (!file_exists($FileIcon)):
-            $icon = HOME . "/" . REQUIRE_PATH . "/images/ftpIcons/arquivos.png";
-        else:
-            $icon = HOME . "/" . REQUIRE_PATH . "/images/ftpIcons/$this->Type.png";
+    function getIcon($url, $title, $type = null, $isFile = null) {
+        $img = FTP_HOME . "/images/$type.png";
+        if (!file_exists(getcwd() . "/ftp/images/$type.png") && $isFile):
+            $img = FTP_HOME . "/images/arquivos.png";
         endif;
 
-        return $icon;
+        echo "<div class=col-md-2 ftp-icon>
+                <a href=\"$this->Pager$url\" title=\"$title\" " . ($isFile ? "target=\"_blank\"" : "") . ">
+                    <img class='img-responsive' src=\"$img\" alt=\"$title\">
+                </a>
+                <p>$title</p>
+             </div>";
+    }
+
+    function setLogin($User, $Pass) {
+        try {
+            ftp_login($this->Conn, $User, $Pass);
+            $this->Result = true;
+        } catch (Error $e) {
+            $this->Result = false;
+            $this->Error = "Ocorreu um erro ao tentar logar no servidor FTP: " . $e;
+            echo $this->Error;
+        }
+    }
+
+    function nlist($dir) {
+        $this->Dir = $dir;
+        return ftp_nlist($this->Conn, $this->Dir);
+    }
+
+    function ftp_is_dir($dir) {
+
+        // get current directory
+        $original_directory = ftp_pwd($this->Conn);
+        // test if you can change directory to $dir
+        // suppress errors in case $dir is not a file or not a directory
+
+        if (ftp_chdir($this->Conn, $dir)) {
+            // If it is a directory, then change the directory back to the original directory
+            ftp_chdir($this->Conn, $original_directory);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getError() {
+        return $this->Error;
+    }
+
+    function getResult() {
+        return $this->Result;
     }
 
 }

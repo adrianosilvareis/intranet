@@ -108,7 +108,7 @@ class Seo {
                 $ReadSeo = new WsCategories;
                 $ReadSeo->setCategory_name($this->Link);
                 $ReadSeo->Execute()->Query("#category_name#");
-                
+
                 if (!$ReadSeo->Execute()->getResult()):
                     $this->seoData = null;
                     $this->seoTags = null;
@@ -116,7 +116,7 @@ class Seo {
                     extract((array) $ReadSeo->Execute()->getResult()[0]);
                     $this->seoData = (array) $ReadSeo->Execute()->getResult()[0];
                     $this->Data = [$category_title . ' - ' . SITENAME, $category_content, HOME . "/categoria/{$category_name}", INCLUDE_PATH . '/images/site.png'];
-                    
+
                     //categories:: conta views da categoria
                     Check::ContCategoryViews($category_id);
                 endif;
@@ -160,11 +160,6 @@ class Seo {
             case 'index':
                 $this->Data = [SITENAME . ' - ' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                 break;
-            
-            //SEO:: INDEX
-            case 'sobre':
-                $this->Data = [SITENAME . ' - ' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
-                break;
 
             //SEO:: PAGES
             case 'pages':
@@ -184,6 +179,16 @@ class Seo {
                         $this->Data = [SITENAME . ' - Formularios da Qualidade.', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
+                    //SEO:: SOBRE
+                    case 'sobre':
+                        $this->Data = [SITENAME . ' - Sobre a Intranet' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        break;
+
+                    //SEO:: INSTITUCIONAL
+                    case 'institucional':
+                        $this->Data = [SITENAME . ' - Instituição Tommasi' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        break;
+
                     //SEO:: 404
                     default :
                         $this->Data = ['404 Oppss, Nada encontrado!', SITEDESC, HOME . '/404', INCLUDE_PATH . '/images/site.png'];
@@ -194,9 +199,19 @@ class Seo {
             //SEO:: PLUGIN
             case 'plugin':
                 switch ($this->Link) {
-                    //SEO:: Contato
+                    //SEO:: Contadores de Impresão
                     case 'contadores-de-impressao':
-                        $this->Data = [SITENAME . ' - Contadores de impressão', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        $this->Data = ['Contadores de impressão - Registra os contadores de cada Mês', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        break;
+
+                    //SEO:: Fast Exames
+                    case 'fast-exames':
+                        $this->Data = ['Fast Exames Tommasi - Formulario de alteração de exames', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        break;
+
+                    //SEO:: Agenda
+                    case 'agenda':
+                        $this->Data = ['Agenda telefonica - Lista Telefonica Tommasi', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
                     //SEO:: 404
@@ -229,7 +244,7 @@ class Seo {
         $this->Data = null;
 
         $this->seoTags = "\n";
-        $this->seoTags .= "<!--[if lt IE 9]><script src='../../_cdn/html5.js'></script><![endif]-->" . "\n";
+        $this->seoTags .= "<!--[if lt IE 9]><script src='" . HOME . "/_cdn/html5.js'></script><![endif]-->" . "\n";
 
         $this->seoTags .= "\n";
         $this->seoTags .= "<meta charset='UTF-8'>" . "\n";
@@ -263,20 +278,22 @@ class Seo {
         $this->seoTags .= "\n";
 
         //LIBS        
-        $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/lib/bootstrap/css/bootstrap2.css'>" . "\n";
+        $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap2.css'>" . "\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . '/themes/' . THEME . "/css/default.css'/>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/lib/jquery/jquery-min.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/lib/jquery-mask/jmask.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/lib/bootstrap/js/bootstrap.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/jquery/jquery-min.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/jquery-mask/jmask.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . '/themes/' . THEME . "/js/intranet.js'></script>" . "\n";
-        
-        
+        $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular.min.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
+
+        //_CDN
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_cdn/shadowbox/shadowbox.css'>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/jcycle.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/shadowbox/shadowbox.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_plugins.conf.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_scripts.conf.js'></script>" . "\n";
-           
+
         $this->Tags = null;
     }
 

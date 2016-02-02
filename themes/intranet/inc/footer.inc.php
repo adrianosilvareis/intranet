@@ -22,3 +22,6 @@
         </section>
     </div>
 </footer>
+
+<?php 
+    Register::getRegister();

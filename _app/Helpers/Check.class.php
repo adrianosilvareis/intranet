@@ -211,13 +211,11 @@ class Check {
      */
     public static function BDCREATE($msg) {
 
-        if (strpos($msg, "ws_categories") || strpos($msg, "ws_posts") || strpos($msg, "ws_posts_gallery") || strpos($msg, "ws_siteviews") || strpos($msg, "ws_siteviews_agent") || strpos($msg, "ws_siteviews_online") || strpos($msg, "ws_users")):
+        if (strpos($msg, "ws_categories") || strpos($msg, "ws_posts") || strpos($msg, "ws_posts_gallery") || strpos($msg, "ws_siteviews") || strpos($msg, "ws_siteviews_agent") || strpos($msg, "ws_siteviews_online") || strpos($msg, "ws_users") || strpos($msg, "app_cidades") || strpos($msg, "app_estados")):
             $tab = 'framework';
         elseif (strpos($msg, "app_youtube") || strpos($msg, "app_niver")):
             $tab = 'aplicacao';
-        elseif (strpos($msg, "app_cidades") || strpos($msg, "app_estados")):
-            $tab = 'endereco';
-        elseif (strpos($msg, "app_postos") || strpos($msg, "app_contadores") || strpos($msg, "app_impressora") || strpos($msg, "app_modelo") || strpos($msg, "app_taxa_impress")):
+        elseif (strpos($msg, "imp_postos") || strpos($msg, "imp_contadores") || strpos($msg, "imp_impressora") || strpos($msg, "imp_modelo") || strpos($msg, "imp_taxa_impress")):
             $tab = 'plugin_impress';
         elseif (strpos($msg, "fe_exames") || strpos($msg, "fe_material") || strpos($msg, "fe_metodo") || strpos($msg, "fe_setor") || strpos($msg, "fe_acoes")):
             $tab = 'plugin_fast_exames';

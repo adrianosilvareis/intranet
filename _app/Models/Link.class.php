@@ -16,7 +16,6 @@ class Link {
     private $Patch;
     private $Tags;
     private $Data;
-
     /** @var SEO */
     private $Seo;
 
@@ -53,7 +52,6 @@ class Link {
      * *************** PRIVATES ***************
      * ****************************************
      */
-    
     /*
      * verifica e inclui os arquivos por demanda. Podendo encontra-los dentro da pasta rais ou subpastas.
      * cada nivel de subpasta deve ser preestabelecido com elseif.

@@ -96,8 +96,10 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="https://webmail-seguro.com.br/tommasi.com.br/" target="_blank">WebMail</a></li>
-                            <li><a href="<?= HOME ?>/pages/contato">Contato</a></li>
-                            <li><a href="<?= HOME ?>/sobre">Sobre</a></li>
+                            <li><a href="<?= HOME ?>/pages/contato" title="contato por email">Contato</a></li>
+                            <li class="active"><a href="<?= HOME ?>/plugin/agenda" title="Lista Telefonica">Agenda</a></li>
+                            <li class="active"><a href="<?= HOME ?>/pages/institucional" title="Missão, Visão, Valores">Institucional</a></li>
+                            <li><a href="<?= HOME ?>/pages/sobre" title="Sobre a Intranet">Sobre</a></li>
                         </ul>
 
                     </div><!-- /.navbar-collapse -->

@@ -13,10 +13,10 @@ class AgendaContatos extends Beans {
     private $contato_descricao;
     private $contato_telefone;
     private $contato_email;
-    private $contato_endereco;
-    private $contato_cidade;
-    private $contato_estados;
-    private $contato_setor;
+    private $contato_site;
+    private $contato_obs;
+    private $endereco_id;
+    private $setor_id;
 
     function __construct() {
         $this->Controle = new Controle('agenda_contatos');
@@ -32,10 +32,10 @@ class AgendaContatos extends Beans {
             'contato_descricao' => $this->getContato_descricao(),
             'contato_telefone' => $this->getContato_telefone(),
             'contato_email' => $this->getContato_email(),
-            'contato_endereco' => $this->getContato_endereco(),
-            'contato_cidade' => $this->getContato_cidade(),
-            'contato_estados' => $this->getContato_estados(),
-            'contato_setor' => $this->getContato_setor(),
+            'contato_site' => $this->getContato_site(),
+            'contato_obs' => $this->getContato_obs(),
+            'endereco_id' => $this->getEndereco_id(),
+            'setor_id' => $this->getSetor_id(),
             'contato_id' => $this->getContato_id()
         ]));
         return $this->Controle->getDados();
@@ -51,10 +51,10 @@ class AgendaContatos extends Beans {
         $this->setContato_descricao((isset($object->contato_descricao) ? $object->contato_descricao : null));
         $this->setContato_telefone((isset($object->contato_telefone) ? $object->contato_telefone : null));
         $this->setContato_email((isset($object->contato_email) ? $object->contato_email : null));
-        $this->setContato_endereco((isset($object->contato_endereco) ? $object->contato_endereco : null));
-        $this->setContato_cidade((isset($object->contato_cidade) ? $object->contato_cidade : null));
-        $this->setContato_estados((isset($object->contato_estados) ? $object->contato_estados : null));
-        $this->setContato_setor((isset($object->contato_setor) ? $object->contato_setor : null));
+        $this->setContato_site((isset($object->contato_site) ? $object->contato_site : null));
+        $this->setContato_obs((isset($object->contato_obs) ? $object->contato_obs : null));
+        $this->setEndereco_id((isset($object->endereco_id) ? $object->endereco_id : null));
+        $this->setSetor_id((isset($object->setor_id) ? $object->setor_id : null));
     }
 
     /**
@@ -88,20 +88,20 @@ class AgendaContatos extends Beans {
         return $this->contato_email;
     }
 
-    function getContato_endereco() {
-        return $this->contato_endereco;
+    function getContato_site() {
+        return $this->contato_site;
     }
 
-    function getContato_cidade() {
-        return $this->contato_cidade;
+    function getContato_obs() {
+        return $this->contato_obs;
     }
 
-    function getContato_estados() {
-        return $this->contato_estados;
+    function getEndereco_id() {
+        return $this->endereco_id;
     }
 
-    function getContato_setor() {
-        return $this->contato_setor;
+    function getSetor_id() {
+        return $this->setor_id;
     }
 
     function setContato_id($contato_id) {
@@ -120,20 +120,20 @@ class AgendaContatos extends Beans {
         $this->contato_email = $contato_email;
     }
 
-    function setContato_endereco($contato_endereco) {
-        $this->contato_endereco = $contato_endereco;
+    function setContato_site($contato_site) {
+        $this->contato_site = $contato_site;
     }
 
-    function setContato_cidade($contato_cidade) {
-        $this->contato_cidade = $contato_cidade;
+    function setContato_obs($contato_obs) {
+        $this->contato_obs = $contato_obs;
     }
 
-    function setContato_estados($contato_estados) {
-        $this->contato_estados = $contato_estados;
+    function setEndereco_id($endereco_id) {
+        $this->endereco_id = $endereco_id;
     }
 
-    function setContato_setor($contato_setor) {
-        $this->contato_setor = $contato_setor;
+    function setSetor_id($setor_id) {
+        $this->setor_id = $setor_id;
     }
 
 }

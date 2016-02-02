@@ -9,7 +9,13 @@ abstract class Business extends Conn {
 
     /** @var string Nome da tabela */
     protected $Table;
-
+    
+    /**
+     * Informaçõoes da conexão com banco de dados caso não seja padrão
+     * @var Array 
+     */
+    protected $DBConn;
+    
     /** @var PDOStatement */
     protected $Stmt;
 
@@ -149,7 +155,7 @@ abstract class Business extends Conn {
     }
 
     protected function Execute($Sql) {
-        $this->Stmt = Conn::prepare($Sql);
+        $this->Stmt = $this->prepare($Sql, $this->DBConn);
 
         if ($this->Dados && array_key_exists('limit', $this->Dados)) {
             $Limit = (int) $this->Dados['limit'];

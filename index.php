@@ -18,7 +18,7 @@ $Session = new Session;
         <?php
         require(REQUIRE_PATH . '/inc/header.inc.php');
         ?>
-
+        
         <div class="section">
             <div class="container">
                 <?php

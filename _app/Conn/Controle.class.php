@@ -9,6 +9,7 @@ class Controle extends Business {
 
     function __construct($Table = null) {
         $this->Table = $Table;
+        $this->DBConn = ['DB_HOST' => DB_HOST, 'DB_NAME' => DB_NAME, 'DB_USER' => DB_USER, 'DB_PASS' => DB_PASS];
     }
 
     public function setTable($Table) {
@@ -17,6 +18,19 @@ class Controle extends Business {
 
     public function getResult() {
         return $this->Result;
+    }
+
+    /**
+     * Deve ser inserido um array com os seguintes campos
+     * <br><b>[DB_HOST] = Host do Banco</b>
+     * <br><b>[DB_NAME] = Nome do Banco</b>
+     * <br><b>[DB_USER] = Usuario</b>
+     * <br><b>[DB_PASS] = Senha</b>
+     * 
+     * @param array $DBConn
+     */
+    public function setDBConn(array $DBConn) {
+        $this->DBConn = $DBConn;
     }
 
     /**

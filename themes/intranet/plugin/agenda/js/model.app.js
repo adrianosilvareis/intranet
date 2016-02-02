@@ -1,0 +1,1 @@
+var appAgenda = angular.module("agenda", ["ngMessages"]);

@@ -1,20 +1,5 @@
 <?php
 
-//CONFIGURACAO DO BANCO ####################
-define("DB_HOST", "localhost");
-define("DB_USER", "root");
-define("DB_PASS", "root");
-define("DB_NAME", "ws_intranet");
-
-//DEFINE SERVIDOR DE E-MAIL ####################
-define('MAILUSER', 'adriano@tommasi.com.br');
-define('MAILDESTINO', 'adriano@tommasi.com.br');
-define('MAILNAME', 'Intranet Tommasi');
-define('MAILASSUNTO', 'Contato via [SYSTEMA INTRANET]!');
-define('MAILHOST', 'email-ssl.com.br');
-define('MAILPASS', 'tommasi0000');
-define('MAILPORT', '587');
-
 //DEFINE IDENTIDADE DO SITE ####################
 define('SITENAME', 'Intranet Tommasi');
 define('SITEDESC', '&copy; 2015 Adriano Reis | Todos os direitos reservados.');
@@ -30,6 +15,27 @@ define('REQUIRE_PATH', 'themes' . DIRECTORY_SEPARATOR . THEME);
 define('INCLUDE_PATH', HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH);
 define('PLUGIN_PATH', REQUIRE_PATH . DIRECTORY_SEPARATOR . 'plugin');
 
+//CONFIGURACAO DO BANCO ####################
+define("DB_HOST", "localhost");
+define("DB_USER", "root");
+define("DB_PASS", "root");
+define("DB_NAME", "ws_intranet");
+
+//DEFINE SERVIDOR DE E-MAIL ####################
+define('MAILUSER', 'adriano@tommasi.com.br');
+define('MAILDESTINO', 'adriano@tommasi.com.br');
+define('MAILNAME', 'Intranet Tommasi');
+define('MAILASSUNTO', 'Contato via [SYSTEMA INTRANET]!');
+define('MAILHOST', 'email-ssl.com.br');
+define('MAILPASS', 'tommasi0000');
+define('MAILPORT', '587');
+
+//DEFINE SERVIDRO FTP
+define("FTP_HOST", "localhost");
+define("FTP_USER", "intranet");
+define("FTP_PASS", "kr@p2605");
+define("FTP_HOME", HOME . "/ftp");
+
 //REDES SOCIAIS
 define('CANAL', 'UCG1S-LQV55pl0-n_KLTNtJQ');
 define('FACEBOOK', 'adriano.reis23');
@@ -39,10 +45,10 @@ define('TWITTER', 'Adriano_EngPro');
 //CSS Constantes :: Mensagens de Erro
 define("WS_ACCEPT", 'accept');
 define("WS_INFOR", 'infor');
-define("WS_ALERT", 'alert');
+define("WS_ALERT", 'alerte');
 define("WS_ERROR", 'error');
 
-//AUTO LOAD DE CALSSES ####################
+//AUTO LOAD DE CLASSES ####################
 function __autoload($Class_name) {
     /*
      * ****************************************
@@ -50,7 +56,7 @@ function __autoload($Class_name) {
      * ****************************************
      */
     $cDir = ['Conn', 'Helpers', 'Beans', 'Models', 'library'];
-    $pDir = ['contadores-de-impressao', 'qualidade', 'fast-exames', 'agenda']; 
+    $pDir = ['contadores-de-impressao', 'fast-exames', 'agenda'];
     $iDir = null;
 
     foreach ($cDir as $dirName):
@@ -79,7 +85,7 @@ function AUTO($iDir, $file) {
 
 //Plugins listas:: Lista links 
 function Plugins() {
-    $lista = ['contadores-de-impressao', 'fast-exames'];
+    $lista = ['contadores-de-impressao', 'fast-exames', 'agenda'];
 
     $result = array();
     foreach ($lista as $plugin):
@@ -113,12 +119,14 @@ function PHPErro($ErrNo, $ErrMsg, $ErrFile, $ErrLine) {
         echo "<small>Por favor, atualize a pagina!</small>";
         echo "</div>";
     endif;
-
-    $CssClass = ($ErrNo == E_USER_NOTICE ? WS_INFOR : ($ErrNo == E_USER_WARNING ? WS_ALERT : ($ErrNo == E_USER_ERROR ? WS_ERROR : $ErrNo)));
-    echo "<p class=\"trigger {$CssClass}\">";
-    echo "<b>Erro na Linha: {$ErrLine} ::</b> {$ErrMsg} <br>";
-    echo "<small>{$ErrFile}</small>";
-    echo "<span class=\"ajax_close\">{$ErrMsg}</span></p>";
+    
+    if (!strstr($ErrMsg, "ftp_chdir(): CWD")):
+        $CssClass = ($ErrNo == E_USER_NOTICE ? WS_INFOR : ($ErrNo == E_USER_WARNING ? WS_ALERT : ($ErrNo == E_USER_ERROR ? WS_ERROR : $ErrNo)));
+        echo "<p class=\"trigger {$CssClass}\">";
+        echo "<b>Erro na Linha: {$ErrLine} ::</b> {$ErrMsg} <br>";
+        echo "<small>{$ErrFile}</small>";
+        echo "<span class=\"ajax_close\">{$ErrMsg}</span></p>";
+    endif;
 
     if ($ErrNo == E_USER_ERROR):
         die;
