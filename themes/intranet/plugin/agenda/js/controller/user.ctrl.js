@@ -3,8 +3,8 @@ appAgenda.controller("user", function ($scope, objetoAPI, config) {
     $scope.setores = [];
     $scope.enderecos = [];
     $scope.cidades = [];
-    $scope.carregando = false;
-    
+    $scope.carregando = [];
+
     $scope.setorSelecionado = function (setor) {
         $scope.setor = setor;
     };
@@ -35,22 +35,25 @@ appAgenda.controller("user", function ($scope, objetoAPI, config) {
 
     var carregarListas = function () {
         objetoAPI.getObjeto(config.apiURL + "/contatos.api.php").success(function (data) {
+            $scope.carregando.push(true);
             $scope.contatos = data;
         });
 
         objetoAPI.getObjeto(config.apiURL + "/setores.api.php").success(function (data) {
+            $scope.carregando.push(true);
             $scope.setores = data;
         });
 
         objetoAPI.getObjeto(config.apiURL + "/enderecos.api.php").success(function (data) {
+            $scope.carregando.push(true);
             $scope.enderecos = data;
         });
 
         objetoAPI.getObjeto(config.apiURL + "/cidades.api.php").success(function (data) {
+            $scope.carregando.push(true);
             $scope.cidades = data;
         });
-        $scope.carregando = true;
     };
-
+    
     carregarListas();
 });

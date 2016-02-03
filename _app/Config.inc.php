@@ -31,8 +31,8 @@ define('MAILPASS', 'tommasi0000');
 define('MAILPORT', '587');
 
 //DEFINE SERVIDRO FTP
-define("FTP_HOST", "localhost");
-define("FTP_USER", "intranet");
+define("FTP_HOST", "192.168.0.50");
+define("FTP_USER", "ftp");
 define("FTP_PASS", "kr@p2605");
 define("FTP_HOME", HOME . "/ftp");
 

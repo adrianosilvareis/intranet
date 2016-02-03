@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS agenda_contatos (
     contato_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     contato_descricao VARCHAR(200),
     contato_telefone VARCHAR(500),
-    contato_email VARCHAR(50),
-    contato_site VARCHAR(50),
+    contato_email VARCHAR(100),
+    contato_site VARCHAR(300),
     contato_obs VARCHAR(500),
     endereco_id INT,
     setor_id INT

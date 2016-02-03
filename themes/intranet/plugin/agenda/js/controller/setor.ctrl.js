@@ -1,7 +1,7 @@
 appAgenda.controller("agendaSetor", function ($scope, setorAPI) {
 
     $scope.setores = [];
-
+    
     $scope.salvarSetor = function (setor) {
         setorAPI.saveSetor(setor).success(function (data) {
             delete $scope.setor;

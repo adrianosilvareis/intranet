@@ -12,7 +12,7 @@
                 <input class="form-control" type="text" placeholder="Nº" name="endereco_numero" ng-model="contato.endereco.endereco_numero"/> 
             </div>
             <div class="col-md-8">
-                <input class="form-control" type="text" placeholder="Bairro" name="endereco_bairro" ng-model="contato.endereco.endereco_bairro" ng-required="true" ng-minlength="5"/>
+                <input class="form-control" type="text" placeholder="Bairro" name="endereco_bairro" ng-model="contato.endereco.endereco_bairro" ng-required="true" ng-minlength="3"/>
             </div>
             <div class="col-md-4">
                 <input class="form-control" type="text" placeholder="Cep" name="endereco_cep" ng-model="contato.endereco.endereco_cep" ng-required="true" ui-format-cep/>
@@ -60,7 +60,7 @@
             </div>
 
             <div ng-message="minlength" class="alert alert-danger">
-                O campo Bairro deve ter no mínimo 5 caracteres.
+                O campo Bairro deve ter no mínimo 3 caracteres.
             </div>
 
         </div>

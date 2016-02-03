@@ -1,5 +1,5 @@
 
-<div ng-controller="user">
+<div style="min-height: 400px;" ng-controller="user">
 
     <div class="form row" style="margin-bottom: 10px" ng-if="contato">
         <div class="col-md-6"> 
@@ -10,10 +10,10 @@
                 <input class="form-control" type="tel" name="contato_telefone" placeholder="Telefone" disabled="true" ng-model="contato.contato_telefone"/>
             </div>
             <div class="col-md-6">
-                <input class="form-control" type="email" name="contato_email" placeholder="Email" disabled="true" ng-model="contato.contato_email"/>
+                <a class="form-control" href="mailto:{{contato.contato_email}}" title="enviar uma mensagem" target="_blank">{{contato.contato_email| maxlength:26}}</a>                
             </div>
             <div class="col-md-6">
-                <input class="form-control" type="url" name="contato_site" placeholder="site" disabled="true" ng-model="contato.contato_site"/>
+                <a class="form-control" href="{{contato.contato_site}}" title="{{contato.contato_descricao}}" target="_blank">{{contato.contato_site| maxlength:26}}</a>
             </div>
             <div class="col-md-12" style="margin-top: 5px">
                 <textarea class="form-control" name="contato_obs" placeholder="Observações" disabled="true" ng-model="contato.contato_obs" rows="3"></textarea>
@@ -45,7 +45,6 @@
         </div>
     </div>
 
-
     <div class="row col-md-12" ng-if="!contato">
         <div ng-repeat="setor in setores">
 
@@ -67,7 +66,7 @@
                         </thead>
 
                         <tbody>
-                            <tr ng-repeat="contato in contatos| filter:{setor_id:setor.setor_id} | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+                            <tr ng-repeat="contato in contatos | filter:{setor_id:setor.setor_id} | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
                                 <td><a href="" ng-click="contatoSelecionado(contato)">{{contato.contato_descricao| name}}</a></td>
                                 <td>{{contato.contato_telefone}}</td>
                                 <td>{{contato.contato_email}}</td>
@@ -77,6 +76,15 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div ng-if="setores.length === 0">
+        <div ng-if="carregando.length === 4">
+            <?php WSErro("Não exite contatos Cadastrados", WS_INFOR); ?>
+        </div>
+        <div ng-if="carregando.length !== 4">
+            <img src="<?= HOME ?>/<?= REQUIRE_PATH ?>/images/ajax-loader.gif" class="img-responsive">
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
 
     <form class="form" name="contatoForm">
 
-        <input class="form-control" type="text" name="contato_descricao" placeholder="Nome / Descrição" ng-model="contato.contato_descricao" ng-required="true" ng-minlength="5"/>
+        <input class="form-control" type="text" name="contato_descricao" placeholder="Nome / Descrição" ng-model="contato.contato_descricao" ng-required="true" ng-minlength="3"/>
         <input class="form-control" type="tel" name="contato_telefone" placeholder="Telefone" ng-model="contato.contato_telefone"  ng-required="true" ui-format-tel/>
         <input class="form-control" type="email" name="contato_email" placeholder="email@site.com.br" ng-model="contato.contato_email"/>
         <input class="form-control" type="url" name="contato_site" placeholder="site.com.br" ng-model="contato.contato_site" ui-format-site/>
@@ -29,7 +29,7 @@
             </div>
 
             <div ng-message="minlength" class="alert alert-danger">
-                O campo Nome deve ter no mínimo 5 caracteres.
+                O campo Nome deve ter no mínimo 3 caracteres.
             </div>
 
         </div>

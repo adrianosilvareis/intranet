@@ -5,6 +5,7 @@ Register::addRegister("<script src='" . HOME . DIRECTORY_SEPARATOR . REQUIRE_PAT
 Register::addRegister("<script src='" . HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH . "/plugin/agenda/js/controller/home.ctrl.js'></script>");
 Register::addRegister("<script src='" . HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH . "/plugin/agenda/js/services/objetoAPI.services.js'></script>");
 Register::addRegister("<script src='" . HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH . "/plugin/agenda/js/filter/name.filter.js'></script>");
+Register::addRegister("<script src='" . HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH . "/plugin/agenda/js/filter/maxlength.filter.js'></script>");
 ?>
 
 <div ng-app="agenda">
