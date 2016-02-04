@@ -41,6 +41,13 @@
             <div class="col-md-6">
                 <h1>Valores</h1>
                 <p style="font-size: 1.2em;">São o coração da cultura organizacional do Tommasi e norteiam as decisões e atitudes da alta direção e demais funcionários.</p>
+                <ul>
+                    <li>Compromisso com o cliente.</li>
+                    <li>Trabalho em equipe.</li>
+                    <li>Inovação.</li>
+                    <li>Responsabilidade com a saúde humana.</li>
+                    <li>Integridade.</li>
+                </ul>
             </div>
         </article>
     </div>

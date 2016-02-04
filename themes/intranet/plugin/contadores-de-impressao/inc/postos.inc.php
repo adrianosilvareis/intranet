@@ -113,7 +113,6 @@ endif;
 
             <?php
             if ($Login->CheckLogin()):
-
                 $AdPostos->ListAdmin();
                 foreach ($AdPostos->getResult() as $imp):
                     extract((array) $imp);
@@ -148,22 +147,24 @@ endif;
                     </tr>
                     <?php
                 endforeach;
-
             else:
-
-                foreach ($AdPostos->getRestantes() as $imp):
-                    extract((array) $imp);
-                    ?>
-                    <tr class="text-center">
-                        <td>
-                            <a href="<?= IMP_INCLUDE . $postos_id; ?>"><?= $postos_nome; ?></a>
-                        </td>
-                        <td>
-                            <?= $cont; ?>
-                        </td>
-                    </tr>
-                    <?php
-                endforeach;
+                if (!$AdPostos->getRestantes()):
+                    WSErro("Não existem postos a ser exibido!", WS_INFOR);
+                else:
+                    foreach ($AdPostos->getRestantes() as $imp):
+                        extract((array) $imp);
+                        ?>
+                        <tr class="text-center">
+                            <td>
+                                <a href="<?= IMP_INCLUDE . $postos_id; ?>"><?= $postos_nome; ?></a>
+                            </td>
+                            <td>
+                                <?= $cont; ?>
+                            </td>
+                        </tr>
+                        <?php
+                    endforeach;
+                endif;
             endif;
             ?>
 

@@ -4,49 +4,42 @@ $file = filter_input(INPUT_GET, "file", FILTER_DEFAULT);
 
 $Ftp = new Ftp(HOME . "/pages/qualidade/");
 
-echo $Ftp->getNav($dir);
+echo $Ftp->getBread($dir);
 $Ftp->setConn(FTP_HOST);
 $Ftp->setLogin(FTP_USER, FTP_PASS);
 ?>
 
 <div class="well">
     <?php
-    if (!empty($dir)):
-        $lista = $Ftp->nlist($dir);
-    else:
-        $lista = $Ftp->nlist('.');
-    endif;
+    $lista = (!empty($dir) ? $Ftp->nlist($dir) : $Ftp->nlist('.'));
 
     if (empty($file)):
         $i = 0;
         echo "<div class=\"row\">";
-        foreach ($lista as $key):
-            if ($i % 6 == 0):
-                echo "</div><div class=\"row\">";
+        
+        foreach ($lista as $url):
+
+            $title = $Ftp->UrlToDir($url);
+
+            if ($title != '.tmb' && $title != '.quarantine'):
+                if ($i % 6 == 0):
+                    echo "</div><div class=\"row\">";
+                endif;
+
+                if ($Ftp->ftp_is_dir($url)):
+                    $Ftp->getIcon("&ftp=$url", $title, "pasta");
+                else:
+                    $File = $Ftp->UrlToFile($url);
+                    $Ftp->getIcon("&file=$url", $File['fileName'], $File['type'], true);
+                endif;
+                $i++;
             endif;
-            if ($Ftp->ftp_is_dir($key)):
-                $title = explode("/", $key);
-                $title = array_pop($title);
-                $Ftp->getIcon("&ftp=$key", $title, "pasta");
-            else:
-                $title = explode("/", $key);
-                $title = array_pop($title);
-                $title = explode(".", $title);
-                $type = array_pop($title);
-                $title = implode(".", $title);
-                $Ftp->getIcon("&file=$key", $title, $type, true);
-            endif;
-            $i++;
+
         endforeach;
         echo "</div>";
     else:
-        $local_file = '/temp/' . str_replace("/", "_", $file);
-    
-        /**
-         * Esta condição verifica que so arquivo já existe com este nome, porem se o mesmo for alterado não será baixado uma nova versão.
-         * 
-         * sendo necessario limpar a pasta ftp/temp quando um arquivo for modificado e não alterado o nome.
-         */
+        $local_file = '/temp/' . Check::FileName($file);
+        //verifica se o arquivo ja foi acessado. Se sim acessa a pasta temp do FTP
         if (file_exists(DOCUMENT_ROOT . NAME . DIRECTORY_SEPARATOR . "ftp" . $local_file)):
             header("Location: " . FTP_HOME . "$local_file");
         else:

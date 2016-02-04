@@ -17,7 +17,7 @@ class AdminPostos {
     function __construct() {
         $this->Read = new ImpPostos();
     }
-    
+
     /**
      * Executa a criacao dos postos no sistema
      * 
@@ -90,7 +90,7 @@ class AdminPostos {
             WSErro("O posto <b>DESATIVADO</b> não pode ser deletado!", WS_ERROR);
         endif;
     }
-    
+
     /**
      * Lista todos os postos no sistema, quando não é admin.
      */
@@ -99,7 +99,7 @@ class AdminPostos {
         $this->Result = $this->Read->Execute()->getResult();
         $this->Executar();
     }
-    
+
     /**
      * Lista todos os postos do sistema quando é admin.
      */
@@ -108,7 +108,7 @@ class AdminPostos {
         $this->Result = $this->Read->Execute()->getResult();
         $this->Executar();
     }
-    
+
     /**
      * Retorna o posto com base no id
      * 
@@ -119,7 +119,7 @@ class AdminPostos {
         $this->Read->Execute()->find("postos_id={$postoId}");
         return $this->Read->Execute()->getResult();
     }
-    
+
     /**
      * Retorna o posto com base no numero informado
      * 
@@ -130,7 +130,7 @@ class AdminPostos {
         $this->Read->Execute()->find("postos_numero={$postoNumero}");
         return $this->Read->Execute()->getResult();
     }
-    
+
     /**
      * Lista em array de impressoras que já foram registradas contadores do mês
      * 
@@ -146,9 +146,12 @@ class AdminPostos {
      * @return List:impressoras
      */
     public function getRestantes() {
+        if (!is_array($this->Rest)) {
+            $this->Rest = [];
+        }
         return $this->Rest;
     }
-    
+
     /**
      * Lista em array de todas as impressoras do sistema
      * 
@@ -157,7 +160,7 @@ class AdminPostos {
     public function getResult() {
         return $this->Result;
     }
-    
+
     /**
      * ****************************************
      * ************* PRIVATES *****************
@@ -167,7 +170,7 @@ class AdminPostos {
         $this->Data = array_map('strip_tags', $this->Data);
         $this->Data = array_map('trim', $this->Data);
     }
-    
+
     /**
      * lista as impressoras e executa a contagem por posto
      * 

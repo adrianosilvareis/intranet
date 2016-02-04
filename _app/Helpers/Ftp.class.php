@@ -33,12 +33,12 @@ class Ftp {
     }
 
     function Download($local_file, $remote_file) {
-        
+
         //cria pasta temp caso não exista
         if (!file_exists(DOCUMENT_ROOT . NAME . '/ftp/temp')):
             mkdir(DOCUMENT_ROOT . NAME . '/ftp/temp');
         endif;
-        
+
         // open some file to write to
         $handle = fopen(DOCUMENT_ROOT . NAME . '/ftp' . $local_file, 'w');
 
@@ -51,26 +51,26 @@ class Ftp {
         }
     }
 
-    function getNav($dir = null) {
+    function getBread($dir = null) {
 
-        $nav = "<a href=\"$this->Pager&ftp=.\" title=\"inicio\" ><strong>Inicio</strong></a> / ";
+        $nav = "<ol class='breadcrumb'>\n<li><a href=\"$this->Pager&ftp=.\" title=\"inicio\" ><strong>Inicio</strong></a></li>\n";
 
         if (!empty($dir)) {
-            $link = explode("/", $dir);
-
-            $c = 0;
-            foreach ($link as $key) {
+            
+            $link = Check::array_filter_shift(explode("/", $dir));
+            
+            $url = "";
+            for ($i = 0; $i < count($link); $i++):
+                $key = $link[$i];
                 if (!empty($key) && $key != "."):
-                    $url = "";
-                    for ($i = 0; $i <= $c; $i++) {
-                        $url .= $link[$i] . "/";
-                    }
-                    $nav .= "<a href=\"$this->Pager&ftp=$url\" title=\"$key\" ><strong>$key</strong></a> / ";
+                    $url .= $key . '/';
+                    $nav .= (($i != count($link) - 1) ?
+                                    "<li><a href=\"$this->Pager&ftp=$url\" title=\"$key\" ><strong>$key</strong></a></li> \n" :
+                                    "<li class='active'>$key</li>\n");
                 endif;
-                $c++;
-            }
+            endfor;
         }
-
+        $nav .= "</ol>\n";
         return $nav;
     }
 
@@ -84,8 +84,23 @@ class Ftp {
                 <a href=\"$this->Pager$url\" title=\"$title\" " . ($isFile ? "target=\"_blank\"" : "") . ">
                     <img class='img-responsive' src=\"$img\" alt=\"$title\">
                 </a>
-                <p>$title</p>
+                <p>" . $title . "</p>
              </div>";
+    }
+
+    function UrlToDir($url) {
+        $arrayURL = explode("/", $url);
+        return array_pop($arrayURL);
+    }
+
+    function UrlToFile($url) {
+        $title = $this->UrlToDir($url);
+        $arrayFile = explode(".", $title);
+        $type = array_pop($arrayFile);
+        $fileName = implode(".", $arrayFile);
+        $nameFormat = str_replace(array("_", "-", "  "), " ", $fileName);
+
+        return ['type' => $type, 'fileName' => $nameFormat];
     }
 
     function setLogin($User, $Pass) {

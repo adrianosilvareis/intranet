@@ -46,6 +46,37 @@ class Check {
     }
 
     /**
+     * <b>Transforma Titulo</b> Trasnforma os nomes de arquivos, para um formato limpo.
+     * 
+     * @param string $Name
+     * @return string
+     */
+    public static function FileName($Name) {
+        $Title = self::Name($Name);
+        $arrayFile = explode("-", $Title);
+        $type = array_pop($arrayFile);
+        $FileName = implode("_", $arrayFile);
+        return $FileName . ".$type";
+    }
+    
+    /**
+     * Função que remove campos nulos e movimenta os demais.
+     * 
+     * @param array $Array
+     * @return array
+     */
+    public static function array_filter_shift(array $Array) {
+
+        for ($i = 0; $i < count($Array); $i++):
+            if (!empty($Array[$i])):
+                $arrayClear[] = $Array[$i];
+            endif;
+        endfor;
+
+        return $arrayClear;
+    }
+
+    /**
      * <b>Tranforma Data:</b> Transforma uma data no formato DD/MM/YY em uma data no formato TIMESTAMP!
      * @param STRING $Name = Data em (d/m/Y) ou (d/m/Y H:i:s)
      * @return STRING = $Data = Data no formato timestamp!
@@ -99,7 +130,7 @@ class Check {
         endif;
     }
 
-     /**
+    /**
      * <b>Obter post:</b> Informe o name (url) de uma categoria para obter o ID da mesma.
      * @param STRING $post_name = URL da postagem
      * @return INT $post_id = id do post informada
@@ -117,7 +148,7 @@ class Check {
             return null;
         endif;
     }
-    
+
     /**
      * <b>Contagem de Views:</b> Realiza uma contagem ao post informado.
      * @param INT $post_id
