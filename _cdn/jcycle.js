@@ -32,14 +32,14 @@ $.fn.cycle = function(options, arg2) {
 	// in 1.3+ we can fix mistakes with the ready state
 	if (this.length === 0 && options != 'stop') {
 		if (!$.isReady && o.s) {
-			log('DOM not ready, queuing slideshow');
+			//log('DOM not ready, queuing slideshow');
 			$(function() {
 				$(o.s,o.c).cycle(options,arg2);
 			});
 			return this;
 		}
 		// is your DOM ready?  http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
-		log('terminating; zero elements found by selector' + ($.isReady ? '' : ' (DOM not ready)'));
+		//log('terminating; zero elements found by selector' + ($.isReady ? '' : ' (DOM not ready)'));
 		return this;
 	}
 

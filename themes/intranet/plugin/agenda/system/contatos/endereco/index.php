@@ -8,12 +8,12 @@
         <?php include HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH . '/plugin/agenda/system/contatos/inc/novoContato.php'; ?>
 
         <?php include HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH . '/plugin/agenda/system/contatos/inc/novoEndereco.php'; ?>
-        
+
         <label>Lista de Endereços dos sistema:</label>
-        
+
         <div class="col-md-4">
             <input class="form-control" type="text" name="criterioDeBusca" ng-model="criterioDeBusca" placeholder="Criterio de Busca"/> 
-            <table class="table">
+            <table class="table" ng-if="enderecos.length > 0">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -30,6 +30,10 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="row" ng-if="enderecos.length <= 0">
+                <?php WSErro("Nenhum endereço foi encontrado!", WS_INFOR); ?>
+            </div>
         </div>
 
     </div>
