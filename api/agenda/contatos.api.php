@@ -24,7 +24,8 @@ if (!empty($request)):
         //adicionar
         $AgendaContatos->setThis($request);
         $AgendaContatos->Execute()->insert();
-        echo "Adicionado com sucesso!";
+//        echo "Adicionado com sucesso!";
+        echo json_encode("Adicionado com sucesso!");
     endif;
     
 else:

@@ -50,8 +50,9 @@ appAgenda.controller("agendaContato", function ($scope, contatosAPI, setorAPI, o
                     return endereco;
             })[0];
         }
-        $scope.isEnderecoEdited(contato.endereco);
-        
+        if (!angular.isUndefined(contato.endereco))
+            $scope.isEnderecoEdited(contato.endereco);
+
         $scope.contato = contato;
         $scope.contato.edited = true;
     };
