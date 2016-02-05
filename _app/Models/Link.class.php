@@ -57,12 +57,17 @@ class Link {
      * cada nivel de subpasta deve ser preestabelecido com elseif.
      */
     private function setPatch() {
-        if (file_exists(REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . '.php')):
-            $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . '.php';
-        elseif (file_exists(REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . DIRECTORY_SEPARATOR . $this->Link . '.php')):
-            $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . DIRECTORY_SEPARATOR . $this->Link . '.php';
-        elseif (file_exists(REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . DIRECTORY_SEPARATOR . $this->Link . DIRECTORY_SEPARATOR . 'index.php')):
-            $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File . DIRECTORY_SEPARATOR . $this->Link . DIRECTORY_SEPARATOR . 'index.php';
+        $file = REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File;
+        $link = $file . DIRECTORY_SEPARATOR . $this->Link;
+        
+        if (file_exists($file . '.php')):
+            $this->Patch = $file . '.php';
+        elseif (file_exists($link . '.php')):
+            $this->Patch = $link . '.php';
+        elseif (file_exists($file . DIRECTORY_SEPARATOR . 'index.php')):
+            $this->Patch = $file . DIRECTORY_SEPARATOR . 'index.php';
+        elseif (file_exists($link . DIRECTORY_SEPARATOR . 'index.php')):
+            $this->Patch = $link . DIRECTORY_SEPARATOR . 'index.php';
         else:
             $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . '404.php';
         endif;

@@ -1,7 +1,11 @@
 appAgenda.controller("agendaSetor", function ($scope, setorAPI) {
 
     $scope.setores = [];
-    
+
+    var BroadCast = function (msg) {
+        $scope.$emit('handleEmit', {setores: msg});
+    };
+
     $scope.salvarSetor = function (setor) {
         setorAPI.saveSetor(setor).success(function (data) {
             delete $scope.setor;
@@ -22,10 +26,11 @@ appAgenda.controller("agendaSetor", function ($scope, setorAPI) {
             $scope.message = data;
         });
     };
-    
+
     var carregarSetores = function () {
         setorAPI.getSetor().success(function (data) {
             $scope.setores = data;
+            BroadCast(data);
         });
     };
 

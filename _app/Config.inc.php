@@ -11,7 +11,7 @@ define('NAME', '/intranet');
 define('HTTP_HOST', 'http://' . $SERVER['HTTP_HOST']);
 define('HOME', HTTP_HOST . NAME);
 define('THEME', 'intranet');
-define('REQUIRE_PATH', 'themes' . DIRECTORY_SEPARATOR . THEME);
+define('REQUIRE_PATH', 'themes' . '/' . THEME);
 define('INCLUDE_PATH', HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH);
 define('PLUGIN_PATH', REQUIRE_PATH . DIRECTORY_SEPARATOR . 'plugin');
 
@@ -56,7 +56,7 @@ function __autoload($Class_name) {
      * ****************************************
      */
     $cDir = ['Conn', 'Helpers', 'Beans', 'Models', 'library'];
-    $pDir = ['contadores-de-impressao', 'fast-exames', 'agenda'];
+    $pDir = ['contadores-de-impressao', 'fast-exames', 'agenda', 'os-nao-pagas'];
     $iDir = null;
 
     foreach ($cDir as $dirName):
@@ -85,12 +85,17 @@ function AUTO($iDir, $file) {
 
 //Plugins listas:: Lista links 
 function Plugins() {
-    $lista = ['contadores-de-impressao', 'fast-exames', 'agenda'];
+    $lista = [
+        'contadores-de-impressao' => "Contadores de impressão",
+        'fast-exames' => "Fast Exames",
+        'agenda' => "Agenda",
+        'os-nao-pagas' => "Financeiro"
+        ];
 
     $result = array();
-    foreach ($lista as $plugin):
-        $Data['title'] = strtolower(str_replace('-', ' ', $plugin));
-        $Data['url'] = HOME . "/plugin/" . $plugin;
+    foreach ($lista as $url => $title):
+        $Data['title'] = strtolower($title);
+        $Data['url'] = HOME . "/plugin/" . $url;
         $result[] = $Data;
     endforeach;
 
@@ -119,7 +124,7 @@ function PHPErro($ErrNo, $ErrMsg, $ErrFile, $ErrLine) {
         echo "<small>Por favor, atualize a pagina!</small>";
         echo "</div>";
     endif;
-    
+
     if (!strstr($ErrMsg, "ftp_chdir(): CWD")):
         $CssClass = ($ErrNo == E_USER_NOTICE ? WS_INFOR : ($ErrNo == E_USER_WARNING ? WS_ALERT : ($ErrNo == E_USER_ERROR ? WS_ERROR : $ErrNo)));
         echo "<p class=\"trigger {$CssClass}\">";

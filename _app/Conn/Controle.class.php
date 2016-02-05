@@ -102,4 +102,22 @@ class Controle extends Business {
         return $this->Result;
     }
 
+    /**
+     * 
+     * @return boolean
+     */
+    public function truncate() {
+
+        $this->Execute("SET FOREIGN_KEY_CHECKS = 0");
+        $this->Result = $this->Commit();
+
+        $this->Execute("TRUNCATE TABLE $this->Table");
+        $this->Result = $this->Commit();
+
+        $this->Execute("SET FOREIGN_KEY_CHECKS = 0");
+        $this->Result = $this->Commit();
+
+        return $this->Result;
+    }
+
 }

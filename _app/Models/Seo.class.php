@@ -166,27 +166,27 @@ class Seo {
                 switch ($this->Link) {
                     //SEO:: Contato
                     case 'contato':
-                        $this->Data = [SITENAME . ' - Fale conosco', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        $this->Data = ['Fale conosco - ' . SITENAME, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
                     //SEO:: Aniversarios
                     case 'aniversarios':
-                        $this->Data = [SITENAME . ' - Aniversariantes do mês | Parabéns a todos do grupo tommasi.', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        $this->Data = ['Aniversariantes do mês - ' . SITENAME . '| Parabéns a todos do grupo tommasi.', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
                     //SEO:: Qualidade
                     case 'qualidade':
-                        $this->Data = [SITENAME . ' - Formularios da Qualidade.', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        $this->Data = ['Formularios da Qualidade - ' . SITENAME, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
                     //SEO:: SOBRE
                     case 'sobre':
-                        $this->Data = [SITENAME . ' - Sobre a Intranet' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        $this->Data = ['Sobre a Intranet - ' . SITENAME, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
                     //SEO:: INSTITUCIONAL
                     case 'institucional':
-                        $this->Data = [SITENAME . ' - Instituição Tommasi' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        $this->Data = ['Instituição Tommasi - ' . SITENAME, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
                     //SEO:: 404

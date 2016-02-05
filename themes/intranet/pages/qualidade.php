@@ -16,7 +16,7 @@ $Ftp->setLogin(FTP_USER, FTP_PASS);
     if (empty($file)):
         $i = 0;
         echo "<div class=\"row\">";
-        
+
         foreach ($lista as $url):
 
             $title = $Ftp->UrlToDir($url);
@@ -38,7 +38,11 @@ $Ftp->setLogin(FTP_USER, FTP_PASS);
         endforeach;
         echo "</div>";
     else:
-        $local_file = '/temp/' . Check::FileName($file);
+        $title = $file;
+        $arrayTitle = explode("/", $title);
+        $fileName = array_pop($arrayTitle);
+
+        $local_file = '/temp/' . Check::FileName($fileName);
         //verifica se o arquivo ja foi acessado. Se sim acessa a pasta temp do FTP
         if (file_exists(DOCUMENT_ROOT . NAME . DIRECTORY_SEPARATOR . "ftp" . $local_file)):
             header("Location: " . FTP_HOME . "$local_file");

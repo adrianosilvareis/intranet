@@ -6,6 +6,19 @@ appAgenda.controller("agendaContato", function ($scope, contatosAPI, setorAPI, o
     $scope.estados = [];
     $scope.cidades = [];
 
+    $scope.$on('handleBroadcast', function (event, args) {
+        if (args.setores)
+            $scope.setores = args.setores;
+    });
+
+    var BroadCastContatos = function (msg) {
+        $scope.$emit('handleEmit', {contatos: msg});
+    };
+
+    var BroadCastEnderecos = function (msg) {
+        $scope.$emit('handleEmit', {enderecos: msg});
+    };
+
     $scope.salvarContato = function (contato) {
         contatosAPI.saveContato(contato).success(function (data) {
             delete $scope.contato;
@@ -34,6 +47,7 @@ appAgenda.controller("agendaContato", function ($scope, contatosAPI, setorAPI, o
     var carregarContatos = function () {
         contatosAPI.getContatos().success(function (data) {
             $scope.contatos = data;
+            BroadCastContatos(data);
         });
     };
 
@@ -87,6 +101,7 @@ appAgenda.controller("agendaContato", function ($scope, contatosAPI, setorAPI, o
     var carregarEnderecos = function () {
         objetoAPI.getObjeto(config.apiURL + "/enderecos.api.php").success(function (data) {
             $scope.enderecos = data;
+            BroadCastEnderecos(data);
         });
     };
 
@@ -137,7 +152,7 @@ appAgenda.controller("agendaContato", function ($scope, contatosAPI, setorAPI, o
     };
 
     carregarContatos();
-    carregarSetores();
+    //carregarSetores();
     carregarEnderecos();
     carregarEstados();
     carregarCidades();

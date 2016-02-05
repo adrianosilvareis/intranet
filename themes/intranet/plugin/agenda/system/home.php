@@ -74,5 +74,4 @@
             </table>
         </article>
     </section>
-    <input type="submit" class="btn btn-block" ng-click="carregarListas()" value="Atualizar" />
 </div>
