@@ -4,7 +4,8 @@ appAgenda.controller("user", function ($scope, objetoAPI, config) {
     $scope.enderecos = [];
     $scope.cidades = [];
     $scope.carregando = [];
-
+    
+    $("#formContato").hide();
     $scope.setorSelecionado = function (setor) {
         $scope.setor = setor;
     };
@@ -20,11 +21,15 @@ appAgenda.controller("user", function ($scope, objetoAPI, config) {
             }
 
         })[0];
-
+        
+        $("#contatoLista").hide();
+        $('#formContato').show('slow');
         $scope.contato = contato;
     };
 
     $scope.limparContato = function () {
+        $("#formContato").hide();
+        $('#contatoLista').show('slow');
         $scope.contato = null;
     };
 
