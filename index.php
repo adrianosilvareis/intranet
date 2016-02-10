@@ -10,7 +10,6 @@ $Session = new Session;
         <?php
         $Link = new Link;
         $Link->getTags();
-        //Check::Manutencao($Link->getLocal());
         ?>        
     </head>
 
@@ -32,6 +31,8 @@ $Session = new Session;
 
         <?php
         require(REQUIRE_PATH . '/inc/footer.inc.php');
+        
+        Register::getRegister();
         ?>
     </body>
 </html>

@@ -242,25 +242,26 @@ class Seo {
         $this->Tags = array_map('trim', $this->Tags);
 
         $this->Data = null;
-
-        $this->seoTags = "\n";
+        
+        
+        
         $this->seoTags .= "<!--[if lt IE 9]><script src='" . HOME . "/_cdn/html5.js'></script><![endif]-->" . "\n";
-
-        $this->seoTags .= "\n";
         $this->seoTags .= "<meta charset='UTF-8'>" . "\n";
 
         //NORMAL PAGE
+        $this->seoTags .= "<!--NORMAL PAGE-->\n";
         $this->seoTags .= "<title>{$this->Tags['Title']}</title>" . "\n";
         $this->seoTags .= "<meta name='description' content='{$this->Tags['Content']}'/>" . "\n";
         $this->seoTags .= "<meta name='robots' content='index, fallow'/>" . "\n";
         $this->seoTags .= "<link rel='canonical' href='{$this->Tags['Link']}'>" . "\n";
-        $this->seoTags .= "\n";
+        
         //ICONES
+        $this->seoTags .= "<!--ICONES-->\n";
         $this->seoTags .= "<link rel='shortcut icon' href='" . HOME . '/themes/' . THEME . "/images/icon/labo.png'/>" . "\n";
         $this->seoTags .= "<link rel='apple-touch-icon' href='" . HOME . '/themes/' . THEME . "/images/icon/labo.png'/>" . "\n";
-        $this->seoTags .= "\n";
 
         //FACEBOOK
+        $this->seoTags .= "<!--FACEBOOK-->\n";
         $this->seoTags .= "<meta property='og:site_name' content='" . SITENAME . "' />" . "\n";
         $this->seoTags .= "<meta property='og:locale' content='pt-BR' />" . "\n";
         $this->seoTags .= "<meta property='og:title' content='{$this->Tags['Title']}' />" . "\n";
@@ -268,16 +269,17 @@ class Seo {
         $this->seoTags .= "<meta property='og:image' content='{$this->Tags['Image']}' />" . "\n";
         $this->seoTags .= "<meta property='og:url' content='{$this->Tags['Link']}' />" . "\n";
         $this->seoTags .= "<meta property='og:type' content='article' />" . "\n";
-        $this->seoTags .= "" . "\n";
 
         //Item GROUP (TWITTER)
+        $this->seoTags .= "<!--TWITTER-->\n";
         $this->seoTags .= "<meta itemprop='name' content='{$this->Tags['Title']}' />" . "\n";
         $this->seoTags .= "<meta itemprop='description' content='{$this->Tags['Content']}' />" . "\n";
         $this->seoTags .= "<meta itemprop='url' content='{$this->Tags['Link']}' />" . "\n";
         $this->seoTags .= "<meta itemprop='image' content='{$this->Tags['Image']}' />" . "\n";
-        $this->seoTags .= "\n";
-
-        //LIBS        
+        
+        
+        //LIBS    
+        $this->seoTags .= "<!--LIBS-->\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap2.css'>" . "\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . '/themes/' . THEME . "/css/default.css'/>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/jquery/jquery-min.js'></script>" . "\n";
@@ -286,14 +288,15 @@ class Seo {
         $this->seoTags .= "<script src='" . HOME . '/themes/' . THEME . "/js/intranet.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular.min.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
-
+        
         //_CDN
+        $this->seoTags .= "<!--CDN-->\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_cdn/shadowbox/shadowbox.css'>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/jcycle.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/shadowbox/shadowbox.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_plugins.conf.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_scripts.conf.js'></script>" . "\n";
-
+                
         $this->Tags = null;
     }
 
