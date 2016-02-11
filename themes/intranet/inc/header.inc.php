@@ -62,7 +62,6 @@
                                     <li class="active"><a>Aplicativos</a></li>
                                     <li><a href="/view/redirect/sft_redirect.html" target="_blank">SFT - Tommasi</a></li>
                                     <li><a href="<?= HOME ?>/pages/qualidade">Qualidade</a></li>
-                                    <li><a href="<?= HOME ?>/pages/aniversarios">Aniversariantes</a></li>
                                     <li class="active"><a>Plugins</a></li>
                                     <?php
                                     /**

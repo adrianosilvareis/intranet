@@ -1,8 +1,21 @@
 <section class="section">
+
     <dic class="container">
         <div class="row">
             <img src="<?= INCLUDE_PATH ?>/images/cabecalhos/aniversariantesdomes.png" alt="Aniversariantes do Mês" class="img-responsive img-rounded">
         </div>
+        <?php
+        $error = filter_input(INPUT_GET, "error", FILTER_DEFAULT);
+        if (isset($error)):
+            if ($error === "arquivo"):
+                WSErro("Arquivo inválido!", WS_ERROR);
+            elseif ($error === "opcao"):
+                WSErro("Opção inválida!", WS_INFOR);
+            elseif ($error === "save"):
+                WSErro("Arquivo salvo com sucesso!", WS_ACCEPT);
+            endif;
+        endif;
+        ?>
         <div class="table-responsive">	
             <table class="table table-striped table-hover table-bordered text-center">
                 <thead>

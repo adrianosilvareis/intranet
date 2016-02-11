@@ -169,11 +169,6 @@ class Seo {
                         $this->Data = ['Fale conosco - ' . SITENAME, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
-                    //SEO:: Aniversarios
-                    case 'aniversarios':
-                        $this->Data = ['Aniversariantes do mês - ' . SITENAME . '| Parabéns a todos do grupo tommasi.', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
-                        break;
-
                     //SEO:: Qualidade
                     case 'qualidade':
                         $this->Data = ['Formularios da Qualidade - ' . SITENAME, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
@@ -214,6 +209,11 @@ class Seo {
                         $this->Data = ['Agenda telefonica - Lista Telefonica Tommasi', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
+                    //SEO:: Aniversarios
+                    case 'aniversarios':
+                        $this->Data = ['Aniversariantes do mês - ' . SITENAME . '| Parabéns a todos do grupo tommasi.', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        break;
+
                     //SEO:: 404
                     default :
                         $this->Data = [SITENAME . ' - Plugin', SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
@@ -242,9 +242,9 @@ class Seo {
         $this->Tags = array_map('trim', $this->Tags);
 
         $this->Data = null;
-        
-        
-        
+
+
+
         $this->seoTags .= "<!--[if lt IE 9]><script src='" . HOME . "/_cdn/html5.js'></script><![endif]-->" . "\n";
         $this->seoTags .= "<meta charset='UTF-8'>" . "\n";
 
@@ -254,7 +254,7 @@ class Seo {
         $this->seoTags .= "<meta name='description' content='{$this->Tags['Content']}'/>" . "\n";
         $this->seoTags .= "<meta name='robots' content='index, fallow'/>" . "\n";
         $this->seoTags .= "<link rel='canonical' href='{$this->Tags['Link']}'>" . "\n";
-        
+
         //ICONES
         $this->seoTags .= "<!--ICONES-->\n";
         $this->seoTags .= "<link rel='shortcut icon' href='" . HOME . '/themes/' . THEME . "/images/icon/labo.png'/>" . "\n";
@@ -276,27 +276,27 @@ class Seo {
         $this->seoTags .= "<meta itemprop='description' content='{$this->Tags['Content']}' />" . "\n";
         $this->seoTags .= "<meta itemprop='url' content='{$this->Tags['Link']}' />" . "\n";
         $this->seoTags .= "<meta itemprop='image' content='{$this->Tags['Image']}' />" . "\n";
-        
-        
+
+
         //LIBS    
         $this->seoTags .= "<!--LIBS-->\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap2.css'>" . "\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . '/themes/' . THEME . "/css/default.css'/>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/jquery/jquery-min.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/jquery/jquery.min.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/jquery-mask/jmask.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . '/themes/' . THEME . "/js/intranet.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular.min.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
         
-        //_CDN
+        //CDN
         $this->seoTags .= "<!--CDN-->\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_cdn/shadowbox/shadowbox.css'>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/jcycle.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/shadowbox/shadowbox.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_plugins.conf.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_scripts.conf.js'></script>" . "\n";
-                
+
         $this->Tags = null;
     }
 

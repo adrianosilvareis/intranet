@@ -27,7 +27,7 @@ class AppNiver extends Beans {
         $this->Controle->setDados(array_filter([
             'niver_nome' => $this->getNiver_nome(),
             'niver_setor' => $this->getNiver_setor(),
-            'niver_date' => $this->getNiver_data(),
+            'niver_data' => $this->getNiver_data(),
             'niver_id' => $this->getNiver_id()
         ]));
         return $this->Controle->getDados();

@@ -1,0 +1,32 @@
+{
+  "name": "intranet",
+  "homepage": "https://github.com/adrianosilvareis/intranet",
+  "authors": [
+    "adrianosilvareis <adriano_silvareis@hotmail.com>"
+  ],
+  "description": "intranet tommasi",
+  "main": "index.php",
+  "moduleType": [],
+  "keywords": [
+    "phpOO",
+    "angularJS",
+    "Jquery",
+    "HTML5",
+    "less"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-mask-plugin": "1.13.4",
+    "bootstrap": "3.3.6",
+    "jquery-form": "^3.46.0",
+    "angular": "^1.5.0"
+  }
+}

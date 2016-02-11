@@ -86,6 +86,7 @@ function AUTO($iDir, $file) {
 //Plugins listas:: Lista links 
 function Plugins() {
     $lista = [
+        'aniversarios' => "Aniversariantes do Mês",
         'contadores-de-impressao' => "Contadores de impressão",
         'fast-exames' => "Fast Exames",
         'agenda' => "Agenda",
