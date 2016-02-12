@@ -37,9 +37,9 @@ class NcOrigem {
      * @param stdClass $object
      */
     public function setThis($object) {
-        $this->origem_id((isset($object->origem_id) ? $object->origem_id : null));
-        $this->origem_ativo((isset($object->origem_ativo) ? $object->origem_ativo : null));
-        $this->origem_descricao((isset($object->origem_descricao) ? $object->origem_descricao : null));
+        $this->setOrigem_id((isset($object->origem_id) ? $object->origem_id : null));
+        $this->setOrigem_ativo((isset($object->origem_ativo) ? $object->origem_ativo : null));
+        $this->setOrigem_descricao((isset($object->origem_descricao) ? $object->origem_descricao : null));
     }
 
     /**
