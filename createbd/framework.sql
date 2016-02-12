@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS ws_siteviews_online (online_id INT NOT NULL AUTO_INCR
 CREATE TABLE IF NOT EXISTS ws_users (user_id INT NOT NULL AUTO_INCREMENT, user_name VARCHAR(255) NOT NULL, user_lastname VARCHAR(255) NOT NULL, user_email VARCHAR(255) NOT NULL, user_password VARCHAR(255) NOT NULL, user_registration TIMESTAMP DEFAULT CURRENT_TIMESTAMP  NOT NULL, user_lastupdate TIMESTAMP, user_level INT DEFAULT 1  NOT NULL, PRIMARY KEY (user_id));
 INSERT INTO ws_users (user_name, user_lastname, user_email, user_password, user_registration, user_lastupdate, user_level) 
 	VALUES ('Administrador', 'Sistema', 'admin@system.com.br', '25f9e794323b453885f5181f1b624d0b', now(), now(), 3);
-INSERT INTO ws_intranet.ws_categories (category_parent, category_name, category_title, category_content, category_date, category_views, category_last_view) 
+INSERT INTO ws_categories (category_parent, category_name, category_title, category_content, category_date, category_views, category_last_view) 
         VALUES (NULL, 'destaque', 'Destaque', 'Conteúdo em destaque no carrousel', DEFAULT, NULL, DEFAULT),
                (NULL, 'siderbar', 'Siderbar', 'Todas as siderbar', DEFAULT, NULL, DEFAULT),
                (2, 'siderbar-left', 'Siderbar Left', 'Barra lateral esquerda', DEFAULT, NULL, DEFAULT);
