@@ -28,33 +28,36 @@ if (file_exists($filename)):
         if (!empty($Dado)):
             $Dado = explode(";", utf8_encode($Dado));
 
-            $Erro = null;
-            $atendente = $Aten->FindUser("USER" . explode(" - ", $Dado[2])[0]);
-            $unidade = $Unid->FindCod(explode('-', $Dado[0])[0]);
+            if (is_array($Dado) && count($Dado) == 12):
+                $Erro = null;
+                $atendente = $Aten->FindUser("USER" . explode(" - ", $Dado[2])[0]);
+                $unidade = $Unid->FindCod(explode('-', $Dado[0])[0]);
 
-            if (empty($atendente)):
-                $Erro = true;
-                $Erros[] = $Aten->getErro();
-            endif;
+                if (empty($atendente)):
+                    $Erro = true;
+                    $Erros[] = $Aten->getErro();
+                endif;
 
-            if (empty($unidade)):
-                $Erro = true;
-                $Erros[] = $Unid->getErro();
-            endif;
+                if (empty($unidade)):
+                    $Erro = true;
+                    $Erros[] = $Unid->getErro();
+                endif;
 
-            $Linha['part_os_ospart'] = $Dado[0];
-            $Linha['part_data_regist'] = $Dado[1];
-            $Linha['fk_aten'] = $atendente;
-            $Linha['fk_unid'] = $unidade;
-            $Linha['part_nm_paciente'] = $Dado[4];
-            $Linha['part_vl_total'] = (int) $Dado[6];
-            $Linha['part_vl_desc'] = (int) $Dado[7];
-            $Linha['part_vl_liquido'] = (int) $Dado[9];
-            $Linha['part_vl_pago'] = (int) $Dado[10];
-            $Linha['part_vl_debito'] = (int) $Dado[11];
+                $Linha['part_os_ospart'] = $Dado[0];
+                $Linha['part_data_regist'] = $Dado[1];
+                $Linha['fk_aten'] = $atendente;
+                $Linha['fk_unid'] = $unidade;
+                $Linha['part_nm_paciente'] = $Dado[4];
+                $Linha['part_vl_total'] = (int) $Dado[6];
+                $Linha['part_vl_desc'] = (int) $Dado[7];
+                $Linha['part_vl_liquido'] = (int) $Dado[9];
+                $Linha['part_vl_pago'] = (int) $Dado[10];
+                $Linha['part_vl_debito'] = (int) $Dado[11];
 
-            if (!$Erro):
-                $Part->ExeCreate($Linha);
+                if (!$Erro):
+                    $Part->ExeCreate($Linha);
+                endif;
+
             endif;
         endif;
     endwhile;

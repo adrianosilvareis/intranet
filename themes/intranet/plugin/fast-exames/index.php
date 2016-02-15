@@ -16,6 +16,7 @@ elseif (Check::UserLogin(1)):
     WSErro("<b>Área Restrita!</b> Você não tem permissão para acessar esta área.", WS_INFOR);
 else:
     $Login->CheckLogin();
+    echo "<a class=\"btn btn-primary\" style=\"width: 200px; margin: 10px 0;\" href=\"/intranet/admin\" title=\"Login\" alt=\"admin\" >Login</a>";
     WSErro("<b>Área Restrita!</b> Efetue login para acessar.", WS_INFOR);
 endif;
 ?>

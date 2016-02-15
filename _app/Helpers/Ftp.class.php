@@ -38,10 +38,10 @@ class Ftp {
         if (!file_exists(DOCUMENT_ROOT . NAME . '/ftp/temp')):
             mkdir(DOCUMENT_ROOT . NAME . '/ftp/temp');
         endif;
-
+        
         // open some file to write to
         $handle = fopen(DOCUMENT_ROOT . NAME . '/ftp' . $local_file, 'w');
-
+        
         // try to download $remote_file and save it to $handle
         if (ftp_fget($this->Conn, $handle, $remote_file, FTP_ASCII, 0)) {
             echo "successfully written to $local_file\n";

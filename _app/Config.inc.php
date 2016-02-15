@@ -85,22 +85,16 @@ function AUTO($iDir, $file) {
 
 //Plugins listas:: Lista links 
 function Plugins() {
-    $lista = [
-        'aniversarios' => "Aniversariantes do Mês",
-        'contadores-de-impressao' => "Contadores de impressão",
-        'fast-exames' => "Fast Exames",
-        'agenda' => "Agenda",
-        'os-nao-pagas' => "Financeiro"
-        ];
 
-    $result = array();
-    foreach ($lista as $url => $title):
-        $Data['title'] = strtolower($title);
-        $Data['url'] = HOME . "/plugin/" . $url;
-        $result[] = $Data;
-    endforeach;
+    $plugins = [
+        ['url' => 'aniversarios', 'title' => 'Aniversariantes do Mês'],
+        ['url' => 'contadores-de-impressao', 'title' => 'Contadores de impressão'],
+        ['url' => 'fast-exames', 'title' => 'Fast Exames'],
+        ['url' => 'agenda', 'title' => 'Agenda'],
+        ['url' => 'os-nao-pagas', 'title' => 'Financeiro'],
+    ];
 
-    return $result;
+    return $plugins;
 }
 
 //ES ERROR :: Exibe os erros lançados :: FRONT

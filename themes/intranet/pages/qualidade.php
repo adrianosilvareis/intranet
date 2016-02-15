@@ -45,7 +45,7 @@ $Ftp->setLogin(FTP_USER, FTP_PASS);
         $local_file = '/temp/' . Check::FileName($fileName);
         //verifica se o arquivo ja foi acessado. Se sim acessa a pasta temp do FTP
         if (file_exists(DOCUMENT_ROOT . NAME . DIRECTORY_SEPARATOR . "ftp" . $local_file)):
-            header("Location: " . FTP_HOME . "$local_file");
+            header("Location: " . FTP_HOME . $local_file);
         else:
             if ($Ftp->Download($local_file, $file)):
                 header("Location: " . FTP_HOME . "$local_file");

@@ -58,7 +58,7 @@ class Check {
         $FileName = implode("_", $arrayFile);
         return $FileName . ".$type";
     }
-    
+
     /**
      * Função que remove campos nulos e movimenta os demais.
      * 
@@ -91,6 +91,59 @@ class Check {
 
         self::$Data = self::$Data[2] . '-' . self::$Data[1] . '-' . self::$Data[0] . ' ' . self::$Format[1];
         return self::$Data;
+    }
+
+    /**
+     * Tempo 
+     * 
+     * @param String(TIMESTAMP) $dataini
+     * @param String(TIMESTAMP) $datafim
+     * @return String
+     */
+    public static function DataDiff($dataini, $datafim, $metaD = null, $metaH = null, $metaM = null) {
+
+        # Split para dia, mes, ano, hora, minuto e segundo da data inicial
+        $_split_datehour = explode(' ', $dataini);
+        $_split_data = explode("-", $_split_datehour[0]);
+        $_split_hour = explode(":", $_split_datehour[1]);
+
+        # Coloquei o parse (integer) caso o timestamp nao tenha os segundos, dai ele fica como 0
+        $dtini = mktime($_split_hour[0], $_split_hour[1], (integer) $_split_hour[2], $_split_data[1], $_split_data[2], $_split_data[0]);
+
+        # Split para dia, mes, ano, hora, minuto e segundo da data final
+        $_split_datehour = explode(' ', $datafim);
+        $_split_data = explode("-", $_split_datehour[0]);
+        $_split_hour = explode(":", $_split_datehour[1]);
+        $dtfim = mktime($_split_hour[0], $_split_hour[1], (integer) $_split_hour[2], $_split_data[1], $_split_data[2], $_split_data[0]);
+
+        # Diminui a datafim que é a maior com a dataini
+        $time = ($dtfim - $dtini);
+        # Recupera os dias
+        $days = floor($time / 86400);
+        # Recupera as horas
+        $hours = floor(($time - ($days * 86400)) / 3600);
+        # Recupera os minutos
+        $mins = floor(($time - ($days * 86400) - ($hours * 3600)) / 60);
+        # Recupera os segundos
+        $secs = floor($time - ($days * 86400) - ($hours * 3600) - ($mins * 60));
+        # Monta o retorno no formato
+        # 5d 10h 15m 20s
+        # somente se os itens forem maior que zero
+        $retorno = "";
+        $retorno .= ($days > 0) ? $days . 'd ' : "";
+        $retorno .= ($hours > 0) ? $hours . 'h ' : "";
+        $retorno .= ($mins > 0) ? $mins . 'm ' : "";
+        $retorno .= ($secs > 0) ? $secs . 's ' : "";
+
+        $metaD = (empty($metaD) && empty($metaH) && empty($metaM) ? 3 : $metaD);
+
+        if (!empty($metaD) && $days > $metaD ||
+                empty($metaD) && !empty($metaH) && $hours > $metaH ||
+                empty($metaD) && empty($metaH) && !empty($metaM) && $mins > $metaM):
+            return "<span style='color:red'>" . $retorno . "</span>";
+        endif;
+
+        return $retorno;
     }
 
     /**
@@ -127,6 +180,19 @@ class Check {
         else:
             WSErro("A categoria <b>{$CategoryName}</b> não foi encontrada!", WS_ERROR);
             return null;
+        endif;
+    }
+
+    public static function CatParentByName($CategoryName) {
+        $Read = new WsCategories;
+
+        $Read->setCategory_parent(self::CatByName($CategoryName));
+        $Read->Execute()->Query("#category_parent#");
+
+        if ($Read->Execute()->getResult()):
+            return $Read->Execute()->getResult();
+        else:
+            WSErro("A subcategoria de {$CategoryName} não foi encontrada!", WS_INFOR);
         endif;
     }
 

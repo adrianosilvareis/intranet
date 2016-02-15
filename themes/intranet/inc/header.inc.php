@@ -33,7 +33,7 @@
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="<?= HOME ?>">
+                        <a class="navbar-brand" title="HOME" href="<?= HOME ?>">
                             <h1 class="notitle">Menu <img alt="<?= SITENAME ?>" src="<?= HOME . '/themes/' . THEME ?>/images/icon/labo.png"></h1>
                         </a>
                     </div>
@@ -43,25 +43,41 @@
 
                         <ul class="nav navbar-nav nav-pills"> <!-- primairo bloco -->
                             <li class="active"><a href="<?= HOME ?>">HOME</a></li>
-                            <li><a href="<?= HOME ?>/membros/equipe-de-ti/">Equipe de TI</a></li>
-
-                            <!-- dropdown -->
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Links<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li class="active"><a>Grupo</a></li>
-                                    <li><a href="<?= HOME ?>/grupo/convenios">Convênio</a></li>
-                                    <li><a href="<?= HOME ?>/grupo/nota-fiscal">Nota Fiscal</a></li>
-                                    <li role="separator" class="divider"></li>
                                     <li class="active"><a>Links</a></li>
+                                    <li><a href="https://webmail-seguro.com.br/tommasi.com.br/" target="_blank">WebMail</a></li>
                                     <li><a href="http://helpdesktommasi.ddns.net:8778/ocomon/" target="_blank">HelpDesk</a></li>
                                     <li><a href="http://sdlaudos.portalglauco.com.br/LoginNovo.aspx?ReturnUrl=%2fSistema%2fAberturaNova.aspx">SDLaudos</a></li>
                                     <li><a href="http://187.72.199.27/shift/lis/tommasi/s00.iu.Login.cls" target="_blank">SHIFT LIS</a></li>
                                     <li><a href="http://cetan.tempsite.ws/coleta/adm/login.php" target="_blank">Coleta Domiciliar</a></li>
-                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </li>
+                            <!-- dropdown -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <?php
+                                    if (Check::CatParentByName("grupo")):
+                                        echo "<li class = \"active\"><a>Grupo</a></li>";
+                                        foreach (Check::CatParentByName("grupo") as $cat):
+                                            echo "<li><a href=" . HOME . "/grupo/{$cat->category_name}>{$cat->category_title}</a></li>";
+                                        endforeach;
+                                    endif;
+                                    echo "<li class=\"divider\"></li>";
+                                    if (Check::CatParentByName("membros")):
+                                        echo "<li class = \"active\"><a>Membros</a></li>";
+                                        foreach (Check::CatParentByName("membros") as $cat):
+                                            echo "<li><a href=" . HOME . "/membros/{$cat->category_name}>{$cat->category_title}</a></li>";
+                                        endforeach;
+                                    endif;
+                                    ?>
+                                    <li class="divider"></li>
                                     <li class="active"><a>Aplicativos</a></li>
                                     <li><a href="/view/redirect/sft_redirect.html" target="_blank">SFT - Tommasi</a></li>
                                     <li><a href="<?= HOME ?>/pages/qualidade">Qualidade</a></li>
+                                    <li class="divider"></li>
                                     <li class="active"><a>Plugins</a></li>
                                     <?php
                                     /**
@@ -69,9 +85,14 @@
                                      */
                                     $lista = Plugins();
                                     foreach ($lista as $plugin):
-                                        echo "<li><a class=\"text-capitalize\" href=\"{$plugin['url']}\">{$plugin['title']}</a></li>";
+                                        echo "<li><a class=\"text-capitalize\" href=" . HOME . "/plugin/{$plugin['url']}>{$plugin['title']}</a></li>";
                                     endforeach;
                                     ?>
+                                    <li class="divider"></li>
+                                    <li class="active"><a>Informação</a></li>
+                                    <li><a href="<?= HOME ?>/pages/contato" title="contato por email">Contato</a></li>
+                                    <li><a href="<?= HOME ?>/pages/institucional" title="Missão, Visão, Valores">Institucional</a></li>
+                                    <li><a href="<?= HOME ?>/pages/sobre" title="Sobre a Intranet">Sobre</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -96,9 +117,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="https://webmail-seguro.com.br/tommasi.com.br/" target="_blank">WebMail</a></li>
                             <li><a href="<?= HOME ?>/pages/contato" title="contato por email">Contato</a></li>
-                            <li class="active"><a href="<?= HOME ?>/plugin/agenda" title="Lista Telefonica">Agenda</a></li>
-                            <li class="active"><a href="<?= HOME ?>/pages/institucional" title="Missão, Visão, Valores">Institucional</a></li>
-                            <li><a href="<?= HOME ?>/pages/sobre" title="Sobre a Intranet">Sobre</a></li>
+
                         </ul>
 
                     </div><!-- /.navbar-collapse -->

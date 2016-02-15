@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS dt_downtime(
+    time_id INT NOT NULL AUTO_INCREMENT,
+    time_stop TIMESTAMP DEFAULT 0 NOT NULL,
+    time_start TIMESTAMP DEFAULT 0 NOT NULL,
+    time_lastupdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(time_id)
+);
+
+CREATE TABLE IF NOT EXISTS dt_equipamentos(
+    equip_id INT NOT NULL AUTO_INCREMENT,
+    equip_content VARCHAR(255) NOT NULL,
+    equipe_status BOOLEAN DEFAULT TRUE,
+
+    PRIMARY KEY(equip_id)
+);
