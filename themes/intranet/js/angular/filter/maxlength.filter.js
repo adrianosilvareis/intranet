@@ -1,4 +1,4 @@
-appAgenda.filter("maxlength", function () {
+angular.module("filterDefault").filter("maxlength", function () {
     return function (input, limit) {
         if (input && input.length > limit) {
             var _maxLength = input.substr(0, limit);

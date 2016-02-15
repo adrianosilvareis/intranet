@@ -1,4 +1,4 @@
-appAgenda.directive("uiFormatTel", function () {
+angular.module("uiFormat").directive("uiFormatTel", function () {
     return {
         require: "ngModel",
         link: function (scope, element, attrs, ctrl) {

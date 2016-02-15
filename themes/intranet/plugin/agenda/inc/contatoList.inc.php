@@ -3,7 +3,7 @@
     <div ng-repeat="setor in setores">
         <a data-toggle="collapse" href="#{{setor.setor_id}}" ng-click="setorSelecionado(setor)">
             <div class="btn btn-primary col-md-1" style="padding: 3% 0; margin: 10px 2px;">
-                {{setor.setor_descricao| name}}
+                {{setor.setor_content| name}}
             </div>
         </a>
         <div class="collapse col-md-12" id="{{setor.setor_id}}">

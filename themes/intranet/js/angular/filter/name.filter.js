@@ -1,4 +1,4 @@
-appAgenda.filter("name", function () {
+angular.module("filterDefault").filter("name", function () {
     return function (input) {
         if(input === undefined || input === null) return input;
         var listaDeNomes = input.split(" ");

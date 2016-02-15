@@ -9,27 +9,27 @@
  */
 class NcRegistro {
 
-    private $reg_id; //INT AUTO_INCREMENT
-    private $reg_descricao; //VARCHAR(255)
-    private $reg_impacto_paciente; //BOOLEAN
-    private $reg_origem_outros; //VARCHAR(255),
-    private $reg_correcao_imediata; //VARCHAR(500),
-    private $reg_user_correcao; // VARCHAR(255),
-    private $reg_aval_processo; // VARCHAR(500),
-    private $reg_aval_material; // VARCHAR(500),
-    private $reg_aval_pessoas; // VARCHAR(500),
-    private $reg_aval_equipamento; // VARCHAR(500),
-    private $reg_aval_ambiente; // VARCHAR(500),
-    private $reg_aval_outros; // VARCHAR(500),
-    private $reg_causa; // VARCHAR(500),
-    private $reg_date_ocorrencia; // TIMESTAMP DEFAULT 0 NOT NULL,
-    private $reg_date_correcao; // TIMESTAMP DEFAULT 0 NOT NULL,
-    private $reg_date_resposta; // TIMESTAMP DEFAULT 0 NOT NULL,
-    private $reg_date_cadastro; // TIMESTAMP DEFAULT 0 NOT NULL,
-    private $reg_date_lastupdate; // TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    private $user_cadastro; // INT,
-    private $user_recebimento; // INT,
-    private $user_avaliacao; // INT,
+    private $reg_id;
+    private $reg_descricao;
+    private $reg_impacto_paciente;
+    private $reg_origem_outros;
+    private $reg_correcao_imediata;
+    private $reg_user_correcao;
+    private $reg_user_aval;
+    private $reg_aval_processo;
+    private $reg_aval_materia_prima;
+    private $reg_aval_mao_obra;
+    private $reg_aval_equipamento;
+    private $reg_aval_meio_ambiente;
+    private $reg_aval_outros;
+    private $reg_causa_principal;
+    private $reg_date_correcao;
+    private $reg_date_resposta;
+    private $reg_date_cadastro;
+    private $reg_date_lastupdate;
+    private $user_lastupdate;
+    private $user_cadastro;
+    private $user_recebimento;
 
     function __construct() {
         $this->Controle = new Controle('nc_registro');
@@ -42,9 +42,27 @@ class NcRegistro {
      */
     public function getThis() {
         $this->Controle->setDados(array_filter([
-            'origem_descricao' => $this->getOrigem_descricao(),
-            'origem_ativo' => $this->getOrigem_ativo(),
-            'origem_id' => $this->getOrigem_id()
+            'reg_descricao' => $this->getReg_descricao(),
+            'reg_impacto_paciente' => $this->getReg_impacto_paciente(),
+            'reg_origem_outros' => $this->getReg_origem_outros(),
+            'reg_correcao_imediata' => $this->getReg_correcao_imediata(),
+            'reg_user_correcao' => $this->getReg_user_correcao(),
+            'reg_user_aval' => $this->getReg_user_aval(),
+            'reg_aval_processo' => $this->getReg_aval_processo(),
+            'reg_aval_materia_prima' => $this->getReg_aval_materia_prima(),
+            'reg_aval_mao_obra' => $this->getReg_aval_mao_obra(),
+            'reg_aval_equipamento' => $this->getReg_aval_equipamento(),
+            'reg_aval_meio_ambiente' => $this->getReg_aval_meio_ambiente(),
+            'reg_aval_outros' => $this->getReg_aval_outros(),
+            'reg_causa_principal' => $this->getReg_causa_principal(),
+            'reg_date_correcao' => $this->getReg_date_correcao(),
+            'reg_date_resposta' => $this->getReg_date_resposta(),
+            'reg_date_cadastro' => $this->getReg_date_cadastro(),
+            'reg_date_lastupdate' => $this->getReg_date_lastupdate(),
+            'user_lastupdate' => $this->getUser_lastupdate(),
+            'user_cadastro' => $this->getUser_cadastro(),
+            'user_recebimento' => $this->getUser_recebimento(),
+            'reg_id' => $this->getReg_id()
         ]));
         return $this->Controle->getDados();
     }
@@ -61,21 +79,20 @@ class NcRegistro {
         $this->setReg_origem_outros((isset($object->reg_origem_outros) ? $object->reg_origem_outros : null));
         $this->setReg_correcao_imediata((isset($object->reg_correcao_imediata) ? $object->reg_correcao_imediata : null));
         $this->setReg_user_correcao((isset($object->reg_user_correcao) ? $object->reg_user_correcao : null));
+        $this->setReg_user_aval((isset($object->reg_user_aval) ? $object->reg_user_aval : null));
         $this->setReg_aval_processo((isset($object->reg_aval_processo) ? $object->reg_aval_processo : null));
-        $this->setReg_aval_material((isset($object->reg_aval_material) ? $object->reg_aval_material : null));
-        $this->setReg_aval_pessoas((isset($object->reg_aval_pessoas) ? $object->reg_aval_pessoas : null));
+        $this->setReg_aval_materia_prima((isset($object->reg_aval_materia_prima) ? $object->reg_aval_materia_prima : null));
+        $this->setReg_aval_mao_obra((isset($object->reg_aval_mao_obra) ? $object->reg_aval_mao_obra : null));
         $this->setReg_aval_equipamento((isset($object->reg_aval_equipamento) ? $object->reg_aval_equipamento : null));
-        $this->setReg_aval_ambiente((isset($object->reg_aval_ambiente) ? $object->reg_aval_ambiente : null));
+        $this->setReg_aval_meio_ambiente((isset($object->reg_aval_meio_ambiente) ? $object->reg_aval_meio_ambiente : null));
         $this->setReg_aval_outros((isset($object->reg_aval_outros) ? $object->reg_aval_outros : null));
-        $this->setReg_causa((isset($object->reg_causa) ? $object->reg_causa : null));
+        $this->setReg_causa_principal((isset($object->reg_causa_principal) ? $object->reg_causa_principal : null));
         $this->setReg_date_lastupdate((isset($object->reg_date_lastupdate) ? $object->reg_date_lastupdate : null));
-        $this->setReg_date_ocorrencia((isset($object->reg_date_ocorrencia) ? $object->reg_date_ocorrencia : null));
         $this->setReg_date_correcao((isset($object->reg_date_correcao) ? $object->reg_date_correcao : null));
         $this->setReg_date_resposta((isset($object->reg_date_resposta) ? $object->reg_date_resposta : null));
         $this->setReg_date_cadastro((isset($object->reg_date_cadastro) ? $object->reg_date_cadastro : null));
         $this->setUser_cadastro((isset($object->user_cadastro) ? $object->user_cadastro : null));
         $this->setUser_recebimento((isset($object->user_recebimento) ? $object->user_recebimento : null));
-        $this->setUser_avaliacao((isset($object->user_avaliacao) ? $object->user_avaliacao : null));
     }
 
     /**
@@ -117,36 +134,36 @@ class NcRegistro {
         return $this->reg_user_correcao;
     }
 
+    function getReg_user_aval() {
+        return $this->reg_user_aval;
+    }
+
     function getReg_aval_processo() {
         return $this->reg_aval_processo;
     }
 
-    function getReg_aval_material() {
-        return $this->reg_aval_material;
+    function getReg_aval_materia_prima() {
+        return $this->reg_aval_materia_prima;
     }
 
-    function getReg_aval_pessoas() {
-        return $this->reg_aval_pessoas;
+    function getReg_aval_mao_obra() {
+        return $this->reg_aval_mao_obra;
     }
 
     function getReg_aval_equipamento() {
         return $this->reg_aval_equipamento;
     }
 
-    function getReg_aval_ambiente() {
-        return $this->reg_aval_ambiente;
+    function getReg_aval_meio_ambiente() {
+        return $this->reg_aval_meio_ambiente;
     }
 
     function getReg_aval_outros() {
         return $this->reg_aval_outros;
     }
 
-    function getReg_causa() {
-        return $this->reg_causa;
-    }
-
-    function getReg_date_ocorrencia() {
-        return $this->reg_date_ocorrencia;
+    function getReg_causa_principal() {
+        return $this->reg_causa_principal;
     }
 
     function getReg_date_correcao() {
@@ -165,16 +182,16 @@ class NcRegistro {
         return $this->reg_date_lastupdate;
     }
 
+    function getUser_lastupdate() {
+        return $this->user_lastupdate;
+    }
+
     function getUser_cadastro() {
         return $this->user_cadastro;
     }
 
     function getUser_recebimento() {
         return $this->user_recebimento;
-    }
-
-    function getUser_avaliacao() {
-        return $this->user_avaliacao;
     }
 
     function setReg_id($reg_id) {
@@ -201,36 +218,36 @@ class NcRegistro {
         $this->reg_user_correcao = $reg_user_correcao;
     }
 
+    function setReg_user_aval($reg_user_aval) {
+        $this->reg_user_aval = $reg_user_aval;
+    }
+
     function setReg_aval_processo($reg_aval_processo) {
         $this->reg_aval_processo = $reg_aval_processo;
     }
 
-    function setReg_aval_material($reg_aval_material) {
-        $this->reg_aval_material = $reg_aval_material;
+    function setReg_aval_materia_prima($reg_aval_materia_prima) {
+        $this->reg_aval_materia_prima = $reg_aval_materia_prima;
     }
 
-    function setReg_aval_pessoas($reg_aval_pessoas) {
-        $this->reg_aval_pessoas = $reg_aval_pessoas;
+    function setReg_aval_mao_obra($reg_aval_mao_obra) {
+        $this->reg_aval_mao_obra = $reg_aval_mao_obra;
     }
 
     function setReg_aval_equipamento($reg_aval_equipamento) {
         $this->reg_aval_equipamento = $reg_aval_equipamento;
     }
 
-    function setReg_aval_ambiente($reg_aval_ambiente) {
-        $this->reg_aval_ambiente = $reg_aval_ambiente;
+    function setReg_aval_meio_ambiente($reg_aval_meio_ambiente) {
+        $this->reg_aval_meio_ambiente = $reg_aval_meio_ambiente;
     }
 
     function setReg_aval_outros($reg_aval_outros) {
         $this->reg_aval_outros = $reg_aval_outros;
     }
 
-    function setReg_causa($reg_causa) {
-        $this->reg_causa = $reg_causa;
-    }
-
-    function setReg_date_ocorrencia($reg_date_ocorrencia) {
-        $this->reg_date_ocorrencia = $reg_date_ocorrencia;
+    function setReg_causa_principal($reg_causa_principal) {
+        $this->reg_causa_principal = $reg_causa_principal;
     }
 
     function setReg_date_correcao($reg_date_correcao) {
@@ -249,16 +266,16 @@ class NcRegistro {
         $this->reg_date_lastupdate = $reg_date_lastupdate;
     }
 
+    function setUser_lastupdate($user_lastupdate) {
+        $this->user_lastupdate = $user_lastupdate;
+    }
+
     function setUser_cadastro($user_cadastro) {
         $this->user_cadastro = $user_cadastro;
     }
 
     function setUser_recebimento($user_recebimento) {
         $this->user_recebimento = $user_recebimento;
-    }
-
-    function setUser_avaliacao($user_avaliacao) {
-        $this->user_avaliacao = $user_avaliacao;
     }
 
 }

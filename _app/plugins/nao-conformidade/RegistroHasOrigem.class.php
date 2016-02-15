@@ -1,19 +1,20 @@
 <?php
 
 /**
- * AgendaSetor.class.php [Beans]
+ * RegistroHasOrigem.class.php [BEANS]
  * 
- * Classe que representa a tabela agenda_setor do banco de dados
+ * Representa a tabela registro_has_origem do banco de dados
+ * tabela responsavel por criar uma ligação many-to-many entre as tabelas nc_registro e nc_origem
  * 
- * @copyright (c) 2015, Adriano S. Reis Programador
+ * @copyright (c) 2016,  S. Reis, Adriano
  */
-class AgendaSetor extends Beans {
+class RegistroHasOrigem extends Beans {
 
-    private $setor_id;
-    private $setor_descricao;
+    private $reg_id;
+    private $origem_id;
 
     function __construct() {
-        $this->Controle = new Controle('agenda_setor');
+        $this->Controle = new Controle('registro_has_origem');
     }
 
     /**
@@ -23,8 +24,8 @@ class AgendaSetor extends Beans {
      */
     public function getThis() {
         $this->Controle->setDados(array_filter([
-            'setor_descricao' => $this->getSetor_descricao(),
-            'setor_id' => $this->getSetor_id()
+            'reg_id' => $this->getReg_id(),
+            'origem_id' => $this->getOrigem_id(),
         ]));
         return $this->Controle->getDados();
     }
@@ -35,8 +36,8 @@ class AgendaSetor extends Beans {
      * @param stdClass $object
      */
     public function setThis($object) {
-        $this->setSetor_id((isset($object->setor_id) ? $object->setor_id : null));
-        $this->setSetor_descricao((isset($object->setor_descricao) ? $object->setor_descricao : null));
+        $this->setReg_id((isset($object->reg_id) ? $object->reg_id : null));
+        $this->setOrigem_id((isset($object->origem_id) ? $object->origem_id : null));
     }
 
     /**
@@ -54,20 +55,20 @@ class AgendaSetor extends Beans {
      * ************** GET & SET ***************
      * ****************************************
      */
-    function getSetor_id() {
-        return $this->setor_id;
+    function getReg_id() {
+        return $this->reg_id;
     }
 
-    function getSetor_descricao() {
-        return $this->setor_descricao;
+    function getOrigem_id() {
+        return $this->origem_id;
     }
 
-    function setSetor_id($setor_id) {
-        $this->setor_id = $setor_id;
+    function setReg_id($reg_id) {
+        $this->reg_id = $reg_id;
     }
 
-    function setSetor_descricao($setor_descricao) {
-        $this->setor_descricao = $setor_descricao;
+    function setOrigem_id($origem_id) {
+        $this->origem_id = $origem_id;
     }
 
 }

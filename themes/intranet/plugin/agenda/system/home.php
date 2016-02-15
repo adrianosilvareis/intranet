@@ -18,7 +18,7 @@
                     <tr ng-repeat="contato in contatos">
                         <td>{{contato.contato_descricao| name}}</td>
                         <td>{{contato.contato_telefone}}</td>
-                        <td>{{contato.setor.setor_descricao}}</td>
+                        <td>{{contato.setor.setor_content}}</td>
                     </tr>
                     <tr class="active">
                         <td>Total:</td>
@@ -64,7 +64,7 @@
                 <tbody>
                     <tr ng-repeat="setor in setores">
                         <td>{{setor.setor_id}}</td>
-                        <td>{{setor.setor_descricao| name}}</td>
+                        <td>{{setor.setor_content| name}}</td>
                     </tr>
                     <tr class="active">
                         <td>Total: </td>

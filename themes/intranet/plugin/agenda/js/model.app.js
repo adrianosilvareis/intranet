@@ -1,4 +1,4 @@
-var appAgenda = angular.module("agenda", ["ngMessages"]);
+var appAgenda = angular.module("agenda", ["ngMessages", "objetoAPI", 'uiFormat', 'filterDefault']);
 
 appAgenda.run(function ($rootScope) {
     /*

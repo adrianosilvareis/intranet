@@ -1,4 +1,4 @@
-appAgenda.directive("uiFormatSite", function () {
+angular.module("uiFormat").directive("uiFormatSite", function () {
     return {
         require: "ngModel",
         link: function (scope, element, attrs, ctrl) {

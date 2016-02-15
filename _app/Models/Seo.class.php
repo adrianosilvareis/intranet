@@ -240,10 +240,7 @@ class Seo {
         $this->Tags['Image'] = $this->Data[3];
         $this->Tags = array_map('strip_tags', $this->Tags);
         $this->Tags = array_map('trim', $this->Tags);
-
         $this->Data = null;
-
-
 
         $this->seoTags .= "<!--[if lt IE 9]><script src='" . HOME . "/_cdn/html5.js'></script><![endif]-->" . "\n";
         $this->seoTags .= "<meta charset='UTF-8'>" . "\n";
@@ -277,7 +274,6 @@ class Seo {
         $this->seoTags .= "<meta itemprop='url' content='{$this->Tags['Link']}' />" . "\n";
         $this->seoTags .= "<meta itemprop='image' content='{$this->Tags['Image']}' />" . "\n";
 
-
         //LIBS    
         $this->seoTags .= "<!--LIBS-->\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap2.css'>" . "\n";
@@ -296,7 +292,17 @@ class Seo {
         $this->seoTags .= "<script src='" . HOME . "/_cdn/shadowbox/shadowbox.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_plugins.conf.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_scripts.conf.js'></script>" . "\n";
-
+        
+        //Angular Default Packet
+        $this->seoTags .= "<!--ANGULAR DEFAULT PACKET-->\n";
+        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/services/objetoAPI.services.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiFormat.module.js'></script>" . "\n";
+        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiCep.directive.js'></script>" . "\n";
+        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiSite.directive.js'></script>" . "\n";
+        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiTel.directive.js'></script>" . "\n";
+        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/filter.module.js'></script>" . "\n";
+        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/maxlength.filter.js'></script>" . "\n";
+        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/name.filter.js'></script>" . "\n";
         $this->Tags = null;
     }
 

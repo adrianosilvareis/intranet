@@ -1,7 +1,7 @@
 <?php
 
-include "../../_app/Config.inc.php";
-$NcSetor = new NcSetor();
+include_once '../../_app/Config.inc.php';
+$WsSetor = new WsSetor();
 
 $request = json_decode(file_get_contents("php://input"));
 
@@ -10,23 +10,25 @@ if (!empty($request)):
     if (!empty($request) && is_array($request)):
         //excluir
         foreach ($request as $data):
-            $NcSetor->setSetor_id($data->setor_id);
-            $NcSetor->Execute()->delete();
+            $WsSetor->setSetor_id($data->setor_id);
+            $WsSetor->Execute()->delete();
         endforeach;
         echo "Setor excluido com sucesso!";
 
     elseif (!empty($request->edited)):
         //editar
-        $NcSetor->setThis($request);
-        $NcSetor->Execute()->update(NULL, "setor_id");
+        $WsSetor->setThis($request);
+        $WsSetor->Execute()->update(NULL, "setor_id");
         echo "Setor editado com sucesso!";
     else:
         //adicionar
-        $NcSetor->setThis($request);
-        $NcSetor->Execute()->insert();
+        $request->setor_category = "nao-conformidade";
+        $WsSetor->setThis($request);
+        $WsSetor->Execute()->insert();
         echo "Setor adicionado com sucesso!";
     endif;
 else:
-    $AgendaSetor->Execute()->findAll();
-    echo json_encode($AgendaSetor->Execute()->getResult());
+    $WsSetor->setSetor_category("nao-conformidade");
+    $WsSetor->Execute()->Query("#setor_category#");
+    echo json_encode($WsSetor->Execute()->getResult());
 endif;

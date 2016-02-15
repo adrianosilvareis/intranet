@@ -3,8 +3,8 @@
  * ******* Serviço do tipo SERVICES *******
  * ****************************************
  */
-
-appAgenda.service("objetoAPI", function ($http) {
+angular.module("objetoAPI", []);
+angular.module("objetoAPI").service("objetoAPI", function ($http) {
 
     this.getObjeto = function (url) {
         return $http.get(url);

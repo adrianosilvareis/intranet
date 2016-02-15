@@ -10,7 +10,7 @@
         <input class="form-control" type="url" name="contato_site" placeholder="site.com.br" ng-model="contato.contato_site" ui-format-site/>
         <textarea class="form-control" name="contato_obs" placeholder="informações adicionais" ng-model="contato.contato_obs" rows="3">
         </textarea>
-        <select class="form-control" name="setor_id" ng-model="contato.setor_id" ng-options="setor.setor_id as setor.setor_descricao for setor in setores"  ng-required="true">
+        <select class="form-control" name="setor_id" ng-model="contato.setor_id" ng-options="setor.setor_id as setor.setor_content for setor in setores"  ng-required="true">
             <option value="">Selecione um setor para continuar</option>
         </select>
         <div class="btn-group" style="margin-top: 15px; margin-left: 50%;">
