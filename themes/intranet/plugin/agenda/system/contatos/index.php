@@ -16,7 +16,7 @@
                     <input class="form-control" type="text" name="criterioDeBusca" ng-model="criterioDeBusca" placeholder="Criterio de Busca"/> 
                 </div>
                 <div class="col-md-6">
-                    <select class="form-control col-md-6" ng-model="setor" ng-options="setor.setor_id as setor.setor_descricao for setor in setores">
+                    <select class="form-control col-md-6" ng-model="setor" ng-options="setor.setor_id as setor.setor_content for setor in setores">
                         <option value="">Selecione um setor para continuar</option>
                     </select>
                 </div>
@@ -33,7 +33,7 @@
                 </thead>
 
                 <tbody>
-                    <tr ng-repeat="contato in contatos | filter:{setor_id: setor} | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+                    <tr ng-repeat="contato in contatos | filter:{setor_id: setor}:true | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
                         <td><input class="form-control" type="checkbox" ng-model="contato.selecionado" ></td>
                         <td><a href="" ng-click="isContatoEdited(contato)">{{contato.contato_descricao| name}}</a></td>
                         <td>{{contato.contato_telefone}}</td>

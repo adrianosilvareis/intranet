@@ -2,7 +2,7 @@
     <h1>Lista de Contatos</h1>
     <div ng-repeat="setor in setores">
         <a data-toggle="collapse" href="#{{setor.setor_id}}" ng-click="setorSelecionado(setor)">
-            <div class="btn btn-primary col-md-1" style="padding: 3% 0; margin: 10px 2px;">
+            <div class="btn btn-primary col-md-1" style="padding: 3% 0; margin: 10px 2px; white-space:normal; max-height: 95px;">
                 {{setor.setor_content| name}}
             </div>
         </a>
@@ -18,7 +18,7 @@
                     </thead>
 
                     <tbody>
-                        <tr ng-repeat="contato in contatos| filter:{setor_id:setor.setor_id} | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+                        <tr ng-repeat="contato in contatos| filter:{setor_id:setor.setor_id}:true | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
                             <td><a href="" ng-click="contatoSelecionado(contato)">{{contato.contato_descricao| name}}</a></td>
                             <td>{{contato.contato_telefone}}</td>
                             <td>{{contato.contato_email}}</td>
