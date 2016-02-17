@@ -22,7 +22,7 @@ angular.module("downtime").controller("user", function ($scope, objetoAPI, confi
         }
         saveEquip(equip);
     };
-    
+
     var getTimestampNow = function () {
         //2016-02-16 16:31:45
         var date = new Date();
@@ -38,17 +38,21 @@ angular.module("downtime").controller("user", function ($scope, objetoAPI, confi
 
     var saveEquip = function (equip) {
         objetoAPI.saveObjeto(config.apiURL + "/equipe.api.php", equip).success(function (data) {
+            carregarEquipamentos();
+        }).error(function (data) {
+            $scope.message = "ocorreu um erro ao alterar o equipamento!";
             console.log(data);
             console.log(equip);
-            carregarListas();
         });
     };
 
     var saveTime = function (down) {
         objetoAPI.saveObjeto(config.apiURL + "/time.api.php", down).success(function (data) {
+            carregarTimes();
+        }).error(function (data) {
+            $scope.message = "Ocorreu um erro ao salvar o tempo de parada";
             console.log(data);
             console.log(down);
-            carregarListas();
         });
     };
 
@@ -57,7 +61,9 @@ angular.module("downtime").controller("user", function ($scope, objetoAPI, confi
         num += cont;
         if (num === 2) {
             num = 0;
-            vincularTimes();
+            if ($scope.equipamentos.length !== 0)
+                vincularTimes();
+            $scope.carregando = true;
         }
     };
 
@@ -74,21 +80,28 @@ angular.module("downtime").controller("user", function ($scope, objetoAPI, confi
             });
             equip.stoped = (equip.downtime[0] ? true : false);
         });
-        $scope.carregando = true;
     };
 
-    var carregarListas = function () {
+    var carregarEquipamentos = function () {
         objetoAPI.getObjeto(config.apiURL + "/equipe.api.php").success(function (data) {
             $scope.equipamentos = data;
             load(1);
+        }).error(function (data) {
+            $scope.message = data;
         });
+    };
+
+    var carregarTimes = function () {
 
         objetoAPI.getObjeto(config.apiURL + "/time.api.php").success(function (data) {
             times = data;
             load(1);
+        }).error(function (data) {
+            $scope.message = data;
         });
 
     };
 
-    carregarListas();
+    carregarEquipamentos();
+    carregarTimes();
 });
