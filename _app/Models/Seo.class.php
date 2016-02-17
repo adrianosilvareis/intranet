@@ -46,6 +46,12 @@ class Seo {
     private function getSeo() {
 
         switch ($this->File):
+
+            //SEO:: Indicadores
+            case 'indicadores':
+                $this->Data = ['Indicadores de qualidade - ' . SITENAME . ' - ' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                break;
+
             //SEO:: ARTIGO
             case 'artigo':
                 $Admin = (isset($_SESSION['userlogin']['user_level']) && $_SESSION['userlogin']['user_level'] == 3 ? true : false);
@@ -284,7 +290,7 @@ class Seo {
         $this->seoTags .= "<script src='" . HOME . '/themes/' . THEME . "/js/intranet.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular.min.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
-        
+
         //CDN
         $this->seoTags .= "<!--CDN-->\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_cdn/shadowbox/shadowbox.css'>" . "\n";
@@ -292,17 +298,19 @@ class Seo {
         $this->seoTags .= "<script src='" . HOME . "/_cdn/shadowbox/shadowbox.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_plugins.conf.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_cdn/_scripts.conf.js'></script>" . "\n";
-        
+
         //Angular Default Packet
         $this->seoTags .= "<!--ANGULAR DEFAULT PACKET-->\n";
         $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/services/objetoAPI.services.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiFormat.module.js'></script>" . "\n";
-        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiCep.directive.js'></script>" . "\n";
-        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiSite.directive.js'></script>" . "\n";
-        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiTel.directive.js'></script>" . "\n";
-        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/filter.module.js'></script>" . "\n";
-        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/maxlength.filter.js'></script>" . "\n";
-        $this->seoTags  .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/name.filter.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiCep.directive.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiSite.directive.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiTel.directive.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/filter.module.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/maxlength.filter.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/name.filter.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/timestampBr.filter.js'></script>" . "\n";
+        
         $this->Tags = null;
     }
 
