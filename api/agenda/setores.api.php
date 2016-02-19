@@ -28,7 +28,6 @@ if (!empty($request)):
         echo "Adicionado com sucesso!";
     endif;
 else:
-    $Read->setSetor_category("agenda");
-    $Read->Execute()->Query("#setor_category# order by setor_content");
+    $Read->Execute()->Query("setor_category='agenda' or setor_category='geral' order by setor_content");
     echo json_encode($Read->Execute()->getResult());
 endif;

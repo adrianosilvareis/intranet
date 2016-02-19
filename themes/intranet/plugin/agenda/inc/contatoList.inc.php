@@ -2,7 +2,7 @@
     <h1>Lista de Contatos</h1>
     <div ng-repeat="setor in setores">
         <a data-toggle="collapse" href="#{{setor.setor_id}}" ng-click="setorSelecionado(setor)">
-            <div class="btn btn-primary col-md-1" style="padding: 3% 0; margin: 10px 2px; white-space:normal; max-height: 95px;">
+            <div class="btn btn-primary col-md-2" style="border: 2px solid #fff; padding: 3% 0;white-space:normal; height: 120px;">
                 {{setor.setor_content| name}}
             </div>
         </a>
