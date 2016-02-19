@@ -32,7 +32,7 @@
                 foreach ($WsUsers->Execute()->getResult() as $users):
                     extract((array) $users);
                     $user_lastupdate = ($user_lastupdate ? date('d/m/Y H:i', strtotime($user_lastupdate)) . ' hs' : '-');
-                    $nivel = ['', 'User', 'Editor', 'Admin'];
+                    $nivel = ['', 'Admin', 'Editor', 'Exec', 'Solic', 'User'];
                     ?>            
                     <li>
                         <span class="ui center"><?= $user; ?></span>

@@ -9,12 +9,12 @@ if (!empty($uploads) && $uploads['sendPostForm']):
     header("Location: " . HOME . "/plugin/os-nao-pagas/save&file=" . $Upload->getResult());
 endif;
 
-if (!Check::UserLogin(2)):
+if (!Check::UserLogin(3)):
     echo "<a class=\"btn btn-primary\" style=\"width: 200px; margin: 10px 0;\" href=\"/intranet/admin\" title=\"Login\" alt=\"admin\" >Login</a>";
     WSErro("<b>Área Restrita!</b> Efetue login para acessar.", WS_INFOR);
 else:
     ?>
-    <div class="section" style="height: 350px;;">
+    <div class="section" style="height: 350px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

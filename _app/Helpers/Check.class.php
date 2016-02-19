@@ -263,7 +263,7 @@ class Check {
      * @return obejct ws_user
      */
     public static function UserLogin($Level = null) {
-        if (!empty($_SESSION['userlogin']) && !$Level || !empty($_SESSION['userlogin']) && $_SESSION['userlogin']['user_level'] >= $Level):
+        if (!empty($_SESSION['userlogin']) && !$Level || !empty($_SESSION['userlogin']) && $_SESSION['userlogin']['user_level'] <= $Level):
             return $_SESSION['userlogin'];
         else:
             return false;

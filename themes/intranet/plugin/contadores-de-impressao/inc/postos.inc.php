@@ -21,7 +21,7 @@ endif;
 /**
  * Tratamento de erro
  */
-if (!empty($Link->getLocal()[2]) && $Login->CheckLogin()):
+if (!empty($Link->getLocal()[2]) && Check::UserLogin(2)):
 
     switch ($Link->getLocal()[2]):
         case "ok":
@@ -91,7 +91,7 @@ elseif (!empty($Link->getLocal()[2])):
     endswitch;
 endif;
 
-if ($Login->CheckLogin()):
+if (Check::UserLogin(2)):
     echo "<a title=\"Gerenciamento\" href=\"" . IMP_INCLUDE . "admin\" class=\"btn btn-danger glyphicon glyphicon-cog\" style=\"float: right; margin: 25px;\"></a>";
 endif;
 ?>
@@ -101,7 +101,7 @@ endif;
         <thead>
             <tr>
                 <th>Unidades</th>
-                <?php if ($Login->CheckLogin()): ?>
+                <?php if (Check::UserLogin(2)): ?>
                     <th>Todos as impressoras</th>
                     <th>Ações</th>
                 <?php else: ?>
@@ -112,7 +112,7 @@ endif;
         <tbody>
 
             <?php
-            if ($Login->CheckLogin()):
+            if (Check::UserLogin(2)):
                 $AdPostos->ListAdmin();
                 foreach ($AdPostos->getResult() as $imp):
                     extract((array) $imp);

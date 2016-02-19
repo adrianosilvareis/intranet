@@ -46,7 +46,7 @@ class Login {
     }
 
     public function CheckLogin() {
-        if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin']['user_level'] < $this->Level):
+        if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin']['user_level'] > $this->Level):
             unset($_SESSION['userlogin']);
             return false;
         else:
@@ -64,9 +64,9 @@ class Login {
             $this->Error = ['Informe seu email e senha para efetuar seu login', WS_INFOR];
             $this->Result = false;
         elseif (!$this->getUser()):
-            $this->Error = ['os dados informados não são compatíveis', WS_ALERT];
+            $this->Error = ['Os dados informados não são compatíveis', WS_ALERT];
             $this->Result = false;
-        elseif ($this->Result->user_level < $this->Level):
+        elseif ($this->Result->user_level > $this->Level):
             $this->Error = ["Desculpe {$this->Result->user_name}, você não tem permissão para acessar esta área!", WS_ERROR];
             $this->Result = false;
         else:
@@ -92,7 +92,7 @@ class Login {
         if (!session_id()):
             session_start();
         endif;
-
+        
         $_SESSION['userlogin'] = (array) $this->Result;
         $this->Error = ["Olá {$this->Result->user_name}, seja bem vindo(a). Aguarde redirecionamento!", WS_ACCEPT];
 

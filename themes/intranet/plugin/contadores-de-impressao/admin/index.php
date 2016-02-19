@@ -5,7 +5,7 @@ $Login = new Login(1);
 $getexe = filter_input(INPUT_GET, 'exe', FILTER_DEFAULT);
 Check::UserOnline();
 
-if (!$Login->CheckLogin()):
+if (!Check::UserLogin(2)):
     unset($_SESSION['userlogin']);
     header('Location: ' . HOME . '/admin/index.php?exe=restrito');
 else:

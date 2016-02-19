@@ -20,7 +20,7 @@ if ($logoff):
     header('Location: index.php?exe=logoff');
 endif;
 
-if ($userlogin['user_level'] < 3):
+if ($userlogin['user_level'] > 1):
     header('Location: ' . HOME);
 endif;
 ?>

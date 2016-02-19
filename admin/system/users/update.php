@@ -82,9 +82,11 @@
                     <span class="field">Nível:</span>
                     <select name = "user_level" title = "Selecione o nível de usuário" required >
                         <option value = "">Selecione o Nível</option>
-                        <option value = "1" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 1) echo 'selected="selected"'; ?>>User</option>
+                        <option value = "1" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 1) echo 'selected="selected"'; ?>>Admin</option>
                         <option value="2" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 2) echo 'selected="selected"'; ?>>Editor</option>
-                        <option value="3" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 3) echo 'selected="selected"'; ?>>Admin</option>
+                        <option value="3" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 3) echo 'selected="selected"'; ?>>Solic</option>
+                        <option value="3" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 4) echo 'selected="selected"'; ?>>Exec</option>
+                        <option value="3" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 5) echo 'selected="selected"'; ?>>User</option>
                     </select>
                 </label>
             </div><!-- LABEL LINE -->

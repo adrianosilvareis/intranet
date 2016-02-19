@@ -1,6 +1,5 @@
 <div class="section bg-sucesso">
     <?php
-    $Login = new Login(1);
 
     if ($Login->CheckLogin()):
         ?>
@@ -9,7 +8,7 @@
                 <ul class="nav navbar-nav">
                     <li class="navbar-brand">Olá, <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>
                     <li class="active"><a href="<?= HOME ?>">Home</a></li>
-                    <?php if (Check::UserLogin(3)): ?>
+                    <?php if (Check::UserLogin(1)): ?>
                         <li><a href="<?= HOME ?>/admin/painel.php?exe=users/profile">Profile</a></li>
                     <?php else: ?>
                         <li><a href="<?= HOME ?>/profile">Profile</a></li>
