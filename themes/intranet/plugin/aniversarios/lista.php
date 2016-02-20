@@ -1,5 +1,9 @@
 <section class="section">
-
+    <?php
+    if (Check::UserLogin(2)):
+        echo "<a href=" . HOME . "/plugin/aniversarios/upload\" title=\"Uploads\" class=\"btn btn-primary glyphicon glyphicon-upload\"></a>";
+    endif;
+    ?>
     <dic class="container">
         <div class="row">
             <img src="<?= INCLUDE_PATH ?>/images/cabecalhos/aniversariantesdomes.png" alt="Aniversariantes do Mês" class="img-responsive img-rounded">

@@ -1,0 +1,5 @@
+1 - Administrador
+2 - Editor
+3 - Executores
+4 - Solicitantes
+5 - Usuario

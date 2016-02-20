@@ -1,5 +1,9 @@
 <?php
 
+if (!Check::UserLogin(2)):
+    header("Location: " . HOME . "/plugin/aniversarios/");
+endif;
+
 $File = filter_input(INPUT_GET, "file", FILTER_DEFAULT);
 $Erros = array();
 

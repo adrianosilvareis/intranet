@@ -51,7 +51,7 @@ endif;
     <div class="btn-group">
         <a href="javascript:down()" title="Novo" class="btn btn-danger glyphicon glyphicon-plus"></a>
         <a href="javascript:up()" title="Pagina usuario" class="btn btn-danger glyphicon glyphicon-list"></a>
-        <?php if (Check::UserLogin(3)): ?>
+        <?php if (Check::UserLogin(2)): ?>
             <a href="<?= FAST_INCLUDE ?>admin/" title="Gerenciamento" class="btn btn-danger glyphicon glyphicon-cog"></a>
         <?php endif; ?>
     </div>
