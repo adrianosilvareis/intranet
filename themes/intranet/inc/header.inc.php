@@ -1,6 +1,5 @@
 <div class="section bg-sucesso">
     <?php
-
     if ($Login->CheckLogin()):
         ?>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -54,6 +53,18 @@
                                     <li><a href="http://www.crmes.org.br/index.php?option=com_medicos" target="_blank">Buscar Médicos (CRM)</a></li>
                                 </ul>
                             </li>
+
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Plugins<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="active"><a>Plugins</a></li>
+                                    <?php
+                                    foreach (Plugins() as $plugin):
+                                        echo "<li><a class=\"text-capitalize\" href=" . HOME . "/plugin/{$plugin['url']}>{$plugin['title']}</a></li>";
+                                    endforeach;
+                                    ?>
+                                </ul>
+                            </li>
                             <!-- dropdown -->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
@@ -78,16 +89,8 @@
                                     <li><a href="/view/redirect/sft_redirect.html" target="_blank">SFT - Tommasi</a></li>
                                     <li><a href="<?= HOME ?>/pages/qualidade">Qualidade</a></li>
                                     <li class="divider"></li>
-                                    <li class="active"><a>Plugins</a></li>
-                                    <?php
-                                    /**
-                                     * Plugins
-                                     */
-                                    $lista = Plugins();
-                                    foreach ($lista as $plugin):
-                                        echo "<li><a class=\"text-capitalize\" href=" . HOME . "/plugin/{$plugin['url']}>{$plugin['title']}</a></li>";
-                                    endforeach;
-                                    ?>
+                                    <li class="active"><a>Indicadores</a></li>
+                                    <li><a href="<?= HOME ?>/indicadores/downtime">Downtime de equipamento</a></li>
                                     <li class="divider"></li>
                                     <li class="active"><a>Informação</a></li>
                                     <li><a href="<?= HOME ?>/pages/contato" title="contato por email">Contato</a></li>

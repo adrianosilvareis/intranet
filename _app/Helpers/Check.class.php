@@ -102,19 +102,8 @@ class Check {
      */
     public static function DataDiff($dataini, $datafim, $metaD = null, $metaH = null, $metaM = null) {
 
-        # Split para dia, mes, ano, hora, minuto e segundo da data inicial
-        $_split_datehour = explode(' ', $dataini);
-        $_split_data = explode("-", $_split_datehour[0]);
-        $_split_hour = explode(":", $_split_datehour[1]);
-
-        # Coloquei o parse (integer) caso o timestamp nao tenha os segundos, dai ele fica como 0
-        $dtini = mktime($_split_hour[0], $_split_hour[1], (integer) $_split_hour[2], $_split_data[1], $_split_data[2], $_split_data[0]);
-
-        # Split para dia, mes, ano, hora, minuto e segundo da data final
-        $_split_datehour = explode(' ', $datafim);
-        $_split_data = explode("-", $_split_datehour[0]);
-        $_split_hour = explode(":", $_split_datehour[1]);
-        $dtfim = mktime($_split_hour[0], $_split_hour[1], (integer) $_split_hour[2], $_split_data[1], $_split_data[2], $_split_data[0]);
+        $dtini = self::DateToInteger($dataini);
+        $dtfim = self::DateToInteger($datafim);
 
         # Diminui a datafim que é a maior com a dataini
         $time = ($dtfim - $dtini);
@@ -126,6 +115,7 @@ class Check {
         $mins = floor(($time - ($days * 86400) - ($hours * 3600)) / 60);
         # Recupera os segundos
         $secs = floor($time - ($days * 86400) - ($hours * 3600) - ($mins * 60));
+
         # Monta o retorno no formato
         # 5d 10h 15m 20s
         # somente se os itens forem maior que zero
@@ -144,6 +134,14 @@ class Check {
         endif;
 
         return $retorno;
+    }
+
+    static function DateToInteger($data) {
+        # Split para dia, mes, ano, hora, minuto e segundo da data final
+        $_split_datehour = explode(' ', $data);
+        $_split_data = explode("-", $_split_datehour[0]);
+        $_split_hour = explode(":", $_split_datehour[1]);
+        return mktime($_split_hour[0], $_split_hour[1], (integer) $_split_hour[2], $_split_data[1], $_split_data[2], $_split_data[0]);
     }
 
     /**

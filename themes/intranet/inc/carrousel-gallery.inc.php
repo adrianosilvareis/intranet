@@ -27,6 +27,8 @@ else:
                     $gal->class = ($c == 0 ? "item active" : "item");
                     if (!$bar->post_url):
                         $gal->post_url = "#HOME#/artigo/$bar->post_name";
+                    else:
+                        $gal->post_url = $bar->post_url;
                     endif;
                     $View->Show((array) $gal, $siderbar);
                     $c++;
@@ -36,8 +38,8 @@ else:
         </div>
         <?php
         if ($c != 1):
-            //echo "<a class='left carousel-control' href='#carousel' data-slide='prev'><i class='icon-prev fa fa-angle-left'></i></a>";
-            //echo "<a class='right carousel-control' href='#carousel' data-slide='next'><i class='icon-next fa fa-angle-right'></i></a>";
+        //echo "<a class='left carousel-control' href='#carousel' data-slide='prev'><i class='icon-prev fa fa-angle-left'></i></a>";
+        //echo "<a class='right carousel-control' href='#carousel' data-slide='next'><i class='icon-next fa fa-angle-right'></i></a>";
         endif;
         ?>
     </div>

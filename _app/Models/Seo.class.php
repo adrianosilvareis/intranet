@@ -290,6 +290,7 @@ class Seo {
         $this->seoTags .= "<script src='" . HOME . '/themes/' . THEME . "/js/intranet.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular.min.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/google-chart/loader.js'></script>" . "\n";
 
         //CDN
         $this->seoTags .= "<!--CDN-->\n";
