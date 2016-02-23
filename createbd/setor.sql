@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS ws_setor(
 ); 
 
 CREATE TABLE IF NOT EXISTS ws_setor_type(
-
     type_id INT NOT NULL AUTO_INCREMENT,
     type_content VARCHAR(255) NOT NULL,
     type_status BOOLEAN DEFAULT TRUE,

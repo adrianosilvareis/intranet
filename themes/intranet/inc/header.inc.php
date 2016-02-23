@@ -1,26 +1,35 @@
 <div class="section bg-sucesso">
     <?php
+    if (isset($_SESSION['login_report'])):
+        WSErro($_SESSION['login_report'][0], $_SESSION['login_report'][1]);
+        unset($_SESSION['login_report']);
+    endif;
+
     if ($Login->CheckLogin()):
         ?>
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container">
-                <ul class="nav navbar-nav">
-                    <li class="navbar-brand">Olá, <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>
-                    <li class="active"><a href="<?= HOME ?>">Home</a></li>
-                    <?php if (Check::UserLogin(1)): ?>
-                        <li><a href="<?= HOME ?>/admin/painel.php?exe=users/profile">Profile</a></li>
-                    <?php else: ?>
-                        <li><a href="<?= HOME ?>/profile">Profile</a></li>
-                    <?php endif; ?>
-                    <li><a href="<?= HOME ?>/admin/painel.php?logoff=true">Logoff</a></li>
+        <div class="collapse" id="menuAdmin">
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <ul class="nav navbar-nav">
+                        <li class="navbar-brand">Olá, <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>
+                        <?php if (Check::UserLogin(2)): ?>
+                            <li class="active"><a href="<?= HOME ?>/admin/painel.php">Admin</a></li>
+                            <li><a href="<?= HOME ?>/admin/painel.php?exe=users/profile">Profile</a></li>
+                        <?php else: ?>
+                            <li class="active"><a href="<?= HOME ?>">Home</a></li>
+                            <li><a href="<?= HOME ?>/profile">Profile</a></li>
+                        <?php endif; ?>
+                        <li><a href="<?= HOME ?>/admin/painel.php?logoff=true">Logoff</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <a class="btn btn-primary glyphicon glyphicon-chevron-down" data-toggle="collapse" href="#menuAdmin" aria-controls="collapseExample"></a>
+        <button class="btn btn-primary glyphicon glyphicon-chevron-up" data-toggle="collapse" data-target="#menuAdmin" aria-controls="collapseExample"></button>
 
-                </ul>
-            </div>
-        </nav>
         <?php
     endif;
     ?>
-
 
     <div class="container">
         <header>
@@ -86,7 +95,7 @@
                                     ?>
                                     <li class="divider"></li>
                                     <li class="active"><a>Aplicativos</a></li>
-                                    <li><a href="/view/redirect/sft_redirect.html" target="_blank">SFT - Tommasi</a></li>
+                                    <li><a href="<?= HOME ?>/sft_redirect" target="_blank">SFT - Tommasi</a></li>
                                     <li><a href="<?= HOME ?>/pages/qualidade">Qualidade</a></li>
                                     <li class="divider"></li>
                                     <li class="active"><a>Indicadores</a></li>
@@ -138,13 +147,13 @@
                             $dataLogin = filter_input_array(INPUT_POST, FILTER_DEFAULT);
                             if (!empty($dataLogin['AdminLogin'])):
 
-                                $Login = new Login(1);
-
                                 $Login->ExeLogin($dataLogin);
                                 if (!$Login->getResult()):
-                                    WSErro($Login->getError()[0], $Login->getError()[1]);
+                                    var_dump($Login);
+                                    $_SESSION['login_report'] = $Login->getError();
+                                    header("Location: " . HOME);
                                 else:
-                                    header("Location: " . HOME . "/admin/painel.php");
+                                    header("Location: " . HOME);
                                 endif;
 
                             endif;

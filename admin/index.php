@@ -20,24 +20,25 @@ require('../_app/Config.inc.php');
                 <h1>Administrar Site</h1>
 
                 <?php
-                $login = new Login(1);
-                
+                $login = new Login(2);
+
                 if ($login->CheckLogin()):
                     header('Location: painel.php');
                 endif;
 
                 $dataLogin = filter_input_array(INPUT_POST, FILTER_DEFAULT);
                 if (!empty($dataLogin['AdminLogin'])):
-
+                    
+                    $login->setLevel(5);
                     $login->ExeLogin($dataLogin);
                     if (!$login->getResult()):
                         WSErro($login->getError()[0], $login->getError()[1]);
                     else:
-                        header('Location: painel.php');
+                        header('Location: ' . HOME);
                     endif;
 
                 endif;
-                
+
                 $get = filter_input(INPUT_GET, 'exe', FILTER_DEFAULT);
                 if (!empty($get)):
                     if ($get == 'restrito'):

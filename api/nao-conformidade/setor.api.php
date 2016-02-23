@@ -28,7 +28,6 @@ if (!empty($request)):
         echo "Setor adicionado com sucesso!";
     endif;
 else:
-    $Read->setSetor_category("nao-conformidade");
-    $Read->Execute()->Query("#setor_category#");
+    $Read->Execute()->Query("setor_category='nao-conformidade' or setor_category='geral' order by setor_content");
     echo json_encode($Read->Execute()->getResult());
 endif;
