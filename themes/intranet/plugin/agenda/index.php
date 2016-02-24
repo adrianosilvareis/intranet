@@ -7,7 +7,11 @@ Register::addRegister("<script src='" . AGENDADIR . "/controller/home.ctrl.js'><
 ?>
 
 <div ng-app="agenda">
-    <?php
+    <?php if (Check::UserLogin(3)): ?>
+        <a href="<?= HOME ?>/plugin/agenda/admin" title="Admin" class="btn btn-primary glyphicon glyphicon-cog" style="float: right;"></a>
+        <a href="<?= HOME ?>/plugin/agenda/" title="Lista telefonica" class="btn btn-danger glyphicon glyphicon-th" style="float: right;"></a>
+        <?php
+    endif;
     if (!empty($Link->getLocal()[2]) && $Link->getLocal()[2] == "admin" && Check::UserLogin(3)):
         Register::addRegister("<script src='" . AGENDADIR . "/controller/setor.ctrl.js'></script>");
         Register::addRegister("<script src='" . AGENDADIR . "/controller/contato.ctrl.js'></script>");

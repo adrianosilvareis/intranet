@@ -284,6 +284,7 @@ class Seo {
         $this->seoTags .= "<!--LIBS-->\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap2.css'>" . "\n";
         $this->seoTags .= "<link rel='stylesheet' href='" . HOME . '/themes/' . THEME . "/css/default.css'/>" . "\n";
+        $this->seoTags .= "<link rel='stylesheet' href='" . HOME . '/themes/' . THEME . "/css/teste.css'/>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/jquery/jquery.min.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/jquery-mask/jmask.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap.js'></script>" . "\n";

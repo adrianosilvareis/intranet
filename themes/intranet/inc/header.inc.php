@@ -4,36 +4,24 @@
         WSErro($_SESSION['login_report'][0], $_SESSION['login_report'][1]);
         unset($_SESSION['login_report']);
     endif;
-
-    if ($Login->CheckLogin()):
-        ?>
-        <div class="collapse" id="menuAdmin">
-            <nav class="navbar navbar-inverse navbar-static-top">
-                <div class="container">
-                    <ul class="nav navbar-nav">
-                        <li class="navbar-brand">Olá, <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>
-                        <?php if (Check::UserLogin(2)): ?>
-                            <li class="active"><a href="<?= HOME ?>/admin/painel.php">Admin</a></li>
-                            <li><a href="<?= HOME ?>/admin/painel.php?exe=users/profile">Profile</a></li>
-                        <?php else: ?>
-                            <li class="active"><a href="<?= HOME ?>">Home</a></li>
-                            <li><a href="<?= HOME ?>/profile">Profile</a></li>
-                        <?php endif; ?>
-                        <li><a href="<?= HOME ?>/admin/painel.php?logoff=true">Logoff</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <a class="btn btn-primary glyphicon glyphicon-chevron-down" data-toggle="collapse" href="#menuAdmin" aria-controls="collapseExample"></a>
-        <button class="btn btn-primary glyphicon glyphicon-chevron-up" data-toggle="collapse" data-target="#menuAdmin" aria-controls="collapseExample"></button>
-
-        <?php
-    endif;
     ?>
-
+    
     <div class="container">
+        
+        <?php if ($Login->CheckLogin()): ?>
+            <ul class="systema_nav radius">
+                <li class="username">Olá, <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>  
+                <?php if (Check::UserLogin(2)): ?>
+                    <li><a class="icon profile radius" href="<?= HOME ?>/admin/painel.php?exe=users/profile">Perfíl</a></li>
+                    <li><a class="icon admin radius" href="<?= HOME ?>/admin/painel.php">Admin</a></li>
+                <?php else: ?>
+                    <li><a class="icon profile radius" href="<?= HOME ?>/profile">Perfíl</a></li>
+                <?php endif; ?>
+                <li><a class="icon logout radius" href="<?= HOME ?>/admin/painel.php?logoff=true">Sair</a></li>
+            </ul>
+        <?php endif; ?>
+        
         <header>
-
             <h1 class="notitle logo shadow-right"><?= SITENAME ?><a title="<?= SITENAME ?>" href="<?= HOME ?>"><img src="<?= HOME . '/themes/' . THEME ?>/images/header-trans-inverse.png" alt="<?= SITENAME ?>" class="img-responsive"></a></h1>
 
             <nav class="navbar navbar-default">
