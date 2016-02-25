@@ -62,7 +62,7 @@ class AdminContadores {
     function FindId($contadores_id) {
         $this->Read->setThis(NULL);
         $this->Read->setContadores_id($contadores_id);
-        $this->Result = $this->Read->Execute()->FullRead("SELECT * FROM app_contadores c JOIN app_impressora i ON(c.fk_impressora = i.impressora_id) WHERE #contadores_id#");
+        $this->Result = $this->Read->Execute()->FullRead("SELECT * FROM imp_contadores c JOIN imp_impressora i ON(c.fk_impressora = i.impressora_id) WHERE #contadores_id#");
         return $this->getResult();
     }
 

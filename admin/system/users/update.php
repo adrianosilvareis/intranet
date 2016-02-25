@@ -35,47 +35,23 @@
         <form action = "" method = "post" name = "UserCreateForm">
             <label class="label">
                 <span class="field">Nome:</span>
-                <input
-                    type = "text"
-                    name = "user_name"
-                    value="<?php if (!empty($ClienteData['user_name'])) echo $ClienteData['user_name']; ?>"
-                    title = "Informe seu primeiro nome"
-                    required
-                    />
+                <input type="text" name="user_name" value="<?php if (!empty($ClienteData['user_name'])) echo $ClienteData['user_name']; ?>" title="Informe seu primeiro nome" required />
             </label>
 
             <label class="label">
                 <span class="field">Sobrenome:</span>
-                <input
-                    type = "text"
-                    name = "user_lastname"
-                    value="<?php if (!empty($ClienteData['user_lastname'])) echo $ClienteData['user_lastname']; ?>"
-                    title = "Informe seu sobrenome"
-                    required
-                    />
+                <input type="text" name="user_lastname" value="<?php if (!empty($ClienteData['user_lastname'])) echo $ClienteData['user_lastname']; ?>" title = "Informe seu sobrenome" required />
             </label>
 
             <label class="label">
                 <span class="field">E-mail:</span>
-                <input
-                    type = "email"
-                    name = "user_email"
-                    value="<?php if (!empty($ClienteData['user_email'])) echo $ClienteData['user_email']; ?>"
-                    title = "Informe seu e-mail"
-                    required
-                    />
+                <input type="email" name="user_email" value="<?php if (!empty($ClienteData['user_email'])) echo $ClienteData['user_email']; ?>" title="Informe seu e-mail" required />
             </label>
 
             <div class="label_line">
                 <label class="label_medium">
                     <span class="field">Senha:</span>
-                    <input
-                        type = "password"
-                        name = "user_password"
-                        value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>"
-                        title = "Informe sua senha [ de 6 a 12 caracteres! ]"
-                        pattern = ".{6,12}"
-                        />
+                    <input type="password" name="user_password" value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern=".{6,12}" />
                 </label>
 
                 <label class="label_medium">

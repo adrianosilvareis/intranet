@@ -54,7 +54,7 @@ endif;
                 </ul>
 
                 <nav>
-                    <h1><a href="painel.php" title="Dasboard">Dasboard</a></h1>
+                    <h1><a href="painel.php" title="Dashboard">Dashboard</a></h1>
 
                     <?php
                     //ATIVA MENU
@@ -77,6 +77,20 @@ endif;
                             <ul class="sub">
                                 <li><a href="painel.php?exe=categories/create">Criar Categoria</a></li>
                                 <li><a href="painel.php?exe=categories/index">Listar / Editar Categorias</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="li<?php if (in_array('setor', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Setor</a>
+                            <ul class="sub">
+                                <li><a href="painel.php?exe=setor/create">Criar Setor</a></li>
+                                <li><a href="painel.php?exe=setor/index">Listar / Editar Setor</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="li<?php if (in_array('setor_type', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Tipo de Setor</a>
+                            <ul class="sub">
+                                <li><a href="painel.php?exe=setor_type/create">Criar Tipo</a></li>
+                                <li><a href="painel.php?exe=setor_type/index">Listar / Editar Tipo</a></li>
                             </ul>
                         </li>
 

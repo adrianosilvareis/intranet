@@ -14,7 +14,7 @@ endif;
 ?>
 <header id="navtab">
     <nav>
-        <h1><a href="<?= IMP_INCLUDE ?>admin" title="Dasboard">Dasboard</a></h1>
+        <h1><a href="<?= IMP_INCLUDE ?>admin" title="Dashboard">Dashboard</a></h1>
 
         <?php
         //ATIVA MENU

@@ -13,21 +13,15 @@ Register::addRegister("<script src='" . NCONDIR . "/controller/setor.ctrl.js'></
     };
 </script>
 <header id="navtab">
-    <ul class="systema_nav radius">
-        <li class="username">Olá Adriano Reis</li>
-        <li><a class="icon profile radius" href="painel.php?exe=users/profile">Perfíl</a></li>
-        <li><a class="icon users radius" href="painel.php?exe=users/users">Usuários</a></li>
-        <li><a class="icon logout radius" href="painel.php?logoff=true">Sair</a></li>
-    </ul>
     <nav>
-        <h1><a href="painel.php" title="Dasboard">Dasboard</a></h1>
+        <h1><a href="painel.php" title="Dashboard">Dashboard</a></h1>
 
         <!--Query String-->
         <ul class="menu">
             <li id="principal" class="li"><a class="opensub" onclick="return false;" href="#">HOME</a>
                 <ul class="sub">
-                    <li><a href="#home" onclick="alterClass('#principal')" data-toggle="tab">Criar Post</a></li>
-                    <li><a href="#home" data-toggle="tab">Listar / Editar Posts</a></li>
+                    <li><a href="#home_create" onclick="alterClass('#principal')" data-toggle="tab">Criar Post</a></li>
+                    <li><a href="#home_list" data-toggle="tab">Listar / Editar Posts</a></li>
                 </ul>
             </li>
 
@@ -44,8 +38,6 @@ Register::addRegister("<script src='" . NCONDIR . "/controller/setor.ctrl.js'></
 </header>
 
 <div class="tab-content">
-    <div class="tab-pane" id="home">HOME</div>
-    <div class="tab-pane" id="profile">PROFILE</div>
-    <div class="tab-pane active" id="messages">MESSAGE</div>
-    <div class="tab-pane" id="settings">SETTING</div>
+    <div class="tab-pane" id="home_create">Create HOME</div>
+    <div class="tab-pane" id="home_list">LISTAR HOME</div>
 </div>

@@ -101,7 +101,7 @@ endif;
                     if (!$cont): echo "class='danger'";
                     endif;
                     ?>>
-                        <a href="<?= IMP_INCLUDE . $postos_id; ?>"><?= $postos_nome; ?></a>
+                        <a href="<?= IMP_INCLUDE . $postos_id; ?>" class="text-capitalize"><?= strtolower($postos_nome); ?></a>
                     </td>
                     <td <?php
                     if (!$cont): echo "class='danger'";

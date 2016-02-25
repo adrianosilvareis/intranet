@@ -2,6 +2,12 @@
     Less 
     @copyrigth S. Reis, Adriano 2016
 */
+.reset * {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  line-height: 1.2;
+}
 /*MENSAGENS DO SISTEM*/
 .trigger {
   padding: 15px 15px 15px 40px;
@@ -295,6 +301,35 @@
   font-size: 16px;
   color: #666;
 }
+.nivercard * {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  line-height: 1.2;
+}
+.nivercard .img {
+  background: url("../images/cabecalhos/parabens.jpg") no-repeat;
+  opacity: 0.35;
+  -moz-opacity: 0.35;
+  filter: alpha(opacity=35);
+  width: 100%;
+  height: 400px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.nivercard .table {
+  text-align: center;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.nivercard .table th {
+  text-align: center;
+}
+/*Mixins*/
+/*Mixins end*/
 /*BODY*/
 .notitle {
   font-size: 0;

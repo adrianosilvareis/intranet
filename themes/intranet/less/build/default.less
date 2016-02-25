@@ -3,6 +3,10 @@
     @copyrigth S. Reis, Adriano 2016
 */
 
+.reset{
+    *{padding: 0; margin: 0;list-style: none; line-height: 1.2;}
+}
+
 /*MENSAGENS DO SISTEM*/
 .trigger{
     padding: 15px 15px 15px 40px; background: #eee; font-size: 14px; margin-bottom: 15px;
@@ -43,7 +47,7 @@
 
 /*SYSTEM NAV*/
 .systema_nav{
-    *{padding: 0; margin: 0;list-style: none; line-height: 1.2;}
+    .reset;
     float: right; padding: 20px 5px 10px; background: #006699; position: relative; top: -10px;
     li{
         float: left;
@@ -60,7 +64,7 @@
 
 /*MENU TAB*/
 #navtab{
-    *{padding: 0; margin: 0;list-style: none; line-height: 1.2;}
+    .reset;
     width: 100%; height: 70px; position: relative; margin-bottom: 50px;padding-left: 35px;
     background: url(../images/header_bg.png) repeat-x #fbfbfb; 
     nav{
@@ -133,6 +137,46 @@
         p{font-family: 'Baumans', cursive; font-size: 16px; color: #666;}
     }
 }
+
+.nivercard{
+    .reset;
+    .img{
+        background: url("../images/cabecalhos/parabens.jpg") no-repeat;
+        .opacity(0.35,0.35,35);
+        .size(100%,400px);
+        .position(relative);
+    }
+    .table{
+        th{
+            text-align: center;
+        }
+        text-align: center;
+        font-weight: bold;
+        .position(absolute);
+    }
+}
+
+
+/*Mixins*/
+.opacity(@opacit, @moz, @alpha){
+    opacity: @opacit;
+    -moz-opacity: @moz;
+    filter: alpha(opacity=@alpha);
+}
+
+.size(@width,@height: 100%){
+    width: @width;
+    height: @height;
+}
+
+.position(@type, @top: 0, @left: 0){
+    position: @type;
+    top: @top;
+    left: @left;
+}
+
+/*Mixins end*/
+
 
 /*BODY*/
 .notitle{font-size: 0; margin: 0; padding: 0;}

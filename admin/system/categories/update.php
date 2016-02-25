@@ -67,12 +67,12 @@ endif;
                     <select name="category_parent">
                         <option value="null"> Selecione a Seção: </option>
                         <?php
-                        $ReadCat = new WsCategories();
-                        $ReadCat->Execute()->Query("category_parent is NULL ORDER BY category_title ASC");
-                        if (!$ReadCat->Execute()->getResult()):
+                        $ReadSet = new WsCategories();
+                        $ReadSet->Execute()->Query("category_parent is NULL ORDER BY category_title ASC");
+                        if (!$ReadSet->Execute()->getResult()):
                             echo '<option disabled="disable" value="null"> Cadastre antes uma seção! </option>';
                         else:
-                            foreach ($ReadCat->Execute()->getResult() as $ses):
+                            foreach ($ReadSet->Execute()->getResult() as $ses):
                                 echo "<option value=\"{$ses->category_id}\" ";
 
                                 if ($ses->category_id == $data['category_parent']):

@@ -61,7 +61,7 @@ endif;
                     ?>
                     <tr class="text-center">
                         <td>
-                            <a href="<?= IMP_INCLUDE . $postos_id; ?>"><?= $postos_nome; ?></a>
+                            <a href="<?= IMP_INCLUDE . $postos_id; ?>" class="text-capitalize"><?= strtolower($postos_nome); ?></a>
                         </td>
                         <td>
                             <?= $cont; ?>

@@ -127,12 +127,12 @@
                         if ($ReadSes->Execute()->getRowCount() >= 1):
                             foreach ($ReadSes->Execute()->getResult() as $ses):
                                 echo "<option disabled=\"disabled\" value=\"\"> {$ses->category_title} </option>";
-                                $ReadCat = new WsCategories;
-                                $ReadCat->setCategory_parent($ses->category_id);
-                                $ReadCat->Execute()->Query("#category_parent# ORDER BY category_title ASC");
+                                $ReadSet = new WsCategories;
+                                $ReadSet->setCategory_parent($ses->category_id);
+                                $ReadSet->Execute()->Query("#category_parent# ORDER BY category_title ASC");
 
-                                if ($ReadCat->Execute()->getRowCount() >= 1):
-                                    foreach ($ReadCat->Execute()->getResult() as $cat):
+                                if ($ReadSet->Execute()->getRowCount() >= 1):
+                                    foreach ($ReadSet->Execute()->getResult() as $cat):
                                         echo "<option ";
 
                                         if ($post['post_category'] == $cat->category_id):

@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS nc_registro_has_nc_origem (
     PRIMARY KEY(reg_id, origem_id)
 );
 
+-- deve mesmo existir ?
 CREATE TABLE IF NOT EXISTS ws_user_has_nc_setor(
     user_id INT NOT NULL,
     setor_id INT NOT NULL,

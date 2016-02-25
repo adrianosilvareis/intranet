@@ -6,7 +6,7 @@
  * Classe que representa a tabela ws_setor_type do banco de dados
  * @copyright (c) 2015, Adriano S. Reis Programador
  */
-class WsSetor extends Beans {
+class WsSetorType extends Beans {
 
     private $type_id;
     private $type_content;
