@@ -75,9 +75,9 @@
                         <option value = "">Selecione o Nível</option>
                         <option value = "1" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 1) echo 'selected="selected"'; ?>>Admin</option>
                         <option value="2" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 2) echo 'selected="selected"'; ?>>Editor</option>
-                        <option value="3" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 3) echo 'selected="selected"'; ?>>Solic</option>
-                        <option value="3" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 4) echo 'selected="selected"'; ?>>Exec</option>
-                        <option value="3" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 5) echo 'selected="selected"'; ?>>Usuarios</option>
+                        <option value="3" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 3) echo 'selected="selected"'; ?>>Exec</option>
+                        <option value="4" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 4) echo 'selected="selected"'; ?>>Solic</option>
+                        <option value="5" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 5) echo 'selected="selected"'; ?>>Usuarios</option>
                     </select>
                 </label>
             </div><!-- LABEL LINE -->

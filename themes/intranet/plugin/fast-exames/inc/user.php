@@ -4,10 +4,19 @@ if (file_exists(FAST_PATH . '_models/AdminExames.class.php')):
 endif;
 
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+$cad = filter_input(INPUT_GET, "cadastro", FILTER_VALIDATE_BOOLEAN);
+
+if (!empty($cad)):
+    if (!$cad):
+        WSErro("Erro ao cadastrar solicitação!", WS_ERROR);
+    else:
+        WSErro("Solicitação cadastrada com sucesso!", WS_ACCEPT);
+    endif;
+endif;
 
 $AdminExames = new AdminExames();
 $FeAcoes = new FeAcoes();
-$FeSetor = new FeSetor();
+$WsSetor = new WsSetor();
 $FeMaterial = new FeMaterial();
 $FeExames = new FeExames();
 
@@ -17,31 +26,22 @@ $Pager->ExePager($getPage, 15);
 
 $FeExames->Execute()->FullRead("SELECT * FROM fe_exames WHERE ex_cancelado = 0 ORDER BY ex_status, ex_data_abertura DESC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 
-//separa os dados que podem ser nulos
-$nulos = ["ex_info_encaminhamento" => $Dados['ex_info_encaminhamento'], "ex_info_interferentes" => $Dados['ex_info_interferentes'], "ex_info_coleta" => $Dados['ex_info_coleta'], "ex_info_paciente" => $Dados['ex_info_paciente'], "ex_observacao" => $Dados['ex_observacao'], "ex_unidade" => $Dados['ex_unidade'], "ex_sinonimia" => $Dados['ex_sinonimia']];
-//exclui os mesmos do array Dados
-unset($Dados['ex_sinonimia'], $Dados['ex_unidade'], $Dados['ex_observacao'], $Dados['ex_info_paciente'], $Dados['ex_info_coleta'], $Dados['ex_info_interferentes'], $Dados['ex_info_encaminhamento']);
+if (!empty($Dados)):
+    $obs = $Dados['ex_observacao'];
+    unset($Dados['ex_observacao']);
 
-if (!empty($Dados) && !in_array("", $Dados)):
-    $Dados['ws_users_soli'] = Check::UserLogin()['user_id'];
-    $Dados['ex_data_abertura'] = date('Y-m-d H:i:s');
-    $Dados['ex_sinonimia'] = $nulos['ex_sinonimia'];
-    $Dados['ex_unidade'] = $nulos['ex_unidade'];
-    $Dados['ex_observacao'] = $nulos['ex_observacao'];
-    $Dados['ex_info_paciente'] = $nulos['ex_info_paciente'];
-    $Dados['ex_info_coleta'] = $nulos['ex_info_coleta'];
-    $Dados['ex_info_interferentes'] = $nulos['ex_info_interferentes'];
-    $Dados['ex_info_encaminhamento'] = $nulos['ex_info_encaminhamento'];
-    unset($nulos);
+    if (!in_array("", $Dados)):
+        $Dados['ws_users_soli'] = Check::UserLogin()['user_id'];
+        $Dados['ex_data_abertura'] = date('Y-m-d H:i:s');
+        $Dados['ex_observacao'] = $obs;
 
-    if (!is_numeric($Dados['ex_valor']) || !is_numeric($Dados['ex_prazo'])):
-        WSErro("O <b>valor e o prazo</b> informado tem que ser numerico!", WS_ALERT);
-        WSErro("A solicitação não foi salva!", WS_ERROR);
-    elseif ($AdminExames->ExeCreate($Dados)):
-        WSErro("Solicitação cadastrada com sucesso!", WS_ACCEPT);
-        $Dados = null;
+        if ($AdminExames->ExeCreate($Dados)):
+            header("Location: " . HOME . "/plugin/fast-exames&cadastro=true");
+        else:
+            header("Location: " . HOME . "/plugin/fast-exames&cadastro=false");
+        endif;
     else:
-        WSErro("Erro ao cadastrar solicitação!", WS_ERROR);
+        WSErro("Por favor, preencha todos os campos!", WS_ALERT);
     endif;
 endif;
 ?>
@@ -82,12 +82,7 @@ endif;
                     <input required="true" class="form-control" title="Minemônico" type="text" name="ex_minemonico" placeholder="Minemônico" value="<?= $Dados['ex_minemonico']; ?>">
                 </div>
 
-                <div class="form-group col-md-12">
-                    <label>Sinonimia:</label>
-                    <textarea class="form-control" title="Sinonimia" name="ex_sinonimia" placeholder="Sinonimia"><?= $Dados['ex_sinonimia']; ?></textarea>
-                </div>
-
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label>Ação a executar:</label>
                     <select  required="true" title="Ação a executar" name="fe_acoes" class="form-control">
                         <option value="">Selecione uma ação</option>
@@ -101,61 +96,6 @@ endif;
                         endforeach;
                         ?>
                     </select>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label>Solicitante:</label>
-                    <select  required="true" title="Setor Solicitante" name="fe_setor_soli" class="form-control">
-                        <option value="">Selecione um solicitante</option>
-                        <?php
-                        $FeSetor->setSet_status(true);
-                        $FeSetor->setSet_solicita(true);
-                        $FeSetor->Execute()->Query("#set_status# AND #set_solicita#");
-                        foreach ($FeSetor->Execute()->getResult() as $setor):
-                            extract((array) $setor);
-                            $select = ($Dados['fe_setor_soli'] == $set_id ? 'selected=true' : '');
-                            echo "<option value=\"{$set_id}\" {$select}>{$set_descricao}</option>";
-                        endforeach;
-                        ?>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label>Setor execução:</label>
-                    <select required="true" title="Setor Solicitante" name="fe_setor_exec" class="form-control">
-                        <option value="">Selecione um setor</option>
-                        <?php
-                        $FeSetor->setSet_status(true);
-                        $FeSetor->setSet_solicita(null);
-                        $FeSetor->setSet_execucao(true);
-                        $FeSetor->Execute()->Query("#set_status# AND #set_execucao#");
-                        foreach ($FeSetor->Execute()->getResult() as $setor):
-                            extract((array) $setor);
-                            $select = ($Dados['fe_setor_exec'] == $set_id ? 'selected=true' : '');
-                            echo "<option value=\"{$set_id}\" {$select}>{$set_descricao}</option>";
-                        endforeach;
-                        ?>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label>Unidade:</label>
-                    <input class="form-control" title="Unidade" type="text" name="ex_unidade" placeholder="Unidade" value="<?= $Dados['ex_unidade']; ?>">
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label>Prazo:</label>
-                    <input required="true" class="form-control" title="Prazo" type="text" name="ex_prazo" placeholder="Prazo" value="<?= $Dados['ex_prazo']; ?>">
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label>Valor:</label>
-                    <input required="true" class="form-control" title="Valor" type="text" name="ex_valor" placeholder="Valor" value="<?= $Dados['ex_valor']; ?>">
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label>Método:</label>
-                    <input required="true" class="form-control" title="Valor" type="text" name="ex_metodo" placeholder="Metodo" value="<?= $Dados['ex_metodo']; ?>">
                 </div>
 
                 <div class="form-group col-md-6">
@@ -174,34 +114,55 @@ endif;
                     </select>
                 </div>
 
-                <div class="form-group col-md-12">
-                    <label>Vr:</label>
-                    <textarea required="true" class="form-control" title="Valor de Referencia" name="ex_valor_referencia" placeholder="Valor de Referencia"><?= $Dados['ex_valor_referencia']; ?></textarea>
+                <div class="form-group col-md-6">
+                    <label>Setor Solicitante:</label>
+                    <select  required="true" title="Setor Solicitante" name="ws_setor_soli" class="form-control">
+                        <option value="">Selecione um setor</option>
+                        <?php
+                        $WsSetor->setSetor_status(true);
+                        $WsSetor->Execute()->Query("setor_status=1 AND setor_type!=2 AND setor_type!=1 AND (setor_category='geral' OR setor_category='fast-exames')");
+                        foreach ($WsSetor->Execute()->getResult() as $setor):
+                            extract((array) $setor);
+                            $select = ($Dados['ws_setor_soli'] == $setor_id ? 'selected=true' : '');
+                            echo "<option value=\"{$setor_id}\" {$select}>{$setor_content}</option>";
+                        endforeach;
+                        ?>
+                    </select>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Informação Paciente:</label>
-                    <textarea class="form-control" title="Info Paciente" name="ex_info_paciente" placeholder="Info Paciente"><?= $Dados['ex_info_paciente']; ?></textarea>
+                    <label>Setor execução:</label>
+                    <select required="true" title="Setor Solicitante" name="ws_setor_exec" class="form-control">
+                        <option value="">Selecione um setor</option>
+                        <?php
+                        $WsSetor->Execute()->Query("setor_status=1 AND (setor_type=2 OR setor_type=1) AND (setor_category='geral' OR setor_category='fast-exames')");
+                        foreach ($WsSetor->Execute()->getResult() as $setor):
+                            extract((array) $setor);
+                            $select = ($Dados['fe_setor_exec'] == $setor_id ? 'selected=true' : '');
+                            echo "<option value=\"{$setor_id}\" {$select}>{$setor_content}</option>";
+                        endforeach;
+                        ?>
+                    </select>
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label>Informação Coleta:</label>
-                    <textarea class="form-control" title="Info Coleta" name="ex_info_coleta" placeholder="Info Coleta"><?= $Dados['ex_info_coleta']; ?></textarea>
+                <div class="form-group col-md-4">
+                    <label>Unidade:</label>
+                    <input required="true" class="form-control" title="Unidade" type="text" name="ex_unidade" placeholder="Unidade" value="<?= $Dados['ex_unidade']; ?>">
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label>Informação Encaminhamento:</label>
-                    <textarea class="form-control" title="Info Encaminhamento" name="ex_info_encaminhamento" placeholder="Info Encaminhamento"><?= $Dados['ex_info_encaminhamento']; ?></textarea>
+                <div class="form-group col-md-4">
+                    <label>Prazo:</label>
+                    <input required="true" class="form-control" title="Prazo" type="text" name="ex_prazo" placeholder="Prazo" value="<?= $Dados['ex_prazo']; ?>">
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label>Informação Interferentes:</label>
-                    <textarea class="form-control" title="Info Interferentes" name="ex_info_interferentes" placeholder="Info Interferentes"><?= $Dados['ex_info_interferentes']; ?></textarea>
+                <div class="form-group col-md-4">
+                    <label>Valor:</label>
+                    <input required="true" class="form-control" title="Valor" type="text" name="ex_valor" placeholder="Valor" value="<?= $Dados['ex_valor']; ?>">
                 </div>
 
                 <div class="form-group col-md-12">
                     <label>Observações:</label>
-                    <textarea class="form-control" title="Observações internas" name="ex_observacao" placeholder="Observações internas"><?= $Dados['ex_observacao']; ?></textarea>
+                    <textarea class="form-control" title="Observações internas" name="ex_observacao" placeholder="Observações internas"><?= (!empty($Dados['ex_observacao']) ? $Dados['ex_observacao'] : ""); ?></textarea>
                 </div>
             </div>
 
@@ -238,7 +199,7 @@ endif;
                         ?>
                         <tr>
                             <td><?= Check::Words($ex_descricao, 3); ?></td>
-                            <td><?= $AdminExames->Setor($fe_setor_exec); ?></td>
+                            <td><?= $AdminExames->Setor($ws_setor_exec); ?></td>
                             <td><?= ($ex_status ? "concluido" : "em processamento") ?></td>
                             <td><?= date("d/m/Y H:i:s", strtotime($ex_data_abertura)); ?></td>
                             <td><?= ($ex_status ? date("d/m/Y H:i:s", strtotime($ex_data_fechamento)) : ""); ?></td>

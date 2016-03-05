@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS ws_posts_file (post_id INT, file_id INT NOT NULL AUTO
 CREATE TABLE IF NOT EXISTS ws_siteviews (siteviews_id INT NOT NULL AUTO_INCREMENT, siteviews_date DATE NOT NULL, siteviews_users DECIMAL(10) NOT NULL, siteviews_views DECIMAL(10) NOT NULL, siteviews_pages DECIMAL(10) NOT NULL, PRIMARY KEY (siteviews_id));
 CREATE TABLE IF NOT EXISTS ws_siteviews_agent (agent_id INT NOT NULL AUTO_INCREMENT, agent_name VARCHAR(255) NOT NULL, agent_views DECIMAL(10) NOT NULL, agent_lastview TIMESTAMP DEFAULT CURRENT_TIMESTAMP  NOT NULL, PRIMARY KEY (agent_id));
 CREATE TABLE IF NOT EXISTS ws_siteviews_online (online_id INT NOT NULL AUTO_INCREMENT, online_session VARCHAR(255) NOT NULL, online_startview TIMESTAMP DEFAULT CURRENT_TIMESTAMP  NOT NULL, online_endview TIMESTAMP NOT NULL, online_ip VARCHAR(255) NOT NULL, online_url VARCHAR(255) NOT NULL, online_agent VARCHAR(255) NOT NULL, agent_name VARCHAR(255), PRIMARY KEY (online_id));
+CREATE TABLE IF NOT EXISTS ws_setor(setor_id INT NOT NULL AUTO_INCREMENT, setor_content VARCHAR(255) NOT NULL, setor_status BOOLEAN DEFAULT TRUE, setor_email VARCHAR(255), setor_type INT, setor_category VARCHAR(255), setor_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(setor_id));
+CREATE TABLE IF NOT EXISTS ws_setor_type(type_id INT NOT NULL AUTO_INCREMENT, type_content VARCHAR(255) NOT NULL, type_status BOOLEAN DEFAULT TRUE, PRIMARY KEY(type_id));
 CREATE TABLE IF NOT EXISTS ws_users (user_id INT NOT NULL AUTO_INCREMENT, user_name VARCHAR(255) NOT NULL, user_lastname VARCHAR(255) NOT NULL, user_email VARCHAR(255) NOT NULL, user_password VARCHAR(255) NOT NULL, user_registration TIMESTAMP DEFAULT CURRENT_TIMESTAMP  NOT NULL, user_lastupdate TIMESTAMP, user_level INT DEFAULT 1  NOT NULL, PRIMARY KEY (user_id));
 INSERT INTO ws_users (user_name, user_lastname, user_email, user_password, user_registration, user_lastupdate, user_level) 
 	VALUES ('Administrador', 'Sistema', 'admin@system.com.br', '25f9e794323b453885f5181f1b624d0b', now(), now(), 3);
@@ -13,6 +15,8 @@ INSERT INTO ws_categories (category_parent, category_name, category_title, categ
                (NULL, 'siderbar', 'Siderbar', 'Todas as siderbar', DEFAULT, NULL, DEFAULT),
                (2, 'siderbar-left', 'Siderbar Left', 'Barra lateral esquerda', DEFAULT, NULL, DEFAULT);
 
+CREATE TABLE IF NOT EXISTS app_youtube (youtube_id INT NOT NULL AUTO_INCREMENT, youtube_title VARCHAR(50), youtube_url VARCHAR(50), youtube_author VARCHAR(50), youtube_date TIMESTAMP, youtube_status TINYINT, PRIMARY KEY (youtube_id));
+CREATE TABLE IF NOT EXISTS app_niver(niver_id INT NOT NULL AUTO_INCREMENT, niver_nome VARCHAR(50), niver_setor VARCHAR(50), niver_data TIMESTAMP, niver_ordem INT NOT NULL, PRIMARY KEY (niver_id));
 DROP TABLE IF EXISTS `app_cidades`;
 CREATE TABLE `app_cidades` (`cidade_id` int(11) NOT NULL AUTO_INCREMENT,`estado_id` int(11) DEFAULT NULL,`cidade_nome` varchar(75) DEFAULT NULL,`cidade_uf` varchar(5) DEFAULT NULL, PRIMARY KEY (`cidade_id`)) ENGINE=InnoDB AUTO_INCREMENT=14261 DEFAULT CHARSET=latin1;
 LOCK TABLES `app_cidades` WRITE;

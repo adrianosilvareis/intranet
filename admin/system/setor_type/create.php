@@ -27,7 +27,7 @@ endif;
             if ($cadastra->getResult() == null):
                 WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
             else: 
-                header('Location: painel.php?exe=setor_type/update&create=true&setid=' . $cadastra->getResult());
+                header('Location: painel.php?exe=setor_type/update&create=true&typeId=' . $cadastra->getResult());
             endif;
         endif;
         ?>

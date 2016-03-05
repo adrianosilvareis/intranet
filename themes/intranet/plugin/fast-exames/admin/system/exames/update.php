@@ -11,38 +11,34 @@ $create = filter_input(INPUT_GET, "create", FILTER_DEFAULT);
 $AdminExames = new AdminExames();
 
 $FeAcoes = new FeAcoes();
-$FeSetor = new FeSetor();
+$WsSetor = new WsSetor();
 $FeMaterial = new FeMaterial();
 
 if (!empty($Dados) && !empty($Dados['sendPostForm'])):
-    $Dados['ex_id'] = $examesId;
-
-    switch ($Dados['sendPostForm']) :
-        case 'concluir':
-            $Dados['ws_users'] = Check::UserLogin()['user_id'];
-            $Dados['ex_data_fechamento'] = date('Y-m-d H:i:s');
-            $Dados['ex_status'] = true;
-            break;
-        case 'cancelar':
-            $Dados['ex_cancelado'] = true;
-            $Dados['ws_users'] = Check::UserLogin()['user_id'];
-            $Dados['ex_data_fechamento'] = date('Y-m-d H:i:s');
-            break;
-    endswitch;
     unset($Dados['sendPostForm']);
 
-    if (!empty($Dados['ex_status']) && !empty($Dados['ex_paciente_os']) || empty($Dados['ex_status'])):
+    $Dados['ex_id'] = $examesId;
+    $Dados['ws_users'] = Check::UserLogin()['user_id'];
+    $Dados['ex_data_fechamento'] = date('Y-m-d H:i:s');
+    $Dados['ex_status'] = true;
+    $Obs = $Dados['ex_observacao'];
+    unset($Dados['ex_observacao']);
+
+    if (!in_array("", $Dados)):
+        $Dados['ex_observacao'] = $Obs;
         ($AdminExames->ExeUpdate($Dados) ?
                         WSErro("Solicitação <b>{$Dados['ex_descricao']}</b> atualizada com sucesso!", WS_ACCEPT) :
                         WSErro("Erro ao atualizar solicitação!", WS_ERROR));
     else:
-        WSErro("Ops! você não informou o paciente teste", WS_INFOR);
+        WSErro("Ops! preecha todos os campos", WS_INFOR);
     endif;
 
-elseif ($AdminExames->FindId($examesId)):
-    $Dados = (array) $AdminExames->FindId($examesId);
 else:
-    WSErro("Solicitação não encontrada!", WS_ERROR);
+    if ($AdminExames->FindId($examesId)):
+        $Dados = (array) $AdminExames->FindId($examesId);
+    else:
+        WSErro("Solicitação não encontrada!", WS_ERROR);
+    endif;
 endif;
 
 if (!empty($create)):
@@ -61,11 +57,6 @@ endif;
         <div class="form-group col-md-4">
             <label>Minemônico:</label>
             <input required="true" class="form-control" title="Minemônico" type="text" name="ex_minemonico" placeholder="Minemônico" value="<?= $Dados['ex_minemonico']; ?>">
-        </div>
-
-        <div class="form-group col-md-12">
-            <label>Sinonimia:</label>
-            <textarea class="form-control" title="Sinonimia" name="ex_sinonimia" placeholder="Sinonimia"><?= $Dados['ex_sinonimia']; ?></textarea>
         </div>
 
         <div class="form-group col-md-8">
@@ -90,17 +81,16 @@ endif;
         </div>
 
         <div class="form-group col-md-6">
-            <label>Solicitante:</label>
-            <select  required="true" title="Setor Solicitante" name="fe_setor_soli" class="form-control">
-                <option value="">Selecione um solicitante</option>
+            <label>Setor Solicitante:</label>
+            <select  required="true" title="Setor Solicitante" name="ws_setor_soli" class="form-control">
+                <option value="">Selecione um setor</option>
                 <?php
-                $FeSetor->setSet_status(true);
-                $FeSetor->setSet_solicita(true);
-                $FeSetor->Execute()->Query("#set_status# AND #set_solicita#");
-                foreach ($FeSetor->Execute()->getResult() as $setor):
+                $WsSetor->setSetor_status(true);
+                $WsSetor->Execute()->Query("setor_status=1 AND setor_type!=2 AND setor_type!=1 AND (setor_category='geral' OR setor_category='fast-exames')");
+                foreach ($WsSetor->Execute()->getResult() as $setor):
                     extract((array) $setor);
-                    $select = ($Dados['fe_setor_soli'] == $set_id ? 'selected=true' : '');
-                    echo "<option value=\"{$set_id}\" {$select}>{$set_descricao}</option>";
+                    $select = ($Dados['ws_setor_soli'] == $setor_id ? 'selected=true' : '');
+                    echo "<option value=\"{$setor_id}\" {$select}>{$setor_content}</option>";
                 endforeach;
                 ?>
             </select>
@@ -108,17 +98,14 @@ endif;
 
         <div class="form-group col-md-6">
             <label>Setor execução:</label>
-            <select required="true" title="Setor Solicitante" name="fe_setor_exec" class="form-control">
+            <select required="true" title="Setor Solicitante" name="ws_setor_exec" class="form-control">
                 <option value="">Selecione um setor</option>
                 <?php
-                $FeSetor->setSet_status(true);
-                $FeSetor->setSet_solicita(null);
-                $FeSetor->setSet_execucao(true);
-                $FeSetor->Execute()->Query("#set_status# AND #set_execucao#");
-                foreach ($FeSetor->Execute()->getResult() as $setor):
+                $WsSetor->Execute()->Query("setor_status=1 AND (setor_type=2 OR setor_type=1) AND (setor_category='geral' OR setor_category='fast-exames')");
+                foreach ($WsSetor->Execute()->getResult() as $setor):
                     extract((array) $setor);
-                    $select = ($Dados['fe_setor_exec'] == $set_id ? 'selected=true' : '');
-                    echo "<option value=\"{$set_id}\" {$select}>{$set_descricao}</option>";
+                    $select = ($Dados['ws_setor_exec'] == $setor_id ? 'selected=true' : '');
+                    echo "<option value=\"{$setor_id}\" {$select}>{$setor_content}</option>";
                 endforeach;
                 ?>
             </select>
@@ -140,11 +127,6 @@ endif;
         </div>
 
         <div class="form-group col-md-6">
-            <label>Método:</label>
-            <input required="true" class="form-control" title="Valor" type="text" name="ex_metodo" placeholder="Metodo" value="<?= $Dados['ex_metodo']; ?>">
-        </div>
-
-        <div class="form-group col-md-6">
             <label>Material:</label>
             <select  required="true" title="Material" name="fe_material" class="form-control">
                 <option value="">Selecione um material</option>
@@ -161,47 +143,14 @@ endif;
         </div>
 
         <div class="form-group col-md-12">
-            <label>Vr:</label>
-            <textarea required="true" class="form-control" title="Valor de Referencia" name="ex_valor_referencia" placeholder="Valor de Referencia"><?= $Dados['ex_valor_referencia']; ?></textarea>
-        </div>
-
-        <div class="form-group col-md-6">
-            <label>Informação Paciente:</label>
-            <textarea class="form-control" title="Info Paciente" name="ex_info_paciente" placeholder="Info Paciente"><?= $Dados['ex_info_paciente']; ?></textarea>
-        </div>
-
-        <div class="form-group col-md-6">
-            <label>Informação Coleta:</label>
-            <textarea class="form-control" title="Info Coleta" name="ex_info_coleta" placeholder="Info Coleta"><?= $Dados['ex_info_coleta']; ?></textarea>
-        </div>
-
-        <div class="form-group col-md-6">
-            <label>Informação Encaminhamento:</label>
-            <textarea class="form-control" title="Info Encaminhamento" name="ex_info_encaminhamento" placeholder="Info Encaminhamento"><?= $Dados['ex_info_encaminhamento']; ?></textarea>
-        </div>
-
-        <div class="form-group col-md-6">
-            <label>Informação Interferentes:</label>
-            <textarea class="form-control" title="Info Interferentes" name="ex_info_interferentes" placeholder="Info Interferentes"><?= $Dados['ex_info_interferentes']; ?></textarea>
-        </div>
-
-        <div class="form-group col-md-12">
             <label>Observações:</label>
             <textarea class="form-control" title="Observações internas" name="ex_observacao" placeholder="Observações internas"><?= $Dados['ex_observacao']; ?></textarea>
         </div>
     </div>
 
     <hr>
-    <div class="btn-group">
-        <button type="submit" class="btn btn-primary btn-lg" name="sendPostForm" value="editar">
-            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
-        </button>
-        <button type="submit" class="btn btn-success btn-lg" name="sendPostForm" value="concluir">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Concluir
-        </button>
-        <button type="submit" class="btn btn-danger btn-lg" name="sendPostForm" value="cancelar">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancelar
-        </button>
-    </div>
+    <button type="submit" class="btn btn-success btn-lg" name="sendPostForm" value="concluir">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Concluir
+    </button>
 
 </form>

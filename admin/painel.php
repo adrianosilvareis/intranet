@@ -3,7 +3,7 @@ ob_start();
 session_start();
 require('../_app/Config.inc.php');
 
-$Login = new Login(1);
+$Login = new Login(2);
 $logoff = filter_input(INPUT_GET, 'logoff', FILTER_VALIDATE_BOOLEAN);
 $getexe = filter_input(INPUT_GET, 'exe', FILTER_DEFAULT);
 Check::UserOnline();
@@ -20,7 +20,7 @@ if ($logoff):
     header('Location: index.php?exe=logoff');
 endif;
 
-if ($userlogin['user_level'] > 1):
+if ($userlogin['user_level'] > 2):
     header('Location: ' . HOME);
 endif;
 ?>

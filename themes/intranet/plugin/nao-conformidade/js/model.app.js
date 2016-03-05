@@ -1,1 +1,1 @@
-var appNCon = angular.module("naoConformidade" , ["objetoAPI", "uiFormat", "filterDefault"]);
+var appNCon = angular.module("naoConformidade", ["ngMessages", 'ngRoute',"objetoAPI", 'uiFormat', 'filterDefault']);

@@ -3,9 +3,12 @@
 
     {{message}}
     <div class="row">
-        
+
         <form class="form form-horizontal col-md-4 ">
-            <input class="form-control" type="text" placeholder="Descrição" name="content" ng-model="setor.setor_content"/>
+            <input class="form-control" type="text" placeholder="Descrição" name="setor_content" ng-model="setor.setor_content"/>
+            <select class="form-control" name="setor_type" ng-model="setor.setor_type" ng-options="type.type_id as type.type_content for type in types">
+                <option value="">Selecione um tipo</option>
+            </select>
             <div class="btn-group" style="margin-top: 15px; margin-left: 50%">
                 <input class="btn btn-primary btn-block" type="submit" ng-click="salvarSetor(setor)" ng-disabled="!setor.setor_content" ng-if="!setor.edited" value="Adicionar Setor"/>
                 <input class="btn btn-success btn-block" type="submit" ng-click="salvarSetor(setor)" ng-disabled="!setor.setor_content" ng-if="setor.edited" value="Salvar Edição"/>

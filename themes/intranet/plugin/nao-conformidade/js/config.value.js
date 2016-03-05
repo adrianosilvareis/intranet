@@ -1,3 +1,3 @@
 appNCon.value("config", {
-    apiURL: "/intranet/api/nao-conformidade"
+    apiURL: "/intranet/api/nao-conformidade",
 });

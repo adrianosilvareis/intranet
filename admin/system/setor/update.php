@@ -40,7 +40,7 @@ endif;
 
         $checkCreate = filter_input(INPUT_GET, 'create', FILTER_VALIDATE_BOOLEAN);
         if ($checkCreate && empty($cadastra)):
-            WSErro("O tipo <b>{$data['type_content']}</b> foi cadastrado com sucesso no sistema! Continue atualizando o mesmo!", WS_ACCEPT);
+            WSErro("O Setor <b>{$data['setor_content']}</b> foi cadastrado com sucesso no sistema! Continue atualizando o mesmo!", WS_ACCEPT);
         endif;
         ?>
 
@@ -59,23 +59,23 @@ endif;
 
                 <label class="label_small">
                     <span class="field">Data:</span>
-                    <input type="text" class="formDate center" name="post_date" value="<?= (isset($data['setor_date']) ? date('d/m/Y H:i:s', strtotime($data['setor_date'])) : date('d/m/Y H:i:s')); ?>" />
+                    <input type="text" class="formDate center" name="setor_date" value="<?= (isset($data['setor_date']) ? date('d/m/Y H:i:s', strtotime($data['setor_date'])) : date('d/m/Y H:i:s')); ?>" />
                 </label>
 
                 <label class="label_small left">
                     <span class="field">Tipo:</span>
                     <select name="setor_type">
-                        <option value="null"> Selecione um tipo: </option>
+                        <option value=""> Selecione um tipo: </option>
                         <?php
                         $ReadSet = new WsSetorType();
                         $ReadSet->Execute()->findAll();
                         if (!$ReadSet->Execute()->getResult()):
-                            echo '<option disabled="disable" value="null"> Cadastre antes um tipo! </option>';
+                            echo '<option disabled="disable" value=""> Cadastre antes um tipo! </option>';
                         else:
                             foreach ($ReadSet->Execute()->getResult() as $ses):
                                 echo "<option value=\"{$ses->type_id}\" ";
 
-                                if ($ses->type_id == $data['type_content']):
+                                if ($ses->type_id == $data['setor_type']):
                                     echo ' selected="seleted" ';
                                 endif;
 
@@ -84,6 +84,11 @@ endif;
                         endif;
                         ?>
                     </select>
+                </label>
+
+                <label class="label_small">
+                    <span class="field">Categoria:</span>
+                    <input type="text" class="formDate center" name="setor_category" value="<?php if (isset($data)) echo $data['setor_category']; ?>" />
                 </label>
             </div>
 

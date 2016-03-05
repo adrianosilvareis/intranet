@@ -20,18 +20,18 @@ endif;
 
         if (!empty($data['SendPostForm'])):
             unset($data['SendPostForm']);
-
+        
             $cadastra = new AdminSetor();
             $cadastra->ExeCreate($data);
-            
+
             if ($cadastra->getResult() == null):
                 WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
-            else: 
-                header('Location: painel.php?exe=setor/update&create=true&setid=' . $cadastra->getResult());
+            else:
+                header('Location: painel.php?exe=setor/update&create=true&setId=' . $cadastra->getResult());
             endif;
         endif;
         ?>
-        
+
         <form name="PostForm" action="" method="post" enctype="multipart/form-data">
             <label class="label">
                 <span class="field">Titulo:</span>
@@ -53,12 +53,12 @@ endif;
                 <label class="label_small left">
                     <span class="field">Tipo:</span>
                     <select name="setor_type">
-                        <option value="null"> Selecione um tipo: </option>
+                        <option value=""> Selecione um tipo: </option>
                         <?php
                         $ReadSet = new WsSetorType();
                         $ReadSet->Execute()->findAll();
                         if (!$ReadSet->Execute()->getResult()):
-                            echo '<option disabled="disable" value="null"> Cadastre antes um tipo! </option>';
+                            echo '<option disabled="disable" value=""> Cadastre antes um tipo! </option>';
                         else:
                             foreach ($ReadSet->Execute()->getResult() as $ses):
                                 echo "<option value=\"{$ses->type_id}\" ";
@@ -72,6 +72,11 @@ endif;
                         endif;
                         ?>
                     </select>
+                </label>
+                
+                <label class="label_small">
+                    <span class="field">Categoria:</span>
+                    <input type="text" class="formDate center" name="setor_category" value="<?php if (isset($data)) echo $data['setor_category']; ?>" />
                 </label>
             </div>
 

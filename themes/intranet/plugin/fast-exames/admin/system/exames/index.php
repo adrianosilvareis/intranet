@@ -55,7 +55,7 @@ $Pager->ExePager($getPage, 15);
 
 
 $FeExames = new FeExames();
-$FeExames->Execute()->FullRead("SELECT * FROM fe_exames ORDER BY ex_cancelado,ex_status LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
+$FeExames->Execute()->FullRead("SELECT * FROM fe_exames WHERE ex_cancelado = 0 ORDER BY ex_status, ex_data_fechamento DESC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}", true);
 
 if (!$FeExames->Execute()->getResult()):
     $Pager->ReturnPage();
@@ -81,14 +81,14 @@ else:
             foreach ($FeExames->Execute()->getResult() as $exames):
                 extract((array) $exames);
                 ?>    
-                <tr <?= ($ex_cancelado ? "class=\"danger\"" : "") ?>>
+                <tr>
                     <td><?= Check::Words($ex_descricao, 4); ?></td>
                     <td><?= $ex_minemonico; ?></td>
-                    <td><?= $AdminExames->Setor($fe_setor_exec); ?></td>
+                    <td><?= $AdminExames->Setor($ws_setor_exec); ?></td>
                     <td><?= $AdminExames->Acao($fe_acoes); ?></td>
                     <td><?= date('d/m/y | H:i', strtotime($ex_data_abertura)) . "H"; ?></td>
-                    <td><?= date('d/m/y | H:i', strtotime($ex_data_fechamento)) . "H"; ?></td>
-                    <td><?= $AdminExames->Setor($fe_setor_soli); ?></td>
+                    <td><?= (($ex_data_fechamento != "0000-00-00 00:00:00") ? date('d/m/y | H:i', strtotime($ex_data_fechamento)) . "H" : ""); ?></td>
+                    <td><?= $AdminExames->Setor($ws_setor_soli); ?></td>
                     <td><?= $AdminExames->Usuario($ws_users_soli); ?></td>
                     <td>
                         <ul class="post_actions plugin">

@@ -1,6 +1,7 @@
-appAgenda.controller("agendaSetor", function ($scope, setorAPI) {
+appAgenda.controller("agendaSetor", function ($scope, setorAPI, objetoAPI, config) {
 
     $scope.setores = [];
+    $scope.types = [];
 
     var BroadCast = function (msg) {
         $scope.$emit('handleEmit', {setores: msg});
@@ -34,6 +35,12 @@ appAgenda.controller("agendaSetor", function ($scope, setorAPI) {
         });
     };
 
+    var carregarTypes = function () {
+        objetoAPI.getObjeto(config.apiURL + "/setor_type.api.php").success(function (data) {
+            $scope.types = data;
+        });
+    };
+
     $scope.isSetorEdited = function (setor) {
         $scope.setor = setor;
         $scope.setor.edited = true;
@@ -51,4 +58,5 @@ appAgenda.controller("agendaSetor", function ($scope, setorAPI) {
     };
 
     carregarSetores();
+    carregarTypes();
 });

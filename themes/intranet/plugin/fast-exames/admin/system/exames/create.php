@@ -9,8 +9,7 @@ $AdminExames = new AdminExames();
 
 
 $FeAcoes = new FeAcoes();
-$FeSetor = new FeSetor();
-$FeMetodo = new FeMetodo();
+$WsSetor = new WsSetor();
 $FeMaterial = new FeMaterial();
 
 if (!empty($Dados)):
@@ -39,12 +38,7 @@ endif;
             <input required="true" class="form-control" title="Minemônico" type="text" name="ex_minemonico" placeholder="Minemônico" value="<?= $Dados['ex_minemonico']; ?>">
         </div>
 
-        <div class="form-group col-md-12">
-            <label>Sinonimia:</label>
-            <textarea class="form-control" title="Sinonimia" name="ex_sinonimia" placeholder="Sinonimia"><?= $Dados['ex_sinonimia']; ?></textarea>
-        </div>
-
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
             <label>Ação a executar:</label>
             <select  required="true" title="Ação a executar" name="fe_acoes" class="form-control">
                 <option value="">Selecione uma ação</option>
@@ -58,61 +52,6 @@ endif;
                 endforeach;
                 ?>
             </select>
-        </div>
-
-        <div class="form-group col-md-6">
-            <label>Solicitante:</label>
-            <select  required="true" title="Setor Solicitante" name="fe_setor_soli" class="form-control">
-                <option value="">Selecione um solicitante</option>
-                <?php
-                $FeSetor->setSet_status(true);
-                $FeSetor->setSet_solicita(true);
-                $FeSetor->Execute()->FullRead("SELECT * FROM fe_setor WHERE set_status = :set_status AND set_solicita = :set_solicita ORDER by set_descricao");
-                foreach ($FeSetor->Execute()->getResult() as $setor):
-                    extract((array) $setor);
-                    $select = ($Dados['fe_setor_soli'] == $set_id ? 'selected=true' : '');
-                    echo "<option value=\"{$set_id}\" {$select}>{$set_descricao}</option>";
-                endforeach;
-                ?>
-            </select>
-        </div>
-
-        <div class="form-group col-md-6">
-            <label>Setor execução:</label>
-            <select required="true" title="Setor Solicitante" name="fe_setor_exec" class="form-control">
-                <option value="">Selecione um setor</option>
-                <?php
-                $FeSetor->setSet_status(true);
-                $FeSetor->setSet_solicita(null);
-                $FeSetor->setSet_execucao(true);
-                $FeSetor->Execute()->FullRead("SELECT * FROM fe_setor WHERE set_status = :set_status AND set_execucao = :set_execucao ORDER by set_descricao");
-                foreach ($FeSetor->Execute()->getResult() as $setor):
-                    extract((array) $setor);
-                    $select = ($Dados['fe_setor_exec'] == $set_id ? 'selected=true' : '');
-                    echo "<option value=\"{$set_id}\" {$select}>{$set_descricao}</option>";
-                endforeach;
-                ?>
-            </select>
-        </div>
-
-        <div class="form-group col-md-4">
-            <label>Unidade:</label>
-            <input class="form-control" title="Unidade" type="text" name="ex_unidade" placeholder="Unidade" value="<?= $Dados['ex_unidade']; ?>">
-        </div>
-
-        <div class="form-group col-md-4">
-            <label>Prazo:</label>
-            <input required="true" class="form-control" title="Prazo" type="text" name="ex_prazo" placeholder="Prazo" value="<?= $Dados['ex_prazo']; ?>">
-        </div>
-
-        <div class="form-group col-md-4">
-            <label>Valor:</label>
-            <input required="true" class="form-control" title="Valor" type="text" name="ex_valor" placeholder="Valor" value="<?= $Dados['ex_valor']; ?>">
-        </div>
-
-        <div class="form-group col-md-6">
-            <label>Método:</label>
-            <input required="true" class="form-control" title="Valor" type="text" name="ex_metodo" placeholder="Metodo" value="<?= $Dados['ex_metodo']; ?>">
         </div>
 
         <div class="form-group col-md-6">
@@ -132,34 +71,55 @@ endif;
             </select>
         </div>
 
-        <div class="form-group col-md-12">
-            <label>Vr:</label>
-            <textarea required="true" class="form-control" title="Valor de Referencia" name="ex_valor_referencia" placeholder="Valor de Referencia"><?= $Dados['ex_valor_referencia']; ?></textarea>
+        <div class="form-group col-md-6">
+            <label>Setor Solicitante:</label>
+            <select  required="true" title="Setor Solicitante" name="ws_setor_soli" class="form-control">
+                <option value="">Selecione um setor</option>
+                <?php
+                $WsSetor->setSetor_status(true);
+                $WsSetor->Execute()->Query("setor_status=1 AND setor_type!=2 AND setor_type!=1 AND (setor_category='geral' OR setor_category='fast-exames')");
+                foreach ($WsSetor->Execute()->getResult() as $setor):
+                    extract((array) $setor);
+                    $select = ($Dados['ws_setor_soli'] == $setor_id ? 'selected=true' : '');
+                    echo "<option value=\"{$setor_id}\" {$select}>{$setor_content}</option>";
+                endforeach;
+                ?>
+            </select>
         </div>
 
         <div class="form-group col-md-6">
-            <label>Informação Paciente:</label>
-            <textarea class="form-control" title="Info Paciente" name="ex_info_paciente" placeholder="Info Paciente"><?= $Dados['ex_info_paciente']; ?></textarea>
+            <label>Setor execução:</label>
+            <select required="true" title="Setor Solicitante" name="ws_setor_exec" class="form-control">
+                <option value="">Selecione um setor</option>
+                <?php
+                $WsSetor->Execute()->Query("setor_status=1 AND (setor_type=2 OR setor_type=1) AND (setor_category='geral' OR setor_category='fast-exames')");
+                foreach ($WsSetor->Execute()->getResult() as $setor):
+                    extract((array) $setor);
+                    $select = ($Dados['fe_setor_exec'] == $setor_id ? 'selected=true' : '');
+                    echo "<option value=\"{$setor_id}\" {$select}>{$setor_content}</option>";
+                endforeach;
+                ?>
+            </select>
         </div>
 
-        <div class="form-group col-md-6">
-            <label>Informação Coleta:</label>
-            <textarea class="form-control" title="Info Coleta" name="ex_info_coleta" placeholder="Info Coleta"><?= $Dados['ex_info_coleta']; ?></textarea>
+        <div class="form-group col-md-4">
+            <label>Unidade:</label>
+            <input required="true" required="true" class="form-control" title="Unidade" type="text" name="ex_unidade" placeholder="Unidade" value="<?= $Dados['ex_unidade']; ?>">
         </div>
 
-        <div class="form-group col-md-6">
-            <label>Informação Encaminhamento:</label>
-            <textarea class="form-control" title="Info Encaminhamento" name="ex_info_encaminhamento" placeholder="Info Encaminhamento"><?= $Dados['ex_info_encaminhamento']; ?></textarea>
+        <div class="form-group col-md-4">
+            <label>Prazo:</label>
+            <input required="true" class="form-control" title="Prazo" type="text" name="ex_prazo" placeholder="Prazo" value="<?= $Dados['ex_prazo']; ?>">
         </div>
 
-        <div class="form-group col-md-6">
-            <label>Informação Interferentes:</label>
-            <textarea class="form-control" title="Info Interferentes" name="ex_info_interferentes" placeholder="Info Interferentes"><?= $Dados['ex_info_interferentes']; ?></textarea>
-        </div>
+        <div class="form-group col-md-4">
+            <label>Valor:</label>
+            <input required="true" class="form-control" title="Valor" type="text" name="ex_valor" placeholder="Valor" value="<?= $Dados['ex_valor']; ?>">
+        </div>        
 
         <div class="form-group col-md-12">
             <label>Observações:</label>
-            <textarea class="form-control" title="Observações internas" name="ex_observacao" placeholder="Observações internas"><?= $Dados['ex_observacao']; ?></textarea>
+            <textarea class="form-control" title="Observações internas" name="ex_observacao" placeholder="Observações internas"><?= (!empty($Dados['ex_observacao']) ? $Dados['ex_observacao'] : ""); ?></textarea>
         </div>
     </div>
 

@@ -1,34 +1,35 @@
 <?php
 define("NCONDIR", HOME . "/" . REQUIRE_PATH . "/plugin/nao-conformidade/js");
 Register::addRegister("<script src='" . NCONDIR . "/model.app.js'></script>");
-Register::addRegister("<script src='" . NCONDIR . "/config.value.js'></script>");
+Register::addRegister("<script src='" . NCONDIR . "/config/config.value.js'></script>");
+Register::addRegister("<script src='" . NCONDIR . "/config/route.config.js'></script>");
 Register::addRegister("<script src='" . NCONDIR . "/controller/setor.ctrl.js'></script>");
-
-//include 'system/setor/index.php';
+Register::addRegister("<script src='" . NCONDIR . "/event/event.jquery.js'></script>");
 ?>
-<script>
-    var alterClass = function (id) {
-        $('.active').removeClass('active');
-        $(id).addClass('active');
-    };
-</script>
 <header id="navtab">
     <nav>
-        <h1><a href="painel.php" title="Dashboard">Dashboard</a></h1>
+        <h1><a href="#dashboard" title="Dashboard" data-toggle="tab" onclick="alterClass('#dashboard')">Dashboard</a></h1>
 
         <!--Query String-->
         <ul class="menu">
-            <li id="principal" class="li"><a class="opensub" onclick="return false;" href="#">HOME</a>
+            <li id="registro" class="li"><a class="opensub" onclick="return false;" href="#">Registro</a>
                 <ul class="sub">
-                    <li><a href="#home_create" onclick="alterClass('#principal')" data-toggle="tab">Criar Post</a></li>
-                    <li><a href="#home_list" data-toggle="tab">Listar / Editar Posts</a></li>
+                    <li><a href="#reg_create" onclick="alterClass('#registro')" data-toggle="tab">Criar Registro</a></li>
+                    <li><a href="#reg_list" onclick="alterClass('#registro')" data-toggle="tab">Listar / Editar Registro</a></li>
                 </ul>
             </li>
 
-            <li id="cat" class="li"><a class="opensub" onclick="return false;" href="#">Categorias</a>
+            <li id="origem" class="li"><a class="opensub" onclick="return false;" href="#">Origem</a>
                 <ul class="sub">
-                    <li><a href="#profile" onclick="alterClass('#cat')" data-toggle="tab">Criar Categoria</a></li>
-                    <li><a href="#profile" data-toggle="tab">Listar / Editar Categorias</a></li>
+                    <li><a href="#ori_create" onclick="alterClass('#origem')" data-toggle="tab">Criar Origem</a></li>
+                    <li><a href="#ori_list" onclick="alterClass('#origem')" data-toggle="tab">Listar / Editar Origem</a></li>
+                </ul>
+            </li>
+
+            <li id="setor" class="li"><a class="opensub" onclick="return false;" href="#">Setor</a>
+                <ul class="sub">
+                    <li><a href="#set_create" onclick="alterClass('#setor')" data-toggle="tab">Criar Setor</a></li>
+                    <li><a href="#set_list" onclick="alterClass('#setor')" data-toggle="tab">Listar / Editar Setor</a></li>
                 </ul>
             </li>
 
@@ -37,7 +38,20 @@ Register::addRegister("<script src='" . NCONDIR . "/controller/setor.ctrl.js'></
     </nav>
 </header>
 
-<div class="tab-content">
-    <div class="tab-pane" id="home_create">Create HOME</div>
-    <div class="tab-pane" id="home_list">LISTAR HOME</div>
+<div class="tab-content" ng-app="naoConformidade">
+
+    <div class="tab-pane" id="dashboard"></div>
+    <!--registro-->
+    <div class="tab-pane" id="reg_create"><?php require '/system/registro/create.php'; ?></div>
+    <div class="tab-pane" id="reg_list"><?php require '/system/registro/index.php'; ?></div>
+
+    <!--origem-->
+    <div class="tab-pane" id="ori_create"><?php require '/system/origem/origem.php'; ?>Origem</div>
+    <div class="tab-pane" id="ori_list"><?php require '/system/origem/index.php'; ?>Lista origem</div>
+
+    <!--setor-->
+    <div class="tab-content" ng-controller="setor">
+        <div class="tab-pane" id="set_create"><?php require '/system/setor/setor.php'; ?></div>
+        <div class="tab-pane" id="set_list"><?php require '/system/setor/index.php'; ?></div>
+    </div>
 </div>

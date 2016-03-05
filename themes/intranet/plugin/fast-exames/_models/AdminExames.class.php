@@ -46,9 +46,9 @@ class AdminExames {
         $update = $this->update();
 
         if ($update && $this->Data['ex_status']):
-            $FeSetor = new FeSetor();
-            $FeSetor->setSet_id($Data['fe_setor_soli']);
-            $setor = $FeSetor->Execute()->find();
+            $WsSetor = new WsSetor();
+            $WsSetor->setSetor_id($Data['ws_setor_soli']);
+            $setor = $WsSetor->Execute()->find();
 
             if (!empty($setor->set_email)):
                 $this->MensagemConcluido($setor->set_email);
@@ -113,9 +113,9 @@ class AdminExames {
      * @return string
      */
     public function Setor($Setor) {
-        $FeSetor = new FeSetor();
-        $FeSetor->setSet_id($Setor);
-        return (!empty($FeSetor->Execute()->find()) ? $FeSetor->Execute()->find()->set_descricao : null);
+        $WsSetor = new WsSetor();
+        $WsSetor->setSetor_id($Setor);
+        return (!empty($WsSetor->Execute()->find()) ? $WsSetor->Execute()->find()->setor_content : null);
     }
 
     /**
@@ -128,18 +128,6 @@ class AdminExames {
         $WsUsers = new WsUsers();
         $WsUsers->setUser_id($User);
         return (!empty($WsUsers->Execute()->find()) ? $WsUsers->Execute()->find()->user_name : null);
-    }
-
-    /**
-     * Retorna descrição do metodo com Id informado
-     * 
-     * @param int $Metodo
-     * @return string
-     */
-    public function Metodo($Metodo) {
-        $FeMetodo = new FeMetodo();
-        $FeMetodo->setMet_id($Metodo);
-        return (!empty($FeMetodo->Execute()->find()) ? $FeMetodo->Execute()->find()->met_descricao : null);
     }
 
     /**
@@ -166,6 +154,23 @@ class AdminExames {
         return (!empty($FeAcoes->Execute()->find()) ? $FeAcoes->Execute()->find()->acao_descricao : null);
     }
 
+    public function TempoMedio($ListaTempoMedio) {
+        $dif = [];
+        foreach ($ListaTempoMedio as $value) {
+            $aberto = strtotime($value->data_inicio);
+            $fechado = strtotime($value->data_fim);
+            $dif[] = $fechado - $aberto;
+        }
+
+        $result['count'] = count($dif);
+        $result['soma'] = array_sum($dif);
+        $result['media'] = (count($dif) == 0 || array_sum($dif) == 0 ? 0 : round(array_sum($dif) / count($dif)));
+        $result['max'] = (!empty($dif) ? max($dif) : 0);
+        $result['min'] = (!empty($dif) ? min($dif) : 0);
+
+        return $result;
+    }
+
     /**
      * ****************************************
      * ************** PRIVATES ****************
@@ -182,15 +187,8 @@ class AdminExames {
         $this->Data = array_map("trim", $this->Data);
 
         //retira excesso de espaços destes campos
-        $this->Data['ex_valor_referencia'] = str_replace('-', ' ', Check::Name($this->Data['ex_valor_referencia']));
-        $this->Data['ex_info_paciente'] = str_replace('-', ' ', Check::Name($this->Data['ex_info_paciente']));
-        $this->Data['ex_info_coleta'] = str_replace('-', ' ', Check::Name($this->Data['ex_info_coleta']));
-        $this->Data['ex_info_interferentes'] = str_replace('-', ' ', Check::Name($this->Data['ex_info_interferentes']));
-        $this->Data['ex_info_encaminhamento'] = str_replace('-', ' ', Check::Name($this->Data['ex_info_encaminhamento']));
         $this->Data['ex_observacao'] = str_replace('-', ' ', Check::Name($this->Data['ex_observacao']));
         $this->Data['ex_descricao'] = str_replace('-', ' ', Check::Name($this->Data['ex_descricao']));
-        $this->Data['ex_sinonimia'] = str_replace('-', ' ', Check::Name($this->Data['ex_sinonimia']));
-
         $this->Data['ex_status'] = (!empty($this->Data['ex_status']) ? $this->Data['ex_status'] : "0");
         $this->Data['ex_cancelado'] = (!empty($this->Data['ex_cancelado']) ? $this->Data['ex_cancelado'] : "0");
     }

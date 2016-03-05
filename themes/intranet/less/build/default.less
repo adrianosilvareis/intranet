@@ -2,6 +2,7 @@
     Less 
     @copyrigth S. Reis, Adriano 2016
 */
+@import "../variaveis.less";
 
 .reset{
     *{padding: 0; margin: 0;list-style: none; line-height: 1.2;}
@@ -138,6 +139,7 @@
     }
 }
 
+/*CARDS*/
 .nivercard{
     .reset;
     .img{
@@ -156,6 +158,10 @@
     }
 }
 
+.bodered{
+    border: solid 1px @basic;
+    box-shadow: @basic 2px 2px 1px;
+}
 
 /*Mixins*/
 .opacity(@opacit, @moz, @alpha){

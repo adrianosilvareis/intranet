@@ -18,7 +18,11 @@ if (!empty($request)):
     elseif (!empty($request->edited)):
         //editar
         $Read->setThis($request);
-        $Read->Execute()->update(NULL, "setor_id");
+        if (!$Read->Execute()->update(NULL, "setor_id")):
+            $status = ($request->setor_status ? '1' : '0');
+            $Read->Execute()->update("setor_id={$request->setor_id}&setor_status={$status}", "setor_id");
+            echo "status atualizado!";
+        endif;
         echo "Setor editado com sucesso!";
     else:
         //adicionar

@@ -17,7 +17,7 @@
             require_once '_models/AdminSetor.class.php';
 
             $postAction = filter_input(INPUT_GET, 'setor', FILTER_VALIDATE_INT);
-            $postUpdate = new AdminPost;
+            $postUpdate = new AdminSetor();
 
             switch ($action):
                 case 'active':
@@ -32,8 +32,7 @@
 
                 case 'delete':
                     $postUpdate->ExeDelete($postAction);
-                    WSErro('O Setor ' . $postUpdate->getError()[0], $postUpdate->getError()[1]);
-
+                    WSErro('O Setor <b>' . $postUpdate->getError()[0] . "</b>, foi deletado com sucesso!", $postUpdate->getError()[1]);
                     break;
 
                 default:
@@ -54,22 +53,6 @@
             $Pager->ReturnPage();
             WSErro("Desculpa, ainda não temos setor cadastrados", WS_INFOR);
         else:
-            ?>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                <tr>
-                    <td>teste</td>
-                </tr>
-            </tbody>
-        </table>
-        
-            <?php
             foreach ($Read->getResult() as $setor):
                 $posti++;
                 extract((array) $setor);
@@ -81,8 +64,9 @@
                     <h1><?= Check::Words($setor_content, 5) ?></h1>
                     <ul class="info post_actions">
                         <li><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($setor_date)); ?>Hs</li>
+                        <p class="post_tipo"><strong>Tipo:</strong> <?= $setor_category; ?></p>
                         <li><a class="act_edit" href="painel.php?exe=setor/update&setId=<?= $setor_id; ?>" title="Editar">Editar</a></li>
-
+                        
                         <?php if (!$setor_status): ?>
                             <li><a class="act_ative" href="painel.php?exe=setor/index&setor=<?= $setor_id; ?>&action=active" title="Ativar">Ativar</a></li>
                         <?php else: ?>

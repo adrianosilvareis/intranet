@@ -107,6 +107,22 @@ class Check {
 
         # Diminui a datafim que é a maior com a dataini
         $time = ($dtfim - $dtini);
+
+        $return = self::RecuperaData($time);
+
+        $metaD = (empty($metaD) && empty($metaH) && empty($metaM) ? 3 : $metaD);
+
+        if (!empty($metaD) && $days > $metaD ||
+                empty($metaD) && !empty($metaH) && $hours > $metaH ||
+                empty($metaD) && empty($metaH) && !empty($metaM) && $mins > $metaM):
+            return "<span style='color:red'>" . $retorno . "</span>";
+        endif;
+
+        return $retorno;
+    }
+
+    static function RecuperaData($time) {
+
         # Recupera os dias
         $days = floor($time / 86400);
         # Recupera as horas
@@ -125,17 +141,12 @@ class Check {
         $retorno .= ($mins > 0) ? $mins . 'm ' : "";
         $retorno .= ($secs > 0) ? $secs . 's ' : "";
 
-        $metaD = (empty($metaD) && empty($metaH) && empty($metaM) ? 3 : $metaD);
-
-        if (!empty($metaD) && $days > $metaD ||
-                empty($metaD) && !empty($metaH) && $hours > $metaH ||
-                empty($metaD) && empty($metaH) && !empty($metaM) && $mins > $metaM):
-            return "<span style='color:red'>" . $retorno . "</span>";
-        endif;
-
         return $retorno;
     }
 
+    /**
+     * Equivalente a strtotime
+     */
     static function DateToInteger($data) {
         # Split para dia, mes, ano, hora, minuto e segundo da data final
         $_split_datehour = explode(' ', $data);
@@ -306,14 +317,16 @@ class Check {
      */
     public static function BDCREATE($msg) {
 
-        if (strpos($msg, "ws_categories") || strpos($msg, "ws_posts") || strpos($msg, "ws_posts_gallery") || strpos($msg, "ws_siteviews") || strpos($msg, "ws_siteviews_agent") || strpos($msg, "ws_siteviews_online") || strpos($msg, "ws_users") || strpos($msg, "app_cidades") || strpos($msg, "app_estados")):
+        if (strpos($msg, "ws_setor_type") || strpos($msg, "ws_setor") || strpos($msg, "app_youtube") || strpos($msg, "app_niver") || strpos($msg, "ws_categories") || strpos($msg, "ws_posts") || strpos($msg, "ws_posts_gallery") || strpos($msg, "ws_siteviews") || strpos($msg, "ws_siteviews_agent") || strpos($msg, "ws_siteviews_online") || strpos($msg, "ws_users") || strpos($msg, "app_cidades") || strpos($msg, "app_estados")):
             $tab = 'framework';
-        elseif (strpos($msg, "app_youtube") || strpos($msg, "app_niver")):
-            $tab = 'aplicacao';
+        elseif (strpos($msg, "agenda_contatos") || strpos($msg, "agenda_endereco") || strpos($msg, "agenda_endereco")):
+            $tab = 'agenda';
         elseif (strpos($msg, "imp_postos") || strpos($msg, "imp_contadores") || strpos($msg, "imp_impressora") || strpos($msg, "imp_modelo") || strpos($msg, "imp_taxa_impress")):
             $tab = 'plugin_impress';
-        elseif (strpos($msg, "fe_exames") || strpos($msg, "fe_material") || strpos($msg, "fe_metodo") || strpos($msg, "fe_setor") || strpos($msg, "fe_acoes")):
+        elseif (strpos($msg, "fe_exames") || strpos($msg, "fe_material") || strpos($msg, "fe_acoes")):
             $tab = 'plugin_fast_exames';
+        elseif (strpos($msg, "dt_downtime") || strpos($msg, "dt_equipamentos")):
+            $tab = 'downtime';
         endif;
 
         if (!empty($tab)):

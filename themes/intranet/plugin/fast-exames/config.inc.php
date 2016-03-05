@@ -7,8 +7,8 @@
 /**
  * NOME DO PLUGIN
  */
-define("FAST_NOME", "fast-exames" . DIRECTORY_SEPARATOR);
-define("FAST_LOCAL", DIRECTORY_SEPARATOR . "plugin" . DIRECTORY_SEPARATOR . FAST_NOME);
+define("FAST_NOME", "fast-exames/");
+define("FAST_LOCAL", "/plugin/" . FAST_NOME);
 /**
  * Link de acesso externo
  */
