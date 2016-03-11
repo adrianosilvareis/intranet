@@ -3,8 +3,6 @@
     
     <?php include "inc/carrousel-gallery.inc.php"; ?>
 
-    <?php include "inc/parabens.inc.php"; ?>
-
     <?php
     $Titulo = "Destaques";
     $Categoria = "destaque";
@@ -31,4 +29,5 @@
 <?php
 //coluna direita
 $cat = Check::CatByName("siderbar-left");
+$fixo = Check::CatByName("siderbar-left-fixo");
 require("inc/siderbar.inc.php");

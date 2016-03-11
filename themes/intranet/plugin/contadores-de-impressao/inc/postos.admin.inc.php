@@ -4,7 +4,6 @@ if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminPostos.clas
 endif;
 
 $AdPostos = new AdminPostos();
-$AdPostos->Lista();
 /**
  * Formulario de atualização
  */
@@ -76,43 +75,34 @@ endif;
 ?>
 
 <a title="Gerenciamento" href="<?= IMP_INCLUDE ?>admin" class="btn btn-danger glyphicon glyphicon-cog" style="float: right; margin: 25px;"></a>
+
 <div class="panel">
     <table class="table table-striped table-hover table-bordered">
         <thead>
             <tr>
                 <th>Unidades</th>
-                <?php if (Check::UserLogin(2)): ?>
-                    <th>Todos as impressoras</th>
-                    <th>Ações</th>
-                <?php else: ?>
-                    <th>Pendente</th>
-                <?php endif; ?>
+                <th>Todos as impressoras</th>
+                <th>Impressoras Pendentes</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-
             <?php
             $AdPostos->ListAdmin();
             foreach ($AdPostos->getResult() as $imp):
                 extract((array) $imp);
                 ?>
-                <tr class="text-center">
-                    <td <?php
-                    if (!$cont): echo "class='danger'";
-                    endif;
-                    ?>>
+                <tr class="text-center" <?= (!$cont ? "class='danger'" : ""); ?>>
+                    <td>
                         <a href="<?= IMP_INCLUDE . $postos_id; ?>" class="text-capitalize"><?= strtolower($postos_nome); ?></a>
+                    </td>                    
+                    <td>
+                        <?= $cont; ?>
                     </td>
-                    <td <?php
-                    if (!$cont): echo "class='danger'";
-                    endif;
-                    ?>>
-                            <?= $cont; ?>
+                     <td>
+                        <?= $restantes; ?>
                     </td>
-                    <td <?php
-                    if (!$cont): echo "class='danger'";
-                    endif;
-                    ?>>
+                    <td>
                         <ul class="post_actions plugin">
                             <li><a class="act_edit" href="<?= IMP_INCLUDE ?>update/<?= $postos_id; ?>" title="Editar">Editar</a></li>
                             <?php if (!$postos_ativo): ?>

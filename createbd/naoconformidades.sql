@@ -8,12 +8,12 @@
 
 CREATE TABLE IF NOT EXISTS nc_origem(
     origem_id INT NOT NULL AUTO_INCREMENT,
-    origem_descricao VARCHAR(255) NOT NULL,
-    origem_ativo BOOLEAN DEFAULT TRUE,
+    origem_title VARCHAR(255) NOT NULL,
+    origem_status BOOLEAN DEFAULT TRUE,
     PRIMARY KEY (origem_id)
 );
 
-CREATE TABLE IF NOT EXISTS nc_reg_file (
+CREATE TABLE IF NOT EXISTS nc_registro_file (
     reg_id INT, 
     file_id INT NOT NULL AUTO_INCREMENT, 
     file_url VARCHAR(255), 
@@ -28,8 +28,7 @@ CREATE TABLE IF NOT EXISTS nc_registro_has_nc_origem (
     PRIMARY KEY(reg_id, origem_id)
 );
 
--- deve mesmo existir ?
-CREATE TABLE IF NOT EXISTS ws_user_has_nc_setor(
+CREATE TABLE IF NOT EXISTS ws_user_has_ws_setor(
     user_id INT NOT NULL,
     setor_id INT NOT NULL,
     PRIMARY KEY (user_id, setor_id)

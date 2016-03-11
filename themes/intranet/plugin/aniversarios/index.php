@@ -1,6 +1,5 @@
 <?php
 
-//if (!isset($Link->getLocal()[2])):
 if (!Check::UserLogin(2) || !isset($Link->getLocal()[2])):
     include_once 'lista.php';
 else:

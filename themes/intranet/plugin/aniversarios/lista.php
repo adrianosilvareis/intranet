@@ -1,7 +1,7 @@
 <section class="section">
     <?php
     if (Check::UserLogin(2)):
-        echo "<a href=" . HOME . "/plugin/aniversarios/upload\" title=\"Uploads\" class=\"btn btn-primary glyphicon glyphicon-upload\"></a>";
+        echo "<a href=" . HOME . "/plugin/aniversarios/upload title=\"Uploads\" class=\"btn btn-primary glyphicon glyphicon-upload\"></a>";
     endif;
     ?>
     <dic class="container">

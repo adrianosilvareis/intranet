@@ -1,4 +1,8 @@
 <?php
+if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminImpressoras.class.php")):
+    include PLUGIN_PATH . "\contadores-de-impressao\_models\AdminImpressoras.class.php";
+endif;
+
 $ImpPostos = new ImpPostos();
 $ImpPostos->Execute()->find("postos_id={$Link->getLocal()[2]}");
 ?>
@@ -7,10 +11,6 @@ $ImpPostos->Execute()->find("postos_id={$Link->getLocal()[2]}");
 <h2><small><?= $ImpPostos->Execute()->getResult()->postos_nome; ?></small></h2>
 
 <?php
-if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminImpressoras.class.php")):
-    include PLUGIN_PATH . "\contadores-de-impressao\_models\AdminImpressoras.class.php";
-endif;
-
 $AdImpress = new AdminImpressoras($Link->getLocal()[2]);
 
 $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -76,7 +76,7 @@ endif;
 
                     <?php if ($impressora_status): ?>
                         <td class="accept">
-                            Ultimo: <?= "<b>" . $AdImpress->MinContador(0, $impressora_id)[0]->contadores_contador . "</b>"; ?>
+                            Ultimo: <?= "<b>" . (isset($AdImpress->MinContador(0, $impressora_id)[0]) ? $AdImpress->MinContador(0, $impressora_id)[0]->contadores_contador : "Erro contact o CPD") . "</b>"; ?>
                         </td>
                     <?php else: ?>
                         <td class="error">

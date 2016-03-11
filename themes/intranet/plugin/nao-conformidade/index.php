@@ -4,7 +4,8 @@ Register::addRegister("<script src='" . NCONDIR . "/model.app.js'></script>");
 Register::addRegister("<script src='" . NCONDIR . "/config/config.value.js'></script>");
 Register::addRegister("<script src='" . NCONDIR . "/config/route.config.js'></script>");
 Register::addRegister("<script src='" . NCONDIR . "/controller/setor.ctrl.js'></script>");
-Register::addRegister("<script src='" . NCONDIR . "/event/event.jquery.js'></script>");
+Register::addRegister("<script src='" . NCONDIR . "/controller/origem.ctrl.js'></script>");
+Register::addRegister("<script src='" . NCONDIR . "/controller/registro.ctrl.js'></script>");
 ?>
 <header id="navtab">
     <nav>
@@ -42,12 +43,16 @@ Register::addRegister("<script src='" . NCONDIR . "/event/event.jquery.js'></scr
 
     <div class="tab-pane" id="dashboard"></div>
     <!--registro-->
-    <div class="tab-pane" id="reg_create"><?php require '/system/registro/create.php'; ?></div>
-    <div class="tab-pane" id="reg_list"><?php require '/system/registro/index.php'; ?></div>
-
+    <div class="tab-content" ng-controller="registro">
+        <div class="tab-pane" id="reg_create"><?php require '/system/registro/registro.php'; ?></div>
+        <div class="tab-pane" id="reg_list"><?php require '/system/registro/index.php'; ?></div>
+    </div>
+    
     <!--origem-->
-    <div class="tab-pane" id="ori_create"><?php require '/system/origem/origem.php'; ?>Origem</div>
-    <div class="tab-pane" id="ori_list"><?php require '/system/origem/index.php'; ?>Lista origem</div>
+    <div class="tab-content" ng-controller="origem">
+        <div class="tab-pane" id="ori_create"><?php require '/system/origem/origem.php'; ?></div>
+        <div class="tab-pane" id="ori_list"><?php require '/system/origem/index.php'; ?></div>
+    </div>
 
     <!--setor-->
     <div class="tab-content" ng-controller="setor">

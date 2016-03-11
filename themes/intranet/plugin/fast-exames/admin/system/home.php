@@ -72,17 +72,17 @@ $day = $AdminExames->TempoMedio($dia);
 
         <article class="list-group">
             <h3 class="list-group-item list-group-item-success">Tempo medio dias corridos</h3>
-            <a class="list-group-item">Maior Tempo:<span class="badge"><?= Check::RecuperaData($TempoMedio['max']); ?></span></a>
-            <a class="list-group-item">Menor Tempo:<span class="badge"><?= Check::RecuperaData($TempoMedio['min']); ?></span></a>
-            <a class="list-group-item active bodered">Tempo Medio:<span class="badge"><?= Check::RecuperaData($TempoMedio['media']); ?></span></a>
+            <a class="list-group-item">Maior Tempo:<span class="badge"><?= Check::RecuperaData($TempoMedio['max'])['return']; ?></span></a>
+            <a class="list-group-item">Menor Tempo:<span class="badge"><?= Check::RecuperaData($TempoMedio['min'])['return']; ?></span></a>
+            <a class="list-group-item active bodered">Tempo Medio:<span class="badge"><?= Check::RecuperaData($TempoMedio['media'])['return']; ?></span></a>
         </article>
 
         <article class="list-group">
             <h3 class="list-group-item list-group-item-success">Tempo medio de resolução</h3>
-            <a class="list-group-item">Mês<span class="badge"><?= Check::RecuperaData($month['media']); ?></span></a>
-            <a class="list-group-item">Semana<span class="badge"><?= Check::RecuperaData($week['media']); ?></span></a>
-            <a class="list-group-item">Hoje<span class="badge"><?= Check::RecuperaData($day['media']); ?></span></a>
-            <a class="list-group-item active bodered">Total<span class="badge"><?= Check::RecuperaData($TempoMedio['media']); ?></span></a>
+            <a class="list-group-item">Mês<span class="badge"><?= Check::RecuperaData($month['media'])['return']; ?></span></a>
+            <a class="list-group-item">Semana<span class="badge"><?= Check::RecuperaData($week['media'])['return']; ?></span></a>
+            <a class="list-group-item">Hoje<span class="badge"><?= Check::RecuperaData($day['media'])['return']; ?></span></a>
+            <a class="list-group-item active bodered">Total<span class="badge"><?= Check::RecuperaData($TempoMedio['media'])['return']; ?></span></a>
         </article>
 
         <article class="list-group">

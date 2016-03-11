@@ -112,13 +112,13 @@ class Check {
 
         $metaD = (empty($metaD) && empty($metaH) && empty($metaM) ? 3 : $metaD);
 
-        if (!empty($metaD) && $days > $metaD ||
-                empty($metaD) && !empty($metaH) && $hours > $metaH ||
-                empty($metaD) && empty($metaH) && !empty($metaM) && $mins > $metaM):
-            return "<span style='color:red'>" . $retorno . "</span>";
+        if (!empty($metaD) && $return['days'] > $metaD ||
+                empty($metaD) && !empty($metaH) && $return['hours'] > $metaH ||
+                empty($metaD) && empty($metaH) && !empty($metaM) && $return['mins'] > $metaM):
+            return "<span style='color:red'>" . $retorno['return'] . "</span>";
         endif;
 
-        return $retorno;
+        return $return['return'];
     }
 
     static function RecuperaData($time) {
@@ -141,7 +141,7 @@ class Check {
         $retorno .= ($mins > 0) ? $mins . 'm ' : "";
         $retorno .= ($secs > 0) ? $secs . 's ' : "";
 
-        return $retorno;
+        return ["return" => $retorno, "days" => $days, "hours" => $hours, "mins" => $mins, "secs" => $secs];
     }
 
     /**

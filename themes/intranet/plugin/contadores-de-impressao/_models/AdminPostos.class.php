@@ -8,8 +8,6 @@
  */
 class AdminPostos {
 
-    private $Conc;
-    private $Rest;
     private $Result;
     private $Read;
     private $Data;
@@ -95,18 +93,26 @@ class AdminPostos {
      * Lista todos os postos no sistema, quando não é admin.
      */
     public function Lista() {
-        $this->Read->Execute()->Query("postos_ativo = 1");
+        $Termos = "SELECT p.*, COUNT(i.impressora_id) as 'cont' "
+                . "FROM imp_impressora i JOIN imp_postos p ON(p.postos_id = i.fk_postos) "
+                . "WHERE i.impressora_status=0 AND p.postos_ativo=1 GROUP BY i.fk_postos";
+        $this->Read->Execute()->FullRead($Termos);
         $this->Result = $this->Read->Execute()->getResult();
-        $this->Executar();
     }
 
     /**
      * Lista todos os postos do sistema quando é admin.
      */
     public function ListAdmin() {
-        $this->Read->Execute()->FullRead("SELECT * FROM imp_postos ORDER BY postos_ativo");
+        $Termos = "SELECT "
+                . "p.*, "
+                . "COUNT(i.impressora_id) as 'cont', "
+                . "(SELECT COUNT(e.impressora_id) FROM imp_impressora e WHERE e.impressora_status=0 AND e.fk_postos = i.fk_postos) as 'restantes' "
+                . "FROM imp_postos p JOIN imp_impressora i ON(p.postos_id = i.fk_postos) "
+                . "GROUP BY i.fk_postos "
+                . "ORDER BY (SELECT COUNT(e.impressora_id) FROM imp_impressora e WHERE e.impressora_status=0 AND e.fk_postos = i.fk_postos) DESC";
+        $this->Read->Execute()->FullRead($Termos);
         $this->Result = $this->Read->Execute()->getResult();
-        $this->Executar();
     }
 
     /**
@@ -132,27 +138,6 @@ class AdminPostos {
     }
 
     /**
-     * Lista em array de impressoras que já foram registradas contadores do mês
-     * 
-     * @return List:impressoras
-     */
-    public function getConcluidos() {
-        return $this->Conc;
-    }
-
-    /**
-     * Lista em array de impressoras que não foram registradas contadores do mês
-     * 
-     * @return List:impressoras
-     */
-    public function getRestantes() {
-        if (!is_array($this->Rest)) {
-            $this->Rest = [];
-        }
-        return $this->Rest;
-    }
-
-    /**
      * Lista em array de todas as impressoras do sistema
      * 
      * @return List:impressoras
@@ -170,43 +155,4 @@ class AdminPostos {
         $this->Data = array_map('strip_tags', $this->Data);
         $this->Data = array_map('trim', $this->Data);
     }
-
-    /**
-     * lista as impressoras e executa a contagem por posto
-     * 
-     * Obs.: Método precisa ser melhorado
-     */
-    public function Executar() {
-        $AppImpressora = new ImpImpressora();
-        foreach ($this->Result as $posto) {
-            //encontra todas as impressoras deste posto
-            $impressoras = $AppImpressora->Execute()->Query("fk_postos = :posto", "posto=$posto->postos_id");
-
-            //inicia os objetos concluidos e restantes
-            $posto->cont = 0;
-            $con = clone($posto);
-            $res = clone($posto);
-
-            //separa os objetos de acordo com seu status
-            foreach ($impressoras as $imp):
-                if ($imp->impressora_status):
-                    $con->cont++;
-                else:
-                    $res->cont++;
-                endif;
-            endforeach;
-
-            //seta os vetores caso sejam encontrados
-            if ($con->cont):
-                $this->Conc[] = $con;
-            endif;
-            if ($res->cont):
-                $this->Rest[] = $res;
-            endif;
-
-            //seta a contagem de impressoras do resultado total
-            $posto->cont = $AppImpressora->Execute()->getRowCount();
-        }
-    }
-
 }

@@ -7,8 +7,8 @@
 /**
  * NOME DO PLUGIN
  */
-define("IMP_NOME", "contadores-de-impressao" . DIRECTORY_SEPARATOR);
-define("IMP_LOCAL", DIRECTORY_SEPARATOR . "plugin" . DIRECTORY_SEPARATOR . IMP_NOME);
+define("IMP_NOME", "contadores-de-impressao/");
+define("IMP_LOCAL", "/plugin/" . IMP_NOME);
 /**
  * Link de acesso externo
  */

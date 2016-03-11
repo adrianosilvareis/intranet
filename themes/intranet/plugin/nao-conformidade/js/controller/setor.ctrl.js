@@ -18,8 +18,8 @@ appNCon.controller("setor", function ($scope, objetoAPI, config) {
             $scope.setorForm.$setPristine();
             carregarObjetos();
             $scope.message = date;
-            if(status === 200){
-                console.log(dado);
+            if (status === 200) {
+                console.log(date);
             }
         });
     };
@@ -29,6 +29,11 @@ appNCon.controller("setor", function ($scope, objetoAPI, config) {
         $scope.setor = setor;
     };
 
+    $scope.apagarSetor = function (setor) {
+        apagar = [setor];
+        $scope.saveSetor(apagar);
+    };
+
     $scope.novoSetor = function () {
         delete $scope.setor;
         $scope.setorForm.$setPristine();
@@ -36,12 +41,6 @@ appNCon.controller("setor", function ($scope, objetoAPI, config) {
 
     $scope.alterStatus = function (setor) {
         setor.setor_status = (setor.setor_status === "0" ? false : true);
-        if (setor.setor_status) {
-            console.log(setor);
-        }
-
-
-
         setor.setor_status = !setor.setor_status;
         setor.edited = true;
         $scope.saveSetor(setor);

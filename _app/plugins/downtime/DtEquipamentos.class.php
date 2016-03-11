@@ -16,6 +16,7 @@ class DtEquipamentos extends Beans {
     private $equip_status;
     private $equip_lastupdate;
     private $equip_author;
+    private $setor_id;
 
     function __construct() {
         $this->Controle = new Controle('dt_equipamentos');
@@ -34,6 +35,7 @@ class DtEquipamentos extends Beans {
             'equip_status' => $this->getEquip_status(),
             'equip_lastupdate' => $this->getEquip_lastupdate(),
             'equip_author' => $this->getEquip_author(),
+            'setor_id' => $this->getSetor_id(),
             'equip_id' => $this->getEquip_id()
         ]));
         return $this->Controle->getDados();
@@ -52,6 +54,7 @@ class DtEquipamentos extends Beans {
         $this->setEquip_status((isset($object->equip_status) ? $object->equip_status : null));
         $this->setEquip_lastupdate((isset($object->equip_lastupdate) ? $object->equip_lastupdate : null));
         $this->setEquip_author((isset($object->equip_author) ? $object->equip_author : null));
+        $this->setSetor_id((isset($object->setor_id) ? $object->setor_id : null));
     }
 
     /**
@@ -97,6 +100,10 @@ class DtEquipamentos extends Beans {
         return $this->equip_author;
     }
 
+    function getSetor_id() {
+        return $this->setor_id;
+    }
+
     function setEquip_id($equip_id) {
         $this->equip_id = $equip_id;
     }
@@ -123,6 +130,10 @@ class DtEquipamentos extends Beans {
 
     function setEquip_author($equip_author) {
         $this->equip_author = $equip_author;
+    }
+
+    function setSetor_id($setor_id) {
+        $this->setor_id = $setor_id;
     }
 
 }

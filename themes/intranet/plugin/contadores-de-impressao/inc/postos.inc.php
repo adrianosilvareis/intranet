@@ -4,7 +4,6 @@ if (file_exists(PLUGIN_PATH . "\contadores-de-impressao\_models\AdminPostos.clas
 endif;
 
 $AdPostos = new AdminPostos();
-$AdPostos->Lista();
 /**
  * Formulario de atualização
  */
@@ -42,21 +41,16 @@ endif;
         <thead>
             <tr>
                 <th>Unidades</th>
-                <?php if (Check::UserLogin(2)): ?>
-                    <th>Todos as impressoras</th>
-                    <th>Ações</th>
-                <?php else: ?>
-                    <th>Pendente</th>
-                <?php endif; ?>
+                <th>Pendente</th>
             </tr>
         </thead>
         <tbody>
-
             <?php
-            if (!$AdPostos->getRestantes()):
+            $AdPostos->Lista();
+            if (!$AdPostos->getResult()):
                 WSErro("Não existem postos a ser exibido!", WS_INFOR);
             else:
-                foreach ($AdPostos->getRestantes() as $imp):
+                foreach ($AdPostos->getResult() as $imp):
                     extract((array) $imp);
                     ?>
                     <tr class="text-center">
@@ -71,7 +65,6 @@ endif;
                 endforeach;
             endif;
             ?>
-
         </tbody>
     </table>
 </div>

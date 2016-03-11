@@ -26,12 +26,12 @@ if (!empty($request)):
         echo "Setor editado com sucesso!";
     else:
         //adicionar
-        $request->setor_category = "nao-conformidade";
+        $request->setor_category = "geral";
         $Read->setThis($request);
         $Read->Execute()->insert();
         echo "Setor adicionado com sucesso!";
     endif;
 else:
-    $Read->Execute()->Query("setor_category='nao-conformidade' or setor_category='geral' order by setor_content");
+    $Read->Execute()->Query("setor_type = 1 ORDER BY setor_content");
     echo json_encode($Read->Execute()->getResult());
 endif;
