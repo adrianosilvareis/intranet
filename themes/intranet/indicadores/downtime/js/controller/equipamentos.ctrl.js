@@ -4,9 +4,14 @@ appDt.controller("equipamentos", function ($scope, objetoAPI, config) {
     $scope.setores = [];
     $scope.equipamento = "";
 
+    var BroadCastEquipamentos = function (msg) {
+        $scope.$emit('handleEmit', {equipamentos: msg});
+    };
+
     var carregarEquipamentos = function () {
         objetoAPI.getObjeto(config.apiURL + "/equip.api.php").success(function (data) {
             $scope.equipamentos = data;
+            BroadCastEquipamentos(data);
         });
     };
 

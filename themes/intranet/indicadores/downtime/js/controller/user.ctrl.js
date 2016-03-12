@@ -83,7 +83,7 @@ angular.module("downtime").controller("user", function ($scope, objetoAPI, confi
     };
 
     var carregarEquipamentos = function () {
-        objetoAPI.getObjeto(config.apiURL + "/equipe.api.php").success(function (data) {
+        objetoAPI.getObjeto(config.apiURL + "/equip.api.php").success(function (data) {
             $scope.equipamentos = data;
             load(1);
         }).error(function (data) {

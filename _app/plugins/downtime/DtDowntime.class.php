@@ -15,6 +15,7 @@ class DtDowntime extends Beans {
     private $time_start;
     private $time_lastupdate;
     private $equip_author;
+    private $down_author;
 
     function __construct() {
         $this->Controle = new Controle('dt_downtime');
@@ -32,6 +33,7 @@ class DtDowntime extends Beans {
             'time_start' => $this->getTime_start(),
             'time_lastupdate' => $this->getTime_lastupdate(),
             'equip_author' => $this->getEquip_author(),
+            'down_author' => $this->getDown_author(),
             'time_id' => $this->getTime_id()
         ]));
         return $this->Controle->getDados();
@@ -49,6 +51,7 @@ class DtDowntime extends Beans {
         $this->setTime_start((isset($object->time_start) ? $object->time_start : null));
         $this->setTime_lastupdate((isset($object->time_lastupdate) ? $object->time_lastupdate : null));
         $this->setEquip_author((isset($object->equip_author) ? $object->equip_author : null));
+        $this->setDown_author((isset($object->down_author) ? $object->down_author : null));
     }
 
     /**
@@ -90,6 +93,10 @@ class DtDowntime extends Beans {
         return $this->equip_author;
     }
 
+    function getDown_author() {
+        return $this->down_author;
+    }
+
     function setEquip_id($equip_id) {
         $this->equip_id = $equip_id;
     }
@@ -114,5 +121,8 @@ class DtDowntime extends Beans {
         $this->equip_author = $equip_author;
     }
 
+    function setDown_author($down_author) {
+        $this->down_author = $down_author;
+    }
 
 }

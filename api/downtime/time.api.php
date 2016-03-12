@@ -1,5 +1,4 @@
 <?php
-
 include "../../_app/Config.inc.php";
 $Read = new DtDowntime();
 
@@ -17,11 +16,19 @@ if (!empty($request)):
 
     elseif (!empty($request->time_id)):
         //editar
+        $request->down_author = $request->author;
+        $request->time_start = date("Y-m-d H:i:s");
+        $request->time_lastupdate = date("Y-m-d H:i:s");
+
         $Read->setThis($request);
         $Read->Execute()->update(NULL, "time_id");
         echo "Editado com sucesso!";
     else:
         //adicionar
+        $request->equip_author = $request->author;
+        $request->time_stop = date("Y-m-d H:i:s");
+        $request->time_lastupdate = date("Y-m-d H:i:s");
+
         $Read->setThis($request);
         $Read->Execute()->insert();
         echo "Adicionado com sucesso!";

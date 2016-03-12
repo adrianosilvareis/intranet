@@ -20,7 +20,7 @@ if (!empty($request)):
 
     elseif (!empty($request->equip_id)):
         $request->equip_author = (isset($userlogin) ? $userlogin['user_name'] . " " . $userlogin['user_lastname'] : "");
-
+        $request->equip_lastupdate = new date("Y-m-d H:i:s");
         //editar
         $Read->setThis($request);
         if (!$Read->Execute()->update(NULL, "equip_id")):

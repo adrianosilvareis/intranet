@@ -35,7 +35,7 @@ Register::addRegister("<script src=\"{$dir}js/google-chart/start.js\"></script>"
 
 <div class="tab-content" ng-app="downtime">
 
-    <div class="tab-pane" id="dashboard"></div>
+    <div class="tab-pane active" id="dashboard"><?= require '/report/index.php'; ?></div>
     <!--Equipamento-->
     <div class="tab-content" ng-controller="equipamentos">
         <div class="tab-pane" id="equip_create"><?php require '/system/equipamentos/equipamento.php'; ?></div>
@@ -44,7 +44,7 @@ Register::addRegister("<script src=\"{$dir}js/google-chart/start.js\"></script>"
 
     <!--downtime-->
     <div class="tab-content" ng-controller="parada">
-        <div class="tab-pane" id="down_create">down criar</div>
-        <div class="tab-pane" id="down_list">down listar</div>
+        <div class="tab-pane" id="down_create"><?php require '/system/paradas/parada.php'; ?></div>
+        <div class="tab-pane" id="down_list"><?php require '/system/paradas/index.php'; ?></div>
     </div>
 </div>
