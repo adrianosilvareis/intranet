@@ -10,12 +10,13 @@ class Link {
 
     private $File;
     private $Link;
-    
+
     /** DATA */
     private $Local;
     private $Patch;
     private $Tags;
     private $Data;
+
     /** @var SEO */
     private $Seo;
 
@@ -59,7 +60,7 @@ class Link {
     private function setPatch() {
         $file = REQUIRE_PATH . DIRECTORY_SEPARATOR . $this->File;
         $link = $file . DIRECTORY_SEPARATOR . $this->Link;
-        
+
         if (file_exists($file . '.php')):
             $this->Patch = $file . '.php';
         elseif (file_exists($link . '.php')):
@@ -68,6 +69,20 @@ class Link {
             $this->Patch = $file . DIRECTORY_SEPARATOR . 'index.php';
         elseif (file_exists($link . DIRECTORY_SEPARATOR . 'index.php')):
             $this->Patch = $link . DIRECTORY_SEPARATOR . 'index.php';
+        elseif ($this->File == 'plugin' || $this->File == 'indicadores'):
+            $this->setPlugin();
+        else:
+            $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . '404.php';
+        endif;
+    }
+
+    private function setPlugin() {
+        if (file_exists('include/index.php')):
+            $this->Patch = 'include/index.php';
+        elseif (file_exists('include/' . $this->Link . '.php')):
+            $this->Patch = 'include/' . $this->Link . '.php';
+        elseif (file_exists('include/' . $this->Link . '/index.php')):
+            $this->Patch = 'include/' . $this->Link . '/index.php';
         else:
             $this->Patch = REQUIRE_PATH . DIRECTORY_SEPARATOR . '404.php';
         endif;

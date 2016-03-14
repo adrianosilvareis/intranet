@@ -9,7 +9,7 @@ class Controle extends Business {
 
     function __construct($Table = null) {
         $this->Table = $Table;
-        $this->DBConn = ['DB_HOST' => DB_HOST, 'DB_NAME' => DB_NAME, 'DB_USER' => DB_USER, 'DB_PASS' => DB_PASS];
+        $this->InfoConexaoBD = ['DB_HOST' => DB_HOST, 'DB_NAME' => DB_NAME, 'DB_USER' => DB_USER, 'DB_PASS' => DB_PASS];
     }
 
     public function setTable($Table) {
@@ -30,7 +30,7 @@ class Controle extends Business {
      * @param array $DBConn
      */
     public function setDBConn(array $DBConn) {
-        $this->DBConn = $DBConn;
+        $this->InfoConexaoBD = $DBConn;
     }
 
     /**

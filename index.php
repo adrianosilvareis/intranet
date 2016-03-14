@@ -10,7 +10,7 @@ $Session = new Session;
         <?php
         $Link = new Link;
         $Link->getTags();
-        ?>        
+        ?>
     </head>
 
     <body>
@@ -18,7 +18,7 @@ $Session = new Session;
         $Login = new Login(5);
         require(REQUIRE_PATH . '/inc/header.inc.php');
         ?>
-        
+
         <div class="section">
             <div class="container">
                 <?php
@@ -31,7 +31,7 @@ $Session = new Session;
 
         <?php
         require(REQUIRE_PATH . '/inc/footer.inc.php');
-        
+
         Register::getRegister();
         ?>
     </body>

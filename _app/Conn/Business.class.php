@@ -5,7 +5,7 @@
  *
  * @copyright (c) 2015, Adriano Reis AdrianoReis Tecnologia
  */
-abstract class Business extends Conn {
+abstract class Business extends ConexaoBancoDeDados {
 
     /** @var string Nome da tabela */
     protected $Table;
@@ -14,7 +14,7 @@ abstract class Business extends Conn {
      * Informaçõoes da conexão com banco de dados caso não seja padrão
      * @var Array 
      */
-    protected $DBConn;
+    protected $InfoConexaoBD;
     
     /** @var PDOStatement */
     protected $Stmt;
@@ -155,7 +155,7 @@ abstract class Business extends Conn {
     }
 
     protected function Execute($Sql) {
-        $this->Stmt = $this->prepare($Sql, $this->DBConn);
+        $this->Stmt = $this->prepare($Sql, $this->InfoConexaoBD);
 
         if ($this->Dados && array_key_exists('limit', $this->Dados)) {
             $Limit = (int) $this->Dados['limit'];
