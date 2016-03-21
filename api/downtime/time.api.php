@@ -14,13 +14,16 @@ if (!empty($request)):
         endforeach;
         echo "excluido com sucesso!";
 
-    elseif (!empty($request->time_id)):
+    elseif (!empty($request->stoped)):
         //editar
-        $request->down_author = $request->author;
-        $request->time_start = date("Y-m-d H:i:s");
-        $request->time_lastupdate = date("Y-m-d H:i:s");
-
-        $Read->setThis($request);
+        $newrequest = $request->stoped;
+        $newrequest->down_author = $request->author;
+        $newrequest->time_start = date("Y-m-d H:i:s");
+        $newrequest->time_lastupdate = date("Y-m-d H:i:s");
+        $newrequest->equip_lastupdate = date("Y-m-d H:i:s");
+        $newrequest->equip_id = $request->equip_id;
+        
+        $Read->setThis($newrequest);
         $Read->Execute()->update(NULL, "time_id");
         echo "Editado com sucesso!";
     else:

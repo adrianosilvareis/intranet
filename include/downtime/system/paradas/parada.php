@@ -1,5 +1,4 @@
 
-
 <table class="table">
 
     <thead>
@@ -22,5 +21,5 @@
             <td><input class="form-control" type="text" placeholder="Digite seu nome" ng-model="equip.author" ng-required="true" ng-minlength="3"/></td>
         </tr>
     </tbody>
-    {{form}}
+    
 </table>

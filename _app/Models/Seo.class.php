@@ -292,14 +292,12 @@ class Seo {
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular-route.min.js'></script>" . "\n";
         $this->seoTags .= "<script src='" . HOME . "/_lib/google-chart/loader.js'></script>" . "\n";
-
-//CDN
         $this->seoTags .= "<!--CDN-->\n";
-        $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_cdn/shadowbox/shadowbox.css'>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_cdn/jcycle.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_cdn/shadowbox/shadowbox.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_cdn/_plugins.conf.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_cdn/_scripts.conf.js'></script>" . "\n";
+        $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_lib/cdn/shadowbox/shadowbox.css'>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/cdn/jcycle.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/cdn/shadowbox/shadowbox.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/cdn/_plugins.conf.js'></script>" . "\n";
+        $this->seoTags .= "<script src='" . HOME . "/_lib/cdn/_scripts.conf.js'></script>" . "\n";
 
 //Angular Default Packet
         $this->seoTags .= "<!--ANGULAR DEFAULT PACKET-->\n";

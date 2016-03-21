@@ -136,9 +136,9 @@ endif;
 
     </body>
 
-    <script src="../_lib/jquery/jquery-min.js"></script>
+    <script src="../_lib/jquery/jquery.min.js"></script>
     <script src="../_lib/jquery-mask/jmask.js"></script>
-    <script src="../_cdn/combo.js"></script>
+    <script src="../cdn/combo.js"></script>
     <script src="__jsc/tiny_mce/tiny_mce.js"></script>
     <script src="__jsc/tiny_mce/plugins/tinybrowser/tb_tinymce.js.php"></script>
     <script src="__jsc/admin.js"></script>

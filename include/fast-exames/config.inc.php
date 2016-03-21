@@ -15,4 +15,4 @@ define("FAST_INCLUDE", HOME . "/plugin/" . FAST_NOME);
 /**
  * Local do arquivo
  */
-define("FAST_PATH", REQUIRE_PATH . "/include/" . FAST_NOME );
+define("FAST_PATH", "include/" . FAST_NOME );

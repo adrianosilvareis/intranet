@@ -20,12 +20,13 @@ if (!empty($request)):
 
     elseif (!empty($request->equip_id)):
         $request->equip_author = (isset($userlogin) ? $userlogin['user_name'] . " " . $userlogin['user_lastname'] : "");
-        $request->equip_lastupdate = new date("Y-m-d H:i:s");
+        $request->equip_lastupdate = date("Y-m-d H:i:s");
+        $status = ($request->equip_status ? '1' : '0');
+
         //editar
         $Read->setThis($request);
-        if (!$Read->Execute()->update(NULL, "equip_id")):
-            $status = ($request->equip_status ? '1' : '0');
-            $Read->Execute()->update("equip_id={$request->equip_id}&equip_status={$status}", "equip_id");
+        $Read->Execute()->update(NULL, "equip_id");
+        if ($Read->Execute()->update("equip_id={$request->equip_id}&equip_status={$status}", "equip_id")):
             echo "Status Atualizado | ";
         endif;
         echo "Editado com sucesso!";

@@ -14,17 +14,19 @@ Register::addRegister("<script src=\"{$dir}js/google-chart/start.js\"></script>"
 
         <!--Query String-->
         <ul class="menu">
-            <li id="equipamento" class="li"><a class="opensub" onclick="return false;" href="">Equipamento</a>
-                <ul class="sub">
-                    <li><a href="#equip_create" onclick="alterClass('#equipamento')" data-toggle="tab">Criar Equipamento</a></li>
-                    <li><a href="#equip_list" onclick="alterClass('#equipamento')" data-toggle="tab">Listar / Editar Equipamentos</a></li>
-                </ul>
-            </li>
-
+            
+            <?php if (Check::UserLogin(2)): ?>
+                <li id="equipamento" class="li"><a class="opensub" onclick="return false;" href="">Equipamento</a>
+                    <ul class="sub">
+                        <li><a href="#equip_create" onclick="alterClass('#equipamento')" data-toggle="tab">Criar Equipamento</a></li>
+                        <li><a href="#equip_list" onclick="alterClass('#equipamento')" data-toggle="tab">Listar / Editar Equipamentos</a></li>
+                    </ul>
+                </li>
+            <?php endif; ?>
+                
             <li id="parada" class="li"><a class="opensub" onclick="return false;" href="">Parada</a>
                 <ul class="sub">
                     <li><a href="#down_create" onclick="alterClass('#parada')" data-toggle="tab">Registrar Parada</a></li>
-                    <li><a href="#down_list" onclick="alterClass('#parada')" data-toggle="tab">Listar / Editar Parada</a></li>
                 </ul>
             </li>
 
@@ -45,6 +47,5 @@ Register::addRegister("<script src=\"{$dir}js/google-chart/start.js\"></script>"
     <!--downtime-->
     <div class="tab-content" ng-controller="parada">
         <div class="tab-pane" id="down_create"><?php require '/system/paradas/parada.php'; ?></div>
-        <div class="tab-pane" id="down_list"><?php require '/system/paradas/index.php'; ?></div>
     </div>
 </div>
