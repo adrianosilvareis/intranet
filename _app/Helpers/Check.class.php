@@ -195,8 +195,10 @@ class Check {
     public static function CatParentByName($CategoryName) {
         $Read = new WsCategories;
 
-        $Read->setCategory_parent(self::CatByName($CategoryName));
-        $Read->Execute()->Query("#category_parent#");
+        if (self::CatByName($CategoryName)):
+            $Read->setCategory_parent(self::CatByName($CategoryName));
+            $Read->Execute()->Query("#category_parent#");
+        endif;
 
         if ($Read->Execute()->getResult()):
             return $Read->Execute()->getResult();

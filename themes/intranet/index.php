@@ -1,6 +1,6 @@
 <hr>
 <div class="col-md-9">
-    
+
     <?php include "inc/carrousel-gallery.inc.php"; ?>
 
     <?php
@@ -23,11 +23,14 @@
     $Ordem = "post_views";
     include "inc/noticias_tres.inc.php";
     ?>
-    
+
 </div>
 
-<?php
+<div style="float: left;">
+    <?php
 //coluna direita
-$cat = Check::CatByName("siderbar-left");
-$fixo = Check::CatByName("siderbar-left-fixo");
-require("inc/siderbar.inc.php");
+    $cat = Check::CatByName("siderbar-left");
+    $fixo = Check::CatByName("siderbar-left-fixo");
+    require("inc/siderbar.inc.php");
+    ?>
+</div>
