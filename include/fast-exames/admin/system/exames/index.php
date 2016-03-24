@@ -92,16 +92,10 @@ else:
                     <td><?= $AdminExames->Usuario($ws_users_soli); ?></td>
                     <td>
                         <ul class="post_actions plugin">
-                            <li><a class="act_edit" href="<?= FAST_INCLUDE ?>admin/&exe=exames/update&examesId=<?= $ex_id; ?>#form" title="Editar">Editar</a></li>
                             <?php if (!$ex_status): ?>
-                                <li><a class="act_ative" href="<?= FAST_INCLUDE ?>admin/&exe=exames/index&action=active/<?= $ex_id; ?>#form" title="Concluir">Ativar</a></li>
-                            <?php else: ?>
-                                <li><a class="act_inative" href="<?= FAST_INCLUDE ?>admin/&exe=exames/index&action=inative/<?= $ex_id; ?>#form" title="Abrir">Inativar</a></li>
-                            <?php endif; ?>
-                            <?php if (!$ex_cancelado): ?>
                                 <li><a class="act_delete" href="<?= FAST_INCLUDE ?>admin/&exe=exames/index&action=delete/<?= $ex_id; ?>#form" title="Inativar">Deletar</a></li>
                             <?php else: ?>
-                                <li><a class="act_accept" href="<?= FAST_INCLUDE ?>admin/&exe=exames/index&action=undelete/<?= $ex_id; ?>#form" title="Ativar">Deletar</a></li>
+                                concluido
                             <?php endif; ?>
                         </ul>
                     </td>

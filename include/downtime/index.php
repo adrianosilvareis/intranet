@@ -5,7 +5,8 @@ Register::addRegister("<script src=" . HOME . "/" . REQUIRE_PATH . "/js/angular/
 Register::addRegister("<script src=\"{$dir}js/controller/user.ctrl.js\"></script>");
 Register::addRegister("<script src=\"{$dir}js/controller/equipamentos.ctrl.js\"></script>");
 Register::addRegister("<script src=\"{$dir}js/controller/parada.ctrl.js\"></script>");
-Register::addRegister("<script src=\"{$dir}js/google-chart/start.js\"></script>");
+Register::addRegister("<script src='" . HOME . "/js/google-charts/columns.charts.js'></script>");
+Register::addRegister("<script src='" . HOME . "/js/google-charts/donut.charts.js'></script>");
 ?>
 
 <header id="navtab">
@@ -14,7 +15,7 @@ Register::addRegister("<script src=\"{$dir}js/google-chart/start.js\"></script>"
 
         <!--Query String-->
         <ul class="menu">
-            
+
             <?php if (Check::UserLogin(2)): ?>
                 <li id="equipamento" class="li"><a class="opensub" onclick="return false;" href="">Equipamento</a>
                     <ul class="sub">
@@ -23,7 +24,7 @@ Register::addRegister("<script src=\"{$dir}js/google-chart/start.js\"></script>"
                     </ul>
                 </li>
             <?php endif; ?>
-                
+
             <li id="parada" class="li"><a class="opensub" onclick="return false;" href="">Parada</a>
                 <ul class="sub">
                     <li><a href="#down_create" onclick="alterClass('#parada')" data-toggle="tab">Registrar Parada</a></li>
@@ -37,7 +38,7 @@ Register::addRegister("<script src=\"{$dir}js/google-chart/start.js\"></script>"
 
 <div class="tab-content" ng-app="downtime">
 
-    <div class="tab-pane active" id="dashboard"><?= require '/report/index.php'; ?></div>
+    <div class="tab-pane active" id="dashboard"><?php require '/report/index.php'; ?></div>
     <!--Equipamento-->
     <div class="tab-content" ng-controller="equipamentos">
         <div class="tab-pane" id="equip_create"><?php require '/system/equipamentos/equipamento.php'; ?></div>

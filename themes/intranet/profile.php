@@ -1,10 +1,9 @@
 <div class="jumbotron">
 
     <article>
-
         <?php extract($_SESSION['userlogin']); ?>
 
-        <h1 style="font-size: 2em;">Olá <?= "{$user_name} {$user_lastname}"; ?>, atualize seu perfíl!</h1>
+        <h1 style="font-size: 2em;">Olá <?= "{$user_name} {$user_lastname}"; ?>, <small>atualize seus dados aqui!</small></h1>
 
         <?php
         $ClienteData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -12,17 +11,21 @@
 
         if ($ClienteData && $ClienteData['SendPostForm']):
             unset($ClienteData['SendPostForm']);
-        
+
             extract($ClienteData);
             require('admin/_models/AdminUsers.class.php');
             $cadastra = new AdminUsers;
             $ClienteData['user_level'] = null;
             $cadastra->ExeUpdate($UserId, $ClienteData);
 
-            if ($cadastra->getResult()):
-                WSErro("Seus dados foram atualizados com sucesso! <i>O sistema será atualizado no próximo login!!!</i>", WS_ACCEPT);
+            if ($ClienteData['user_password'] == $ClienteData['user_confirme']):
+                if ($cadastra->getResult()):
+                    WSErro("Seus dados foram atualizados com sucesso! <i>O sistema será atualizado no próximo login!!!</i>", WS_ACCEPT);
+                else:
+                    WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
+                endif;
             else:
-                WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
+                WSErro("A Senha e a confirmação devem ser iguais.", WS_ERROR);
             endif;
         else:
             extract($_SESSION['userlogin']);
@@ -31,62 +34,53 @@
 
         <form method="post" name="UserEditForm" >
 
-            <label class="col-md-4">
-                Nome:
-                <input 
-                    type="text" 
-                    name="user_name" 
-                    value="<?= $user_name; ?>" 
-                    title="Informe seu primeiro nome" 
-                    class="form-control"
-                    required
-                    />
-            </label>
+            <div class="col-md-12 well">
+                <label class="col-md-5">
+                    Nome:
+                    <input type="text" name="user_name" value="<?= $user_name; ?>" title="Informe seu primeiro nome" class="form-control" required />
+                </label>
 
-            <label class="col-md-6">
-                Sobrenome:
-                <input
-                    type="text"
-                    name="user_lastname"
-                    value="<?= $user_lastname; ?>"
-                    title="Informe seu sobrenome"
-                    class="form-control"
-                    required
-                    />
-            </label>
+                <label class="col-md-7">
+                    Sobrenome:
+                    <input type="text" name="user_lastname" value="<?= $user_lastname; ?>" title="Informe seu sobrenome" class="form-control" required />
+                </label>
+            </div>
 
-            <label class="col-md-10">
-                E-mail:
-                <input
-                    type="email"
-                    name="user_email"
-                    value="<?= $user_email; ?>"
-                    title="Informe seu e-mail"
-                    class="form-control"
-                    required
-                    />
-            </label>
+            <div class="col-md-12 well">
+                <label class="col-md-4">
+                    Setor:
+                    <select class="form-control">
+                        <option value="">Selecione um setor</option>
+                    </select>
+                </label>
 
-            <label class="col-md-4">
-                Senha:
-                <input
-                    type="password"
-                    name="user_password"
-                    required="true"
-                    value=""
-                    title="Informe sua senha [ de 6 a 12 caracteres! ]"
-                    pattern = ".{6,12}"
-                    class="form-control"
-                    />
-            </label>
+                <label class="col-md-4">
+                    User:
+                    <input type="text" name="user_nickname" value="<?= (!empty($user_nickname) ? $user_nickname : ""); ?>" title="Usuario" class="form-control" disabled />
+                </label>
+
+                <label class="col-md-4">
+                    E-mail:
+                    <input type="email" name="user_email" value="<?= $user_email; ?>" title="Informe seu e-mail" class="form-control" required />
+                </label>
+            </div>
+
+            <div class="col-md-8 well">
+                <label class="col-md-6">
+                    Senha:
+                    <input type="password" name="user_password" required="true" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                </label>
+
+                <label class="col-md-6">
+                    Confirmação:
+                    <input type="password" name="user_confirme" required="true" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                </label>
+            </div>
 
             <div class="col-md-12">
                 <input type="submit" name="SendPostForm" value="Atualizar Perfil" class="btn btn-primary btn-lg" />
             </div>
-
         </form>
-
-
     </article>
 
     <div class="clearfix"></div>

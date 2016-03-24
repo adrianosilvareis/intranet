@@ -4,7 +4,7 @@ function drawChart() {
     var data = google.visualization.arrayToDataTable(datadonut);
 
     var options = {
-        title: 'Tempo total parado',
+        title: titledonut,
         pieHole: 0.4
     };
 

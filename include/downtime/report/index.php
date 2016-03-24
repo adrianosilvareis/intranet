@@ -1,59 +1,18 @@
 <?php
 $Read = new Controle();
-
-//Grafico de colunas
-$Read->FullRead("SELECT e.equip_title as 'title', count(t.equip_id) as 'cont' FROM dt_downtime t 
-                JOIN dt_equipamentos e ON(e.equip_id = t.equip_id)
-                GROUP BY e.equip_id;");
-
-$datacolumn = "[";
-$datacolumn .= "['Equipamento','Numero de paradas'],";
-foreach ($Read->getResult() as $value):
-    $datacolumn .= "['{$value->title}',{$value->cont}],";
-endforeach;
-$datacolumn .= "]";
-
-//Grafico de Donuts
-$Read->FullRead("SELECT e.equip_title, e.equip_date, t.time_stop, t.time_start
-                from dt_downtime t JOIN dt_equipamentos e ON(e.equip_id = t.equip_id)
-                WHERE e.equip_status ORDER BY e.equip_id;");
-
-array_map(function($value) {
-    $value->diff = Check::DateToInteger($value->time_start) - Check::DateToInteger($value->time_stop);
-}, $Read->getResult());
-
-$arrayEquip = [];
-foreach ($Read->getResult() as $value):
-    if (!array_key_exists($value->equip_title, $arrayEquip)):
-        $arrayEquip[$value->equip_title] = $value->diff;
-    else:
-        $arrayEquip[$value->equip_title] += $value->diff;
-    endif;
-endforeach;
-
-$datadonut = "[['Equipamento', 'Tempo total parado'],";
-foreach ($arrayEquip as $key => $value):
-    $datadonut .= "['$key',$value],";
-endforeach;
-$datadonut .= ']';
-
 //Lista de Registros
 $Read->FullRead("select t.equip_id, t.time_id, t.time_stop, t.time_start, "
         . "t.time_lastupdate, t.equip_author, e.equip_title, e.equip_content, "
         . "e.equip_date, e.equip_status, e.equip_lastupdate "
         . "from dt_downtime t JOIN dt_equipamentos e ON(e.equip_id = t.equip_id)");
-
-
-//Declaração de SCRIPT
-Register::addRegister("<script src=\"{$dir}js/google-chart/column.js\"></script>");
-Register::addRegister("<script src=\"{$dir}js/google-chart/donut.js\"></script>");
 ?>
 
-<script type="text/javascript">
-    var datadonut = <?= $datadonut; ?>;
-    var datacolumn = <?= $datacolumn; ?>;
+<script>
+    var titlecolumn = "Parada de equipamento";
+    var datacolumn = <?php require HOME . '/api/downtime/column_chart.api.php';?>;  
+    var titledonut = "Tempo total parado";
+    var datadonut = <?php require HOME . '/api/downtime/donut_chart.api.php';?>;  
 </script>
-
 
 <div class="row">
     <div id="columnchart_values" style="width: 50%; height: 350px; float: left;"></div>

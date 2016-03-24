@@ -4,9 +4,7 @@ function drawChart() {
     var data = google.visualization.arrayToDataTable(datacolumn);
 
     var options = {
-        title: "Numero de paradas",
-        width: 600,
-        height: 400,
+        title: titlecolumn,
         bar: {groupWidth: "95%"},
         legend: {position: "none"}
     };

@@ -4,7 +4,7 @@ function drawChart() {
     var data = google.visualization.arrayToDataTable(datacolumn);
 
     var options = {
-        title: "Exames por usuario",
+        title: titlecolumn,
         bar: {groupWidth: "95%"},
         legend: {position: "none"}
     };

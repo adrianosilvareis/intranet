@@ -3,10 +3,7 @@ if (file_exists('include/fast-exames/_models/AdminExames.class.php')):
     include_once 'include/fast-exames/_models/AdminExames.class.php';
 endif;
 
-if (file_exists(FAST_PATH . "google-chart/column.js")):
-    Register::addRegister("<script src='" . HOME . '/' . FAST_PATH . "google-chart/start.js'></script>");
-    Register::addRegister("<script src='" . HOME . '/' . FAST_PATH . "google-chart/column.js'></script>");
-endif;
+Register::addRegister("<script src='" . HOME . "/js/google-charts/columns.charts.js'></script>");
 
 $FeExames = new FeExames();
 $AdminExames = new AdminExames();
@@ -15,16 +12,6 @@ $FeExames->Execute()->FullRead("SELECT count(e.ws_users) as 'cont' , u.* FROM fe
         . "JOIN ws_users u ON(u.user_id = e.ws_users) "
         . "GROUP BY e.ws_users;");
 $usuarios = $FeExames->Execute()->getResult();
-
-
-$datacolumn = "[";
-$datacolumn .= "['Usuario','Total Exames'],";
-foreach ($usuarios as $value):
-    $datacolumn .= "['{$value->user_name}',{$value->cont}],";
-endforeach;
-$datacolumn .= "]";
-
-echo "<script>var datacolumn = $datacolumn;</script>";
 
 //Tempo Medio dias corrisdos
 $ListaTempoMedio = $FeExames->Execute()->FullRead("SELECT e.ex_data_abertura as 'data_inicio' , e.ex_data_fechamento  as 'data_fim' "
@@ -54,6 +41,11 @@ $dia = $FeExames->Execute()->FullRead("SELECT e.ex_data_abertura as 'data_inicio
 
 $day = $AdminExames->TempoMedio($dia);
 ?>
+
+<script>
+    var titlecolumn = "Exames por usuario";
+    var datacolumn = <?php require HOME . "/api/fast-exames/column_chart.api.php"; ?>;
+</script>
 
 <div class="row">
     <div class="col-md-4">
@@ -99,9 +91,9 @@ $day = $AdminExames->TempoMedio($dia);
     <div class="col-md-8">
 
         <div id="columnchart_values" style="width: 100%; height: 400px; padding-bottom: 55px; float: left;"></div>
-        
+
         <div class="clearfix"></div>
-        
+
         <?php
         $FeExames->Execute()->FullRead("SELECT e.ex_id, e.ex_descricao, e.ex_minemonico, e.ex_data_abertura "
                 . "FROM fe_exames e WHERE e.ex_cancelado=0 AND e.ex_status=0");
