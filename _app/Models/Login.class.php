@@ -60,8 +60,8 @@ class Login {
      * ****************************************
      */
     private function setLogin() {
-        if (!$this->Email || !$this->Senha || !Check::Email($this->Email)):
-            $this->Error = ['Informe seu email e senha para efetuar seu login', WS_INFOR];
+        if (!$this->Email || !$this->Senha):
+            $this->Error = ['Informe seu usuario e senha para efetuar seu login', WS_INFOR];
             $this->Result = false;
         elseif (!$this->getUser()):
             $this->Error = ['Os dados informados não são compatíveis', WS_ALERT];
@@ -77,9 +77,16 @@ class Login {
     private function getUser() {
         $this->Senha = md5($this->Senha);
         $WsUsers = new WsUsers();
-        $WsUsers->setUser_email($this->Email);
+        if (Check::Email($this->Email)):
+            $WsUsers->setUser_email($this->Email);
+            $login = '#user_email#';
+        else:
+            $WsUsers->setUser_nickname($this->Email);
+            $login = '#user_nickname#';
+        endif;
+
         $WsUsers->setUser_password($this->Senha);
-        $WsUsers->Execute()->Query("#user_email# AND #user_password#");
+        $WsUsers->Execute()->Query("{$login} AND #user_password#");
         if ($WsUsers->Execute()->getResult()):
             $this->Result = $WsUsers->Execute()->getResult()[0];
             return true;
@@ -92,7 +99,7 @@ class Login {
         if (!session_id()):
             session_start();
         endif;
-        
+
         $_SESSION['userlogin'] = (array) $this->Result;
         $this->Error = ["Olá {$this->Result->user_name}, seja bem vindo(a). Aguarde redirecionamento!", WS_ACCEPT];
 

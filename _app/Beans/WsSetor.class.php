@@ -83,11 +83,11 @@ class WsSetor extends Beans {
     function getSetor_email() {
         return $this->setor_email;
     }
-
+    
     function getSetor_type() {
         return $this->setor_type;
     }
-
+    
     function getSetor_category() {
         return $this->setor_category;
     }
@@ -115,7 +115,7 @@ class WsSetor extends Beans {
     function setSetor_type($setor_type) {
         $this->setor_type = $setor_type;
     }
-
+    
     function setSetor_category($setor_category) {
         $this->setor_category = $setor_category;
     }

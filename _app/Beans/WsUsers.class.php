@@ -10,6 +10,7 @@
 class WsUsers extends Beans {
 
     private $user_id;
+    private $user_nickname;
     private $user_name;
     private $user_lastname;
     private $user_email;
@@ -29,6 +30,7 @@ class WsUsers extends Beans {
      */
     public function getThis() {
         $this->Controle->setDados(array_filter([
+            'user_nickname' => $this->getUser_nickname(),
             'user_name' => $this->getUser_name(),
             'user_lastname' => $this->getUser_lastname(),
             'user_email' => $this->getUser_email(),
@@ -48,6 +50,7 @@ class WsUsers extends Beans {
      */
     public function setThis($object) {
         $this->setUser_id((isset($object->user_id) ? $object->user_id : null));
+        $this->setUser_nickname((isset($object->user_nickname) ? $object->user_nickname : null));
         $this->setUser_name((isset($object->user_name) ? $object->user_name : null));
         $this->setUser_lastname((isset($object->user_lastname) ? $object->user_lastname : null));
         $this->setUser_email((isset($object->user_email) ? $object->user_email : null));
@@ -72,9 +75,12 @@ class WsUsers extends Beans {
      * ************** GET & SET ***************
      * ****************************************
      */
-    
     function getUser_id() {
-        return (int) $this->user_id;
+        return $this->user_id;
+    }
+
+    function getUser_nickname() {
+        return $this->user_nickname;
     }
 
     function getUser_name() {
@@ -102,11 +108,15 @@ class WsUsers extends Beans {
     }
 
     function getUser_level() {
-        return (int) $this->user_level;
+        return $this->user_level;
     }
 
     function setUser_id($user_id) {
         $this->user_id = $user_id;
+    }
+
+    function setUser_nickname($user_nickname) {
+        $this->user_nickname = $user_nickname;
     }
 
     function setUser_name($user_name) {

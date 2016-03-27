@@ -102,9 +102,10 @@ class AdminUsers {
         $Where = (!empty($this->Users) ? "user_id != {$this->Users} AND " : '');
         $this->Read = new WsUsers();
         $this->Read->setUser_email($this->Data['user_email']);
-        $this->Read->Execute()->Query("{$Where}#user_email#");
+        $this->Read->setUser_nickname($this->Data['user_nickname']);
+        $this->Read->Execute()->Query("{$Where}#user_email# OR {$Where}#user_nickname#");
         if ($this->Read->Execute()->getResult()):
-            $this->Error = ['<b>Opppsss, email já cadastrado</b>, por favor preencha um novo email.', WS_INFOR];
+            $this->Error = ['<b>Opppsss, email ou usuario já cadastrado</b>, por favor preencha um novo email ou usuario.', WS_INFOR];
             $this->Result = null;
         endif;
     }
@@ -128,7 +129,7 @@ class AdminUsers {
     private function Messagem($Action, $Return, $Criterio) {
         if ($Criterio):
             $this->Result = $Return;
-            $this->Error = ["<b>Sucesso:</b> Usuário <b>{$this->Data['user_name']}</b> foi {$Action} corretamente no sistema!", WS_ACCEPT];
+            $this->Error = ["<b>Sucesso:</b> Usuário <b>{$this->Data['user_nickname']}</b> foi {$Action} corretamente no sistema!", WS_ACCEPT];
         endif;
     }
 

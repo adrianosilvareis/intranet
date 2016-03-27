@@ -23,6 +23,17 @@
 
         <form action = "" method = "post" name = "UserCreateForm">
             <label class="label">
+                <span class="field">User:</span>
+                <input
+                    type = "text"
+                    name = "user_nickname"
+                    value="<?php if (!empty($ClienteData['user_nickname'])) echo $ClienteData['user_nickname']; ?>"
+                    title = "Informe seu usuario"
+                    required
+                    />
+            </label>
+            
+            <label class="label">
                 <span class="field">Nome:</span>
                 <input
                     type = "text"

@@ -51,7 +51,7 @@ require('../_app/Config.inc.php');
                 <form name="AdminLoginForm" action="" method="post">
                     <label>
                         <span>E-mail:</span>
-                        <input type="email" name="user" />
+                        <input type="text" name="user" />
                     </label>
 
                     <label>

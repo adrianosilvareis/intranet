@@ -32,6 +32,11 @@
         <form action = "" method = "post" name = "UserEditForm">
 
             <label class="label">
+                <span class="field">User:</span>
+                <input type="text" name="user_nickname" value="<?= strtoupper($user_nickname); ?>" title="Informe seu primeiro nome" required />
+            </label>
+
+            <label class="label">
                 <span class="field">Nome:</span>
                 <input type="text" name="user_name" value="<?= $user_name; ?>" title="Informe seu primeiro nome" required />
             </label>

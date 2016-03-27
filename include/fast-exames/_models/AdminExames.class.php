@@ -25,7 +25,7 @@ class AdminExames {
     public function ExeCreate($Data) {
         $this->Data = $Data;
         $this->setData();
-        $this->Read->setThis((object) $this->Data);
+        $this->Read->setThis((object) $this->Data);        
         $insert = $this->Read->Execute()->insert();
         $this->Result = $this->Read->Execute()->MaxFild("ex_id");
         $this->MensagemCadastra($insert);

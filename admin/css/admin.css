@@ -222,18 +222,18 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 /*USUÁRIOS*/
 .user_cad{float: right; background: #bee2b0; padding: 8px 20px; font-size: 14px; text-transform: uppercase; color: #fff;}
 .user_cad:hover{background: #80e258}
-.ultable{width: 968px; display: block; margin: 20px auto; overflow: hidden; background: #eee; list-style: none; padding: 0;}
-.ultable .t_title{background: #333; color: #fff; border-color: #333; width: 968px;}
+.ultable{width: 1028px; display: block; margin: 20px auto; overflow: hidden; background: #eee; list-style: none; padding: 0;}
+.ultable .t_title{background: #333; color: #fff; border-color: #333; width: 100%;}
 .ultable .t_title span{border-color: #fff;}
-.ultable li{float: left; display: block; border: 1px solid #333; border-top: none; width: 968px; font-size: 14px;}
+.ultable li{float: left; display: block; border: 1px solid #333; border-top: none; width: 100%; font-size: 14px;}
 .ultable li span{float: left; padding: 15px; border-right: 1px solid #ccc; min-height: 22px}
 .ultable li .center{text-align: center;}
-.ultable li .ui{width: 20px;}
+.ultable li .ui{width: 7.8%;}
 .ultable li .un{width: 210px;}
 .ultable li .ue{width: 200px;}
-.ultable li .ur{width: 80px;}
+.ultable li .ur{width: 7.8%;}
 .ultable li .ua{width: 150px;}
-.ultable li .ul{width: 40px;}
+.ultable li .ul{width: 3.9%;}
 .ultable li .ed{width: 50px; border-right-color: #333;}
 .ultable li .ed a{background: #069;}
 .ultable li .ed a:hover{background-color: #09f;}

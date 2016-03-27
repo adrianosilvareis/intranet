@@ -115,7 +115,7 @@ class Check {
         if (!empty($metaD) && $return['days'] > $metaD ||
                 empty($metaD) && !empty($metaH) && $return['hours'] > $metaH ||
                 empty($metaD) && empty($metaH) && !empty($metaM) && $return['mins'] > $metaM):
-            return "<span style='color:red'>" . $retorno['return'] . "</span>";
+            return "<span style='color:red'>" . $return['return'] . "</span>";
         endif;
 
         return $return['return'];

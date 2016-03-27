@@ -26,11 +26,8 @@
 
 </div>
 
-<div style="float: left;">
-    <?php
-//coluna direita
+<?php
+    //coluna direita
     $cat = Check::CatByName("siderbar-left");
     $fixo = Check::CatByName("siderbar-left-fixo");
     require("inc/siderbar.inc.php");
-    ?>
-</div>

@@ -33,6 +33,12 @@
         ?>
 
         <form action = "" method = "post" name = "UserCreateForm">
+
+            <label class="label">
+                <span class="field">User:</span>
+                <input type = "text" name = "user_nickname" value="<?php if (!empty($ClienteData['user_nickname'])) echo strtoupper($ClienteData['user_nickname']); ?>" title = "Informe seu usuario" required />
+            </label>
+
             <label class="label">
                 <span class="field">Nome:</span>
                 <input type="text" name="user_name" value="<?php if (!empty($ClienteData['user_name'])) echo $ClienteData['user_name']; ?>" title="Informe seu primeiro nome" required />

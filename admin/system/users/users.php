@@ -17,7 +17,7 @@
 
         <ul class="ultable">
             <li class="t_title">
-                <span class="ui center">Res:</span>
+                <span class="ui center">User:</span>
                 <span class="un">Nome:</span>
                 <span class="ue">E-mail:</span>
                 <span class="ur center">Registro:</span>
@@ -35,7 +35,7 @@
                     $nivel = ['', 'Admin', 'Editor', 'Exec', 'Solic', 'User'];
                     ?>            
                     <li>
-                        <span class="ui center"><?= $user; ?></span>
+                        <span class="ui center"><?= strtoupper($user_nickname); ?></span>
                         <span class="un"><?= $user_name . ' ' . $user_lastname; ?></span>
                         <span class="ue"><?= $user_email; ?></span>
                         <span class="ur center"><?= date('d/m/Y', strtotime($user_registration)); ?></span>
