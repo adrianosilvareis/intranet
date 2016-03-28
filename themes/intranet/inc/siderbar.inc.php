@@ -11,7 +11,7 @@
                 WSErro("Opps! Não temos artigos para a barra lateral", WS_INFOR);
             else:
                 $View = new View();
-                $siderbar = $View->Load("article_siderbar");
+                $siderbar = $View->Load("article_sidebar_clean");
                 foreach ($Read->Execute()->getResult() as $bar):
                     $bar->datetime = date('Y-m-d', strtotime($bar->post_date));
                     $bar->pubdate = date("d/m/Y H:i", strtotime($bar->post_date));

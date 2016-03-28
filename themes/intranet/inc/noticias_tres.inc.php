@@ -11,7 +11,7 @@
             WSErro("Opps! Não temos artigos em destaques!", WS_INFOR);
         else:
             $View = new View();
-            $new = $View->Load("noticias_m");
+            $new = $View->Load("noticias_m_clean");
             foreach ($Read->Execute()->getResult() as $bar):
                 $bar->datetime = date('Y-m-d', strtotime($bar->post_date));
                 $bar->pubdate = date("d/m/Y H:i", strtotime($bar->post_date));

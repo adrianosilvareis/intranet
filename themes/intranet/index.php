@@ -1,7 +1,7 @@
 <hr>
 <div class="col-md-9">
 
-    <?php include "inc/carrousel-gallery.inc.php"; ?>
+    <?php include "inc/carrousel.inc.php"; ?>
 
     <?php
     $Titulo = "Destaques";
