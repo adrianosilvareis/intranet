@@ -20,9 +20,10 @@ gulp.task('jshint', function () {
 
 gulp.task('uglify', ['clean'], function () {
     return es.merge([
-        gulp.src(['_lib/jquery/jquery.min.js', '_lib/jquery/jmask.min.js', '_lib/angular/*.js', '_lib/bootstrap/js/*.js', '_lib/google-chart/*.js']).pipe(concat('lib.min.js')),
-        gulp.src(['js/**/*.js', 'include/*/js/**/*.js']).pipe(uglify()).pipe(concat('all.min.js'))
-    ])
+        gulp.src(['_lib/jquery/jquery.min.js', '_lib/jquery/jmask.min.js', '_lib/bootstrap/js/*.js', '_lib/google-chart/*.js']).pipe(concat('lib.min.js')),
+        gulp.src(['js/angular/**/*.js', 'js/jquery/**/*.js', 'js/google-charts/start.js', 'js/google-charts/*.charts.js', 'include/*/js/**/*.js']).pipe(uglify()).pipe(concat('all.min.js'))
+    ])  
+            .pipe(concat('all.min.js'))
             .pipe(gulp.dest('dist/js'));
 });
 
@@ -40,6 +41,7 @@ gulp.task('copy', function () {
     return es.merge([
         gulp.src('_app/**').pipe(gulp.dest('dist/_app')),
         gulp.src('_lib/cdn/**').pipe(gulp.dest('dist/cdn')),
+        gulp.src('_lib/angular/**').pipe(gulp.dest('dist/js')),
         gulp.src('admin/**').pipe(gulp.dest('dist/admin')),
         gulp.src('api/**').pipe(gulp.dest('dist/api')),
         gulp.src('ftp/images/**').pipe(gulp.dest('dist/ftp/images')),

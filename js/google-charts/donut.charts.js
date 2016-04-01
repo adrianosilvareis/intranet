@@ -1,4 +1,7 @@
-
+/**
+ * google charts
+ * donut
+ */
 google.charts.setOnLoadCallback(drawChart);
 function drawChart() {    
     var data = google.visualization.arrayToDataTable(datadonut);

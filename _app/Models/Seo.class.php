@@ -291,7 +291,10 @@ class Seo {
 
     private function setProd() {
         $this->seoLibs .= "<!--LIBS PRODUCAO-->\n";
-        $this->seoLibs .= "<script src='" . HOME . "/js/lib.min.js'></script>" . "\n";
+        
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular-route.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular-messages.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/all.min.js'></script>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/bootstrap-all.min.css'/>" . "\n";

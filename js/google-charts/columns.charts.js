@@ -1,4 +1,7 @@
-
+/**
+ * google charts
+ * column
+ */
 google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
     var data = google.visualization.arrayToDataTable(datacolumn);

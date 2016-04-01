@@ -24,11 +24,14 @@
     "tests"
   ],
   "dependencies": {
+    "angular": "^1.5.0"
+  },
+  "devDependencies": {
+    "angular": "^1.5.0",
+    "angular-messages": "^1.5.0",
+    "angular-route": "^1.5.0",
     "bootstrap": "3.3.6",
     "jquery-form": "^3.46.0",
-    "angular": "^1.5.0",
-    "jquery-mask-plugin": "1.13.8",
-    "angular-messages": "^1.5.0",
-    "angular-route": "^1.5.0"
+    "jquery-mask-plugin": "1.13.9"
   }
 }
