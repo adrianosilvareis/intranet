@@ -1,4 +1,4 @@
-appDt.controller("equipamentos", function ($scope, objetoAPI, config) {
+angular.module('downtime').controller("equipamentos", function ($scope, objetoAPI, config) {
 
     $scope.equipamentos = [];
     $scope.setores = [];

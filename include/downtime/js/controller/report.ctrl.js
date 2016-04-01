@@ -1,4 +1,4 @@
-appDt.controller('report', function ($scope, objetoAPI, config) {
+angular.module('downtime').controller('report', function ($scope, objetoAPI, config) {
 
     var datacolumn = [];
     var title = "Parada por equipamento";

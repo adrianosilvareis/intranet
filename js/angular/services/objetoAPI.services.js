@@ -3,7 +3,6 @@
  * ******* Serviço do tipo SERVICES *******
  * ****************************************
  */
-angular.module("objetoAPI", []);
 angular.module("objetoAPI").service("objetoAPI", function ($http) {
 
     this.getObjeto = function (url) {

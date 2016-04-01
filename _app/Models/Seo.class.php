@@ -245,9 +245,26 @@ class Seo {
 
         if ($this->Data):
             $this->setTags();
-            $this->setLib();
-//            $this->setProd();
+//            $this->setLib();
+            $this->setProd();
         endif;
+    }
+
+    private function setProd() {
+        $this->seoLibs .= "<!--LIBS PRODUCAO-->\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/lib.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/all.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/downtime.min.js'></script>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/bootstrap.min.css'/>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/bootstrap-multiselect.css'/>" . "\n";
+
+        $this->seoLibs .= "<!--CDN-->\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/cdn/shadowbox/shadowbox.css'>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/cdn/jcycle.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/cdn/shadowbox/shadowbox.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/cdn/_plugins.conf.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/cdn/_scripts.conf.js'></script>" . "\n";
     }
 
     private function setTags() {
@@ -289,24 +306,6 @@ class Seo {
         $this->Tags = null;
     }
 
-    private function setProd() {
-        $this->seoLibs .= "<!--LIBS PRODUCAO-->\n";
-        
-        $this->seoLibs .= "<script src='" . HOME . "/js/angular.min.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/js/angular-route.min.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/js/angular-messages.min.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/js/all.min.js'></script>" . "\n";
-        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
-        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/bootstrap-all.min.css'/>" . "\n";
-        
-        $this->seoLibs .= "<!--CDN-->\n";
-        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/cdn/shadowbox/shadowbox.css'>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/cdn/jcycle.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/cdn/shadowbox/shadowbox.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/cdn/_plugins.conf.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/cdn/_scripts.conf.js'></script>" . "\n";
-    }
-
     private function setLib() {
         //LIBS    
         $this->seoLibs .= "<!--LIBS-->\n";
@@ -321,7 +320,7 @@ class Seo {
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap.css'>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/intranet.js'></script>" . "\n";
-        
+
         $this->seoLibs .= "<!--Google Charts-->\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/google-chart/loader.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/google-charts/start.js'></script>" . "\n";

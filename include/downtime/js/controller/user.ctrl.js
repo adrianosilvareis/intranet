@@ -1,4 +1,4 @@
-angular.module("downtime").controller("user", function ($scope, objetoAPI, config) {
+angular.module('downtime').controller("user", function ($scope, objetoAPI, config) {
     var times = [];
     $scope.equipamentos = [];
 

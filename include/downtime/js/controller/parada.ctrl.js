@@ -1,4 +1,4 @@
-appDt.controller("parada", function ($scope, objetoAPI, config) {
+angular.module('downtime').controller("parada", function ($scope, objetoAPI, config) {
 
     var _equipamentos = null;
     var _time = null;
