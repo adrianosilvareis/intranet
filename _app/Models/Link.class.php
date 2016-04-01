@@ -31,6 +31,7 @@ class Link {
 
     public function getTags() {
         $this->Tags = $this->Seo->getTags();
+        $this->Tags .= $this->Seo->getLibs();
         echo $this->Tags;
     }
 

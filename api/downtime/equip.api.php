@@ -19,7 +19,6 @@ if (!empty($request)):
         echo "excluido com sucesso!";
 
     elseif (!empty($request->equip_id)):
-        $request->equip_author = (isset($userlogin) ? $userlogin['user_name'] . " " . $userlogin['user_lastname'] : "");
         $request->equip_lastupdate = date("Y-m-d H:i:s");
         $status = ($request->equip_status ? '1' : '0');
 

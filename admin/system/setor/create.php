@@ -76,7 +76,7 @@ endif;
                 
                 <label class="label_small">
                     <span class="field">Categoria:</span>
-                    <input type="text" class="formDate center" name="setor_category" value="<?php if (isset($data)) echo $data['setor_category']; ?>" />
+                    <input type="text" class="center" name="setor_category" value="<?php if (isset($data)) echo $data['setor_category']; ?>" />
                 </label>
             </div>
 

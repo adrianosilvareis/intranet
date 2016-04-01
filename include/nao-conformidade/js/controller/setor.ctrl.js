@@ -1,7 +1,7 @@
 appNCon.controller("setor", function ($scope, objetoAPI, config) {
     $scope.setores = [];
     $scope.types = [];
-    $scope.setor;
+    $scope.setor = "";
 
     var carregarObjetos = function () {
         objetoAPI.getObjeto(config.apiURL + "/setor.api.php").success(function (data) {

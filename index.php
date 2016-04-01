@@ -16,9 +16,26 @@ $Session = new Session;
     <body>
         <?php
         $Login = new Login(5);
+
+        $logoff = filter_input(INPUT_GET, 'logoff', FILTER_VALIDATE_BOOLEAN);
+        $getexe = filter_input(INPUT_GET, 'exe', FILTER_DEFAULT);
+        Check::UserOnline();
+
+        if (!$Login->CheckLogin()):
+            unset($_SESSION['userlogin']);
+            header('Location: ' . HOME . '/login.php?exe=restrito');
+        else:
+            $userlogin = $_SESSION['userlogin'];
+        endif;
+
+        if ($logoff):
+            unset($_SESSION['userlogin']);
+            header('Location: ' . HOME . '/login.php?exe=logoff');
+        endif;
+
         require(REQUIRE_PATH . '/inc/header.inc.php');
         ?>
-
+        
         <div class="section">
             <div class="container">
                 <?php

@@ -17,7 +17,7 @@
                 <?php else: ?>
                     <li><a class="icon profile radius" href="<?= HOME ?>/profile">Perfíl</a></li>
                 <?php endif; ?>
-                <li><a class="icon logout radius" href="<?= HOME ?>/admin/painel.php?logoff=true">Sair</a></li>
+                <li><a class="icon logout radius" href="<?= HOME ?>/&logoff=true">Sair</a></li>
             </ul>
         <?php endif; ?>
 
@@ -26,7 +26,7 @@
 
             <?php require "menu.inc.php"; ?>
 
-            <?php require "login.inc.php"; ?>
+            <?php // require "login.inc.php"; ?>
             
             <?php include "parabens.inc.php"; ?>
             <!-- modal -->

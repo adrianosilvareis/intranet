@@ -7,7 +7,7 @@
         </header>
         
         <p ng-if="message" class="trigger accept">{{message}}<span class="ajax_close"></span></p> 
-        <?php require HOME . "/" . REQUIRE_PATH . "/plugin/nao-conformidade/system/message/message-setor.html"; ?>
+        <?php require HOME . "/include/nao-conformidade/system/message/message-setor.html"; ?>
 
         <form name="setorForm">
 

@@ -1,10 +1,10 @@
 <?php
 $dir = HOME . "/include/downtime/";
-Register::addRegister("<script src=\"{$dir}js/downtime.module.js\"></script>");
-Register::addRegister("<script src=" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/timestampBr.filter.js></script>");
 Register::addRegister("<script src=\"{$dir}js/controller/user.ctrl.js\"></script>");
 Register::addRegister("<script src=\"{$dir}js/controller/equipamentos.ctrl.js\"></script>");
 Register::addRegister("<script src=\"{$dir}js/controller/parada.ctrl.js\"></script>");
+Register::addRegister("<script src=\"{$dir}js/downtime.module.js\"></script>");
+Register::addRegister("<script src='" . HOME . "/js/angular/filter/timestampBr.filter.js'></script>");
 Register::addRegister("<script src='" . HOME . "/js/google-charts/columns.charts.js'></script>");
 Register::addRegister("<script src='" . HOME . "/js/google-charts/donut.charts.js'></script>");
 ?>

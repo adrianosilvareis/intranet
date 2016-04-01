@@ -5,6 +5,12 @@ endif;
 
 Register::addRegister("<script src='" . HOME . "/js/google-charts/columns.charts.js'></script>");
 
+
+$using = filter_input(INPUT_GET, 'using', FILTER_VALIDATE_BOOLEAN);
+if($using):
+    WSErro("Este exame já esta sendo usado por outra pessoa.", WS_ALERT);
+endif;
+
 $FeExames = new FeExames();
 $AdminExames = new AdminExames();
 //Total por usuarios

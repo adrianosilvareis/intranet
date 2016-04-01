@@ -269,6 +269,25 @@ class Check {
     }
 
     /**
+     * <b>Usuários Usando a página:</b> Ao executar este HELPER, ele automaticamente verifica usuarios que estejam usando a url atual. 
+     * @return BOOLEAN = Ultrapassou o numero de usuarios máximo.
+     */
+    public static function UsingPage($maxUsing = NULL) {
+        $max = (!empty($maxUsing) ? $maxUsing : 1);
+
+        $online_url = $_SESSION['useronline']['online_url'];
+        $online_session = $_SESSION['useronline']['online_session'];
+
+        $userOnline = new WsSiteviewsOnline;
+        $userOnline->setOnline_url($online_url);
+        $userOnline->setOnline_session($online_session);
+
+        $userOnline->Execute()->Query("online_url = :online_url AND online_session != :online_session");
+
+        return ($userOnline->Execute()->getRowCount() < $max ? true : false);
+    }
+
+    /**
      * <b>Usuário Logado</b> Ao executar este HELPER, ele retorna o usuário que esta logado no momento.
      * 
      * @return obejct ws_user

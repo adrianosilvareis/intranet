@@ -1,5 +1,5 @@
 <?php
-define("NCONDIR", HOME . "/" . REQUIRE_PATH . "/plugin/nao-conformidade/js");
+define("NCONDIR", HOME . "/include/nao-conformidade/js");
 Register::addRegister("<script src='" . NCONDIR . "/model.app.js'></script>");
 Register::addRegister("<script src='" . NCONDIR . "/config/config.value.js'></script>");
 Register::addRegister("<script src='" . NCONDIR . "/config/route.config.js'></script>");
@@ -48,7 +48,7 @@ Register::addRegister("<script src='" . NCONDIR . "/controller/registro.ctrl.js'
         <div class="tab-pane" id="reg_list"><?php require '/system/registro/index.php'; ?></div>
     </div>
     
-    <!--origem-->
+      <!--origem-->
     <div class="tab-content" ng-controller="origem">
         <div class="tab-pane" id="ori_create"><?php require '/system/origem/origem.php'; ?></div>
         <div class="tab-pane" id="ori_list"><?php require '/system/origem/index.php'; ?></div>
@@ -59,4 +59,5 @@ Register::addRegister("<script src='" . NCONDIR . "/controller/registro.ctrl.js'
         <div class="tab-pane" id="set_create"><?php require '/system/setor/setor.php'; ?></div>
         <div class="tab-pane" id="set_list"><?php require '/system/setor/index.php'; ?></div>
     </div>
+
 </div>

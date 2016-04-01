@@ -16,6 +16,7 @@ class Seo {
     /* DADOS POVOADOS */
     private $seoTags;
     private $seoData;
+    private $seoLibs;
 
     function __construct($File, $Link) {
         $this->File = strip_tags(trim($File));
@@ -25,6 +26,10 @@ class Seo {
     public function getTags() {
         $this->checkData();
         return $this->seoTags;
+    }
+
+    public function getLibs() {
+        return $this->seoLibs;
     }
 
     public function getData() {
@@ -51,7 +56,7 @@ class Seo {
             case 'indicadores':
                 $this->Data = ['Indicadores de qualidade - ' . SITENAME . ' - ' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                 break;
-            
+
             case 'profile':
                 $this->Data = ['Dados cadastrais - ' . SITENAME . ' - ' . SITEDESC, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                 break;
@@ -240,6 +245,8 @@ class Seo {
 
         if ($this->Data):
             $this->setTags();
+            $this->setLib();
+//            $this->setProd();
         endif;
     }
 
@@ -254,19 +261,16 @@ class Seo {
 
         $this->seoTags .= "<!--[if lt IE 9]><script src='" . HOME . "/_cdn/html5.js'></script><![endif]-->" . "\n";
         $this->seoTags .= "<meta charset='UTF-8'>" . "\n";
-
         //NORMAL PAGE
         $this->seoTags .= "<!--NORMAL PAGE-->\n";
         $this->seoTags .= "<title>{$this->Tags['Title']}</title>" . "\n";
         $this->seoTags .= "<meta name='description' content='{$this->Tags['Content']}'/>" . "\n";
         $this->seoTags .= "<meta name='robots' content='index, fallow'/>" . "\n";
         $this->seoTags .= "<link rel='canonical' href='{$this->Tags['Link']}'>" . "\n";
-
         //ICONES
         $this->seoTags .= "<!--ICONES-->\n";
         $this->seoTags .= "<link rel='shortcut icon' href='" . HOME . '/themes/' . THEME . "/images/icon/labo.png'/>" . "\n";
         $this->seoTags .= "<link rel='apple-touch-icon' href='" . HOME . '/themes/' . THEME . "/images/icon/labo.png'/>" . "\n";
-
         //FACEBOOK
         $this->seoTags .= "<!--FACEBOOK-->\n";
         $this->seoTags .= "<meta property='og:site_name' content='" . SITENAME . "' />" . "\n";
@@ -276,53 +280,67 @@ class Seo {
         $this->seoTags .= "<meta property='og:image' content='{$this->Tags['Image']}' />" . "\n";
         $this->seoTags .= "<meta property='og:url' content='{$this->Tags['Link']}' />" . "\n";
         $this->seoTags .= "<meta property='og:type' content='article' />" . "\n";
-
         //Item GROUP (TWITTER)
         $this->seoTags .= "<!--TWITTER-->\n";
         $this->seoTags .= "<meta itemprop='name' content='{$this->Tags['Title']}' />" . "\n";
         $this->seoTags .= "<meta itemprop='description' content='{$this->Tags['Content']}' />" . "\n";
         $this->seoTags .= "<meta itemprop='url' content='{$this->Tags['Link']}' />" . "\n";
         $this->seoTags .= "<meta itemprop='image' content='{$this->Tags['Image']}' />" . "\n";
-
-        //LIBS    
-        $this->seoTags .= "<!--LIBS-->\n";
-        $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap2.css'>" . "\n";
-        $this->seoTags .= "<link rel='stylesheet' href='" . HOME . '/themes/' . THEME . "/css/default.css'/>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/jquery/jquery.min.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/jquery-mask/jmask.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . '/themes/' . THEME . "/js/intranet.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular.min.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/angular/angular-route.min.js'></script>" . "\n";
-
-        $this->seoTags .= "<!--Google Charts-->\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/google-chart/loader.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/js/google-charts/start.js'></script>" . "\n";
-
-        $this->seoTags .= "<!--CDN-->\n";
-        $this->seoTags .= "<link rel='stylesheet' href='" . HOME . "/_lib/cdn/shadowbox/shadowbox.css'>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/cdn/jcycle.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/cdn/shadowbox/shadowbox.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/cdn/_plugins.conf.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/_lib/cdn/_scripts.conf.js'></script>" . "\n";
-
-        //Angular Default Packet
-        $this->seoTags .= "<!--ANGULAR DEFAULT PACKET-->\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/jquery/event/classe.event.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/services/objetoAPI.services.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiFormat.module.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiCep.directive.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiSite.directive.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/directive/uiTel.directive.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/filter.module.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/maxlength.filter.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/name.filter.js'></script>" . "\n";
-        $this->seoTags .= "<script src='" . HOME . "/" . REQUIRE_PATH . "/js/angular/filter/timestampBr.filter.js'></script>" . "\n";
-        $this->seoTags .= "<script type=\"text/javascript\" src='" . HOME . "/_lib/bootstrap/js/bootstrap-multiselect.js'></script>" . "\n";
-        $this->seoTags .= "<link rel=\"stylesheet\" href='" . HOME . "/_lib/bootstrap/css/bootstrap-multiselect.css' type=\"text/css\"/>" . "\n";
-
         $this->Tags = null;
+    }
+
+    private function setProd() {
+        $this->seoLibs .= "<!--LIBS PRODUCAO-->\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/lib.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/all.min.js'></script>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/bootstrap-all.min.css'/>" . "\n";
+        
+        $this->seoLibs .= "<!--CDN-->\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/cdn/shadowbox/shadowbox.css'>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/cdn/jcycle.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/cdn/shadowbox/shadowbox.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/cdn/_plugins.conf.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/cdn/_scripts.conf.js'></script>" . "\n";
+    }
+
+    private function setLib() {
+        //LIBS    
+        $this->seoLibs .= "<!--LIBS-->\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/jquery/jquery.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/jquery/jmask.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-route.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap-multiselect.min.js'></script>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap-multiselect.css' type=\"text/css\"/>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap.css'>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/intranet.js'></script>" . "\n";
+        
+        $this->seoLibs .= "<!--Google Charts-->\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/google-chart/loader.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/google-charts/start.js'></script>" . "\n";
+
+        $this->seoLibs .= "<!--CDN-->\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/cdn/shadowbox/shadowbox.css'>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/cdn/jcycle.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/cdn/shadowbox/shadowbox.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/cdn/_plugins.conf.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/cdn/_scripts.conf.js'></script>" . "\n";
+
+        $this->seoLibs .= "<!--ANGULAR DEFAULT PACKET-->\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/jquery/event/classe.event.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/services/objetoAPI.services.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiFormat.module.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiCep.directive.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiSite.directive.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiTel.directive.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/filter.module.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/maxlength.filter.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/name.filter.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/timestampBr.filter.js'></script>" . "\n";
     }
 
 }

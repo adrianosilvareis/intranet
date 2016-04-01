@@ -1,0 +1,38 @@
+{
+  "name": "intranet",
+  "version": "1.0.0",
+  "description": "Intranet Tommasi",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.0.4",
+    "gulp-uglify": "^1.5.3",
+    "run-sequence": "^1.1.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://adriano_silvareis@hotmail.com@github.com/adrianosilvareis/intranet.git"
+  },
+  "keywords": [
+    "intranet",
+    "angularjs",
+    "gulp",
+    "bower",
+    "sass",
+    "bootstrap",
+    "jquery"
+  ],
+  "author": "Adriano Reis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrianosilvareis/intranet/issues"
+  },
+  "homepage": "https://github.com/adrianosilvareis/intranet#readme"
+}

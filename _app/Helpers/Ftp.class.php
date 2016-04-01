@@ -126,7 +126,7 @@ class Ftp {
         // test if you can change directory to $dir
         // suppress errors in case $dir is not a file or not a directory
 
-        if (ftp_chdir($this->Conn, $dir)) {
+        if (@ftp_chdir($this->Conn, $dir)) {
             // If it is a directory, then change the directory back to the original directory
             ftp_chdir($this->Conn, $original_directory);
             return true;

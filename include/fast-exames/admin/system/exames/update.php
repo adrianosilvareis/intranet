@@ -4,6 +4,10 @@ if (file_exists('include/fast-exames/_models/AdminExames.class.php')):
     include_once 'include/fast-exames/_models/AdminExames.class.php';
 endif;
 
+if (!Check::UsingPage()):
+    header("Location: " . HOME . '/plugin/fast-exames/admin/&using=true');
+endif;
+
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 $examesId = filter_input(INPUT_GET, "examesId", FILTER_DEFAULT);
 $create = filter_input(INPUT_GET, "create", FILTER_DEFAULT);

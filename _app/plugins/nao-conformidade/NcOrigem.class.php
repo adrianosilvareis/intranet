@@ -10,8 +10,8 @@
 class NcOrigem {
 
     private $origem_id;
-    private $origem_descricao;
-    private $origem_ativo;
+    private $origem_title;
+    private $origem_status;
 
     function __construct() {
         $this->Controle = new Controle('nc_origem');
@@ -24,8 +24,8 @@ class NcOrigem {
      */
     public function getThis() {
         $this->Controle->setDados(array_filter([
-            'origem_descricao' => $this->getOrigem_descricao(),
-            'origem_ativo' => $this->getOrigem_ativo(),
+            'origem_title' => $this->getOrigem_title(),
+            'origem_status' => $this->getOrigem_status(),
             'origem_id' => $this->getOrigem_id()
         ]));
         return $this->Controle->getDados();
@@ -38,8 +38,8 @@ class NcOrigem {
      */
     public function setThis($object) {
         $this->setOrigem_id((isset($object->origem_id) ? $object->origem_id : null));
-        $this->setOrigem_ativo((isset($object->origem_ativo) ? $object->origem_ativo : null));
-        $this->setOrigem_descricao((isset($object->origem_descricao) ? $object->origem_descricao : null));
+        $this->setOrigem_status((isset($object->origem_status) ? $object->origem_status : null));
+        $this->setOrigem_title((isset($object->origem_title) ? $object->origem_title : null));
     }
 
     /**
@@ -61,24 +61,24 @@ class NcOrigem {
         return $this->origem_id;
     }
 
-    function getOrigem_descricao() {
-        return $this->origem_descricao;
+    function getOrigem_title() {
+        return $this->origem_title;
     }
 
-    function getOrigem_ativo() {
-        return $this->origem_ativo;
+    function getOrigem_status() {
+        return $this->origem_status;
     }
 
     function setOrigem_id($origem_id) {
         $this->origem_id = $origem_id;
     }
 
-    function setOrigem_descricao($origem_descricao) {
-        $this->origem_descricao = $origem_descricao;
+    function setOrigem_title($origem_title) {
+        $this->origem_title = $origem_title;
     }
 
-    function setOrigem_ativo($origem_ativo) {
-        $this->origem_ativo = $origem_ativo;
+    function setOrigem_status($origem_status) {
+        $this->origem_status = $origem_status;
     }
 
 }

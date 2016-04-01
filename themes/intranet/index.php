@@ -27,7 +27,7 @@
 </div>
 
 <?php
-    //coluna direita
-    $cat = Check::CatByName("siderbar-left");
-    $fixo = Check::CatByName("siderbar-left-fixo");
-    require("inc/siderbar.inc.php");
+//coluna direita
+$cat = Check::CatByName("siderbar-left");
+$fixo = Check::CatByName("siderbar-left-fixo");
+require("inc/siderbar.inc.php");

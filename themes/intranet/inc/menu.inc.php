@@ -86,7 +86,7 @@
             </form>
 
             <!-- modal -->
-            <button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal" data-target=".modal-login">Login</button>
+            <!--<button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal" data-target=".modal-login">Login</button>-->
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="https://webmail-seguro.com.br/tommasi.com.br/" target="_blank">WebMail</a></li>

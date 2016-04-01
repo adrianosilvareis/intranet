@@ -41,8 +41,8 @@ appDt.controller("parada", function ($scope, objetoAPI, config) {
         $scope.equipamentos = angular.copy(_equipamentos);
         $scope.time = angular.copy(_time);
 
-        delete _equipamentos;
-        delete _time;
+        _equipamentos = null;
+        _time = null;
     };
 
     var saveParada = function (parada) {
