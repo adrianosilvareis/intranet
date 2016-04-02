@@ -4,7 +4,7 @@
  * ****************************************
  */
 
-appAgenda.factory("contatosAPI", function ($http, config) {
+angular.module("agenda").factory("contatosAPI", function ($http, config) {
 
     var _getContatos = function () {
         return $http.get(config.apiURL + "/contatos.api.php");

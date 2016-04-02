@@ -21,18 +21,16 @@ gulp.task('jshint', function () {
 //'include/*/js/**/*.app.js', 'include/*/js/**/*.value.js', 'include/*/js/**/*.services.js', 'include/*/js/**/*.ctrl.js']
 gulp.task('uglify', ['clean'], function () {
     return es.merge([
-        gulp.src(['_lib/jquery/jquery.min.js', '_lib/jquery/jmask.min.js', '_lib/bootstrap/js/*.js', '_lib/google-chart/*.js',
-            '_lib/angular/**/angular.js', '_lib/angular/**/angular-route.js', '_lib/angular/**/angular-messages.js'])
+        gulp.src('_lib/**/*.min.js')
                 .pipe(concat('lib.min.js')),
         gulp.src(['js/jquery/**/*.js', 'js/google-charts/start.js', 'js/google-charts/*.charts.js',
             'js/angular/**/*.module.js', 'js/angular/**/*.directive.js', 'js/angular/**/*.filter.js', 'js/angular/**/*.services.js'])
-                .pipe(uglify())
+                .pipe(uglify({mangle: false}))
                 .pipe(concat('all.min.js')),
-        gulp.src(['include/downtime/js/*.app.js', 'include/downtime/js/**/*.dev_1.ctrl.js', 'include/downtime/js/**/*.js'])
-//                .pipe(uglify())
-                .pipe(concat('downtime.min.js'))
+        gulp.src('include/*/js/**/*.js')
+                .pipe(uglify({mangle: false}))
+                .pipe(concat('plugins.min.js'))
     ])
-//            .pipe(concat('all.min.js'))
             .pipe(gulp.dest('dist/js'));
 });
 

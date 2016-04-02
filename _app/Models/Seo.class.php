@@ -245,8 +245,13 @@ class Seo {
 
         if ($this->Data):
             $this->setTags();
-//            $this->setLib();
-            $this->setProd();
+            
+        //importa as bibliotecas corretas de acordo com a versão do sistema
+            if (PRODUCAO):
+                $this->setProd();
+            else:
+                $this->setLib();
+            endif;
         endif;
     }
 
@@ -254,7 +259,8 @@ class Seo {
         $this->seoLibs .= "<!--LIBS PRODUCAO-->\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/lib.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/all.min.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/js/downtime.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/plugins.min.js'></script>" . "\n";
+
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/bootstrap.min.css'/>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/bootstrap-multiselect.css'/>" . "\n";

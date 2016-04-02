@@ -1,4 +1,4 @@
-appNCon.controller("origem", function ($scope, objetoAPI, config) {
+angular.module("naoConformidade").controller("origem", function ($scope, objetoAPI, config) {
 
     $scope.origens = [];
 

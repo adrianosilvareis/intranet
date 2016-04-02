@@ -1,11 +1,13 @@
 <?php
-define("NCONDIR", HOME . "/include/nao-conformidade/js");
-Register::addRegister("<script src='" . NCONDIR . "/model.app.js'></script>");
-Register::addRegister("<script src='" . NCONDIR . "/config/config.value.js'></script>");
-Register::addRegister("<script src='" . NCONDIR . "/config/route.config.js'></script>");
-Register::addRegister("<script src='" . NCONDIR . "/controller/setor.ctrl.js'></script>");
-Register::addRegister("<script src='" . NCONDIR . "/controller/origem.ctrl.js'></script>");
-Register::addRegister("<script src='" . NCONDIR . "/controller/registro.ctrl.js'></script>");
+if (!PRODUCAO):
+    define("NCONDIR", HOME . "/include/nao-conformidade/js");
+    Register::addRegister("<script src='" . NCONDIR . "/model.app.js'></script>");
+    Register::addRegister("<script src='" . NCONDIR . "/config/config.value.js'></script>");
+    Register::addRegister("<script src='" . NCONDIR . "/config/route.config.js'></script>");
+    Register::addRegister("<script src='" . NCONDIR . "/controller/setor.ctrl.js'></script>");
+    Register::addRegister("<script src='" . NCONDIR . "/controller/origem.ctrl.js'></script>");
+    Register::addRegister("<script src='" . NCONDIR . "/controller/registro.ctrl.js'></script>");
+endif;
 ?>
 <header id="navtab">
     <nav>
@@ -47,8 +49,8 @@ Register::addRegister("<script src='" . NCONDIR . "/controller/registro.ctrl.js'
         <div class="tab-pane" id="reg_create"><?php require '/system/registro/registro.php'; ?></div>
         <div class="tab-pane" id="reg_list"><?php require '/system/registro/index.php'; ?></div>
     </div>
-    
-      <!--origem-->
+
+    <!--origem-->
     <div class="tab-content" ng-controller="origem">
         <div class="tab-pane" id="ori_create"><?php require '/system/origem/origem.php'; ?></div>
         <div class="tab-pane" id="ori_list"><?php require '/system/origem/index.php'; ?></div>

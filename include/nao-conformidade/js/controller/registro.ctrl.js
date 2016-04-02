@@ -1,4 +1,4 @@
-appNCon.controller("registro", function ($scope) {
+angular.module("naoConformidade").controller("registro", function ($scope) {
 
     $scope.saveRegistro = function (registro) {
         console.log(registro);

@@ -2,8 +2,8 @@
  * google charts
  * column
  */
-google.charts.setOnLoadCallback(drawChart);
-function drawChart() {
+google.charts.setOnLoadCallback(drawColumnChart);
+function drawColumnChart() {
     if (typeof datacolumn !== "undefined") {
         var data = google.visualization.arrayToDataTable(datacolumn);
 

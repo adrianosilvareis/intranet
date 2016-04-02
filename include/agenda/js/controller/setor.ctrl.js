@@ -1,4 +1,4 @@
-appAgenda.controller("agendaSetor", function ($scope, setorAPI, objetoAPI, config) {
+angular.module("agenda").controller("agendaSetor", function ($scope, setorAPI, objetoAPI, config) {
 
     $scope.setores = [];
     $scope.types = [];

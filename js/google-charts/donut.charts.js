@@ -2,8 +2,8 @@
  * google charts
  * donut
  */
-google.charts.setOnLoadCallback(drawChart);
-function drawChart() {
+google.charts.setOnLoadCallback(drawDonutChart);
+function drawDonutChart() {
     if (typeof datadonut !== "undefined") {
         var data = google.visualization.arrayToDataTable(datadonut);
 

@@ -1,6 +1,6 @@
-var appAgenda = angular.module("agenda", ["ngMessages", "objetoAPI", 'uiFormat', 'filterDefault']);
+angular.module("agenda", ["ngMessages", "objetoAPI", 'uiFormat', 'filterDefault']);
 
-appAgenda.run(function ($rootScope) {
+angular.module("agenda").run(function ($rootScope) {
     /*
      Receive emitted message and broadcast it.
      Event names must be distinct or browser will blow up!

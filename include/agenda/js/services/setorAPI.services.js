@@ -4,7 +4,7 @@
  * ****************************************
  */
 
-appAgenda.service("setorAPI", function ($http, config) {
+angular.module("agenda").service("setorAPI", function ($http, config) {
 
     this.getSetor = function () {
         return $http.get(config.apiURL + '/setores.api.php');

@@ -1,4 +1,4 @@
-appNCon.controller("setor", function ($scope, objetoAPI, config) {
+angular.module("naoConformidade").controller("setor", function ($scope, objetoAPI, config) {
     $scope.setores = [];
     $scope.types = [];
     $scope.setor = "";

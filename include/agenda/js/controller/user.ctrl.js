@@ -1,4 +1,4 @@
-appAgenda.controller("user", function ($scope, objetoAPI, config) {
+angular.module("agenda").controller("user", function ($scope, objetoAPI, config) {
     $scope.contatos = [];
     $scope.setores = [];
     $scope.enderecos = [];
