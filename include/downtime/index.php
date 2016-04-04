@@ -3,8 +3,8 @@ if (!PRODUCAO):
     $dir = HOME . "/include/downtime/";
     Register::addRegister("<script src=\"{$dir}js/downtime.app.js\"></script>");
     Register::addRegister("<script src=\"{$dir}js/controller/user.ctrl.js\"></script>");
-    Register::addRegister("<script src=\"{$dir}js/controller/equipamentos.dev_1.ctrl.js\"></script>");
-    Register::addRegister("<script src=\"{$dir}js/controller/parada.ctrl.js\"></script>");
+    Register::addRegister("<script src=\"{$dir}js/controller/equipamentos.ctrl.js\"></script>");
+    Register::addRegister("<script src=\"{$dir}js/controller/dev/parada.ctrl.js\"></script>");
     Register::addRegister("<script src='" . HOME . "/js/angular/filter/timestampBr.filter.js'></script>");
     Register::addRegister("<script src='" . HOME . "/js/google-charts/columns.charts.js'></script>");
     Register::addRegister("<script src='" . HOME . "/js/google-charts/donut.charts.js'></script>");

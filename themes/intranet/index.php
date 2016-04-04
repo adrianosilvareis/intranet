@@ -1,11 +1,14 @@
 <hr>
 <div class="col-md-9">
 
-    <?php include "inc/carrousel.inc.php"; ?>
+    <?php
+    $carrousel = Check::CatByName("destaques");
+    include "inc/carrousel.inc.php";
+    ?>
 
     <?php
     $Titulo = "Destaques";
-    $Categoria = "destaque";
+    $Categoria = "destaques";
     $Ordem = "post_date";
     include "inc/noticias_tres.inc.php";
     ?>

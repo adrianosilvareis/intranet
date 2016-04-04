@@ -12,6 +12,11 @@ gulp.task('clean', function () {
             .pipe(clean());
 });
 
+gulp.task('lastClean', ['copy'], function () {
+    return gulp.src('dist/include/*/js')
+            .pipe(clean());
+})
+
 gulp.task('jshint', function () {
     return gulp.src(['js/**/*.js', 'include/*/js/**/*.js', 'themes/intranet/'])
             .pipe(jshint())
@@ -62,6 +67,6 @@ gulp.task('copy', function () {
 });
 
 gulp.task('default', function (cb) {
-    return runSequence('clean', ['jshint', 'uglify', 'cssmin', 'copy'], cb);
+    return runSequence('clean', ['jshint', 'uglify', 'cssmin', 'lastClean'], cb);
 });
     

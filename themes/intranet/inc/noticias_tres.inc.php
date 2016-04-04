@@ -1,5 +1,5 @@
 <section class="section">
-    <h1><small><?= $Titulo; ?></small></h1>
+    <h1><small><a href="<?= HOME . '/grupo/' . $Categoria ?>" title="<?= $Titulo; ?> da intranet" alt="<?= $Titulo; ?>"><?= $Titulo; ?></a></small></h1>
     <div class="well">
         <?php
         $cat = Check::CatByName($Categoria);

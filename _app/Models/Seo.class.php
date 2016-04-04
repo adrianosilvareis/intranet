@@ -315,9 +315,9 @@ class Seo {
     private function setLib() {
         //LIBS    
         $this->seoLibs .= "<!--LIBS-->\n";
-        $this->seoLibs .= "<script src='" . HOME . "/_lib/jquery/jquery.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/jquery.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/jquery/jmask.min.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/angular.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-route.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap.min.js'></script>" . "\n";
@@ -328,7 +328,7 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/js/intranet.js'></script>" . "\n";
 
         $this->seoLibs .= "<!--Google Charts-->\n";
-        $this->seoLibs .= "<script src='" . HOME . "/_lib/google-chart/loader.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/google-chart/loader.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/google-charts/start.js'></script>" . "\n";
 
         $this->seoLibs .= "<!--CDN-->\n";
@@ -340,6 +340,7 @@ class Seo {
 
         $this->seoLibs .= "<!--ANGULAR DEFAULT PACKET-->\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/jquery/event/classe.event.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/services/objetoAPI.module.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/services/objetoAPI.services.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiFormat.module.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiCep.directive.js'></script>" . "\n";

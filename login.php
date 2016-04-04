@@ -12,7 +12,7 @@ require('_app/Config.inc.php');
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="<?= HOME ?>/admin/css/reset.css" />
         <link rel="stylesheet" href="<?= HOME ?>/admin/css/admin.css" />
-        <link rel="stylesheet" href="<?= REQUIRE_PATH ?>/css/default.css" />
+        <link rel="stylesheet" href="<?= HOME ?>/css/default.css" />
     </head>
     <body class="login">
 
