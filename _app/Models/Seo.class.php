@@ -282,7 +282,7 @@ class Seo {
         $this->Tags = array_map('trim', $this->Tags);
         $this->Data = null;
 
-        $this->seoTags .= "<!--[if lt IE 9]><script src='" . HOME . "/_cdn/html5.js'></script><![endif]-->" . "\n";
+        $this->seoTags .= "<!--[if lt IE 9]><script src='" . HOME . "/cdn/html5.js'></script><![endif]-->" . "\n";
         $this->seoTags .= "<meta charset='UTF-8'>" . "\n";
         //NORMAL PAGE
         $this->seoTags .= "<!--NORMAL PAGE-->\n";
@@ -292,8 +292,8 @@ class Seo {
         $this->seoTags .= "<link rel='canonical' href='{$this->Tags['Link']}'>" . "\n";
         //ICONES
         $this->seoTags .= "<!--ICONES-->\n";
-        $this->seoTags .= "<link rel='shortcut icon' href='" . HOME . '/themes/' . THEME . "/images/icon/labo.png'/>" . "\n";
-        $this->seoTags .= "<link rel='apple-touch-icon' href='" . HOME . '/themes/' . THEME . "/images/icon/labo.png'/>" . "\n";
+        $this->seoTags .= "<link rel='shortcut icon' href='" . HOME . '/themes/' . THEME . "/images/icon/favicon.ico'/>" . "\n";
+        $this->seoTags .= "<link rel='apple-touch-icon' href='" . HOME . '/themes/' . THEME . "/images/icon/favicon.ico'/>" . "\n";
         //FACEBOOK
         $this->seoTags .= "<!--FACEBOOK-->\n";
         $this->seoTags .= "<meta property='og:site_name' content='" . SITENAME . "' />" . "\n";
