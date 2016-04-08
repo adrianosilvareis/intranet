@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav nav-pills"> <!-- primairo bloco -->
                 <li class="active"><a href="<?= HOME ?>">HOME</a></li>
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Links<span class="caret"></span></a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Links úteis<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="active"><a>Links</a></li>
                         <li><a href="https://webmail-seguro.com.br/tommasi.com.br/" target="_blank">WebMail</a></li>
@@ -26,9 +26,9 @@
                 </li>
 
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Plugins<span class="caret"></span></a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Ferramentas<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="active"><a>Plugins</a></li>
+                        <li class="active"><a>Ferramentas</a></li>
                         <?php
                         foreach (Plugins() as $plugin):
                             echo "<li><a class=\"text-capitalize\" href=" . HOME . "/plugin/{$plugin['url']}>{$plugin['title']}</a></li>";
@@ -58,14 +58,11 @@
                         <li class="divider"></li>
                         <li class="active"><a>Aplicativos</a></li>
                         <li><a href="<?= HOME ?>/sft_redirect" target="_blank">SFT - Tommasi</a></li>
-                        <li><a href="<?= HOME ?>/pages/qualidade">Qualidade</a></li>
                         <li class="divider"></li>
-                        <li class="active"><a>Indicadores</a></li>
-                        <li><a href="<?= HOME ?>/indicadores/downtime">Downtime de equipamento</a></li>
-                        <li class="divider"></li>
-                        <li class="active"><a>Informação</a></li>
-                        <li><a href="<?= HOME ?>/pages/contato" title="contato por email">Contato</a></li>
+                        <li class="active"><a>Páginas</a></li>
                         <li><a href="<?= HOME ?>/pages/institucional" title="Missão, Visão, Valores">Institucional</a></li>
+                        <li><a href="<?= HOME ?>/pages/qualidade">Qualidade</a></li>
+                        <li><a href="<?= HOME ?>/pages/contato" title="contato por email">Contato</a></li>
                         <li><a href="<?= HOME ?>/pages/sobre" title="Sobre a Intranet">Sobre</a></li>
                     </ul>
                 </li>

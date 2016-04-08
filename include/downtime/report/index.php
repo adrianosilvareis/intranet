@@ -4,7 +4,7 @@ $Read = new Controle();
 $Read->FullRead("select t.equip_id, t.time_id, t.time_stop, t.time_start, "
         . "t.time_lastupdate, t.equip_author, e.equip_title, e.equip_content, "
         . "e.equip_date, e.equip_status, e.equip_lastupdate "
-        . "from dt_downtime t JOIN dt_equipamentos e ON(e.equip_id = t.equip_id)");
+        . "from dt_downtime t JOIN dt_equipamentos e ON(e.equip_id = t.equip_id)  ORDER BY t.time_start");
 ?>
 
 <script>
@@ -44,7 +44,7 @@ $Read->FullRead("select t.equip_id, t.time_id, t.time_stop, t.time_start, "
                     <td><?= date("d/m/Y H:i", strtotime($key->time_stop)); ?></td>
                     <td><?= ($key->time_start != "0000-00-00 00:00:00" ? date("d/m/Y H:i", strtotime($key->time_start)) : ""); ?></td>
                     <td><?= $key->equip_author; ?></td>
-                    <td><?= ($key->time_start != "0000-00-00 00:00:00" ? Check::DataDiff($key->time_stop, $key->time_start, 2) : ""); ?></td>
+                    <td><?= (!empty($key->time_start) ? Check::DataDiff($key->time_stop, $key->time_start, 2) : ""); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

@@ -7,13 +7,13 @@ define('SITEDESC', '&copy; 2015 Adriano Reis | Todos os direitos reservados.');
 //DEFINE A HOME DO SITE #########################
 $SERVER = filter_input_array(INPUT_SERVER, FILTER_DEFAULT);
 define('DOCUMENT_ROOT', $SERVER['DOCUMENT_ROOT']);
-define('NAME', '/intranet');
+define('NAME', '/intranet/dist');
 define('HTTP_HOST', 'http://' . $SERVER['HTTP_HOST']);
 define('HOME', HTTP_HOST . NAME);
 define('THEME', 'intranet');
 define('REQUIRE_PATH', 'themes' . '/' . THEME);
 define('INCLUDE_PATH', HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH);
-define('PRODUCAO', FALSE);
+define('PRODUCAO', true);
 
 //CONFIGURACAO DO BANCO ####################
 define("DB_HOST", "localhost");
@@ -89,9 +89,10 @@ function Plugins() {
     $plugins = [
         ['url' => 'aniversarios', 'title' => 'Aniversariantes do Mês'],
         ['url' => 'contadores-de-impressao', 'title' => 'Contadores de impressão'],
-        ['url' => 'fast-exames', 'title' => 'Fast Exames'],
         ['url' => 'agenda', 'title' => 'Agenda'],
         ['url' => 'os-nao-pagas', 'title' => 'Financeiro'],
+        ['url' => 'downtime', 'title' => 'DownTimes'],
+        ['url' => 'fast-exames', 'title' => 'Fast Exames'],
     ];
 
     return $plugins;

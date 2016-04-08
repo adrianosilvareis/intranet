@@ -7,7 +7,7 @@ $Read = new Controle();
 //Grafico de Donuts
 $Read->FullRead("SELECT e.equip_title, e.equip_date, t.time_stop, t.time_start
                 from dt_downtime t JOIN dt_equipamentos e ON(e.equip_id = t.equip_id)
-                WHERE e.equip_status ORDER BY e.equip_id;");
+                WHERE e.equip_status AND t.time_start ORDER BY e.equip_id;");
 
 array_map(function($value) {
     $value->diff = Check::DateToInteger($value->time_start) - Check::DateToInteger($value->time_stop);

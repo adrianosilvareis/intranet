@@ -88,7 +88,13 @@ endif;
 
                 <label class="label_small">
                     <span class="field">Categoria:</span>
-                    <input type="text" class="center" name="setor_category" value="<?php if (isset($data)) echo $data['setor_category']; ?>" />
+                    <select name="setor_category">
+                        <option value="">Selecione uma categoria</option>
+                        <option value="agenda">Agenda</option>
+                        <option value="fast-exames" >Fast exames</option>
+                        <option value="nao-conformidade">Não conformidade</option>
+                        <option value="geral">Geral</option>
+                    </select>
                 </label>
             </div>
 

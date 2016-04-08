@@ -49,6 +49,7 @@ angular.module('downtime').controller("parada", function ($scope, objetoAPI, con
         objetoAPI.saveObjeto(config.apiURL + "/time.api.php", parada).success(function (data) {
             console.log(data);
             carregarParadas();
+            carregarEquipamentos();
         });
     };
 

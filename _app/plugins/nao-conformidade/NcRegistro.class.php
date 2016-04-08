@@ -93,6 +93,7 @@ class NcRegistro {
         $this->setReg_date_cadastro((isset($object->reg_date_cadastro) ? $object->reg_date_cadastro : null));
         $this->setUser_cadastro((isset($object->user_cadastro) ? $object->user_cadastro : null));
         $this->setUser_recebimento((isset($object->user_recebimento) ? $object->user_recebimento : null));
+        $this->setUser_lastupdate((isset($object->user_lastupdate) ? $object->user_lastupdate : null));
     }
 
     /**

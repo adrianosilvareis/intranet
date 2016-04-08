@@ -31,7 +31,7 @@ if (!empty($request)):
         echo "Editado com sucesso!";
     else:
         //adicionar
-        $request->equip_author = (isset($userlogin) ? $userlogin['user_name'] . " " . $userlogin['user_lastname'] : "");
+        $request->equip_author = $userlogin['user_id'];
         $request->equip_date = date("Y-m-d H:i:s");
         $Read->setThis($request);
         $Read->Execute()->insert();
