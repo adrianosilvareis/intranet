@@ -1,37 +1,36 @@
 {
   "name": "intranet",
-  "homepage": "https://github.com/adrianosilvareis/intranet",
-  "authors": [
-    "adrianosilvareis <adriano_silvareis@hotmail.com>"
-  ],
-  "description": "intranet tommasi",
+  "description": "Intranet Tommasi",
   "main": "index.php",
-  "moduleType": [],
-  "keywords": [
-    "phpOO",
-    "angularJS",
-    "Jquery",
-    "HTML5",
-    "less"
+  "authors": [
+    "Adriano Reis"
   ],
-  "license": "MIT",
+  "license": "ISC",
+  "keywords": [
+    "intranet",
+    "angularjs",
+    "gulp",
+    "bower",
+    "sass",
+    "bootstrap",
+    "jquery"
+  ],
+  "homepage": "https://github.com/adrianosilvareis/intranet",
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+    "lib_dev",
     "test",
     "tests"
   ],
-  "dependencies": {
-    "angular": "^1.5.0"
-  },
   "devDependencies": {
-    "angular": "^1.5.0",
-    "angular-messages": "^1.5.0",
-    "angular-route": "^1.5.0",
-    "bootstrap": "3.3.6",
+    "ng-file-upload": "^12.0.4",
+    "angular-messages": "^1.5.3",
+    "angular-route": "^1.5.3",
+    "bootstrap": "^3.3.6",
     "jquery-form": "^3.46.0",
-    "jquery-mask-plugin": "1.13.9"
+    "jquery-mask-plugin": "^1.14.0"
   }
 }

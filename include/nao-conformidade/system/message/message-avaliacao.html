@@ -1,0 +1,12 @@
+
+<div style="margin-top: 15px;">
+    <div ng-messages="origemForm.origem_title.$error">
+        <div ng-message="required" class="alert alert-danger" ng-show="origemForm.origem_title.$dirty">
+            Por Favor, Preencha o campo Descrição.
+        </div>
+
+        <div ng-message="minlength" class="alert alert-danger">
+            O campo Descrição deve ter no mínimo 3 caracteres.
+        </div>
+    </div>
+</div>

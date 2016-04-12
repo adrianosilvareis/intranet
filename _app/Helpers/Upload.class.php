@@ -127,7 +127,7 @@ class Upload {
      * @param int $MaxFileSize
      */
     private function saveFile(array $FileAccept, $MaxFileSize) {
-
+        
         if ($this->File['size'] > ($MaxFileSize * (1024 * 1024))):
             $this->Result = false;
             $this->Error = "Arquivo muito grande, tamanho máximo permitido de {$MaxFileSize}mb";

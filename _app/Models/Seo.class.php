@@ -320,6 +320,7 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-route.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/ng-file-upload-all.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap-multiselect.min.js'></script>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap-multiselect.css' type=\"text/css\"/>" . "\n";
