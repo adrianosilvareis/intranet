@@ -26,6 +26,29 @@ class Check {
             return false;
         endif;
     }
+    
+    /**
+     * <b>Lista Arquivos: </b> Transformda arquivos recebido de formulario em uma lista ordenada.
+     * @param array $Files = array com todos atributos misturados
+     * @return array = arquivos separados.
+     */
+    public static function ListFiles($Files) {
+
+        self::$Data = $Files;
+
+        $gbCount = count(self::$Data['tmp_name']);
+        $gbKeys = array_keys(self::$Data);
+
+        $gbFiles = array();
+
+        for ($gb = 0; $gb < $gbCount; $gb++):
+            foreach ($gbKeys as $keys):
+                $gbFiles[$gb][$keys] = $_FILES['files'][$keys][$gb];
+            endforeach;
+        endfor;
+
+        return $gbFiles;
+    }
 
     /**
      * <b>Tranforma URL:</b> Tranforma uma string no formato de URL amigável e retorna o a string convertida!

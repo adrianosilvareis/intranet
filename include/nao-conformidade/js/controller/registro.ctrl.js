@@ -41,17 +41,12 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
             return "list-group-item-success";
     };
 
-    $scope.teste = function (files) {
-        console.log(files);
-    };
-
-    $scope.onFileSelect = function (file) {
-        console.log(file);
-        if (!file)
+    $scope.onFileSelect = function (files) {
+        if (!files)
             return;
         Upload.upload({
             url: config.apiURL + '/upload.api.php',
-            data: {file: file}
+            data: {files: files}
         }).then(function (resp) {
             // file is uploaded successfully
             console.log(resp.data);

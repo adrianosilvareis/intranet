@@ -25,7 +25,7 @@ class Upload {
     private static $BaseDir;
 
     function __construct($BaseDir = null) {
-        self::$BaseDir = ( (string) $BaseDir ? $BaseDir : '../uploads/');
+        self::$BaseDir = ( (string) $BaseDir ? $BaseDir : BASEDIR . '/uploads/');
         if (!file_exists(self::$BaseDir) && !is_dir(self::$BaseDir)):
             mkdir(self::$BaseDir, 0777);
         endif;
@@ -128,12 +128,12 @@ class Upload {
      */
     private function saveFile(array $FileAccept, $MaxFileSize) {
         
-        if ($this->File['size'] > ($MaxFileSize * (1024 * 1024))):
+        if ($this->File['size'] > ($MaxFileSize * (1024 * 1024)) || $this->File['error'] == 1):
             $this->Result = false;
             $this->Error = "Arquivo muito grande, tamanho máximo permitido de {$MaxFileSize}mb";
         elseif (!in_array($this->File['type'], $FileAccept)):
             $this->Result = false;
-            $this->Error = "Tipo de arquivo não suportado. Formato incorreto";
+            $this->Error = "Tipo de arquivo não suportado [{$this->File['type']}]. Formato incorreto";
         else:
             $this->CheckFolder($this->Folder);
             $this->setFileName();

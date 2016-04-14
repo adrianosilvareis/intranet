@@ -2,10 +2,27 @@
 
 include '../../_app/Config.inc.php';
 
-if (!empty($_FILES)):
+if (!empty($_FILES['files'])):
+    $gbFiles = Check::ListFiles($_FILES['files']);
 
-    $Upload = new Upload(DOCUMENT_ROOT . NAME . '/uploads/temp/');
-    $Upload->File($_FILES['file'], Check::Name($_FILES['file']['name']), NULL, 25);
+    $Upload = new Upload();
 
-    echo json_encode($Upload->getResult());
+    $RESP = array();
+
+    $i = 0;
+    foreach ($gbFiles as $file) :
+        $imgName = 'temp' . substr(md5(time() + $i), 0, 5);
+        $Upload->File($file, $imgName, 'temp',50);
+        
+        //verifica se é imagem e realiza o upload;
+        
+        $RESP[$i]['RESULT'] = $Upload->getResult();
+        $RESP[$i]['ERROS'] = $Upload->getError();
+        
+        
+        
+        $i++;
+    endforeach;
+    
+    echo json_encode($RESP);
 endif;
