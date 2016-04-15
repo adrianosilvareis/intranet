@@ -11,7 +11,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="cadastro">
-                <article><?php include 'cadastro.html'; ?></article>
+                <article><?php include 'cadastro.php'; ?></article>
             </div>
             <div role="tabpanel" class="tab-pane" id="avaliacao">
                 <article><?php include 'avaliacao.php'; ?></article>

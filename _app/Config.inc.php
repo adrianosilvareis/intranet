@@ -8,7 +8,7 @@ define('SITEDESC', '&copy; 2015 Adriano Reis | Todos os direitos reservados.');
 $SERVER = filter_input_array(INPUT_SERVER, FILTER_DEFAULT);
 define('DOCUMENT_ROOT', $SERVER['DOCUMENT_ROOT']);
 define('NAME', '/intranet');
-define('BASEDIR', DOCUMENT_ROOT . DIRECTORY_SEPARATOR . NAME);
+define('BASEDIR', DOCUMENT_ROOT . NAME);
 define('HTTP_HOST', 'http://' . $SERVER['HTTP_HOST']);
 define('HOME', HTTP_HOST . NAME);
 define('THEME', 'intranet');

@@ -18,16 +18,22 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
         });
     };
 
-    $scope.addOrigem = function (origem) {
-        origem.classe = !origem.classe;
-        if ($scope.registro === undefined) {
+    objectInit = function () {
+        if ($scope.registro === undefined)
             $scope.registro = {};
-            $scope.registro.origens = [];
-        }
-
         if ($scope.registro.origens === undefined)
             $scope.registro.origens = [];
+        if ($scope.registro.images === undefined)
+            $scope.registro.images = [];
+        if ($scope.registro.files === undefined)
+            $scope.registro.files = [];
+    };
 
+    $scope.addOrigem = function (origem) {
+
+        objectInit();
+
+        origem.classe = !origem.classe;
         var _pos = $scope.registro.origens.indexOf(origem);
         if (_pos !== -1) {
             $scope.registro.origens.splice(_pos, 1);
@@ -41,16 +47,45 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
             return "list-group-item-success";
     };
 
+    $scope.removeFile = function (file) {
+        $scope.registro.images = $scope.registro.images.filter(function (imagem) {
+            if (imagem !== file)
+                return imagem;
+        });
+        
+        $scope.registro.files = $scope.registro.files.filter(function (f) {
+            if (f !== file)
+                return f;
+        });
+    };
+
     $scope.onFileSelect = function (files) {
         if (!files)
             return;
+        start();
         Upload.upload({
             url: config.apiURL + '/upload.api.php',
             data: {files: files}
         }).then(function (resp) {
-            // file is uploaded successfully
-            console.log(resp.data);
+            delete $scope.uploads;
+            preview(resp.data);
         });
+    };
+
+    preview = function (data) {
+        objectInit();
+
+        if (Array.isArray(data)) {
+            data.filter(function (file) {
+                if (file.TYPE.indexOf('image') !== -1)
+                    $scope.registro.images.push(file);
+            });
+            data.filter(function (file) {
+                if (file.TYPE.indexOf('image') === -1)
+                    $scope.registro.files.push(file);
+            });
+            complete();
+        }
     };
 
     $scope.saveRegistro = function (registro) {
@@ -61,6 +96,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     $scope.novoRegistro = function () {
+        reset();
         delete $scope.registro;
         $scope.carregarObjetos();
     };

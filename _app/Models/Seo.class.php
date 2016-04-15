@@ -327,6 +327,7 @@ class Seo {
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap.css'>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/intranet.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/progressBar.js'></script>" . "\n";
 
         $this->seoLibs .= "<!--Google Charts-->\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/google-chart/loader.min.js'></script>" . "\n";
