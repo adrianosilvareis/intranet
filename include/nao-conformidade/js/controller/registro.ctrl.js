@@ -48,14 +48,16 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     $scope.removeFile = function (file) {
-        $scope.registro.images = $scope.registro.images.filter(function (imagem) {
-            if (imagem !== file)
-                return imagem;
-        });
-        
-        $scope.registro.files = $scope.registro.files.filter(function (f) {
-            if (f !== file)
-                return f;
+        objetoAPI.saveObjeto(config.apiURL + '/removeFile.api.php', file).success(function (data) {
+            $scope.registro.images = $scope.registro.images.filter(function (imagem) {
+                if (imagem !== file)
+                    return imagem;
+            });
+
+            $scope.registro.files = $scope.registro.files.filter(function (f) {
+                if (f !== file)
+                    return f;
+            });
         });
     };
 

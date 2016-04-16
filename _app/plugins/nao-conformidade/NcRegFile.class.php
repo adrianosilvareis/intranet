@@ -16,7 +16,7 @@ class NcRegFile extends Beans {
     private $file_name;
 
     function __construct() {
-        $this->Controle = new Controle('nc_reg_file');
+        $this->Controle = new Controle('nc_registro_file');
     }
 
     /**

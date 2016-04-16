@@ -2,6 +2,7 @@
 
 include '../../_app/Config.inc.php';
 
+//Adiciona arquivo a pasta temporaria
 if (!empty($_FILES['files'])):
     $gbFiles = Check::ListFiles($_FILES['files']);
 
@@ -19,10 +20,12 @@ if (!empty($_FILES['files'])):
         endif;
         $RESP[$i]['NAME'] = $File['name'];
         $RESP[$i]['TYPE'] = $File['type'];
-        $RESP[$i]['TMP_NAME'] = BASEDIR . '/uploads/' .$Upload->getResult();
+        $RESP[$i]['TMP_NAME'] = BASEDIR . '/uploads/' . $Upload->getResult();
         $RESP[$i]['RESULT'] = HOME . '/uploads/' . $Upload->getResult();
         $RESP[$i]['TYNY'] = HOME . "/tim.php?src=" . $RESP[$i]['RESULT'] . "&w=202&h=105";
+        $RESP[$i]['URL'] = $Upload->getResult();
         $RESP[$i]['ERROS'] = $Upload->getError();
+        $RESP[$i]['FILE'] = $File;
         $i++;
     endforeach;
 

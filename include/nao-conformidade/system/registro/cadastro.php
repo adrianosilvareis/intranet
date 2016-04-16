@@ -64,8 +64,6 @@
         </div>
 
     </div>
-    
-    {{registro}}
 
     <div class="form-group">
         <label>Descrição:</label>

@@ -14,7 +14,7 @@ class RegistroHasOrigem extends Beans {
     private $origem_id;
 
     function __construct() {
-        $this->Controle = new Controle('registro_has_origem');
+        $this->Controle = new Controle('nc_registro_has_nc_origem');
     }
 
     /**

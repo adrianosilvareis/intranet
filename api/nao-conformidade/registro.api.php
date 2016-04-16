@@ -34,14 +34,51 @@ if (!empty($request)):
             $request->reg_date_correcao = date('Y-m-d H:i:s', strtotime($request->reg_date_correcao));
         endif;
 
-        if (!empty($request->origens)):
-            var_dump($Read->Execute()->MaxFild('reg_id'));
-        endif;
-        
         $Read->setThis($request);
-//        $Read->Execute()->insert();
-        
-        echo "Registro adicionado com sucesso!";
+//        $insert = $Read->Execute()->insert();
+
+        if (true):
+            $regId = $Read->Execute()->MaxFild('reg_id');
+            $Upload = new Upload();
+
+            if (!empty($request->origens)):
+
+                $many = new RegistroHasOrigem();
+                foreach ($request->origens as $origem):
+                    //satisfaz a relação many to many do banco de dados
+                    $many->setReg_id($regId);
+                    $many->setOrigem_id($origem->origem_id);
+//                    $many->Execute()->insert();
+                endforeach;
+
+            endif;
+
+            if (!empty($request->files)):
+
+                $regFile = new NcRegFile();
+                foreach ($request->files as $file):
+                    $Title = Check::Name(substr($file->NAME, 0, strrpos($file->NAME, '.')));
+                    $FileName = $Title . strrchr($file->NAME, '.');
+
+                    $regFile->setFile_name($FileName);
+                    $regFile->setFile_url($file->URL);
+                    $regFile->setFile_date(date('Y-m-d H:i:s'));
+                    $regFile->setReg_id($regId);
+
+                    $insert = $regFile->Execute()->insert();
+
+                    if ($insert):
+                        echo $Upload->File((array) $file->FILE);
+                    endif;
+                endforeach;
+            endif;
+
+            if (!empty($request->images)):
+            endif;
+        endif;
+
+
+//        echo "Registro adicionado com sucesso!";
     endif;
 else:
     $Read->Execute()->findAll();
