@@ -15,7 +15,7 @@ gulp.task('clean', function () {
 gulp.task('lastClean', ['copy'], function () {
     return gulp.src('dist/include/*/js')
             .pipe(clean());
-})
+});
 
 gulp.task('jshint', function () {
     return gulp.src(['js/**/*.js', 'include/*/js/**/*.js', 'themes/intranet/'])
@@ -28,7 +28,7 @@ gulp.task('uglify', ['clean'], function () {
     return es.merge([
         gulp.src('_lib/**/*.min.js')
                 .pipe(concat('lib.min.js')),
-        gulp.src(['js/jquery/**/*.js', 'js/google-charts/start.js', 'js/google-charts/*.charts.js',
+        gulp.src(['js/*.js', 'js/jquery/**/*.js', 'js/google-charts/start.js', 'js/google-charts/*.charts.js',
             'js/angular/**/*.module.js', 'js/angular/**/*.directive.js', 'js/angular/**/*.filter.js', 'js/angular/**/*.services.js'])
                 .pipe(uglify({mangle: false}))
                 .pipe(concat('all.min.js')),
