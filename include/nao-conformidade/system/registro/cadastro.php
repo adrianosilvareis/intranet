@@ -44,7 +44,7 @@
             <label>Imagens:</label>
             <div class="row">
                 <div class="col-md-2" ng-repeat="img in registro.images">
-                    <img src="{{img.TYNY}}"  alt="{{img.NAME}}" class="img-responsive img-thumbnail" style="height: 105px">
+                    <img src="{{img.TYNY}}"  alt="{{img.FILE.name}}" class="img-responsive img-thumbnail" style="height: 105px">
                     <a href="" class="del" title="remover" ng-click="removeFile(img)">remover</a>
                 </div>
             </div>
@@ -54,7 +54,7 @@
             <label>Arquivos:</label>
             <ul class="list-group">
                 <li ng-repeat="file in registro.files" class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
-                    {{file.NAME}}<a href="" class="del" title="remover" ng-click="removeFile(file)">remover</a>
+                    {{file.FILE.name}}<a href="" class="del" title="remover" ng-click="removeFile(file)">remover</a>
                 </li>
             </ul>
         </div>

@@ -49,6 +49,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
 
     $scope.removeFile = function (file) {
         objetoAPI.saveObjeto(config.apiURL + '/removeFile.api.php', file).success(function (data) {
+            console.log(data);
             $scope.registro.images = $scope.registro.images.filter(function (imagem) {
                 if (imagem !== file)
                     return imagem;
@@ -79,11 +80,11 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
 
         if (Array.isArray(data)) {
             data.filter(function (file) {
-                if (file.TYPE.indexOf('image') !== -1)
+                if (file.FILE.type.indexOf('image') !== -1)
                     $scope.registro.images.push(file);
             });
             data.filter(function (file) {
-                if (file.TYPE.indexOf('image') === -1)
+                if (file.FILE.type.indexOf('image') === -1)
                     $scope.registro.files.push(file);
             });
             complete();
@@ -91,7 +92,6 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     $scope.saveRegistro = function (registro) {
-        console.log(registro);
         objetoAPI.saveObjeto(config.apiURL + "/registro.api.php", registro).success(function (data) {
             console.log(data);
         });

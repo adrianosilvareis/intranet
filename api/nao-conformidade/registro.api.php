@@ -35,11 +35,12 @@ if (!empty($request)):
         endif;
 
         $Read->setThis($request);
-//        $insert = $Read->Execute()->insert();
+        $insert = $Read->Execute()->insert();
 
-        if (true):
+        if ($insert):
             $regId = $Read->Execute()->MaxFild('reg_id');
             $Upload = new Upload();
+            $regFile = new NcRegFile();
 
             if (!empty($request->origens)):
 
@@ -48,37 +49,50 @@ if (!empty($request)):
                     //satisfaz a relação many to many do banco de dados
                     $many->setReg_id($regId);
                     $many->setOrigem_id($origem->origem_id);
-//                    $many->Execute()->insert();
+                    $many->Execute()->insert();
                 endforeach;
-
             endif;
 
             if (!empty($request->files)):
-
-                $regFile = new NcRegFile();
                 foreach ($request->files as $file):
-                    $Title = Check::Name(substr($file->NAME, 0, strrpos($file->NAME, '.')));
-                    $FileName = $Title . strrchr($file->NAME, '.');
+                    $Title = Check::Name(substr($file->FILE->name, 0, strrpos($file->FILE->name, '.')));
+                    $FileName = $Title . strrchr($file->FILE->name, '.');
 
                     $regFile->setFile_name($FileName);
                     $regFile->setFile_url($file->URL);
                     $regFile->setFile_date(date('Y-m-d H:i:s'));
                     $regFile->setReg_id($regId);
 
-                    $insert = $regFile->Execute()->insert();
+                    $inFile = $regFile->Execute()->insert();
 
-                    if ($insert):
-                        echo $Upload->File((array) $file->FILE);
+                    if ($inFile):
+                        $Upload->File((array) $file->FILE);
                     endif;
                 endforeach;
             endif;
 
             if (!empty($request->images)):
+                foreach ($request->images as $img):
+                    $Title = Check::Name(substr($img->FILE->name, 0, strrpos($img->FILE->name, '.')));
+                    $FileName = $Title . strrchr($img->FILE->name, '.');
+
+                    $regFile->setFile_name($FileName);
+                    $regFile->setFile_url($img->URL);
+                    $regFile->setFile_date(date('Y-m-d H:i:s'));
+                    $regFile->setReg_id($regId);
+
+                    $inImg = $regFile->Execute()->insert();
+
+                    if ($inImg):
+                        $Upload->Image((array) $img->FILE);
+                        unlink($img->FILE->tmp_name);
+                    endif;
+                endforeach;
             endif;
         endif;
 
 
-//        echo "Registro adicionado com sucesso!";
+        echo "Registro adicionado com sucesso!";
     endif;
 else:
     $Read->Execute()->findAll();

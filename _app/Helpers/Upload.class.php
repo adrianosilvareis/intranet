@@ -30,7 +30,7 @@ class Upload {
             mkdir(self::$BaseDir, 0777);
         endif;
     }
-    
+
     /**
      * <b>Enviar Imagem:</b> Basta envelopar um $_FILES de uma imagem e caso queira um nome e uma largura personalizada.
      * Caso não informe a largura será¡ 1024!
@@ -49,8 +49,8 @@ class Upload {
         $this->setFileName();
         $this->UploadImage();
     }
-    
-     /**
+
+    /**
      * <b>Enviar Arquivo:</b> Basta envelopar um $_FILES de um arquivo e caso queira um nome e um tamanho personalizado.
      * Caso não informe o tamanho será 2mb!
      * @param FILES $File = Enviar envelope de $_FILES (PDF ou DOCX)
@@ -76,7 +76,7 @@ class Upload {
 
         $this->saveFile($FileAccept, $MaxFileSize);
     }
-    
+
     /**
      * <b>Enviar Média:</b> Basta envelopar um $_FILES de uma média e caso queira um nome e um tamanho personalizado.
      * Caso não informe o tamanho será¡ 40mb!
@@ -122,12 +122,12 @@ class Upload {
      * ***************************************
      */
 
-    /** 
+    /**
      * @param array $FileAccept
      * @param int $MaxFileSize
      */
     private function saveFile(array $FileAccept, $MaxFileSize) {
-        
+
         if ($this->File['size'] > ($MaxFileSize * (1024 * 1024)) || $this->File['error'] == 1):
             $this->Result = false;
             $this->Error = "Arquivo muito grande, tamanho máximo permitido de {$MaxFileSize}mb";
@@ -140,7 +140,7 @@ class Upload {
             $this->MoveFile();
         endif;
     }
-    
+
     private function CheckFolder($Folder) {
         list($y, $m) = explode('/', date('Y/m'));
 
@@ -245,12 +245,17 @@ class Upload {
     }
 
     private function MoveFile() {
-        if (move_uploaded_file($this->File['tmp_name'], self::$BaseDir . $this->Send . $this->Name)):
-            $this->Result = $this->Send . $this->Name;
-            $this->Error = null;
+        if (is_uploaded_file($this->File['tmp_name'])):
+            if (move_uploaded_file($this->File['tmp_name'], self::$BaseDir . $this->Send . $this->Name)):
+                $this->Result = $this->Send . $this->Name;
+                $this->Error = null;
+            else:
+                $this->Result = false;
+                $this->Error = "Erro ao mover o arquivo. Favor tente mais tarde!";
+            endif;
         else:
-            $this->Result = false;
-            $this->Error = "Erro ao mover o arquivo. Favor tente mais tarde!";
+            copy($this->File['tmp_name'], self::$BaseDir . $this->Send . $this->Name);
+            unlink($this->File['tmp_name']);
         endif;
     }
 
