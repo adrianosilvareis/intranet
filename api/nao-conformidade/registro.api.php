@@ -20,6 +20,11 @@ if (!empty($request)):
 
     elseif (!empty($request->edited)):
         //editar
+        $request->reg_id = 1;
+        $request->user_lastupdate = $user->user_id;
+        $request->reg_date_resposta = date('Y-m-d H:i:s');
+        $request->reg_date_lastupdate = date('Y-m-d H:i:s');
+
         $Read->setThis($request);
         $Read->Execute()->update(NULL, "reg_id");
         echo "Registro editado com sucesso!";
@@ -28,6 +33,7 @@ if (!empty($request)):
         $request->user_cadastro = $user->user_id;
         $request->user_lastupdate = $user->user_id;
         $request->reg_date_cadastro = date('Y-m-d H:i:s');
+        $request->reg_date_correcao = date('Y-m-d H:i:s', strtotime($request->reg_data_correcao));
         $request->reg_date_lastupdate = date('Y-m-d H:i:s');
 
         if (!empty($request->reg_date_correcao)):
@@ -41,6 +47,7 @@ if (!empty($request)):
             $regId = $Read->Execute()->MaxFild('reg_id');
             $Upload = new Upload();
             $regFile = new NcRegFile();
+            $regImage = new NcRegImage();
 
             if (!empty($request->origens)):
 
@@ -76,12 +83,12 @@ if (!empty($request)):
                     $Title = Check::Name(substr($img->FILE->name, 0, strrpos($img->FILE->name, '.')));
                     $FileName = $Title . strrchr($img->FILE->name, '.');
 
-                    $regFile->setFile_name($FileName);
-                    $regFile->setFile_url($img->URL);
-                    $regFile->setFile_date(date('Y-m-d H:i:s'));
-                    $regFile->setReg_id($regId);
+                    $regImage->setImage_name($FileName);
+                    $regImage->setImage_url($img->URL);
+                    $regImage->setImage_date(date('Y-m-d H:i:s'));
+                    $regImage->setReg_id($regId);
 
-                    $inImg = $regFile->Execute()->insert();
+                    $inImg = $regImage->Execute()->insert();
 
                     if ($inImg):
                         $Upload->Image((array) $img->FILE);

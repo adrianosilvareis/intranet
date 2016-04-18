@@ -10,22 +10,22 @@
 
     <div class="well">
 
-        <label>Avaliação das causas da NC:</label>  
+        <label>Avaliação das causas da NC:</label>
         <div class="clearfix"></div>
 
         <div class="form-group col-md-4">
             <label>Processos:</label>
-            <textarea class="form-control" name="" title="" rows="3"></textarea>
+            <textarea class="form-control" name="" title="" rows="3" placeholder="Erro nos processos." ng-model="registro.reg_aval_processo"></textarea>
         </div>
 
         <div class="form-group col-md-4">
             <label>Matéria-Prima:</label>
-            <textarea class="form-control" name="" title="" rows="3"></textarea>
+            <textarea class="form-control" name="" title="" rows="3" placeholder="Problema com matéria-prima" ng-model="registro.reg_aval_materia_prima"></textarea>
         </div>
 
         <div class="form-group col-md-4">
             <label>Mão de Obra:</label>
-            <textarea class="form-control" name="" title="" rows="3"></textarea>
+            <textarea class="form-control" name="" title="" rows="3" placeholder="Erro operacional" ng-model="registro.reg_aval_mao_obra"></textarea>
         </div>
 
         <div class="col-md-12">
@@ -34,27 +34,33 @@
 
         <div class="form-group col-md-4">
             <label>Equipamentos:</label>
-            <textarea class="form-control" name="" title="" rows="3"></textarea>
+            <textarea class="form-control" name="" title="" rows="3" placeholder="Problema com equipamentos" ng-model="registro.reg_aval_equipamento"></textarea>
         </div>
 
         <div class="form-group col-md-4">
             <label>Meio Ambiente:</label>
-            <textarea class="form-control" name="" title="" rows="3"></textarea>
+            <textarea class="form-control" name="" title="" rows="3" placeholder="Problemas no meio ambiente" ng-model="registro.reg_aval_meio_ambiente"></textarea>
         </div>
 
         <div class="form-group col-md-4">
             <label>Outros:</label>
-            <textarea class="form-control" name="" title="" rows="3"></textarea>
+            <textarea class="form-control" name="" title="" rows="3" placeholder="Outras causas" ng-model="registro.reg_aval_outros"></textarea>
         </div>
     </div>
 
     <div class="form-group">
         <label>Causa Principal:</label>
-        <textarea class="form-control" rows="3" name="" placeholder="Causa Principal"  ng-required="true" ng-minlength="5"></textarea>
+        <textarea class="form-control" rows="3" name="" placeholder="Causa Principal"  ng-required="true" ng-minlength="5" ng-model="registro.reg_causa_principal"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Proposta de ação corretiva:</label>
+        <textarea class="form-control" rows="3" name="" placeholder="Proposta de Ação corretiva"  ng-required="true" ng-minlength="3" ng-model="registro.reg_acao_corretiva"></textarea>
     </div>
 
     <div class="btn-group">
         <input class="btn btn-primary" style="width: 200px;" type="submit" value="Novo" name="SendPostForm" ng-disabled="!registro" ng-click="novoRegistro()"/>
-        <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="registroForm.$invalid" ng-click="saveRegistro(registro)"/>
+        <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="avaliacaoForm.$invalid" ng-click="saveRegistro(registro)"/>
     </div>
 </form>
+{{registro}}

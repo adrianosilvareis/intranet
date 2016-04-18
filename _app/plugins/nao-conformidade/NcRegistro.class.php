@@ -15,7 +15,6 @@ class NcRegistro {
     private $reg_origem_outros;
     private $reg_correcao_imediata;
     private $reg_user_correcao;
-    private $reg_user_aval;
     private $reg_aval_processo;
     private $reg_aval_materia_prima;
     private $reg_aval_mao_obra;
@@ -27,6 +26,7 @@ class NcRegistro {
     private $reg_date_resposta;
     private $reg_date_cadastro;
     private $reg_date_lastupdate;
+    private $reg_acao_corretiva;
     private $user_lastupdate;
     private $user_cadastro;
     private $user_recebimento;
@@ -47,7 +47,6 @@ class NcRegistro {
             'reg_origem_outros' => $this->getReg_origem_outros(),
             'reg_correcao_imediata' => $this->getReg_correcao_imediata(),
             'reg_user_correcao' => $this->getReg_user_correcao(),
-            'reg_user_aval' => $this->getReg_user_aval(),
             'reg_aval_processo' => $this->getReg_aval_processo(),
             'reg_aval_materia_prima' => $this->getReg_aval_materia_prima(),
             'reg_aval_mao_obra' => $this->getReg_aval_mao_obra(),
@@ -59,6 +58,7 @@ class NcRegistro {
             'reg_date_resposta' => $this->getReg_date_resposta(),
             'reg_date_cadastro' => $this->getReg_date_cadastro(),
             'reg_date_lastupdate' => $this->getReg_date_lastupdate(),
+            'reg_acao_corretiva' => $this->getReg_acao_corretiva(),
             'user_lastupdate' => $this->getUser_lastupdate(),
             'user_cadastro' => $this->getUser_cadastro(),
             'user_recebimento' => $this->getUser_recebimento(),
@@ -79,7 +79,6 @@ class NcRegistro {
         $this->setReg_origem_outros((isset($object->reg_origem_outros) ? $object->reg_origem_outros : null));
         $this->setReg_correcao_imediata((isset($object->reg_correcao_imediata) ? $object->reg_correcao_imediata : null));
         $this->setReg_user_correcao((isset($object->reg_user_correcao) ? $object->reg_user_correcao : null));
-        $this->setReg_user_aval((isset($object->reg_user_aval) ? $object->reg_user_aval : null));
         $this->setReg_aval_processo((isset($object->reg_aval_processo) ? $object->reg_aval_processo : null));
         $this->setReg_aval_materia_prima((isset($object->reg_aval_materia_prima) ? $object->reg_aval_materia_prima : null));
         $this->setReg_aval_mao_obra((isset($object->reg_aval_mao_obra) ? $object->reg_aval_mao_obra : null));
@@ -91,6 +90,7 @@ class NcRegistro {
         $this->setReg_date_correcao((isset($object->reg_date_correcao) ? $object->reg_date_correcao : null));
         $this->setReg_date_resposta((isset($object->reg_date_resposta) ? $object->reg_date_resposta : null));
         $this->setReg_date_cadastro((isset($object->reg_date_cadastro) ? $object->reg_date_cadastro : null));
+        $this->setReg_acao_corretiva((isset($object->reg_acao_corretiva) ? $object->reg_acao_corretiva : null));
         $this->setUser_cadastro((isset($object->user_cadastro) ? $object->user_cadastro : null));
         $this->setUser_recebimento((isset($object->user_recebimento) ? $object->user_recebimento : null));
         $this->setUser_lastupdate((isset($object->user_lastupdate) ? $object->user_lastupdate : null));
@@ -133,10 +133,6 @@ class NcRegistro {
 
     function getReg_user_correcao() {
         return $this->reg_user_correcao;
-    }
-
-    function getReg_user_aval() {
-        return $this->reg_user_aval;
     }
 
     function getReg_aval_processo() {
@@ -183,6 +179,10 @@ class NcRegistro {
         return $this->reg_date_lastupdate;
     }
 
+    function getReg_acao_corretiva() {
+        return $this->reg_acao_corretiva;
+    }
+
     function getUser_lastupdate() {
         return $this->user_lastupdate;
     }
@@ -217,10 +217,6 @@ class NcRegistro {
 
     function setReg_user_correcao($reg_user_correcao) {
         $this->reg_user_correcao = $reg_user_correcao;
-    }
-
-    function setReg_user_aval($reg_user_aval) {
-        $this->reg_user_aval = $reg_user_aval;
     }
 
     function setReg_aval_processo($reg_aval_processo) {
@@ -265,6 +261,10 @@ class NcRegistro {
 
     function setReg_date_lastupdate($reg_date_lastupdate) {
         $this->reg_date_lastupdate = $reg_date_lastupdate;
+    }
+
+    function setReg_acao_corretiva($reg_acao_corretiva) {
+        $this->reg_acao_corretiva = $reg_acao_corretiva;
     }
 
     function setUser_lastupdate($user_lastupdate) {

@@ -7,6 +7,7 @@ if (!PRODUCAO):
     Register::addRegister("<script src='" . NCONDIR . "/controller/setor.ctrl.js'></script>");
     Register::addRegister("<script src='" . NCONDIR . "/controller/origem.ctrl.js'></script>");
     Register::addRegister("<script src='" . NCONDIR . "/controller/registro.ctrl.js'></script>");
+    Register::addRegister("<script src='" . NCONDIR . "/controller/avaliacao.ctrl.js'></script>");
 endif;
 ?>
 <header id="navtab">
@@ -45,7 +46,7 @@ endif;
 
     <div class="tab-pane" id="dashboard"></div>
     <!--registro-->
-    <div class="tab-content" ng-controller="registro">
+    <div class="tab-content">
         <div class="tab-pane" id="reg_create"><?php require '/system/registro/registro.php'; ?></div>
         <div class="tab-pane" id="reg_list"><?php require '/system/registro/index.php'; ?></div>
     </div>

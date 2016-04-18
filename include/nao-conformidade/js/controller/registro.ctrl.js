@@ -30,9 +30,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     $scope.addOrigem = function (origem) {
-
         objectInit();
-
         origem.classe = !origem.classe;
         var _pos = $scope.registro.origens.indexOf(origem);
         if (_pos !== -1) {
@@ -45,6 +43,14 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     $scope.activeItem = function (origem) {
         if (origem.classe)
             return "list-group-item-success";
+    };
+
+    $scope.origemList = function () {
+        objectInit();
+        if ($scope.registro.origens && $scope.registro.origens.length > 0 || $scope.registro.reg_origem_outros && $scope.registro.reg_origem_outros.length > 3)
+            return false;
+
+        return true;
     };
 
     $scope.removeFile = function (file) {
@@ -93,7 +99,8 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
 
     $scope.saveRegistro = function (registro) {
         objetoAPI.saveObjeto(config.apiURL + "/registro.api.php", registro).success(function (data) {
-            console.log(data);
+            $scope.message = data;
+            $scope.novoRegistro();
         });
     };
 
@@ -101,6 +108,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
         reset();
         delete $scope.registro;
         $scope.carregarObjetos();
+        $scope.registroForm.$setPristine();
     };
 
     $scope.carregarObjetos();
