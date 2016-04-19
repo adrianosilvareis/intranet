@@ -1,5 +1,5 @@
 <header>
-    <h1>Registros:</h1>
+    <h1>Registros:<small>Cadastro</small></h1>
 </header>
 
 <p ng-if="message" class="trigger accept">{{message}}<span class="ajax_close"></span></p>
@@ -79,14 +79,14 @@
 
     <div class="form-group">
         <label>Setor detectado:</label>
-        <select class="form-control" name="setor_responsavel" ng-model="registro.setor_responsavel" ng-options="setor.setor_id as setor.setor_content for setor in setores" ng-required="true">
+        <select class="form-control" name="setor_recebimento" ng-model="registro.setor_recebimento" ng-options="setor.setor_id as setor.setor_content for setor in setores" ng-required="true">
             <option value="">Selecione um setor</option>
         </select>
     </div>
 
     <div class="form-group">
         <label>Usuário responsável:</label>
-        <select class="form-control" name="user_recebimento" ng-model="registro.user_recebimento" ng-options="user.user_id as user.user_nickname + ' - ' + user.user_name + ' ' + user.user_lastname for user in usuarios">
+        <select class="form-control" name="user_recebimento" ng-model="registro.user_recebimento" ng-options="user.user_id as user.user_nickname + ' - ' + user.user_name + ' ' + user.user_lastname for user in usuarios" ng-required="true">
             <option value="">Selecione um responsável</option>
         </select>
     </div>
@@ -109,6 +109,6 @@
     <hr>
     <div class="btn-group">
         <input class="btn btn-primary" style="width: 200px;" type="submit" value="Novo" name="SendPostForm" ng-disabled="!registro" ng-click="novoRegistro()"/>
-        <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="registroForm.$invalid || origemList()" ng-click="saveRegistro(registro)"/>
+        <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="registroForm.$invalid || origemValid()" ng-click="saveRegistro(registro)"/>
     </div>
 </form>

@@ -30,6 +30,7 @@ class NcRegistro {
     private $user_lastupdate;
     private $user_cadastro;
     private $user_recebimento;
+    private $setor_recebimento;
 
     function __construct() {
         $this->Controle = new Controle('nc_registro');
@@ -62,6 +63,7 @@ class NcRegistro {
             'user_lastupdate' => $this->getUser_lastupdate(),
             'user_cadastro' => $this->getUser_cadastro(),
             'user_recebimento' => $this->getUser_recebimento(),
+            'setor_recebimento' => $this->getSetor_recebimento(),
             'reg_id' => $this->getReg_id()
         ]));
         return $this->Controle->getDados();
@@ -92,8 +94,9 @@ class NcRegistro {
         $this->setReg_date_cadastro((isset($object->reg_date_cadastro) ? $object->reg_date_cadastro : null));
         $this->setReg_acao_corretiva((isset($object->reg_acao_corretiva) ? $object->reg_acao_corretiva : null));
         $this->setUser_cadastro((isset($object->user_cadastro) ? $object->user_cadastro : null));
-        $this->setUser_recebimento((isset($object->user_recebimento) ? $object->user_recebimento : null));
         $this->setUser_lastupdate((isset($object->user_lastupdate) ? $object->user_lastupdate : null));
+        $this->setUser_recebimento((isset($object->user_recebimento) ? $object->user_recebimento : null));
+        $this->setSetor_recebimento((isset($object->setor_recebimento) ? $object->setor_recebimento : null));
     }
 
     /**
@@ -195,6 +198,10 @@ class NcRegistro {
         return $this->user_recebimento;
     }
 
+    function getSetor_recebimento() {
+        return $this->setor_recebimento;
+    }
+
     function setReg_id($reg_id) {
         $this->reg_id = $reg_id;
     }
@@ -277,6 +284,10 @@ class NcRegistro {
 
     function setUser_recebimento($user_recebimento) {
         $this->user_recebimento = $user_recebimento;
+    }
+
+    function setSetor_recebimento($setor_recebimento) {
+        $this->setor_recebimento = $setor_recebimento;
     }
 
 }

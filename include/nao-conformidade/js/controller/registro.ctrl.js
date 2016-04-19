@@ -45,7 +45,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
             return "list-group-item-success";
     };
 
-    $scope.origemList = function () {
+    $scope.origemValid = function () {
         objectInit();
         if ($scope.registro.origens && $scope.registro.origens.length > 0 || $scope.registro.reg_origem_outros && $scope.registro.reg_origem_outros.length > 3)
             return false;

@@ -102,6 +102,6 @@ if (!empty($request)):
         echo "Registro adicionado com sucesso!";
     endif;
 else:
-    $Read->Execute()->findAll();
+    $Read->Execute()->FullRead("SELECT * FROM nc_registro r JOIN user_users u ON(u.user_id = user_recebimento");
     echo json_encode($Read->Execute()->getResult());
 endif;

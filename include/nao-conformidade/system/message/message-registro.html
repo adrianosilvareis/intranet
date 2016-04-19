@@ -1,7 +1,7 @@
 
 <div style="margin-top: 15px;">
     
-    <div class="alert alert-danger" ng-show="registroForm.$dirty && origemList()">
+    <div class="alert alert-danger" ng-show="registroForm.$dirty && origemValid()">
         Por Favor, Preencha o campo <b>origem outros</b> ou selecione uma origem da não conformidade.
     </div>
 
@@ -16,7 +16,7 @@
     </div>
 
     <div ng-messages="registroForm.setor_responsavel.$error">
-        <div ng-message="required" class="alert alert-danger" ng-show="registroForm.setor_responsavel.$dirty">
+        <div ng-message="required" class="alert alert-danger" ng-show="registroForm.setor_recebimento.$dirty">
             Por Favor, Selenione um <b>setor responsável</b>.
         </div>
     </div>
