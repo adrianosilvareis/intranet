@@ -163,6 +163,13 @@
 .systema_nav li .logout {
   background: url("/intranet/themes/intranet/icons/logout.png") center center no-repeat;
 }
+.systema_nav li .badge {
+  background: #66a3c1;
+  font-size: 1em;
+  font-family: cursive;
+  padding: 7px;
+  color: #FFF;
+}
 .systema_nav li .icon {
   background-size: 80%;
 }
