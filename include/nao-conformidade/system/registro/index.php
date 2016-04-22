@@ -3,7 +3,7 @@
     <header>
         <h1>Registros:<small>Lista</small></h1>
     </header>
-
+    
     <table class="table table-striped table-hover">
         <thead>
             <tr>

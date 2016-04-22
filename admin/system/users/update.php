@@ -54,10 +54,32 @@
                 <input type="email" name="user_email" value="<?php if (!empty($ClienteData['user_email'])) echo $ClienteData['user_email']; ?>" title="Informe seu e-mail" required />
             </label>
 
+            <label class="label">
+                <span class="field">Senha:</span>
+                <input type="password" name="user_password" value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern=".{6,12}" />
+            </label>
+
+            <?php
+            $type = Check::SetTypeByName('trabalho');
+            ?>
             <div class="label_line">
                 <label class="label_medium">
-                    <span class="field">Senha:</span>
-                    <input type="password" name="user_password" value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern=".{6,12}" />
+                    <span class="field">Setor:</span>
+                    <select name = "setor_id" title = "Selecione o nível de usuário" required >
+                        <option value = "">Selecione o Nível</option>
+                        <?php
+                        if (!empty($type)):
+                            $WsSetor = new WsSetor();
+                            $WsSetor->setSetor_type($type);
+                            $WsSetor->Execute()->Query("#setor_type#");
+
+                            foreach ($WsSetor->Execute()->getResult() as $setor) :
+                                $select = (isset($ClienteData['setor_id']) && $ClienteData['setor_id'] == $setor->setor_id ? "selected='selected'" : '');
+                                echo "\n<option value='{$setor->setor_id}' {$select}>{$setor->setor_content}</option>";
+                            endforeach;
+                        endif;
+                        ?>
+                    </select>
                 </label>
 
                 <label class="label_medium">

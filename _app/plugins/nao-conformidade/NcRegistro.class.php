@@ -22,11 +22,12 @@ class NcRegistro {
     private $reg_aval_meio_ambiente;
     private $reg_aval_outros;
     private $reg_causa_principal;
+    private $reg_date_lastupdate;
     private $reg_date_correcao;
     private $reg_date_resposta;
     private $reg_date_cadastro;
-    private $reg_date_lastupdate;
     private $reg_acao_corretiva;
+    private $reg_finalizado;
     private $user_lastupdate;
     private $user_cadastro;
     private $user_recebimento;
@@ -60,6 +61,7 @@ class NcRegistro {
             'reg_date_cadastro' => $this->getReg_date_cadastro(),
             'reg_date_lastupdate' => $this->getReg_date_lastupdate(),
             'reg_acao_corretiva' => $this->getReg_acao_corretiva(),
+            'reg_finalizado' => $this->getReg_finalizado(),
             'user_lastupdate' => $this->getUser_lastupdate(),
             'user_cadastro' => $this->getUser_cadastro(),
             'user_recebimento' => $this->getUser_recebimento(),
@@ -93,6 +95,7 @@ class NcRegistro {
         $this->setReg_date_resposta((isset($object->reg_date_resposta) ? $object->reg_date_resposta : null));
         $this->setReg_date_cadastro((isset($object->reg_date_cadastro) ? $object->reg_date_cadastro : null));
         $this->setReg_acao_corretiva((isset($object->reg_acao_corretiva) ? $object->reg_acao_corretiva : null));
+        $this->setReg_finalizado((isset($object->reg_finalizado) ? $object->reg_finalizado : null));
         $this->setUser_cadastro((isset($object->user_cadastro) ? $object->user_cadastro : null));
         $this->setUser_lastupdate((isset($object->user_lastupdate) ? $object->user_lastupdate : null));
         $this->setUser_recebimento((isset($object->user_recebimento) ? $object->user_recebimento : null));
@@ -186,6 +189,10 @@ class NcRegistro {
         return $this->reg_acao_corretiva;
     }
 
+    function getReg_finalizado() {
+        return $this->reg_finalizado;
+    }
+
     function getUser_lastupdate() {
         return $this->user_lastupdate;
     }
@@ -272,6 +279,10 @@ class NcRegistro {
 
     function setReg_acao_corretiva($reg_acao_corretiva) {
         $this->reg_acao_corretiva = $reg_acao_corretiva;
+    }
+
+    function setReg_finalizado($reg_finalizado) {
+        $this->reg_finalizado = $reg_finalizado;
     }
 
     function setUser_lastupdate($user_lastupdate) {

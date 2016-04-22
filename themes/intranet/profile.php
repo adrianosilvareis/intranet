@@ -46,11 +46,26 @@
                 </label>
             </div>
 
+            <?php
+            $type = Check::SetTypeByName("teste");
+            ?>
             <div class="col-md-12 well">
                 <label class="col-md-4">
                     Setor:
-                    <select class="form-control">
+                    <select class="form-control" name="setor_id">
                         <option value="">Selecione um setor</option>
+                        <?php
+                        if (!empty($type)):
+                            $WsSetor = new WsSetor();
+                            $WsSetor->setSetor_type($type);
+                            $WsSetor->Execute()->Query("#setor_type#");
+                            
+                            foreach ($WsSetor->Execute()->getResult() as $setor) :
+                                $select = (isset($setor_id) && $setor_id == $setor->setor_id ? "selected='selected'" : '');
+                                echo "\n<option value='{$setor->setor_id}' {$select}>{$setor->setor_content}</option>";
+                            endforeach;
+                        endif;
+                        ?>
                     </select>
                 </label>
 

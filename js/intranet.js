@@ -36,17 +36,17 @@ $("documents").ready(function () {
         // Entra aqui caso o cookie não exista no  navegador do usuário
 
         // Crio um objeto Date do Javascript pegando a data de hoje e incrementando + 1 dias nessa data
-        var diasparaexpirar = 1;
-        var horas = 1;
+        var diaspexpirar = 1;
+        var hs = 1;
 
-        var expiracao = new Date();
-        expiracao.setTime(expiracao.getTime() + (diasparaexpirar * horas * 60 * 60 * 1000));
+        var prazo = new Date();
+        prazo.setTime(prazo.getTime() + (diaspexpirar * hs * 60 * 60 * 1000));
 
         // Converte a data para string
-        expiracao = expiracao.toUTCString();
+        prazo = prazo.toUTCString();
 
         // Crio o cookie com a data de expiração
-        document.cookie = 'usuarioVisualizouNotificacao=SIM; expires=' + expiracao + '; path=/';
+        document.cookie = 'usuarioVisualizouNotificacao=SIM; expires=' + prazo + '; path=/';
 
         //Exibe a notificação da não conformidade;
         notify(title, icon, content, link);

@@ -103,7 +103,7 @@ endif;
 
                         <!-- adicionar novas categorias aqui-->
 
-                        <li class="li"><a href="../" target="_blank" class="opensub">Ver Site</a></li>
+                        <li class="li"><a href="<?= HOME ?>" target="_blank" class="opensub">Ver Site</a></li>
                     </ul>
                 </nav>
 
@@ -136,9 +136,15 @@ endif;
 
     </body>
 
-    <script src="../_lib/jquery/jquery.min.js"></script>
-    <script src="../_lib/jquery-mask/jmask.js"></script>
-    <script src="../cdn/combo.js"></script>
+    <?php if (!PRODUCAO): ?>  
+        <script src="../_lib/jquery.min.js"></script>
+        <script src="../_lib/jquery/jmask.min.js"></script>
+        <script src="../_lib/cdn/combo.js"></script>
+    <?php else: ?>
+        <script src="../js/lib.min.js"></script>
+        <script src="../cdn/combo.js"></script>
+    <?php endif; ?>
+
     <script src="__jsc/tiny_mce/tiny_mce.js"></script>
     <script src="__jsc/tiny_mce/plugins/tinybrowser/tb_tinymce.js.php"></script>
     <script src="__jsc/admin.js"></script>

@@ -157,7 +157,7 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 .form_create article form .label_small input{width: 250px;}
 .form_create article form .label_small select{width: 280px; padding: 9px 10px}
 
-.form_create article form .label_medium{float: left; width: 500px; float: left; margin-right: 44px;}
+.form_create article form .label_medium{float: left; width: 50%; float: left;}
 .form_create article form .label_medium:last-child{float: right; margin-right: 0;}
 .form_create article form .label_medium input{width: 600px;}
 .form_create article form .label_medium select{width: 442px; padding: 9px 10px}

@@ -26,7 +26,7 @@ class Check {
             return false;
         endif;
     }
-    
+
     /**
      * <b>Lista Arquivos: </b> Transformda arquivos recebido de formulario em uma lista ordenada.
      * @param array $Files = array com todos atributos misturados
@@ -194,6 +194,19 @@ class Check {
         $Pointer = (empty($Pointer) ? '...' : ' ' . $Pointer );
         $Result = ( self::$Format < $NumWords ? $NewWords . $Pointer : self::$Data );
         return $Result;
+    }
+
+    public static function SetTypeByName($TypeName) {
+        $Read = new WsSetorType();
+        $Read->setType_content($TypeName);
+        $query = $Read->Execute()->Query("#type_content# AND type_status = 1");
+
+        if ($Read->Execute()->getResult()):
+            return (int) $query[0]->type_id;
+        else:
+            WSErro("O tipo de setor <b>{$TypeName}</b> não foi encontrado!", WS_ERROR);
+            return null;
+        endif;
     }
 
     /**

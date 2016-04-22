@@ -12,7 +12,7 @@
             require_once '_models/AdminUsers.class.php';
             $AdminUsers = new AdminUsers;
             $AdminUsers->ExeCreate($ClienteData);
-            
+
             if ($AdminUsers->getResult()):
                 header('Location: painel.php?exe=users/update&create=true&users=' . $AdminUsers->getResult());
             else:
@@ -32,7 +32,7 @@
                     required
                     />
             </label>
-            
+
             <label class="label">
                 <span class="field">Nome:</span>
                 <input
@@ -66,19 +66,32 @@
                     />
             </label>
 
+            <label class="label">
+                <span class="field">Senha:</span>
+                <input type="password" name="user_password" value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern=".{6,12}" required />
+            </label>
+
+            <?php
+            $type = Check::SetTypeByName('trabalho');
+            ?>
             <div class="label_line">
                 <label class="label_medium">
-                    <span class="field">Senha:</span>
-                    <input
-                        type = "password"
-                        name = "user_password"
-                        value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>"
-                        title = "Informe sua senha [ de 6 a 12 caracteres! ]"
-                        pattern = ".{6,12}"
-                        required
-                        />
-                </label>
+                    <span class="field">Setor:</span>
+                    <select name = "setor_id" title = "Selecione o nível de usuário" required >
+                        <option value = "">Selecione o Nível</option>
+                        <?php
+                        if (!empty($type)):
+                            $WsSetor = new WsSetor();
+                            $WsSetor->setSetor_type($type);
+                            $WsSetor->Execute()->Query("#setor_type#");
 
+                            foreach ($WsSetor->Execute()->getResult() as $setor) :
+                                echo "\n<option value='{$setor->setor_id}'>{$setor->setor_content}</option>";
+                            endforeach;
+                        endif;
+                        ?>
+                    </select>
+                </label>
 
                 <label class="label_medium">
                     <span class="field">Nível:</span>

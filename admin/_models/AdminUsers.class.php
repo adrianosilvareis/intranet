@@ -65,7 +65,7 @@ class AdminUsers {
         $WsUsers->Execute()->findAll();
         if ($WsUsers->Execute()->getRowCount() == 1):
             $WsUsers->setThis($WsUsers->Execute()->getResult()[0]);
-            $WsUsers->setUser_level(3);
+            $WsUsers->setUser_level(1);
             $WsUsers->Execute()->update(null, "user_id");
             $WsUsers->Execute()->findAll();
         endif;
@@ -95,7 +95,11 @@ class AdminUsers {
 
         $this->Data['user_registration'] = date('Y-m-d H:i:s', time());
         $this->Data['user_lastupdate'] = date('Y-m-d H:i:s', time());
-        $this->Data['user_password'] = md5($this->Data['user_password']);
+        if (!empty($this->Data['user_password'])):
+            $this->Data['user_password'] = md5($this->Data['user_password']);
+        else:
+            unset($this->Data['user_password']);
+        endif;
     }
 
     private function setNome() {
