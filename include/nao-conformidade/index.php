@@ -15,9 +15,9 @@ endif;
 $user = filter_input(INPUT_GET, 'user', FILTER_VALIDATE_BOOLEAN);
 $user_online = $_SESSION['userlogin'];
 
-if (!$user && $user_online['user_level'] < 3) {
+if (!$user && $user_online['user_level'] < 3) :
     require '/admin.php';
-} else {
+else :
     require '/user.php';
-}
+endif;
 ?>

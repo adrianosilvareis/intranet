@@ -1,4 +1,4 @@
-<article ng-controller="registroList">
+<article ng-controller="registro">
     
     <header>
         <h1>Registros:<small>Lista</small></h1>

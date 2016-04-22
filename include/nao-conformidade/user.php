@@ -1,15 +1,22 @@
-<section>
-    <h1>Painel de controle <small>Não conformidades</small></h1>
+<section ng-app="naoConformidade" ng-controller="registroList">
+    <h1>Painel de controle <small>Não conformidades</small></h1>  
     
-    <aside class="col-md-2">
-        <h1 class="notitle">menu</h1>
-    </aside>
+    <div ng-if="view !== 'todos'">
+        <div ng-include="getAllList()"></div>
+    </div>
     
-    <article class="col-md-5">
-        <h1>recebidos</h1>
-    </article>
-    <article class="col-md-5">
-        <h1>enviados</h1>
-    </article>
-    
+    <div ng-if="view === 'todos'">
+        <article class="col-md-6">
+            <h1>Recebido:</h1>
+            <?php include '/system/user/listas/recebido_aberto.html'; ?>
+            <?php include 'system/user/listas/recebido_fechado.html'; ?>
+        </article>
+
+        <article class="col-md-6">
+            <h1>Enviado:</h1>
+            <?php include 'system/user/listas/enviado_aberto.html'; ?>
+            <?php include 'system/user/listas/enviado_fechado.html'; ?>
+        </article>
+    </div>
+
 </section>
