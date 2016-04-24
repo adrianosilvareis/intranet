@@ -3,7 +3,8 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     $scope.origens = [];
     $scope.setores = [];
     $scope.usuarios = [];
-
+    $scope.registros = [];
+    
     $scope.carregarObjetos = function () {
         objetoAPI.getObjeto(config.apiURL + "/origem.api.php").success(function (data) {
             $scope.origens = data;
@@ -15,6 +16,10 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
 
         objetoAPI.getObjeto(config.apiURL + "/usuarios.api.php").success(function (data) {
             $scope.usuarios = data;
+        });
+
+        objetoAPI.getObjeto(config.apiURL + "/registro.api.php").success(function (data) {
+            $scope.registros = data;
         });
     };
 

@@ -1,0 +1,22 @@
+<article class="col-md-12">
+    <h2><a href="" ng-click="openView('recebido_aberto')">Abertos</a></h2>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>COD ID</th>
+                <th>Descrição</th>
+                <th>Data</th>
+                <th>user</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="reg in registros| filter:{reg_finalizado: '0'} | filter:{user_recebimento: userlogin}:true | limitTo:3">
+                <td>{{reg.reg_id}}</td>
+                <td>{{reg.reg_descricao| maxlength:20}}</td>
+                <td>{{reg.reg_date_cadastro| timestampBr  | maxlength:10}}</td>
+                <td>{{reg.user_recebimento.user_name + " " + reg.user_recebimento.user_lastname| name | maxlength:20}}</td>
+            </tr>
+        </tbody>
+    </table>
+</article>

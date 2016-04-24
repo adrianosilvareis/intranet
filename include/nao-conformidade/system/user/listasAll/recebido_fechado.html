@@ -1,0 +1,30 @@
+<article class="col-md-12">
+    <h2><a href="" ng-click="openView('todos')" title="Click para voltar">Recebidos <small>fechados</small></a></h2>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>COD ID</th>
+                <th>Descrição</th>
+                <th>Data Abertura</th>
+                <th>Data Correção</th>
+                <th>Usuário Abertura</th>
+                <th>Usuário Responsável</th>
+                <th>Setor Responsável</th>
+                <th>Imp. Pac.</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="reg in registros| filter:{reg_finalizado:'1'} | filter:{user_recebimento:userlogin}:true">
+                <td>{{reg.reg_id}}</td>
+                <td>{{reg.reg_descricao| maxlength:20}}</td>
+                <td>{{reg.reg_date_cadastro| timestampBr  | maxlength:10}}</td>
+                <td>{{reg.reg_date_correcao| timestampBr  | maxlength:10}}</td>
+                <td>{{reg.user_cadastro.user_name + " " + reg.user_cadastro.user_lastname| name | maxlength:20}}</td>
+                <td>{{reg.user_recebimento.user_name + " " + reg.user_recebimento.user_lastname| name | maxlength:20}}</td>
+                <td>{{reg.setor_recebimento.setor_content| name | maxlength:20}}</td>
+                <td>{{(reg.reg_impacto_paciente === '1' ? "sim" : 'não')}}</td>
+            </tr>
+        </tbody>
+    </table>
+</article>
