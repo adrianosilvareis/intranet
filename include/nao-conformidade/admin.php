@@ -33,7 +33,7 @@
 
 <div class="tab-content" ng-app="naoConformidade">
 
-    <div class="tab-pane" id="dashboard"></div>
+    <div class="tab-pane active" id="dashboard" ng-controller="dashboard"><?php require '/system/dashboard/index.html'; ?></div>
     <!--registro-->
     <div class="tab-content">
         <div class="tab-pane" id="reg_create"><?php require '/system/registro/registro.php'; ?></div>

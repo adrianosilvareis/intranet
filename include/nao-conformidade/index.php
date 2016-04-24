@@ -10,6 +10,7 @@ if (!PRODUCAO):
     Register::addRegister("<script src='" . NCONDIR . "/controller/registro.ctrl.js'></script>");
     Register::addRegister("<script src='" . NCONDIR . "/controller/avaliacao.ctrl.js'></script>");
     Register::addRegister("<script src='" . NCONDIR . "/controller/registroList.ctrl.js'></script>");
+    Register::addRegister("<script src='" . NCONDIR . "/controller/dashboard.ctrl.js'></script>");
 endif;
 
 $user = filter_input(INPUT_GET, 'user', FILTER_VALIDATE_BOOLEAN);

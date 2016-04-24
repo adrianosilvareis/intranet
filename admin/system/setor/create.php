@@ -63,7 +63,7 @@ endif;
                             foreach ($ReadSet->Execute()->getResult() as $ses):
                                 echo "<option value=\"{$ses->type_id}\" ";
 
-                                if ($ses->type_id == $data['type_content']):
+                                if ($ses->type_id == $data['setor_type']):
                                     echo ' selected="seleted" ';
                                 endif;
 

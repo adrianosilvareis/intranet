@@ -1,0 +1,50 @@
+<section>
+    <h1>Painel de controle <small>Não conformidades</small></h1>
+
+    <article>
+        <h1>Abertas</h1>
+
+        <div ng-if="!registros.length > 0">
+            <div class="alert alert-success">
+                desculpe! não temos nenhum registro aberto no momento.
+            </div>
+        </div>
+
+        <table class="table table-striped table-hover" ng-if="registros.length > 0">
+            <thead>
+                <tr>
+                    <td>titulo</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="reg in registros">
+                    <td>{{reg.reg_id}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+
+    <article>
+        <h1>Fechadas</h1>
+
+        <div ng-if="!registros.length > 0">
+            <div class="alert alert-danger">
+                desculpe! não temos nenhum registro fechado no momento.
+            </div>
+        </div>
+
+        <table class="table table-striped table-hover" ng-if="registro.length > 0">
+            <thead>
+                <tr>
+                    <td>titulo</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>value</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+
+</section>
