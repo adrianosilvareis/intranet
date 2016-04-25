@@ -50,10 +50,10 @@ angular.module("naoConformidade").controller('registroList', function ($scope, o
                     return user;
             })[0];
 
-//            reg.setor_recebimento = $scope.setores.filter(function (setor) {
-//                if (reg.setor_recebimento === setor.setor_id)
-//                    return setor;
-//            })[0];
+            reg.setor_recebimento = $scope.setores.filter(function (setor) {
+                if (reg.setor_recebimento === setor.setor_id)
+                    return setor;
+            })[0];
         });
     };
 

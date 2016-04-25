@@ -1,5 +1,5 @@
 <section ng-app="naoConformidade" ng-controller="registroList">
-    <h1>Painel de controle <small>Não conformidades</small></h1>  
+    <h1>Painel de controle <small>Evento indesejado</small></h1>  
     
     <div ng-if="view !== 'todos'">
         <div ng-include="getAllList()"></div>
