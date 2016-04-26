@@ -5,11 +5,12 @@
     $carrousel = Check::CatByName("destaques");
     include "inc/carrousel.inc.php";
     ?>
-
+    
     <?php
     $Titulo = "Destaques";
     $Categoria = "destaques";
     $Ordem = "post_date";
+    $Offset = 3;
     include "inc/noticias_tres.inc.php";
     ?>
 

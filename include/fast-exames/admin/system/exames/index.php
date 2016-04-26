@@ -62,18 +62,19 @@ if (!$FeExames->Execute()->getResult()):
     WSErro("Nenhum solicitação de alteraçao de exame encontrado!", WS_INFOR);
 else:
     ?>
-    <table class="table table-striped text-center" id="form">
+    <table class="table table-striped text-center" id="form" style="font-size: 0.9em;">
         <thead>
             <tr>
-                <th>Descrição</th>
-                <th>Minemônico</th>
-                <th>Setor</th>
-                <th>Ações</th>
-                <th>Data Solicitação</th>
-                <th>Data Conclusão</th>
-                <th>Solicitante(Setor)</th>
-                <th>Solicitante</th>
-                <th>Actions</th>
+                <th class="text-center">Descrição</th>
+                <th class="text-center">Mnemônico</th>
+                <th class="text-center">Setor Exec.</th>
+                <th class="text-center">Ações</th>
+                <th class="text-center">Solicitado em.</th>
+                <th class="text-center">Concluido em.</th>
+                <th class="text-center">Setor Soli.</th>
+                <th class="text-center">Solicitante</th>
+                <th class="text-center">Executor</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -82,14 +83,15 @@ else:
                 extract((array) $exames);
                 ?>    
                 <tr>
-                    <td><?= Check::Words($ex_descricao, 4); ?></td>
+                    <td><?= Check::Words($ex_descricao, 3); ?></td>
                     <td><?= $ex_minemonico; ?></td>
                     <td><?= $AdminExames->Setor($ws_setor_exec); ?></td>
-                    <td><?= $AdminExames->Acao($fe_acoes); ?></td>
+                    <td><?= Check::Words($AdminExames->Acao($fe_acoes), 3); ?></td>
                     <td><?= date('d/m/y | H:i', strtotime($ex_data_abertura)) . "H"; ?></td>
-                    <td><?= (($ex_data_fechamento != "0000-00-00 00:00:00") ? date('d/m/y | H:i', strtotime($ex_data_fechamento)) . "H" : ""); ?></td>
+                    <td><?= (($ex_data_fechamento != "0000-00-00 00:00:00" && !empty($ws_users)) ? date('d/m/y | H:i', strtotime($ex_data_fechamento)) . "H" : ""); ?></td>
                     <td><?= $AdminExames->Setor($ws_setor_soli); ?></td>
                     <td><?= $AdminExames->Usuario($ws_users_soli); ?></td>
+                    <td><?= (!empty($ws_users) ? $AdminExames->Usuario($ws_users) : ""); ?></td>
                     <td>
                         <ul class="post_actions plugin">
                             <?php if (!$ex_status): ?>

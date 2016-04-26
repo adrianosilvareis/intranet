@@ -1,9 +1,10 @@
 <?php
 $Limit = (!empty($Limit) ? $Limit : 3);
+
 $c = 0;
 $Read = new WsPosts();
 $Read->setPost_category($carrousel);
-$Read->Execute()->Query("post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat) ORDER BY post_date LIMIT {$Limit}", "cat={$carrousel}", true);
+$Read->Execute()->Query("post_status = 1 AND (post_category = :cat OR post_cat_parent = :cat) ORDER BY post_date DESC LIMIT {$Limit}", "cat={$carrousel}", true);
 if (!$Read->Execute()->getResult()):
     WSErro("Opps! Não temos artigos em destaques!", WS_INFOR);
 else:
