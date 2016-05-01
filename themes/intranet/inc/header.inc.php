@@ -20,7 +20,7 @@
 
                 echo "<script>"
                 . "var title = 'Notificação de não conformidade';"
-                . "var icon = '" . HOME . "/themes/" . THEME . "/images/nao_conformidade.png';"
+                . "var icon = '" . HOME . "/themes/" . THEME . "/images/ncon.png';"
                 . "var content = 'Olá, você ou seu setor tem {$size} notificações que precisão de atenção!';"
                 . "var link = '" . HOME . "/plugin/nao-conformidade/&user=true';"
                 . "var notification = $size;"

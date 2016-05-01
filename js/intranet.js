@@ -27,7 +27,7 @@ $(function () {
 });
 
 $("documents").ready(function () {
-    
+
     // Obtém todos os cookies do documento
     var cookies = document.cookie;
 
@@ -35,12 +35,11 @@ $("documents").ready(function () {
     if (cookies.indexOf("usuarioVisualizouNotificacao") === -1 && notification > 0) {
         // Entra aqui caso o cookie não exista no  navegador do usuário
 
-        // Crio um objeto Date do Javascript pegando a data de hoje e incrementando + 1 dias nessa data
-        var diaspexpirar = 1;
-        var hs = 1;
+        // Crio um objeto Date do Javascript pegando a data de hoje e incrementando + N min nessa data
+        var min = 1;
 
         var prazo = new Date();
-        prazo.setTime(prazo.getTime() + (diaspexpirar * hs * 60 * 60 * 1000));
+        prazo.setTime(prazo.getTime() + ( min * 60 * 1000));
 
         // Converte a data para string
         prazo = prazo.toUTCString();
