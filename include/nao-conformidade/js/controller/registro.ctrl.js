@@ -4,6 +4,10 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     $scope.setores = [];
     $scope.usuarios = [];
     $scope.registros = [];
+    $scope.registro = {};
+    $scope.registro.origens = [];
+    $scope.registro.images = [];
+    $scope.registro.files = [];
     
     $scope.carregarObjetos = function () {
         objetoAPI.getObjeto(config.apiURL + "/origem.api.php").success(function (data) {
@@ -23,19 +27,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
         });
     };
 
-    objectInit = function () {
-        if ($scope.registro === undefined)
-            $scope.registro = {};
-        if ($scope.registro.origens === undefined)
-            $scope.registro.origens = [];
-        if ($scope.registro.images === undefined)
-            $scope.registro.images = [];
-        if ($scope.registro.files === undefined)
-            $scope.registro.files = [];
-    };
-
     $scope.addOrigem = function (origem) {
-        objectInit();
         origem.classe = !origem.classe;
         var _pos = $scope.registro.origens.indexOf(origem);
         if (_pos !== -1) {
@@ -51,7 +43,6 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     $scope.origemValid = function () {
-        objectInit();
         if ($scope.registro.origens && $scope.registro.origens.length > 0 || $scope.registro.reg_origem_outros && $scope.registro.reg_origem_outros.length > 3)
             return false;
 
@@ -87,8 +78,6 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     preview = function (data) {
-        objectInit();
-
         if (Array.isArray(data)) {
             data.filter(function (file) {
                 if (file.FILE.type.indexOf('image') !== -1)

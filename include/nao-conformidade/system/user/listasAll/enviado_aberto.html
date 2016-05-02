@@ -15,7 +15,7 @@
         </thead>
 
         <tbody>
-            <tr ng-repeat="reg in registros| filter:{reg_finalizado:'0'} | filter:{user_cadastro:userlogin}:true">
+            <tr ng-repeat="reg in registros| filter:{reg_finalizado:'0'} | userOrSetorEnviado:userlogin">
                 <td>{{reg.reg_id}}</td>
                 <td>{{reg.reg_descricao| maxlength:20}}</td>
                 <td>{{reg.reg_date_cadastro| timestampBr  | maxlength:10}}</td>

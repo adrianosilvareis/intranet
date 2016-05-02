@@ -14,7 +14,7 @@
                     . "AND r.reg_finalizado = 0";
             $NcRegistro = new NcRegistro();
             $NcRegistro->Execute()->FullRead($sql, "user_id={$_SESSION['userlogin']['user_id']}&setor_id={$_SESSION['userlogin']['setor_id']}");
-
+            
             if ($NcRegistro->Execute()->getResult()):
                 $size = $NcRegistro->Execute()->getResult()[0]->size;
 

@@ -14,3 +14,18 @@ angular.module("naoConformidade").filter('userOrSetorRecebido', function () {
         return output;
     };
 });
+
+/**
+ * Não conformdiade enviada para setor e usuario 
+ */
+angular.module("naoConformidade").filter('userOrSetorEnviado', function () {
+    return function (input, useronline) {
+        
+        var output = input.filter(function (objeto) {
+            if (objeto.user_cadastro.user_id === useronline.user_id || objeto.user_cadastro.setor_id === useronline.setor_id) {
+                return objeto;
+            }
+        });
+        return output;
+    };
+});

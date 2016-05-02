@@ -4,7 +4,7 @@ angular.module('naoConformidade').controller('dashboard', function ($scope, obje
 
     _carregarObjetos = function () {
         objetoAPI.getObjeto(config.apiURL + '/registro.api.php').success(function (data) {
-            console.log(data);
+            
         });
     };
     

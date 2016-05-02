@@ -1,22 +1,18 @@
 <section ng-app="naoConformidade" ng-controller="registroList">
     <h1>Painel de controle <small>Evento indesejado</small></h1>  
     
-    <div ng-if="view !== 'todos'">
-        <div ng-include="getAllList()"></div>
-    </div>
-    
-    <div ng-if="view === 'todos'">
-        <article class="col-md-6">
-            <h1>Recebido:</h1>
-            <?php include '/system/user/listas/recebido_aberto.html'; ?>
-            <?php include 'system/user/listas/recebido_fechado.html'; ?>
-        </article>
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Cadastro de Evento Indesejado</a></li>
+        </ul>
 
-        <article class="col-md-6">
-            <h1>Enviado:</h1>
-            <?php include 'system/user/listas/enviado_aberto.html'; ?>
-            <?php include 'system/user/listas/enviado_fechado.html'; ?>
-        </article>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home"><?php include 'system/user/view.php'; ?></div>
+            <div role="tabpanel" class="tab-pane" id="profile"><?php include 'system/user/cadastro.php'; ?></div>
+        </div>
     </div>
 
 </section>
