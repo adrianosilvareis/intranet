@@ -10,11 +10,11 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div class="tab-pane active" id="cadastro" ng-controller="registro">
-                <article><?php include 'cadastro.php'; ?></article>
+            <div class="tab-pane active" id="cadastro">
+                <?php include 'cadastro.php'; ?>
             </div>
-            <div class="tab-pane" id="avaliacao" ng-controller="avaliacao">
-                <article><?php include 'avaliacao.php'; ?></article>
+            <div class="tab-pane" id="avaliacao">
+                <?php include 'avaliacao.php'; ?>
             </div>
         </div>
 

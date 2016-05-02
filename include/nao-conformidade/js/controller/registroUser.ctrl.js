@@ -1,4 +1,4 @@
-angular.module("naoConformidade").controller('registroList', function ($scope, objetoAPI, config) {
+angular.module("naoConformidade").controller('registroUser', function ($scope, objetoAPI, config) {
 
     $scope.registros = [];
     $scope.usuarios = [];
@@ -63,6 +63,11 @@ angular.module("naoConformidade").controller('registroList', function ($scope, o
 
     $scope.getAllList = function () {
         return "/intranet/include/nao-conformidade/system/user/listasAll/" + $scope.view + ".html";
+    };
+    
+    $scope.openRegistro = function(reg){
+        $scope.registro = reg;
+        console.log(reg);
     };
 
     $scope.openView('todos');

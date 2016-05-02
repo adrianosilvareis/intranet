@@ -2,15 +2,11 @@
 <header id="navtab">
     <nav>
         <h1><a href="#dashboard" title="Dashboard" data-toggle="tab" onclick="alterClass('#dashboard')">Dashboard</a></h1>
+        
+        <h1><a href="#reg_create" title="Registro" data-toggle="tab" onclick="alterClass('#reg_create')">Registro</a></h1>
 
         <!--Query String-->
         <ul class="menu">
-            <li id="registro" class="li"><a class="opensub" onclick="return false;" href="#">Registro</a>
-                <ul class="sub">
-                    <li><a href="#reg_create" onclick="alterClass('#registro')" data-toggle="tab">Criar Registro</a></li>
-                    <li><a href="#reg_list" onclick="alterClass('#registro')" data-toggle="tab">Listar / Editar Registro</a></li>
-                </ul>
-            </li>
 
             <li id="origem" class="li"><a class="opensub" onclick="return false;" href="#">Origem</a>
                 <ul class="sub">
@@ -37,7 +33,6 @@
     <!--registro-->
     <div class="tab-content">
         <div class="tab-pane" id="reg_create"><?php require '/system/registro/registro.php'; ?></div>
-        <div class="tab-pane" id="reg_list"><?php require '/system/registro/index.php'; ?></div>
     </div>
 
     <!--origem-->

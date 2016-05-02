@@ -1,6 +1,6 @@
-<section ng-app="naoConformidade" ng-controller="registroList">
+<section ng-app="naoConformidade" ng-controller="registroUser">
     <h1>Painel de controle <small>Evento indesejado</small></h1>  
-    
+
     <div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -10,8 +10,16 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="home"><?php include 'system/user/view.php'; ?></div>
-            <div role="tabpanel" class="tab-pane" id="profile"><?php include 'system/user/cadastro.php'; ?></div>
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <div class="well">
+                    <?php include 'system/user/view.php'; ?>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile">
+                <div class="well">
+                    <?php include 'system/registro/cadastro.php'; ?>
+                </div>
+            </div>
         </div>
     </div>
 

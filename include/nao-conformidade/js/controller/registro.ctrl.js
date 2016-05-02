@@ -8,7 +8,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     $scope.registro.origens = [];
     $scope.registro.images = [];
     $scope.registro.files = [];
-    
+
     $scope.carregarObjetos = function () {
         objetoAPI.getObjeto(config.apiURL + "/origem.api.php").success(function (data) {
             $scope.origens = data;
@@ -51,7 +51,6 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
 
     $scope.removeFile = function (file) {
         objetoAPI.saveObjeto(config.apiURL + '/removeFile.api.php', file).success(function (data) {
-            console.log(data);
             $scope.registro.images = $scope.registro.images.filter(function (imagem) {
                 if (imagem !== file)
                     return imagem;

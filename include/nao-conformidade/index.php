@@ -9,7 +9,7 @@ if (!PRODUCAO):
     Register::addRegister("<script src='" . NCONDIR . "/controller/origem.ctrl.js'></script>");
     Register::addRegister("<script src='" . NCONDIR . "/controller/registro.ctrl.js'></script>");
     Register::addRegister("<script src='" . NCONDIR . "/controller/avaliacao.ctrl.js'></script>");
-    Register::addRegister("<script src='" . NCONDIR . "/controller/registroList.ctrl.js'></script>");
+    Register::addRegister("<script src='" . NCONDIR . "/controller/registroUser.ctrl.js'></script>");
     Register::addRegister("<script src='" . NCONDIR . "/controller/dashboard.ctrl.js'></script>");
 endif;
 
