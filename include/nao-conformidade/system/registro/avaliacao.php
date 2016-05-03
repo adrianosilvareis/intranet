@@ -2,11 +2,10 @@
     <header>
         <h1>Registros:<small>Avaliação</small></h1>
     </header>
-    <?php include_once 'c:\xampp\htdocs\intranet\_app\Config.inc.php'; ?>
     
     <p ng-if="message" class="trigger accept">{{message}}<span class="ajax_close"></span></p>
     <?php include HOME . "/include/nao-conformidade/system/message/message-avaliacao.html"; ?>
-
+    
     <form name="avaliacaoForm">
 
         <div class="well">

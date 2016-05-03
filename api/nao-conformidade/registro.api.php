@@ -20,11 +20,15 @@ if (!empty($request)):
 
     elseif (!empty($request->edited)):
         //editar
-        $request->reg_id = 1;
-        $request->user_lastupdate = $user->user_id;
+
         $request->reg_date_resposta = date('Y-m-d H:i:s');
         $request->reg_date_lastupdate = date('Y-m-d H:i:s');
-
+        $request->user_lastupdate = $request->user_lastupdate->user_id;
+        $request->reg_finalizado = 1;
+        unset($request->user_cadastro);
+        unset($request->user_recebimento);
+        unset($request->setor_recebimento);
+        
         $Read->setThis($request);
         $Read->Execute()->update(NULL, "reg_id");
         echo "Registro editado com sucesso!";

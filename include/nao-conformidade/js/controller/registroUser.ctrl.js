@@ -64,10 +64,13 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
     $scope.getAllList = function () {
         return "/intranet/include/nao-conformidade/system/user/listasAll/" + $scope.view + ".html";
     };
-    
-    $scope.openRegistro = function(reg){
+
+    $scope.openRegistro = function (reg) {
         $scope.registro = reg;
-        console.log(reg);
+    };
+    
+    $scope.closeRegistro = function(){
+        delete $scope.registro;
     };
 
     $scope.openView('todos');

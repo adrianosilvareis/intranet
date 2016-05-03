@@ -58,9 +58,10 @@ require('_app/Config.inc.php');
                     <input type="submit" name="AdminLogin" value="Logar" class="btn blue" />
 
                 </form>
+                <small style="font-size: 0.6em; float: right; color: #666">Versão: 3.0</small>
             </div>
         </div>
-
+        
     </body>
 </html>
 <?php
