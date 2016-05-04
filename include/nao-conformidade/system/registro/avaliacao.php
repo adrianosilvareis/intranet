@@ -7,25 +7,24 @@
     <?php include HOME . "/include/nao-conformidade/system/message/message-avaliacao.html"; ?>
     
     <form name="avaliacaoForm">
-
         <div class="well">
-
+            
             <label>Avaliação das causas da NC:</label>
             <div class="clearfix"></div>
-
+           
             <div class="form-group col-md-4">
                 <label>Processos:</label>
-                <textarea class="form-control" name="reg_aval_processo" rows="3" placeholder="Erro nos processos." ng-model="registro.reg_aval_processo"></textarea>
+                <textarea class="form-control" name="reg_aval_processo" rows="3" placeholder="Erro nos processos." ng-model="registro.reg_aval_processo" ng-disabled="registro.reg_finalizado=== '1'"></textarea>
             </div>
 
             <div class="form-group col-md-4">
                 <label>Matéria-Prima:</label>
-                <textarea class="form-control" name="reg_aval_materia_prima" rows="3" placeholder="Problema com matéria-prima" ng-model="registro.reg_aval_materia_prima"></textarea>
+                <textarea class="form-control" name="reg_aval_materia_prima" rows="3" placeholder="Problema com matéria-prima" ng-model="registro.reg_aval_materia_prima" ng-disabled="registro.reg_finalizado=== '1'"></textarea>
             </div>
 
             <div class="form-group col-md-4">
                 <label>Mão de Obra:</label>
-                <textarea class="form-control" name="reg_aval_mao_obra" rows="3" placeholder="Erro operacional" ng-model="registro.reg_aval_mao_obra"></textarea>
+                <textarea class="form-control" name="reg_aval_mao_obra" rows="3" placeholder="Erro operacional" ng-model="registro.reg_aval_mao_obra" ng-disabled="registro.reg_finalizado=== '1'"></textarea>
             </div>
 
             <div class="col-md-12">
@@ -34,34 +33,34 @@
 
             <div class="form-group col-md-4">
                 <label>Equipamentos:</label>
-                <textarea class="form-control" name="reg_aval_equipamento" rows="3" placeholder="Problema com equipamentos" ng-model="registro.reg_aval_equipamento"></textarea>
+                <textarea class="form-control" name="reg_aval_equipamento" rows="3" placeholder="Problema com equipamentos" ng-model="registro.reg_aval_equipamento" ng-disabled="registro.reg_finalizado=== '1'"></textarea>
             </div>
 
             <div class="form-group col-md-4">
                 <label>Meio Ambiente:</label>
-                <textarea class="form-control" name="reg_aval_meio_ambiente" rows="3" placeholder="Problemas no meio ambiente" ng-model="registro.reg_aval_meio_ambiente"></textarea>
+                <textarea class="form-control" name="reg_aval_meio_ambiente" rows="3" placeholder="Problemas no meio ambiente" ng-model="registro.reg_aval_meio_ambiente" ng-disabled="registro.reg_finalizado=== '1'"></textarea>
             </div>
 
             <div class="form-group col-md-4">
                 <label>Outros:</label>
-                <textarea class="form-control" name="reg_aval_outros" rows="3" placeholder="Outras causas" ng-model="registro.reg_aval_outros"></textarea>
+                <textarea class="form-control" name="reg_aval_outros" rows="3" placeholder="Outras causas" ng-model="registro.reg_aval_outros" ng-disabled="registro.reg_finalizado=== '1'"></textarea>
             </div>
 
         </div>
 
         <div class="form-group">
             <label>Causa Principal:</label>
-            <textarea class="form-control" rows="3" name="reg_causa_principal" placeholder="Causa Principal"  ng-required="true" ng-minlength="10" ng-model="registro.reg_causa_principal"></textarea>
+            <textarea class="form-control" rows="3" name="reg_causa_principal" placeholder="Causa Principal"  ng-required="true" ng-minlength="10" ng-model="registro.reg_causa_principal" ng-disabled="registro.reg_finalizado=== '1'"></textarea>
         </div>
 
         <div class="form-group">
             <label>Proposta de ação corretiva:</label>
-            <textarea class="form-control" rows="3" name="reg_acao_corretiva" placeholder="Proposta de Ação corretiva"  ng-required="true" ng-minlength="10" ng-model="registro.reg_acao_corretiva"></textarea>
+            <textarea class="form-control" rows="3" name="reg_acao_corretiva" placeholder="Proposta de Ação corretiva"  ng-required="true" ng-minlength="10" ng-model="registro.reg_acao_corretiva" ng-disabled="registro.reg_finalizado=== '1'"></textarea>
         </div>
-
-        <div class="btn-group">
-            <input class="btn btn-primary" style="width: 200px;" type="submit" value="Novo" name="SendPostForm" ng-disabled="!registro" ng-click="novoRegistro()"/>
-            <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="avaliacaoForm.$invalid || causaValid()" ng-click="saveRegistro(registro)"/>
+        
+        <div class="btn-group" >
+            <input class="btn btn-primary" style="width: 200px;" type="submit" value="Voltar" name="SendPostForm" ng-click="closeRegistro()"/>
+            <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="avaliacaoForm.$invalid || causaValid()" ng-click="saveRegistro(registro)" ng-if="registro.reg_finalizado=== '0'"/>
         </div>
     </form>
 </article>

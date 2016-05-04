@@ -1,14 +1,13 @@
-<article ng-controller="registro">
+<article ng-controller="registroUser">
     <header>
         <h1>Registros:<small>Evento</small></h1>
     </header>
 
     <p ng-if="message" class="trigger accept">{{message}}<span class="ajax_close"></span></p>
     <?php require HOME . "/include/nao-conformidade/system/message/message-registro.html"; ?>
-
-
+    
     <form name="registroForm">
-
+        
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#example-multiple-optgroups').multiselect();
@@ -26,7 +25,7 @@
                        >{{origem.origem_title}}</a>
                 </ul>
             </div>
-
+            
             <div class="clearfix"></div>
             <div class="form-group">
                 <label>Outros:</label>
@@ -80,14 +79,16 @@
 
         <div class="form-group">
             <label>Setor detectado:</label>
-            <select class="form-control" name="setor_recebimento" ng-model="registro.setor_recebimento" ng-options="setor.setor_id as setor.setor_content for setor in setores" ng-required="true" ng-disabled="registro.disabled">
+            <input ng-if="registro.disabled" class="form-control" name="setor_recebimento" ng-model="registro.setor_recebimento.setor_content" disabled="true"/>
+            <select class="form-control" name="setor_recebimento" ng-model="registro.setor_recebimento" ng-options="setor.setor_id as setor.setor_content for setor in setores" ng-required="true" ng-if="!registro.disabled">
                 <option value="">Selecione um setor</option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Usuário responsável:</label>
-            <select class="form-control" name="user_recebimento" ng-model="registro.user_recebimento" ng-options="user.user_id as user.user_nickname +  ' - ' +  user.user_name +  ' ' +  user.user_lastname for user in usuarios" ng-required="true" ng-disabled="registro.disabled">
+            <input ng-if="registro.disabled" class="form-control" name="user_recebimento" ng-model="registro.user_recebimento.user_nickname" disabled="true"/>
+            <select class="form-control" name="user_recebimento" ng-model="registro.user_recebimento" ng-options="user.user_id as user.user_nickname +  ' - ' +  user.user_name +  ' ' +  user.user_lastname for user in usuarios" ng-required="true" ng-if="!registro.disabled">
                 <option value="">Selecione um responsável</option>
             </select>
         </div>
@@ -104,7 +105,8 @@
 
         <div class="form-group  col-md-6">
             <label>Data da ação corretiva:</label>
-            <input type="text" class="form-control formDate" name="reg_date_correcao" ng-model="registro.reg_data_correcao" ng-required="true" ng-minlength='19' ng-disabled="registro.disabled"/>
+            <input type="text" class="form-control formDate" name="reg_date_correcao" ng-model="registro.reg_date_correcao" ng-required="true" ng-minlength='19' ng-if="!registro.disabled"/>
+            <input type="text" class="form-control" name="reg_date_correcao" ng-model="registro.reg_date_correcao" disabled="true" ng-if="registro.disabled"/>
         </div>
 
         <hr>

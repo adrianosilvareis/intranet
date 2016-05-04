@@ -37,7 +37,7 @@ if (!empty($request)):
         $request->user_cadastro = $user->user_id;
         $request->user_lastupdate = $user->user_id;
         $request->reg_date_cadastro = date('Y-m-d H:i:s');
-        $request->reg_date_correcao = date('Y-m-d H:i:s', strtotime($request->reg_data_correcao));
+        $request->reg_date_correcao = date('Y-m-d H:i:s', strtotime($request->reg_date_correcao));
         $request->reg_date_lastupdate = date('Y-m-d H:i:s');
 
         if (!empty($request->reg_date_correcao)):

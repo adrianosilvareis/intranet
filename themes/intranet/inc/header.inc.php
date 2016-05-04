@@ -22,7 +22,7 @@
                 . "var title = 'Notificação de não conformidade';"
                 . "var icon = '" . HOME . "/themes/" . THEME . "/images/ncon.png';"
                 . "var content = 'Olá, você ou seu setor tem {$size} notificações que precisão de atenção!';"
-                . "var link = '" . HOME . "/plugin/nao-conformidade/&user=true';"
+                . "var link = '" . HOME . "/plugin/nao-conformidade/&exe=user/list';"
                 . "var notification = $size;"
                 . "</script>";
             endif;
@@ -38,7 +38,7 @@
                     <li><a class="icon profile radius" title="Perfil" href="<?= HOME ?>/profile">Perfíl</a></li>
                 <?php endif; ?>
                 <li><a class="icon logout radius" href="<?= HOME ?>/&logoff=true">Sair</a></li>
-                <li><a class="badge" title="sair" href="<?= HOME ?>/plugin/nao-conformidade/&user=true"><?= (!empty($size) ? $size : ""); ?></a></li>
+                <li><a class="badge" title="sair" href="<?= HOME ?>/plugin/nao-conformidade/&exe=user/list"><?= (!empty($size) ? $size : ""); ?></a></li>
             </ul>
         <?php endif; ?>
 

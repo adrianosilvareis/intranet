@@ -36,7 +36,7 @@ $("documents").ready(function () {
         // Entra aqui caso o cookie não exista no  navegador do usuário
 
         // Crio um objeto Date do Javascript pegando a data de hoje e incrementando + N min nessa data
-        var min = 1;
+        var min = 30;
 
         var prazo = new Date();
         prazo.setTime(prazo.getTime() + ( min * 60 * 1000));

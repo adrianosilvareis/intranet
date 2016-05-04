@@ -9,13 +9,13 @@
                 <th>user</th>
             </tr>
         </thead>
-
+        
         <tbody>
             <tr ng-repeat="reg in registros| filter:{reg_finalizado: '1'} | userOrSetorEnviado:userlogin | limitTo:3">
-                <td>{{reg.reg_id}}</td>
-                <td>{{reg.reg_descricao| maxlength:20}}</td>
-                <td>{{reg.reg_date_cadastro| timestampBr  | maxlength:10}}</td>
-                <td>{{reg.user_cadastro.user_name + " " + reg.user_cadastro.user_lastname| name | maxlength:20}}</td>
+                <td><a href="" ng-click="openRegistro(reg)">{{reg.reg_id}}</a></td>
+                <td><a href="" ng-click="openRegistro(reg)">{{reg.reg_descricao| maxlength:20}}</a></td>
+                <td><a href="" ng-click="openRegistro(reg)">{{reg.reg_date_cadastro| timestampBr  | maxlength:10}}</a></td>
+                <td><a href="" ng-click="openRegistro(reg)">{{reg.user_cadastro.user_name + " " + reg.user_cadastro.user_lastname| name | maxlength:20}}</a></td>
             </tr>
         </tbody>
     </table>

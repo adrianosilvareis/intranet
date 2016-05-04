@@ -4,9 +4,8 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     $scope.setores = [];
     $scope.usuarios = [];
     $scope.registros = [];
-
+    
     _objetcInit = function () {
-
         if ($scope.registro === undefined)
             $scope.registro = {};
         if ($scope.registro.origens === undefined)
@@ -17,7 +16,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
             $scope.registro.files = [];
     };
 
-    $scope.carregarObjetos = function () {
+    _carregarRegistros = function () {
         objetoAPI.getObjeto(config.apiURL + "/origem.api.php").success(function (data) {
             $scope.origens = data;
         });
@@ -61,9 +60,9 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     $scope.removeFile = function (file) {
-        if($scope.registro.disabled)
+        if ($scope.registro.disabled)
             return;
-        
+
         objetoAPI.saveObjeto(config.apiURL + '/removeFile.api.php', file).success(function (data) {
             $scope.registro.images = $scope.registro.images.filter(function (imagem) {
                 if (imagem !== file)
@@ -89,7 +88,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
             preview(resp.data);
         });
     };
-
+    
     preview = function (data) {
         if (Array.isArray(data)) {
             data.filter(function (file) {
@@ -114,10 +113,11 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     $scope.novoRegistro = function () {
         reset();
         delete $scope.registro;
-        $scope.carregarObjetos();
+        _carregarRegistros();
+        _objetcInit();
         $scope.registroForm.$setPristine();
     };
 
-    $scope.carregarObjetos();
+    _carregarRegistros();
     _objetcInit();
 });
