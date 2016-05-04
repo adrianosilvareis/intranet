@@ -13,7 +13,7 @@
             <div role="tabpanel" class="tab-pane active" id="home">
                 <div class="well">                    
                     <div ng-if="registro">
-                        <?php include 'system/registro/avaliacao.php'; ?>
+                        <?php include 'system/registro/registro.php'; ?>
                     </div>
                     
                     <div ng-if="!registro">

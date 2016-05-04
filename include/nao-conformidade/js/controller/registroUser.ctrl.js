@@ -1,9 +1,12 @@
 angular.module("naoConformidade").controller('registroUser', function ($scope, objetoAPI, config) {
 
-    $scope.registros = [];
-    $scope.usuarios = [];
-    $scope.setores = [];
-    $scope.userlogin = {};
+    _clearObjetc = function () {
+        $scope.registros = [];
+        $scope.usuarios = [];
+        $scope.setores = [];
+        $scope.userlogin = {};
+        _carregarObjetos();
+    };
 
     _carregarObjetos = function () {
         objetoAPI.getObjeto(config.apiURL + "/registro.api.php").success(function (data) {
@@ -66,14 +69,16 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
     };
 
     $scope.openRegistro = function (reg) {
+        reg.disabled = true;
         $scope.registro = reg;
     };
-    
-    $scope.closeRegistro = function(){
+
+    $scope.closeRegistro = function () {
         delete $scope.registro;
+        _clearObjetc();
     };
 
     $scope.openView('todos');
-    _carregarObjetos();
+    _clearObjetc();
 
 });

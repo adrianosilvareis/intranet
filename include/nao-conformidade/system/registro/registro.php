@@ -4,7 +4,7 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li class="active"><a href="#cadastro" data-toggle="tab">Cadastro</a></li>
+            <li class="active"><a href="#cadastro" data-toggle="tab">Evento</a></li>
             <li><a href="#avaliacao" data-toggle="tab">Avaliação</a></li>
         </ul>
 

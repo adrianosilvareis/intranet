@@ -4,10 +4,18 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     $scope.setores = [];
     $scope.usuarios = [];
     $scope.registros = [];
-    $scope.registro = {};
-    $scope.registro.origens = [];
-    $scope.registro.images = [];
-    $scope.registro.files = [];
+
+    _objetcInit = function () {
+
+        if ($scope.registro === undefined)
+            $scope.registro = {};
+        if ($scope.registro.origens === undefined)
+            $scope.registro.origens = [];
+        if ($scope.registro.images === undefined)
+            $scope.registro.images = [];
+        if ($scope.registro.files === undefined)
+            $scope.registro.files = [];
+    };
 
     $scope.carregarObjetos = function () {
         objetoAPI.getObjeto(config.apiURL + "/origem.api.php").success(function (data) {
@@ -28,6 +36,9 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     $scope.addOrigem = function (origem) {
+        if ($scope.registro.disabled)
+            return;
+
         origem.classe = !origem.classe;
         var _pos = $scope.registro.origens.indexOf(origem);
         if (_pos !== -1) {
@@ -50,6 +61,9 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     $scope.removeFile = function (file) {
+        if($scope.registro.disabled)
+            return;
+        
         objetoAPI.saveObjeto(config.apiURL + '/removeFile.api.php', file).success(function (data) {
             $scope.registro.images = $scope.registro.images.filter(function (imagem) {
                 if (imagem !== file)
@@ -105,4 +119,5 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
     };
 
     $scope.carregarObjetos();
+    _objetcInit();
 });
