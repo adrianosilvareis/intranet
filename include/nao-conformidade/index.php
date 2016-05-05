@@ -1,5 +1,4 @@
 <?php
-
 if (!PRODUCAO):
     define("NCONDIR", HOME . "/include/nao-conformidade/js");
     Register::addRegister("<script src='" . NCONDIR . "/model.app.js'></script>");

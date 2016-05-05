@@ -255,6 +255,7 @@ class Upload {
             endif;
         else:
             copy($this->File['tmp_name'], self::$BaseDir . $this->Send . $this->Name);
+            $this->Result = $this->Send . $this->Name;
             unlink($this->File['tmp_name']);
         endif;
     }

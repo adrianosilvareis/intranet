@@ -36,7 +36,7 @@
                 <label>Outros:</label>
                 <input type="text" class="form-control" name="reg_origem_outros" ng-model="registro.reg_origem_outros" ng-disabled="registro.disabled"/>
             </div>
-        </div>
+        </div>        
 
         <div class="well">
 
@@ -48,7 +48,24 @@
             <div class="form-group row" ng-if="registro.images.length > 0">
                 <label>Imagens:</label>
                 <div class="row">
-                    <div class="col-md-2" ng-repeat="img in registro.images">
+
+                    <!--HOME . "/tim.php?src=" . $RESP[$i]['RESULT'] . "&w=202&h=105";-->
+                    <div class="col-md-2" ng-repeat="img in registro.images" ng-if="registro.disabled">
+                        
+                        <a href="" data-toggle="modal" data-target="#{{img.image_id}}">
+                            <img src="<?= HOME ?>/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail" style="height: 105px; float: left; margin-left: 15px;"/>
+                        </a>
+                        <div id="{{img.image_id}}" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <img src="<?= HOME ?>/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-md-2" ng-repeat="img in registro.images" ng-if="!registro.disabled">
                         <img src="{{img.TYNY}}"  alt="{{img.FILE.name}}" class="img-responsive img-thumbnail" style="height: 105px">
                         <a href="" class="del" title="remover" ng-click="removeFile(img)">remover</a>
                     </div>
@@ -57,7 +74,14 @@
 
             <div class="form-group row" ng-if="registro.files.length > 0">
                 <label>Arquivos:</label>
-                <ul class="list-group">
+                <ul ng-if="registro.disabled">
+                    <a href="<?= HOME ?>/uploads/{{file.file_url}}" title="{{file.file_name}}" target="_black" 
+                       ng-repeat="file in registro.files" class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
+                        {{file.file_name}}
+                    </a>
+                </ul>
+
+                <ul class="list-group" ng-if="!registro.disabled">
                     <li ng-repeat="file in registro.files" class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
                         {{file.FILE.name}}<a href="" class="del" title="remover" ng-click="removeFile(file)">remover</a>
                     </li>
@@ -93,7 +117,7 @@
         <div class="form-group">
             <label>Usuário responsável:</label>
             <input ng-if="registro.disabled" class="form-control" name="user_recebimento" ng-model="registro.user_recebimento.user_nickname" disabled="true"/>
-            <select class="form-control" name="user_recebimento" ng-model="registro.user_recebimento" ng-options="user.user_id as user.user_nickname +       ' - ' +       user.user_name +       ' ' +       user.user_lastname for user in usuarios" ng-required="true" ng-if="!registro.disabled">
+            <select class="form-control" name="user_recebimento" ng-model="registro.user_recebimento" ng-options="user.user_id as user.user_nickname +    ' - ' +    user.user_name +    ' ' +    user.user_lastname for user in usuarios" ng-required="true" ng-if="!registro.disabled">
                 <option value="">Selecione um responsável</option>
             </select>
         </div>

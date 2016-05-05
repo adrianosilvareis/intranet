@@ -28,7 +28,7 @@ if (!empty($request)):
         unset($request->user_cadastro);
         unset($request->user_recebimento);
         unset($request->setor_recebimento);
-        
+
         $Read->setThis($request);
         $Read->Execute()->update(NULL, "reg_id");
         echo "Registro editado com sucesso!";
@@ -46,6 +46,7 @@ if (!empty($request)):
 
         $Read->setThis($request);
         $insert = $Read->Execute()->insert();
+        $insert = true;
 
         if ($insert):
             $regId = $Read->Execute()->MaxFild('reg_id');
@@ -69,16 +70,14 @@ if (!empty($request)):
                     $Title = Check::Name(substr($file->FILE->name, 0, strrpos($file->FILE->name, '.')));
                     $FileName = $Title . strrchr($file->FILE->name, '.');
 
+                    $Upload->File((array) $file->FILE);
+
                     $regFile->setFile_name($FileName);
-                    $regFile->setFile_url($file->URL);
+                    $regFile->setFile_url($Upload->getResult());
                     $regFile->setFile_date(date('Y-m-d H:i:s'));
                     $regFile->setReg_id($regId);
 
-                    $inFile = $regFile->Execute()->insert();
-
-                    if ($inFile):
-                        $Upload->File((array) $file->FILE);
-                    endif;
+                    $regFile->Execute()->insert();
                 endforeach;
             endif;
 
@@ -87,21 +86,18 @@ if (!empty($request)):
                     $Title = Check::Name(substr($img->FILE->name, 0, strrpos($img->FILE->name, '.')));
                     $FileName = $Title . strrchr($img->FILE->name, '.');
 
+                    $Upload->Image((array) $img->FILE);
+                    unlink($img->FILE->tmp_name);
+
                     $regImage->setImage_name($FileName);
-                    $regImage->setImage_url($img->URL);
+                    $regImage->setImage_url($Upload->getResult());
                     $regImage->setImage_date(date('Y-m-d H:i:s'));
                     $regImage->setReg_id($regId);
 
-                    $inImg = $regImage->Execute()->insert();
-
-                    if ($inImg):
-                        $Upload->Image((array) $img->FILE);
-                        unlink($img->FILE->tmp_name);
-                    endif;
+                    $regImage->Execute()->insert();
                 endforeach;
             endif;
         endif;
-
 
         echo "Registro adicionado com sucesso!";
     endif;

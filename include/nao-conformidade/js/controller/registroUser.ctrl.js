@@ -3,7 +3,7 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
     _registerHasOrigens = [];
     _registerHasFile = [];
     _registerHasImage = [];
-
+    
     _clearObjetc = function () {
         $scope.registros = [];
         $scope.origens = [];

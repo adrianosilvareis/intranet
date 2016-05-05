@@ -1,4 +1,4 @@
-//Art Reset
+    //Art Reset
 $('.htmlchars img').each(function() {
     var width = $('.htmlchars').innerWidth();
     $(this).removeAttr('width').removeAttr('height').css('max-width',width);
