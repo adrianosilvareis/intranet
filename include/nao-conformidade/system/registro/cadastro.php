@@ -5,27 +5,32 @@
 
     <p ng-if="message" class="trigger accept">{{message}}<span class="ajax_close"></span></p>
     <?php require HOME . "/include/nao-conformidade/system/message/message-registro.html"; ?>
-    
+
     <form name="registroForm">
-        
+
         <script type="text/javascript">
-            $(document).ready(function () {
-                $('#example-multiple-optgroups').multiselect();
-                $('#multiple-selected').multiselect();
-            });
+                    $(document).ready(function () {
+                        $('#example-multiple-optgroups').multiselect();
+                        $('#multiple-selected').multiselect();
+                    });
         </script>
 
         <div class="well">
-
             <label>Origem da não conformidade:</label>
-            <div class="form-group">
+            <div class="form-group" ng-if="!registro.disabled">
                 <ul class="list-group" ng-model="origem" ng-require="true" >
-                    <a id="origem_{{origem.origem_id}}}" href="" class="list-group-item col-md-3" style="float: left; text-align: center;"  
-                       title="{{origem.origem_title}}" ng-repeat="origem in origens" ng-click="addOrigem(origem)" ng-class="activeItem(origem)" 
+                    <a id="origem_{{origem.origem_id}}}" href="" class="list-group-item col-md-3" style="float: left; text-align: center;"
+                       title="{{origem.origem_title}}" ng-repeat="origem in origens" ng-click="addOrigem(origem)" ng-class="activeItem(origem)"
                        >{{origem.origem_title}}</a>
                 </ul>
             </div>
-            
+
+            <div class="form-group" ng-if="registro.disabled">
+                <ul class="list-group">
+                    <li class="list-group-item col-md-3" style="float: left; text-align: center;" ng-repeat="origem in registro.origens">{{origem.origem_title}}</li>
+                </ul>
+            </div>
+
             <div class="clearfix"></div>
             <div class="form-group">
                 <label>Outros:</label>
@@ -88,7 +93,7 @@
         <div class="form-group">
             <label>Usuário responsável:</label>
             <input ng-if="registro.disabled" class="form-control" name="user_recebimento" ng-model="registro.user_recebimento.user_nickname" disabled="true"/>
-            <select class="form-control" name="user_recebimento" ng-model="registro.user_recebimento" ng-options="user.user_id as user.user_nickname +  ' - ' +  user.user_name +  ' ' +  user.user_lastname for user in usuarios" ng-required="true" ng-if="!registro.disabled">
+            <select class="form-control" name="user_recebimento" ng-model="registro.user_recebimento" ng-options="user.user_id as user.user_nickname +       ' - ' +       user.user_name +       ' ' +       user.user_lastname for user in usuarios" ng-required="true" ng-if="!registro.disabled">
                 <option value="">Selecione um responsável</option>
             </select>
         </div>

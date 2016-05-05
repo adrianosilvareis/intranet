@@ -1,5 +1,9 @@
 angular.module("naoConformidade").controller('registroUser', function ($scope, objetoAPI, config, Upload) {
 
+    _registerHasOrigens = [];
+    _registerHasFile = [];
+    _registerHasImage = [];
+
     _clearObjetc = function () {
         $scope.registros = [];
         $scope.origens = [];
@@ -8,7 +12,7 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
         $scope.userlogin = {};
         _carregarRegistrosUser();
     };
-    
+
     _objetcInit = function () {
         if ($scope.registro === undefined)
             $scope.registro = {};
@@ -21,63 +25,96 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
     };
 
     _carregarRegistrosUser = function () {
+        objetoAPI.getObjeto(config.apiURL + "/registroHasOrigem.api.php").success(function (data) {
+            _registerHasOrigens = data;
+            mixin();
+        });
+        objetoAPI.getObjeto(config.apiURL + "/registroHasFile.api.php").success(function (data) {
+            _registerHasFile = data;
+            mixin();
+        });
+        objetoAPI.getObjeto(config.apiURL + "/registroHasImage.api.php").success(function (data) {
+            _registerHasImage = data;
+            mixin();
+        });
+
         objetoAPI.getObjeto(config.apiURL + "/registro.api.php").success(function (data) {
             $scope.registros = data;
-            if ($scope.registros.length > 0 && $scope.usuarios.length > 0 && $scope.setores.length > 0) {
-                mixin();
-            }
+            mixin();
         });
 
         objetoAPI.getObjeto(config.apiURL + "/usuarios.api.php").success(function (data) {
             $scope.usuarios = data;
-            if ($scope.registros.length > 0 && $scope.usuarios.length > 0 && $scope.setores.length > 0) {
-                mixin();
-            }
+            mixin();
         });
 
         objetoAPI.getObjeto(config.apiURL + "/setor.api.php").success(function (data) {
             $scope.setores = data;
-            if ($scope.registros.length > 0 && $scope.usuarios.length > 0 && $scope.setores.length > 0) {
-                mixin();
-            }
+            mixin();
         });
 
         var data = {userOnline: true};
         objetoAPI.saveObjeto(config.apiURL + "/usuarios.api.php", data).success(function (data) {
             $scope.userlogin = data;
         });
-        
+
         objetoAPI.getObjeto(config.apiURL + "/origem.api.php").success(function (data) {
             $scope.origens = data;
+            mixin();
         });
     };
 
+    var _cont = 0;
     var mixin = function () {
-        $scope.registros.map(function (reg) {
-            reg.user_lastupdate = $scope.usuarios.filter(function (user) {
-                if (user.user_id === reg.user_lastupdate)
-                    return user;
-            })[0];
+//        $scope.registros.length > 0 && $scope.usuarios.length > 0 && $scope.setores.length > 0 && $scope.origens.length > 0 && _registerHasOrigens.length > 0
 
-            reg.user_cadastro = $scope.usuarios.filter(function (user) {
-                if (user.user_id === reg.user_cadastro)
-                    return user;
-            })[0];
+        _cont++;
+        if (_cont === 7) {
+            $scope.registros.map(function (reg) {
+                reg.user_lastupdate = $scope.usuarios.filter(function (user) {
+                    if (user.user_id === reg.user_lastupdate)
+                        return user;
+                })[0];
 
-            reg.user_recebimento = $scope.usuarios.filter(function (user) {
-                if (user.user_id === reg.user_recebimento)
-                    return user;
-            })[0];
+                reg.user_cadastro = $scope.usuarios.filter(function (user) {
+                    if (user.user_id === reg.user_cadastro)
+                        return user;
+                })[0];
 
-            reg.setor_recebimento = $scope.setores.filter(function (setor) {
-                if (reg.setor_recebimento === setor.setor_id)
-                    return setor;
-            })[0];
-        });
+                reg.user_recebimento = $scope.usuarios.filter(function (user) {
+                    if (user.user_id === reg.user_recebimento)
+                        return user;
+                })[0];
+
+                reg.setor_recebimento = $scope.setores.filter(function (setor) {
+                    if (reg.setor_recebimento === setor.setor_id)
+                        return setor;
+                })[0];
+
+                _registerHasOrigens.filter(function (origem) {
+                    if (reg.reg_id === origem.reg_id) {
+                        reg.origens = $scope.origens.filter(function (object) {
+                            if (origem.origem_id === object.origem_id) {
+                                return object;
+                            }
+                        });
+                    }
+                });
+
+                reg.images = _registerHasImage.filter(function (image) {
+                    if (reg.reg_id === image.reg_id)
+                        return image;
+                });
+
+                reg.files = _registerHasFile.filter(function (file) {
+                    if (reg.reg_id === file.reg_id)
+                        return file;
+                });
+            });
+        }
     };
 
     $scope.addOrigem = function (origem) {
-        
         _objetcInit();
         if ($scope.registro.disabled)
             return;
