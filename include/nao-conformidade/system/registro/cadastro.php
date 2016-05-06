@@ -16,7 +16,7 @@
         </script>
 
         <div class="well">
-            <label>Origem da não conformidade:</label>
+            <label>Origem do evento:</label>
             <div class="form-group" ng-if="!registro.disabled">
                 <ul class="list-group" ng-model="origem" ng-require="true" >
                     <a id="origem_{{origem.origem_id}}}" href="" class="list-group-item col-md-3" style="float: left; text-align: center;"
@@ -101,7 +101,7 @@
 
         <div class="form-group">
             <label class="btn btn-primary">
-                Hove impacto para o paciente ? 
+                Houve impacto para o paciente ? 
                 <input type="checkbox" autocomplete="off" name="reg_impacto_paciente" ng-model="registro.reg_impacto_paciente" ng-disabled="registro.disabled"> 
             </label>
         </div>

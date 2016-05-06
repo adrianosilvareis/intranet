@@ -9,7 +9,7 @@
     <form name="avaliacaoForm">
         <div class="well">
             
-            <label>Avaliação das causas da NC:</label>
+            <label>Avaliação das causas do evento:</label>
             <div class="clearfix"></div>
            
             <div class="form-group col-md-4">

@@ -1,4 +1,5 @@
 <?php
+
 if (!PRODUCAO):
     define("NCONDIR", HOME . "/include/nao-conformidade/js");
     Register::addRegister("<script src='" . NCONDIR . "/model.app.js'></script>");
@@ -23,11 +24,16 @@ else :
     echo "<div class='well' ng-app='naoConformidade'>";
 
     if ($exe === 'list'):
+        echo "<div class='btn-group'>";
         echo "<a href='/intranet/plugin/nao-conformidade/&exe=user/cadastro' class='btn btn-danger'>Registrar novo Evento</a>";
+        echo "<a href='/intranet/plugin/nao-conformidade/&exe=user/update' class='btn btn-primary'>Atualizar Lista</a>";
+        echo "</div>";
         require '/user.php';
     elseif ($exe === 'cadastro'):
         echo "<a href='/intranet/plugin/nao-conformidade/&exe=user/list' class='btn btn-primary'>Painel de Controle</a>";
         require 'system/registro/cadastro.php';
+    elseif($exe === 'update'):
+        header("Location: " . HOME . '/plugin/nao-conformidade/&exe=user/list');
     else:
         header("Location: " . HOME . "/404.php");
     endif;

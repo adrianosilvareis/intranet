@@ -66,8 +66,6 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
 
     var _cont = 0;
     var mixin = function () {
-//        $scope.registros.length > 0 && $scope.usuarios.length > 0 && $scope.setores.length > 0 && $scope.origens.length > 0 && _registerHasOrigens.length > 0
-
         _cont++;
         if (_cont === 7) {
             $scope.registros.map(function (reg) {
@@ -215,8 +213,8 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
     };
 
     $scope.closeRegistro = function () {
-        delete $scope.registro;
         _clearObjetc();
+        delete $scope.registro;
     };
 
     $scope.openView('todos');
