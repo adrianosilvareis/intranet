@@ -135,7 +135,7 @@
         <div class="form-group  col-md-6">
             <label>Data da ação corretiva:</label>
             <input type="text" class="form-control formDate" name="reg_date_correcao" ng-model="registro.reg_date_correcao" ng-required="true" ng-minlength='19' ng-if="!registro.disabled"/>
-            <input type="text" class="form-control" name="reg_date_correcao" ng-model="registro.reg_date_correcao" disabled="true" ng-if="registro.disabled"/>
+            <input type="text" class="form-control" name="reg_date_correcao" ng-model="registro.reg_date_correcao |timestampBr" disabled="true" ng-if="registro.disabled"/>
         </div>
 
         <hr>

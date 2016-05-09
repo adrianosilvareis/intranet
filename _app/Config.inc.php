@@ -94,7 +94,7 @@ function Plugins() {
         ['url' => 'os-nao-pagas', 'title' => 'Financeiro'],
         ['url' => 'downtime', 'title' => 'DownTimes'],
         ['url' => 'fast-exames', 'title' => 'Fast Exames'],
-        ['url' => 'nao-conformidade', 'title' => 'Não Conformidade'],
+        ['url' => 'nao-conformidade', 'title' => 'Evento Indesejado'],
     ];
 
     return $plugins;

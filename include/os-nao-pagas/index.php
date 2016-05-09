@@ -9,7 +9,7 @@ if ($save):
     WSErro("Arquivo salvo com sucesso!", WS_ACCEPT);
 endif;
 
-if (!Check::UserLogin(3)):
+if (!Check::UserLogin(4)):
     echo "<a class=\"btn btn-primary\" style=\"width: 200px; margin: 10px 0;\" href=\"/intranet/admin\" title=\"Login\" alt=\"admin\" >Login</a>";
     WSErro("<b>Área Restrita!</b> Efetue login para acessar.", WS_INFOR);
 else:
