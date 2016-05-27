@@ -15,12 +15,12 @@
                 </ul>
             </li>
 
-            <li id="setor" class="li"><a class="opensub" onclick="return false;" href="#">Setor</a>
+<!--            <li id="setor" class="li"><a class="opensub" onclick="return false;" href="#">Setor</a>
                 <ul class="sub">
                     <li><a href="#set_create" onclick="alterClass('#setor')" data-toggle="tab">Criar Setor</a></li>
                     <li><a href="#set_list" onclick="alterClass('#setor')" data-toggle="tab">Listar / Editar Setor</a></li>
                 </ul>
-            </li>
+            </li>-->
 
             <!--<li class="li"><a href="../" target="_blank" class="opensub">Ver Site</a></li>-->
         </ul>
@@ -42,9 +42,9 @@
     </div>
 
     <!--setor-->
-    <div class="tab-content" ng-controller="setor">
-        <div class="tab-pane" id="set_create"><?php require '/system/setor/setor.php'; ?></div>
-        <div class="tab-pane" id="set_list"><?php require '/system/setor/index.php'; ?></div>
-    </div>
+    <!--<div class="tab-content" ng-controller="setor">-->
+        <!--<div class="tab-pane" id="set_create"><?php // require '/system/setor/setor.php'; ?></div>-->
+        <!--<div class="tab-pane" id="set_list"><?php // require '/system/setor/index.php'; ?></div>-->
+    <!--</div>-->
 
 </div>

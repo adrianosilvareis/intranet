@@ -1,6 +1,6 @@
 <?php
 
-if (!Check::UserLogin(3)):
+if (!Check::UserLogin(4)):
     header("Location: " . HOME . "/plugin/os-nao-pagas");
 endif;
 

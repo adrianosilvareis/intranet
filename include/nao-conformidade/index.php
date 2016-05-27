@@ -32,10 +32,8 @@ else :
     elseif ($exe === 'cadastro'):
         echo "<a href='/intranet/plugin/nao-conformidade/&exe=user/list' class='btn btn-primary'>Painel de Controle</a>";
         require 'system/registro/cadastro.php';
-    elseif($exe === 'update'):
-        header("Location: " . HOME . '/plugin/nao-conformidade/&exe=user/list');
     else:
-        header("Location: " . HOME . "/404.php");
+        header("Location: " . HOME . '/plugin/nao-conformidade/&exe=user/list');
     endif;
 
     echo "</div>";
