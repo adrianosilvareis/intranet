@@ -10,10 +10,10 @@
         <?php
         if ($Login->CheckLogin()):
             $sql = "SELECT count(r.reg_id) as size FROM nc_registro r "
-                    . "WHERE (r.user_recebimento = :user_id OR r.setor_recebimento = :setor_id) "
+                    . "WHERE (r.user_recebimento = :user_id OR r.area_recebimento = :setor_id) "
                     . "AND r.reg_finalizado = 0";
             $NcRegistro = new NcRegistro();
-            $NcRegistro->Execute()->FullRead($sql, "user_id={$_SESSION['userlogin']['user_id']}&setor_id={$_SESSION['userlogin']['setor_id']}");
+            $NcRegistro->Execute()->FullRead($sql, "user_id={$_SESSION['userlogin']['area_id']}&setor_id={$_SESSION['userlogin']['area_id']}");
             
             if ($NcRegistro->Execute()->getResult()):
                 $size = $NcRegistro->Execute()->getResult()[0]->size;

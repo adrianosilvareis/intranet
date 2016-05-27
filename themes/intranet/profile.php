@@ -47,7 +47,7 @@
             </div>
 
             <?php
-            $type = Check::SetTypeByName("teste");
+            $type = Check::SetTypeByName("trabalho");
             ?>
             <div class="col-md-12 well">
                 <label class="col-md-4">

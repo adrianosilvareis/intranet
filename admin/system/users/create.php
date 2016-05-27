@@ -71,24 +71,17 @@
                 <input type="password" name="user_password" value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern=".{6,12}" required />
             </label>
 
-            <?php
-            $type = Check::SetTypeByName('trabalho');
-            ?>
             <div class="label_line">
                 <label class="label_medium">
-                    <span class="field">Setor:</span>
-                    <select name = "setor_id" title = "Selecione o nível de usuário" required >
+                    <span class="field">Setor de trabalho:</span>
+                    <select name = "area_id" title = "Selecione o nível de usuário" required >
                         <option value = "">Selecione o Nível</option>
                         <?php
-                        if (!empty($type)):
-                            $WsSetor = new WsSetor();
-                            $WsSetor->setSetor_type($type);
-                            $WsSetor->Execute()->Query("#setor_type#");
-
-                            foreach ($WsSetor->Execute()->getResult() as $setor) :
-                                echo "\n<option value='{$setor->setor_id}'>{$setor->setor_content}</option>";
-                            endforeach;
-                        endif;
+                        $WsAreaTrabalho = new WsAreaTrabalho();
+                        $WsAreaTrabalho->Execute()->findAll();
+                        foreach ($WsAreaTrabalho->Execute()->getResult() as $setor) :
+                            echo "\n<option value='{$setor->area_id}'>{$setor->area_title}</option>";
+                        endforeach;
                         ?>
                     </select>
                 </label>
@@ -97,12 +90,14 @@
                     <span class="field">Nível:</span>
                     <select name = "user_level" title = "Selecione o nível de usuário" required >
                         <option value = "">Selecione o Nível</option>
-                        <option value = "1" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 1) echo 'selected="selected"'; ?>>Admin</option>
-                        <option value="2" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 2) echo 'selected="selected"'; ?>>Editor</option>
-                        <option value="3" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 3) echo 'selected="selected"'; ?>>Exec</option>
-                        <option value="4" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 4) echo 'selected="selected"'; ?>>Solic</option>
-                        <option value="5" <?php if (isset($ClienteData['user_level']) && $ClienteData['user_level'] == 5) echo 'selected="selected"'; ?>>Usuarios</option>
-                    </select>
+                        <?php
+                        $WsPerfil = new WsPerfil();
+                        $WsPerfil->Execute()->findAll();
+                        foreach ($WsPerfil->Execute()->getResult() as $perfil) :
+                            echo "\n<option value='{$perfil->perfil_id}'>{$perfil->perfil_title}</option>";
+                        endforeach;
+                        ?>
+                   </select>
                 </label>
             </div><!-- LABEL LINE -->
 

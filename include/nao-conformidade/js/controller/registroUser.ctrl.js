@@ -48,7 +48,7 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
             mixin();
         });
 
-        objetoAPI.getObjeto(config.apiURL + "/setor.api.php").success(function (data) {
+        objetoAPI.getObjeto(config.apiURL + "/area.api.php").success(function (data) {
             $scope.setores = data;
             mixin();
         });
@@ -85,7 +85,7 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
                 })[0];
 
                 reg.setor_recebimento = $scope.setores.filter(function (setor) {
-                    if (reg.setor_recebimento === setor.setor_id)
+                    if (reg.setor_recebimento === setor.area_id)
                         return setor;
                 })[0];
 

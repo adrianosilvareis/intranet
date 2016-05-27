@@ -21,7 +21,7 @@ angular.module("naoConformidade").controller("registro", function ($scope, objet
             $scope.origens = data;
         });
 
-        objetoAPI.getObjeto(config.apiURL + "/setor.api.php").success(function (data) {
+        objetoAPI.getObjeto(config.apiURL + "/area.api.php").success(function (data) {
             $scope.setores = data;
         });
 

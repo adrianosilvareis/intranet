@@ -27,7 +27,7 @@ if (!empty($request)):
         $request->reg_finalizado = 1;
         unset($request->user_cadastro);
         unset($request->user_recebimento);
-        unset($request->setor_recebimento);
+        unset($request->area_recebimento);
 
         $Read->setThis($request);
         $Read->Execute()->update(NULL, "reg_id");

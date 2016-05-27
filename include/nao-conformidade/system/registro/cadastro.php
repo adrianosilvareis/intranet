@@ -108,8 +108,8 @@
 
         <div class="form-group">
             <label>Setor detectado:</label>
-            <input ng-if="registro.disabled" class="form-control" name="setor_recebimento" ng-model="registro.setor_recebimento.setor_content" disabled="true"/>
-            <select class="form-control" name="setor_recebimento" ng-model="registro.setor_recebimento" ng-options="setor.setor_id as setor.setor_content for setor in setores" ng-required="true" ng-if="!registro.disabled">
+            <input ng-if="registro.disabled" class="form-control" name="area_recebimento" ng-model="registro.area_recebimento.setor_content" disabled="true"/>
+            <select class="form-control" name="area_recebimento" ng-model="registro.area_recebimento" ng-options="setor.area_id as setor.area_content for setor in setores" ng-required="true" ng-if="!registro.disabled">
                 <option value="">Selecione um setor</option>
             </select>
         </div>
