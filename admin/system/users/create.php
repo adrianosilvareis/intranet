@@ -9,6 +9,8 @@
         if ($ClienteData && $ClienteData['SendPostForm']):
             unset($ClienteData['SendPostForm']);
 
+
+            var_dump($ClienteData);
             require_once '_models/AdminUsers.class.php';
             $AdminUsers = new AdminUsers;
             $AdminUsers->ExeCreate($ClienteData);
@@ -74,7 +76,7 @@
             <div class="label_line">
                 <label class="label_medium">
                     <span class="field">Setor de trabalho:</span>
-                    <select name = "area_id" title = "Selecione o nível de usuário" required >
+                    <select name="area_id" title="Selecione o nível de usuário" required >
                         <option value = "">Selecione o Nível</option>
                         <?php
                         $WsAreaTrabalho = new WsAreaTrabalho();
@@ -88,8 +90,8 @@
 
                 <label class="label_medium">
                     <span class="field">Nível:</span>
-                    <select name = "user_level" title = "Selecione o nível de usuário" required >
-                        <option value = "">Selecione o Nível</option>
+                    <select name="perfil_id" title="Selecione o nível de usuário" required >
+                        <option value="">Selecione o Nível</option>
                         <?php
                         $WsPerfil = new WsPerfil();
                         $WsPerfil->Execute()->findAll();
@@ -97,7 +99,7 @@
                             echo "\n<option value='{$perfil->perfil_id}'>{$perfil->perfil_title}</option>";
                         endforeach;
                         ?>
-                   </select>
+                    </select>
                 </label>
             </div><!-- LABEL LINE -->
 

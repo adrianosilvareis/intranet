@@ -14,23 +14,23 @@ endif;
         </header>
 
         <?php
-        require '_models/AdminCategory.class.php';
+        require '_models/AdminAreaCategory.class.php';
 
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $catid = filter_input(INPUT_GET, 'catid', FILTER_VALIDATE_INT);
 
         if (!empty($data['SendPostForm'])):
             unset($data['SendPostForm']);
-            $cadastra = new AdminCategory();
+            $cadastra = new AdminAreaCategory();
             $cadastra->ExeUpdate($catid, $data);
             
             WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
         else:
-            $Read = new Wscategories();
+            $Read = new WsAreaCategory();
             $Read->setCategory_id($catid);
             $Read->Execute()->Query("#category_id#");
             if (!$Read->Execute()->getResult()):
-                header("Location: painel.php?exe=categories/index&empty=true");
+                header("Location: painel.php?exe=area_category/index&empty=true");
             else:
                 $data = (array) $Read->Execute()->getResult()[0];
             endif;
@@ -67,7 +67,7 @@ endif;
                     <select name="category_parent">
                         <option value="null"> Selecione a Seção: </option>
                         <?php
-                        $ReadSet = new WsCategories();
+                        $ReadSet = new WsAreaCategory();
                         $ReadSet->Execute()->Query("category_parent is NULL ORDER BY category_title ASC");
                         if (!$ReadSet->Execute()->getResult()):
                             echo '<option disabled="disable" value="null"> Cadastre antes uma seção! </option>';
@@ -90,6 +90,7 @@ endif;
             <div class="gbform"></div>
 
             <input type="submit" class="btn blue" value="Atualizar Categoria" name="SendPostForm" />
+            <a href="painel.php?exe=area_category/index" class="btn default">Voltar</a>
         </form>
 
     </article>

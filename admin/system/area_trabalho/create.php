@@ -10,24 +10,25 @@ endif;
     <article>
 
         <header>
-            <h1>Criar Setor:</h1>
+            <h1>Criar Área:</h1>
         </header>
 
         <?php
-        require '_models/AdminSetor.class.php';
+        require '_models/AdminArea.class.php';
 
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if (!empty($data['SendPostForm'])):
             unset($data['SendPostForm']);
-
-            $cadastra = new AdminSetor();
+            $data['category_id'] = 1;
+            $data['area_status'] = 1;
+            $cadastra = new AdminArea();
             $cadastra->ExeCreate($data);
 
             if ($cadastra->getResult() == null):
                 WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
             else:
-                header('Location: painel.php?exe=setor/update&create=true&setId=' . $cadastra->getResult());
+                header('Location: painel.php?exe=area_trabalho/update&create=true&setId=' . $cadastra->getResult());
             endif;
         endif;
         ?>
@@ -35,60 +36,63 @@ endif;
         <form name="PostForm" action="" method="post" enctype="multipart/form-data">
             <label class="label">
                 <span class="field">Titulo:</span>
-                <input type="text" name="setor_content" placeholder="nome do setor" value="<?php if (isset($data)) echo $data['setor_content']; ?>" />
+                <input type="text" name="area_title" placeholder="nome da area de trabalho" value="<?php if (isset($data)) echo $data['area_title']; ?>" />
+            </label>
+
+
+            <label class="label">
+                <span class="field">Conteúdo:</span>
+                <textarea class="js_editor" name="area_content" rows="10"><?php if (isset($data['area_content'])) echo htmlspecialchars($data['area_content']); ?></textarea>
             </label>
 
             <label class="label">
                 <span class="field">E-mail:</span>
-                <input type="email" name="setor_email" placeholder="email@servidor.com.br" value="<?php if (isset($data)) echo $data['setor_email']; ?>" />
+                <input type="email" name="area_email" placeholder="email@servidor.com.br" value="<?php if (isset($data)) echo $data['area_email']; ?>" />
             </label>
 
             <div class="label_line">
 
                 <label class="label_small">
                     <span class="field">Data:</span>
-                    <input type="text" class="formDate center" name="setor_date" value="<?= date('d/m/Y H:i:s'); ?>" />
+                    <input type="text" class="formDate center" name="area_date" value="<?= date('d/m/Y H:i:s'); ?>" />
                 </label>
-
-                <label class="label_small left">
-                    <span class="field">Tipo:</span>
-                    <select name="setor_type">
-                        <option value=""> Selecione um tipo: </option>
+                
+                <label class="label_small">
+                    <span class="field">Categoria:</span>
+                    <select name="category_id">
+                        <option value=""> Selecione a categoria: </option>
                         <?php
-                        $ReadSet = new WsSetorType();
-                        $ReadSet->Execute()->findAll();
-                        if (!$ReadSet->Execute()->getResult()):
-                            echo '<option disabled="disable" value=""> Cadastre antes um tipo! </option>';
-                        else:
-                            foreach ($ReadSet->Execute()->getResult() as $ses):
-                                echo "<option value=\"{$ses->type_id}\" ";
+                        $ReadSes = new WsAreaCategory();
+                        $ReadSes->Execute()->Query("category_parent IS NULL ORDER BY category_title ASC");
+                        if ($ReadSes->Execute()->getRowCount() >= 1):
+                            foreach ($ReadSes->Execute()->getResult() as $ses):
+                                echo "<option disabled=\"disabled\" value=\"\"> {$ses->category_title} </option>";
+                                $ReadSet = new WsAreaCategory();
+                                $ReadSet->setCategory_parent($ses->category_id);
+                                $ReadSet->Execute()->Query("#category_parent# ORDER BY category_title ASC");
+                                if ($ReadSet->Execute()->getRowCount() >= 1):
+                                    foreach ($ReadSet->Execute()->getResult() as $cat):
+                                        echo "<option ";
 
-                                if ($ses->type_id == $data['setor_type']):
-                                    echo ' selected="seleted" ';
+                                        if ($data['post_category'] == $cat->category_id):
+                                            echo "selected=\"selected\" ";
+                                        endif;
+
+                                        echo "value=\"{$cat->category_id}\"> &raquo;&raquo;{$cat->category_title} </option>";
+                                    endforeach;
                                 endif;
-
-                                echo "> {$ses->type_content} </option>";
                             endforeach;
                         endif;
                         ?>
                     </select>
                 </label>
-
-                <label class="label_small">
-                    <span class="field">Categoria:</span>
-                    <select name="setor_category">
-                        <option value="">Selecione uma categoria</option>
-                        <option value="agenda">Agenda</option>
-                        <option value="fast-exames" >Fast exames</option>
-                        <option value="nao-conformidade">Não conformidade</option>
-                        <option value="geral">Geral</option>
-                    </select>
-                </label>
+                
             </div>
 
             <div class="gbform"></div>
 
-            <input type="submit" class="btn green" value="Cadastrar Setor" name="SendPostForm" />
+            <input type="submit" class="btn green" value="Cadastrar Area" name="SendPostForm" />
+            <a href="painel.php?exe=area_trabalho/index" class="btn default">Voltar</a>
         </form>
 
     </article>

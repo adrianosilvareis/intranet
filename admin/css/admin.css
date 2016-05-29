@@ -15,6 +15,8 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 .blue:hover{background: #09f; border-color: #069;}
 .green{background: #33752c; border-color: #1f471a}
 .green:hover{background: #4aaa40; border-color: #398431;}
+.default{color: #000;}
+.default:hover{background: #ccc; color: #fff;}
 
 /*FLOATS*/
 .right{float: right !important;}
@@ -222,6 +224,7 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 /*USUÁRIOS*/
 .user_cad{float: right; background: #bee2b0; padding: 8px 20px; font-size: 14px; text-transform: uppercase; color: #fff;}
 .user_cad:hover{background: #80e258}
+.user_cad + .user_cad{margin-right: 5px;}
 .ultable{width: 1028px; display: block; margin: 20px auto; overflow: hidden; background: #eee; list-style: none; padding: 0;}
 .ultable .t_title{background: #333; color: #fff; border-color: #333; width: 100%;}
 .ultable .t_title span{border-color: #fff;}

@@ -14,20 +14,20 @@ endif;
         </header>
 
         <?php
-        require '_models/AdminCategory.class.php';
+        require '_models/AdminAreaCategory.class.php';
 
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if (!empty($data['SendPostForm'])):
             unset($data['SendPostForm']);
 
-            $cadastra = new AdminCategory();
+            $cadastra = new AdminAreaCategory();
             $cadastra->ExeCreate($data);
             
             if ($cadastra->getResult() == null):
                 WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
             else: 
-                header('Location: painel.php?exe=categories/update&create=true&catid=' . $cadastra->getResult());
+                header('Location: painel.php?exe=area_category/update&create=true&catid=' . $cadastra->getResult());
             endif;
         endif;
         ?>
@@ -55,7 +55,7 @@ endif;
                     <select name="category_parent">
                         <option value="null"> Selecione a Seção: </option>
                         <?php
-                        $ReadSet = new WsCategories();
+                        $ReadSet = new WsAreaCategory();
                         $ReadSet->Execute()->Query("category_parent is NULL ORDER BY category_title ASC");
                         if (!$ReadSet->Execute()->getResult()):
                             echo '<option disabled="disable" value="null"> Cadastre antes uma seção! </option>';
@@ -78,6 +78,7 @@ endif;
             <div class="gbform"></div>
 
             <input type="submit" class="btn green" value="Cadastrar Categoria" name="SendPostForm" />
+            <a href="painel.php?exe=area_category/index" class="btn default">Voltar</a>
         </form>
 
     </article>

@@ -19,6 +19,7 @@ class WsUsers extends Beans {
     private $user_lastupdate;
     private $user_level;
     private $area_id;
+    private $perfil_id;
 
     function __construct() {
         $this->Controle = new Controle('ws_users');
@@ -40,6 +41,7 @@ class WsUsers extends Beans {
             'user_lastupdate' => $this->getUser_lastupdate(),
             'user_level' => $this->getUser_level(),
             'area_id' => $this->getArea_id(),
+            'perfil_id' => $this->getPerfil_id(),
             'user_id' => $this->getUser_id()
         ]));
         return $this->Controle->getDados();
@@ -61,6 +63,7 @@ class WsUsers extends Beans {
         $this->setUser_lastupdate((isset($object->user_lastupdate) ? $object->user_lastupdate : null));
         $this->setUser_level((isset($object->user_level) ? $object->user_level : null));
         $this->setArea_id((isset($object->area_id) ? $object->area_id : null));
+        $this->setPerfil_id((isset($object->perfil_id) ? $object->perfil_id : null));
     }
 
     /**
@@ -118,6 +121,10 @@ class WsUsers extends Beans {
         return $this->area_id;
     }
 
+    function getPerfil_id() {
+        return $this->perfil_id;
+    }
+
     function setUser_id($user_id) {
         $this->user_id = $user_id;
     }
@@ -157,4 +164,10 @@ class WsUsers extends Beans {
     function setArea_id($area_id) {
         $this->area_id = $area_id;
     }
+
+    function setPerfil_id($perfil_id) {
+        $this->perfil_id = $perfil_id;
+    }
+
+
 }
