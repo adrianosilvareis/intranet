@@ -17,7 +17,8 @@ $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 if (!empty($data['sendContador'])):
     unset($data['sendContador']);
-
+    $data['user_id'] = (!empty($_SESSION['userlogin']) ? $_SESSION['userlogin']['user_id'] : null);
+            
     $minContador = $AdImpress->MinContador($data['contadores_contador'], $Link->getLocal()[3]);
     if (!$minContador):
         $AdImpress->ExeRegister($data);

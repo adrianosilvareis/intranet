@@ -13,7 +13,8 @@ class ImpContadores extends Beans {
     private $contadores_contador;
     private $contadores_data;
     private $fk_impressora;
-
+    private $user_id;
+    
     function __construct() {
         $this->Controle = new Controle('imp_contadores');
     }
@@ -28,6 +29,7 @@ class ImpContadores extends Beans {
             'contadores_contador' => $this->getContadores_contador(),
             'contadores_data' => $this->getContadores_data(),
             'fk_impressora' => $this->getFk_impressora(),
+            'user_id' => $this->getUser_id(),
             'contadores_id' => $this->getContadores_id()
         ]));
         return $this->Controle->getDados();
@@ -43,6 +45,7 @@ class ImpContadores extends Beans {
         $this->setContadores_contador((isset($object->contadores_contador) ? $object->contadores_contador : null));
         $this->setContadores_data((isset($object->contadores_data) ? $object->contadores_data : null));
         $this->setFk_impressora((isset($object->fk_impressora) ? $object->fk_impressora : null));
+        $this->setUser_id((isset($object->user_id) ? $object->user_id : null));
     }
 
     /**
@@ -76,6 +79,10 @@ class ImpContadores extends Beans {
         return $this->fk_impressora;
     }
 
+    function getUser_id() {
+        return $this->user_id;
+    }
+
     function setContadores_id($contadores_id) {
         $this->contadores_id = $contadores_id;
     }
@@ -92,4 +99,7 @@ class ImpContadores extends Beans {
         $this->fk_impressora = $fk_impressora;
     }
 
+    function setUser_id($user_id) {
+        $this->user_id = $user_id;
+    }
 }

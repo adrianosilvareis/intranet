@@ -3,14 +3,14 @@
 
     <?php
     $carrousel = Check::CatByName("destaques");
-    include "inc/carrousel.inc.php";
+    include "inc/carrousel-gallery.inc.php";
     ?>
     
     <?php
     $Titulo = "Destaques";
     $Categoria = "destaques";
     $Ordem = "post_date";
-    $Offset = 3;
+//    $Offset = 3;
     include "inc/noticias_tres.inc.php";
     ?>
 

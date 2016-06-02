@@ -20,11 +20,10 @@ endif;
 
         if (!empty($data['SendPostForm'])):
             unset($data['SendPostForm']);
-            $data['category_id'] = 1;
-            $data['area_status'] = 1;
             $cadastra = new AdminArea();
+            $data['area_status'] = 1;
             $cadastra->ExeCreate($data);
-
+            
             if ($cadastra->getResult() == null):
                 WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
             else:

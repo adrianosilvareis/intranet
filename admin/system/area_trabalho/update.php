@@ -24,8 +24,9 @@ endif;
 
             $data['area_id'] = $areaId;
             $cadastra = new AdminArea();
+         
             $cadastra->ExeUpdate($data);
-
+            
             WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
         else:
             $Read = new WsAreaTrabalho();

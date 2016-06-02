@@ -16,6 +16,7 @@ class WsAreaTrabalho extends Beans {
     private $area_email;
     private $area_date;
     private $category_id;
+    private $category_parent;
 
     function __construct() {
         $this->Controle = new Controle('ws_area_trabalho');
@@ -34,6 +35,7 @@ class WsAreaTrabalho extends Beans {
             'area_email' => $this->getArea_email(),
             'area_date' => $this->getArea_date(),
             'category_id' => $this->getCategory_id(),
+            'category_parent' => $this->getCategory_parent(),
             'area_id' => $this->getArea_id()
         ]));
         return $this->Controle->getDados();
@@ -52,6 +54,7 @@ class WsAreaTrabalho extends Beans {
         $this->setArea_email((isset($object->area_email) ? $object->area_email : null));
         $this->setArea_date((isset($object->area_date) ? $object->area_date : null));
         $this->setCategory_id((isset($object->category_id) ? $object->category_id : null));
+        $this->setCategory_parent((isset($object->category_parent) ? $object->category_parent : null));
     }
 
     /**
@@ -97,6 +100,10 @@ class WsAreaTrabalho extends Beans {
         return $this->category_id;
     }
 
+    function getCategory_parent() {
+        return $this->category_parent;
+    }
+
     function setArea_id($area_id) {
         $this->area_id = $area_id;
     }
@@ -123,5 +130,9 @@ class WsAreaTrabalho extends Beans {
 
     function setCategory_id($category_id) {
         $this->category_id = $category_id;
+    }
+
+    function setCategory_parent($category_parent) {
+        $this->category_parent = $category_parent;
     }
 }

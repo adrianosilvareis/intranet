@@ -74,7 +74,20 @@ class AdminArea {
             $this->Data = array_map("trim", $this->Data);
             $this->Data = array_map("strip_tags", $this->Data);
             $this->Data['area_date'] = Check::Data($this->Data['area_date']);
+            $this->Data['category_parent'] = $this->getCatParent();
             return true;
+        endif;
+    }
+
+    private function getCatParent() {
+        $rCat = new WsAreaCategory();
+        $rCat->setCategory_id($this->Data['category_id']);
+        $rCat->Execute()->find();
+
+        if ($rCat->Execute()->getResult()):
+            return $rCat->Execute()->getResult()->category_parent;
+        else:
+            return null;
         endif;
     }
 

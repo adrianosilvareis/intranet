@@ -209,6 +209,19 @@ class Check {
         endif;
     }
 
+    public static function AreaTypeByName($TypeName) {
+        $Read = new WsAreaCategory();
+        $Read->setCategory_title($TypeName);
+        $query = $Read->Execute()->Query("#category_title#");
+
+        if ($Read->Execute()->getResult()):
+            return (int) $query[0]->category_id;
+        else:
+            WSErro("O tipo de área <b>{$TypeName}</b> não foi encontrado!", WS_ERROR);
+            return null;
+        endif;
+    }
+
     /**
      * <b>Obter categoria:</b> Informe o name (url) de uma categoria para obter o ID da mesma.
      * @param STRING $category_name = URL da categoria

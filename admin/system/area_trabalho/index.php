@@ -80,7 +80,7 @@
 
             echo "<div class=\"clear\"></div>";
 
-            $Pager->ExePaginator("ws_setor");
+            $Pager->ExePaginator("ws_area_trabalho");
             echo $Pager->getPaginator();
         endif;
         ?>

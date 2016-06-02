@@ -85,7 +85,7 @@
 
             echo "<div class=\"clear\"></div>";
 
-            $Pager->ExePaginator("ws_posts");
+            $Pager->ExePaginator("ws_perfil");
             echo $Pager->getPaginator();
         endif;
         ?>
