@@ -1,5 +1,4 @@
 <?php 
 
-    var_dump($_SESSION['userlogin']);
-    $_SESSION['userlogin']['user_level'] = 5;
+    echo md5('tommasi0000');
 ?>

@@ -43,7 +43,7 @@
 
         $posti = 0;
         $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
-        $Pager = new Pager("painel.php?exe=area/index&page=");
+        $Pager = new Pager("painel.php?exe=area_trabalho/index&page=");
         $Pager->ExePager($getPage, 6);
 
         $Read = new Controle();

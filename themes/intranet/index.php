@@ -5,7 +5,7 @@
     $carrousel = Check::CatByName("destaques");
     include "inc/carrousel-gallery.inc.php";
     ?>
-    
+
     <?php
     $Titulo = "Destaques";
     $Categoria = "destaques";

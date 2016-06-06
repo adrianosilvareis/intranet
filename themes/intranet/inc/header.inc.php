@@ -14,7 +14,7 @@
                     . "AND r.reg_finalizado = 0";
             $NcRegistro = new NcRegistro();
             $NcRegistro->Execute()->FullRead($sql, "user_id={$_SESSION['userlogin']['area_id']}&setor_id={$_SESSION['userlogin']['area_id']}");
-            
+
             if ($NcRegistro->Execute()->getResult()):
                 $size = $NcRegistro->Execute()->getResult()[0]->size;
 
@@ -37,8 +37,8 @@
                 <?php else: ?>
                     <li><a class="icon profile radius" title="Perfil" href="<?= HOME ?>/profile">Perfíl</a></li>
                 <?php endif; ?>
-                <li><a class="icon logout radius" href="<?= HOME ?>/&logoff=true">Sair</a></li>
-                <li><a class="badge" title="sair" href="<?= HOME ?>/plugin/nao-conformidade/&exe=user/list"><?= (!empty($size) ? $size : ""); ?></a></li>
+                <li><a class="icon logout radius" title="Sair dos sistema" href="<?= HOME ?>/&logoff=true">Sair</a></li>
+                <li><a class="badge" title="Eventos aguardando resposta" href="<?= HOME ?>/plugin/nao-conformidade/&exe=user/list"><?= (!empty($size) ? $size : ""); ?></a></li>
             </ul>
         <?php endif; ?>
 

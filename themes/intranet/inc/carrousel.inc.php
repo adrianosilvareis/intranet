@@ -9,7 +9,7 @@ if (!$Read->Execute()->getResult()):
     WSErro("Opps! Não temos artigos em destaques!", WS_INFOR);
 else:
     ?>
-    <div id = "carousel" data-interval = "3000" class = "carousel slide well" data-ride = "carousel">
+    <div id = "carousel" data-interval="3000" class="carousel slide well" data-ride="carousel">
         <div class = "carousel-inner" >
             <?php
             $View = new View();
