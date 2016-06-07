@@ -1,5 +1,5 @@
 <div class="content form_create">
-
+    
     <article>
 
         <h1>Usuários: 
@@ -7,7 +7,7 @@
             <a href="painel.php?exe=perfil/index" title="Cadastrar Novo" class="user_cad">Perfil de usuários</a>
             <a href="painel.php?exe=users/create" title="Cadastrar Novo" class="user_cad">Cadastrar Usuário</a>
         </h1>
-
+        
         <?php
         $delUser = filter_input(INPUT_GET, 'delete', FILTER_VALIDATE_BOOLEAN);
         $user = filter_input(INPUT_GET, 'users', FILTER_VALIDATE_INT);

@@ -174,10 +174,21 @@
   background-size: 80%;
 }
 .systema_nav .username {
-  margin: 5px 15px;
   float: left;
   font-variant: small-caps;
   color: #fff;
+  padding: 15px;
+}
+.systema_nav .username .item {
+  clear: both;
+  float: left;
+}
+.systema_nav .avatar {
+  background: url("/intranet/themes/intranet/images/avatar.png") center center no-repeat;
+  background-size: 90px 90px;
+  font-size: 0;
+  width: 90px;
+  height: 90px;
 }
 /*MENU TAB*/
 #navtab {

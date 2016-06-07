@@ -8,9 +8,6 @@
         $ClienteData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if ($ClienteData && $ClienteData['SendPostForm']):
             unset($ClienteData['SendPostForm']);
-
-
-            var_dump($ClienteData);
             require_once '_models/AdminUsers.class.php';
             $AdminUsers = new AdminUsers;
             $AdminUsers->ExeCreate($ClienteData);

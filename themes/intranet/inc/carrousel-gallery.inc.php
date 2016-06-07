@@ -56,6 +56,7 @@ else:
             $noticias = $View->Load("noticias_p");
             $cont = 0;
             foreach ($Read->Execute()->getResult() as $not) :
+                $not->post_title = Check::Words($not->post_title, 3);
                 $not->post_content = Check::Words($not->post_content, 12);
                 if ($cont <= 1):
                     $View->Show((array) $not, $noticias);

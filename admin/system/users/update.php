@@ -74,7 +74,7 @@
                         ?>
                     </select>
                 </label>
-                
+
                 <label class="label_medium">
                     <span class="field">Perfil de acesso:</span>
                     <select name="perfil_id" title="Selecione o nível de usuário" required >
@@ -84,7 +84,7 @@
                         $WsPerfil = new WsPerfil();
                         $WsPerfil->Execute()->findAll();
                         foreach ($WsPerfil->Execute()->getResult() as $perfil) :
-                            $select = (isset($ClienteData['perfil_id']) && $ClienteData['perfil_id'] == $perfil->perfil_id ? "selected='selected'" : '');  
+                            $select = (isset($ClienteData['perfil_id']) && $ClienteData['perfil_id'] == $perfil->perfil_id ? "selected='selected'" : '');
                             echo "\n<option value='{$perfil->perfil_id}' {$select}>{$perfil->perfil_title}</option>";
                         endforeach;
                         ?>

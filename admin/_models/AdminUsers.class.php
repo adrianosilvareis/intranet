@@ -92,7 +92,8 @@ class AdminUsers {
             $this->Data['user_email'] = null;
             $this->Result = null;
         endif;
-
+        
+        $this->Data['user_level'] = 5;
         $this->Data['user_registration'] = date('Y-m-d H:i:s', time());
         $this->Data['user_lastupdate'] = date('Y-m-d H:i:s', time());
         if (!empty($this->Data['user_password'])):

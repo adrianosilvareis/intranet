@@ -1,9 +1,9 @@
 <div class="jumbotron">
 
     <article>
-        <?php extract($_SESSION['userlogin']);?>
-        
-        
+        <?php extract($_SESSION['userlogin']); ?>
+
+
         <h1 style="font-size: 2em;">Olá <?= "{$user_name} {$user_lastname}"; ?>, <small>atualize seus dados aqui!</small></h1>
 
         <?php
@@ -12,12 +12,14 @@
 
         if ($ClienteData && $ClienteData['SendPostForm']):
             unset($ClienteData['SendPostForm']);
-
+            
+            var_dump($ClienteData);
+            
             extract($ClienteData);
             require('admin/_models/AdminUsers.class.php');
             $cadastra = new AdminUsers;
             $ClienteData['user_level'] = null;
-            
+
             $cadastra->ExeUpdate($UserId, $ClienteData);
 
             if ($ClienteData['user_password'] == $ClienteData['user_confirme']):
@@ -50,12 +52,11 @@
 
             <?php
             $type = Check::AreaTypeByName("trabalho");
-          
             ?>
             <div class="col-md-12 well">
                 <label class="col-md-4">
                     Setor:
-                    <select class="form-control" name="setor_id">
+                    <select class="form-control" name="area_id">
                         <option value="">Selecione uma area de trabalho</option>
                         <?php
                         if (!empty($type)):
@@ -63,7 +64,7 @@
                             $WsSetor->setCategory_id($type);
                             $WsSetor->setCategory_parent($type);
                             $WsSetor->Execute()->FullRead("SELECT * FROM ws_area_trabalho WHERE (category_id = :category_id OR category_parent = :category_parent) AND area_status = 1");
-                            
+
                             foreach ($WsSetor->Execute()->getResult() as $setor) :
                                 $select = (isset($area_id) && $area_id == $setor->area_id ? "selected='selected'" : '');
                                 echo "\n<option value='{$setor->area_id}' {$select}>{$setor->area_title}</option>";

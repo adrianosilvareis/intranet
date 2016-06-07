@@ -12,8 +12,11 @@
             $sql = "SELECT count(r.reg_id) as size FROM nc_registro r "
                     . "WHERE (r.user_recebimento = :user_id OR r.area_recebimento = :setor_id) "
                     . "AND r.reg_finalizado = 0";
+
+            extract($_SESSION['userlogin']);
+            
             $NcRegistro = new NcRegistro();
-            $NcRegistro->Execute()->FullRead($sql, "user_id={$_SESSION['userlogin']['area_id']}&setor_id={$_SESSION['userlogin']['area_id']}");
+            $NcRegistro->Execute()->FullRead($sql, "user_id={$area_id}&setor_id={$area_id}");
 
             if ($NcRegistro->Execute()->getResult()):
                 $size = $NcRegistro->Execute()->getResult()[0]->size;
@@ -27,10 +30,15 @@
                 . "</script>";
             endif;
             ?>
-
-
             <ul class="systema_nav radius">
-                <li class="username">Olá, <?= $_SESSION['userlogin']['user_name']; ?> <?= $_SESSION['userlogin']['user_lastname']; ?></li>  
+                <li class="avatar">
+                    avatar
+                    <img src="<?= HOME ?>/tim.php?src=<?= HOME ?>/uploads/<?= $user_cover; ?>&w=90&h=90" title="avatar" class="img img-responsive">
+                </li>
+                <li class="username">
+                    <span class="item">Olá, <?= $user_name; ?> <?= $user_lastname; ?></span>
+                    <span class="item">Setor: <?= strtolower($area_trabalho->area_title); ?></span>
+                </li>
                 <?php if (Check::UserLogin(2)): ?>
                     <li><a class="icon profile radius" title="Perfil" href="<?= HOME ?>/admin/painel.php?exe=users/profile">Perfíl</a></li>
                     <li><a class="icon admin radius" title="Painel Admin" href="<?= HOME ?>/admin/painel.php">Admin</a></li>
@@ -42,7 +50,7 @@
             </ul>
         <?php endif; ?>
 
-        <header>
+        <header style="margin-top: 55px;">
             <h1 class="notitle logo shadow-right"><?= SITENAME ?><a title="<?= SITENAME ?>" href="<?= HOME ?>"><img src="<?= HOME . '/themes/' . THEME ?>/images/header-trans-inverse.png" alt="<?= SITENAME ?>" class="img-responsive"></a></h1>
 
             <?php require "menu.inc.php"; ?>
