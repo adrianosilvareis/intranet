@@ -5,9 +5,8 @@ angular.module("naoConformidade", ["ngMessages", 'ngRoute', "objetoAPI", 'uiForm
  */
 angular.module("naoConformidade").filter('userOrSetorRecebido', function () {
     return function (input, useronline) {
-                
         var output = input.filter(function (objeto) {
-            if (objeto.user_recebimento.user_id === useronline.user_id || objeto.setor_recebimento.setor_id === useronline.setor_id) {
+            if (objeto.user_recebimento.user_id === useronline.user_id || objeto.area_recebimento.area_id === useronline.area_id) {
                 return objeto;
             }
         });
@@ -22,7 +21,7 @@ angular.module("naoConformidade").filter('userOrSetorEnviado', function () {
     return function (input, useronline) {
         
         var output = input.filter(function (objeto) {
-            if (objeto.user_cadastro.user_id === useronline.user_id || objeto.user_cadastro.setor_id === useronline.setor_id) {
+            if (objeto.user_cadastro.user_id === useronline.user_id || objeto.user_cadastro.area_id === useronline.area_id) {
                 return objeto;
             }
         });

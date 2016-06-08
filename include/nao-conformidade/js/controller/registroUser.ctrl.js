@@ -84,9 +84,9 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
                         return user;
                 })[0];
 
-                reg.setor_recebimento = $scope.setores.filter(function (setor) {
-                    if (reg.setor_recebimento === setor.area_id)
-                        return setor;
+                reg.area_recebimento = $scope.setores.filter(function (area) {
+                    if (reg.area_recebimento === area.area_id)
+                        return area;
                 })[0];
 
                 _registerHasOrigens.filter(function (origem) {
@@ -206,7 +206,7 @@ angular.module("naoConformidade").controller('registroUser', function ($scope, o
     $scope.getAllList = function () {
         return "/intranet/include/nao-conformidade/system/user/listasAll/" + $scope.view + ".html";
     };
-
+    
     $scope.openRegistro = function (reg) {
         reg.disabled = true;
         $scope.registro = reg;

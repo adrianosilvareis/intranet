@@ -1,0 +1,30 @@
+<div class="jumbotron">
+    <h1>Painel de controle</h1>
+    <a href="#/registro" class="btn btn-primary">Novo Registro</a>
+</div>
+
+<div class="col-md-6">
+    <h1><small>Recebidos</small></h1>
+    
+    <article class="well">
+        <h1><small>Aberto</small></h1>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>COD ID</th>
+                    <th>Descrição</th>
+                    <th>Data Abertura</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat='reg in registros'>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
+                    <td>{{reg.reg_descricao}}</td>
+                    <td>{{reg.reg_date_cadastro | timestampBr}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    
+</div>

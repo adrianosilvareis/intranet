@@ -4,8 +4,8 @@
     </header>
 
     <p ng-if="message" class="trigger accept">{{message}}<span class="ajax_close"></span></p>
-    <?php require HOME . "/include/nao-conformidade/system/message/message-registro.html"; ?>
-
+    <?php require DOCUMENT_ROOT . "/intranet/include/nao-conformidade/system/message/message-registro.html";?>
+    
     <form name="registroForm">
 
         <script type="text/javascript">
