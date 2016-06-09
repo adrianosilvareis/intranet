@@ -15,16 +15,22 @@ angular.module('ej').config(function ($routeProvider) {
             });
 
     $routeProvider
+            .when("/avaliacao/:regId", {
+                templateUrl: link + "partials/avaliacao.html",
+                controller: 'registro'
+            });
+
+    $routeProvider
             .when("/painel", {
                 templateUrl: link + "partials/painel.html",
                 controller: 'registros'
             });
 
     $routeProvider
-            .when("/404", {
-                templateUrl: link + "partials/404.html",
-                controller: 'registro'
+            .when("/painel/:local", {
+                templateUrl: link + "partials/painel_master.html",
+                controller: 'masterList'
             });
 
-    $routeProvider.otherwise({redirectTo: '/404'});
+    $routeProvider.otherwise({redirectTo: '/painel'});
 });

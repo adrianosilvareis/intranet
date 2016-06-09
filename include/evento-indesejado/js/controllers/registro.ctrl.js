@@ -1,9 +1,10 @@
 angular.module('ej').controller('registro', function ($scope, objetoAPI, config, $routeParams) {
+    
     $scope.registros = [];
     $scope.origens = [];
     $scope.users = [];
     $scope.reg = {};
-
+    
     var _registerHasOrigens = [];
     var _registerHasFile = [];
     var _registerHasImage = [];
@@ -11,8 +12,9 @@ angular.module('ej').controller('registro', function ($scope, objetoAPI, config,
     var init = function () {
         carregarRegistros();
         carregarUsers();
+        carregarOther();
     };
-
+    
     var params = function () {
         if ($routeParams.regId) {
             var idRegistro = $routeParams.regId;

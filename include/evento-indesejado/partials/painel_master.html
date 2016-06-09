@@ -1,0 +1,39 @@
+<div class="jumbotron">
+    <h1>Painel de controle</h1>
+    <a href="#/registro" class="btn btn-primary">Novo Registro</a>
+</div>
+
+<div class="col-md-12">
+    <h1><small>{{title}}</small></h1>
+    
+    <article class="well">
+        <a href="#/painel" title="voltar" class="btn glyphicon glyphicon-resize-small" style="float: right;"></a>
+        
+        <h1><small>{{status}}</small></h1>        
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>COD ID</th>
+                    <th>Descrição</th>
+                    <th>User Responsável</th>
+                    <th>User Solicitante</th>                    
+                    <th>Impacto Paciente</th>
+                    <th>Data Abertura</th>
+                    <th>Data Reposta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat='reg in registros'>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.user_recebimento}}</a></td>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.user_cadastro}}</a></td>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_impacto_paciente}}</a></td>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro | timestampBr}}</a></td>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_resposta | timestampBr}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+
+</div>
