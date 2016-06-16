@@ -14,7 +14,7 @@
                     . "AND r.reg_finalizado = 0";
 
             extract($_SESSION['userlogin']);
-            
+
             $NcRegistro = new NcRegistro();
             $NcRegistro->Execute()->FullRead($sql, "user_id={$area_id}&setor_id={$area_id}");
 
@@ -33,7 +33,9 @@
             <ul class="systema_nav radius">
                 <li class="avatar">
                     avatar
-                    <img src="<?= HOME ?>/tim.php?src=<?= HOME ?>/uploads/<?= $user_cover; ?>&w=90&h=90" title="avatar" class="img img-responsive">
+                    <?php if (!empty($user_cover)): ?>
+                        <img src="<?= HOME ?>/tim.php?src=<?= HOME ?>/uploads/<?= $user_cover; ?>&w=90&h=90" title="avatar" class="img img-responsive">
+                    <?php endif; ?>
                 </li>
                 <li class="username">
                     <span class="item">Olá, <?= $user_name; ?> <?= $user_lastname; ?></span>

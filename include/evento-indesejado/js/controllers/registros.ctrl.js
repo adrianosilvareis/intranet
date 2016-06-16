@@ -1,9 +1,9 @@
 angular.module('ej').controller('registros', function ($scope, objetoAPI, config) {
     
-    $scope.abertos_enviados;
-    $scope.fechados_enviados;
-    $scope.abertos_recebidos;
-    $scope.fechados_recebidos;
+    $scope.abertos_enviados = [];
+    $scope.fechados_enviados = [];
+    $scope.abertos_recebidos = [];
+    $scope.fechados_recebidos = [];
     
     var session = [];
 

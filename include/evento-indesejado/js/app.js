@@ -1,1 +1,1 @@
-angular.module('ej', ['ngRoute','filterDefault', 'objetoAPI']);
+angular.module('ej', ['ngRoute','filterDefault', 'objetoAPI','ngFileUpload', 'ngMessages']);

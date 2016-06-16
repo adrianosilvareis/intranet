@@ -31,6 +31,12 @@ angular.module('ej').config(function ($routeProvider) {
                 templateUrl: link + "partials/painel_master.html",
                 controller: 'masterList'
             });
+    
+    $routeProvider
+            .when("/teste", {
+                templateUrl: link + "partials/teste.html",
+                controller: 'registro'
+            });
 
     $routeProvider.otherwise({redirectTo: '/painel'});
 });

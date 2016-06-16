@@ -15,7 +15,6 @@ angular.module('ej').controller('masterList', function ($scope, objetoAPI, $rout
 
     if ($routeParams.local) {
         local = $routeParams.local;
-        console.log(local);
     }
 
     var carregarUsers = function () {

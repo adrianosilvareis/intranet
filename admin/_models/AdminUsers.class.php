@@ -19,7 +19,7 @@ class AdminUsers {
         $this->setNome();
         $this->setData();
         if ($this->Error == null):
-            $this->Create();
+            $this->CreateImage();
         endif;
     }
 
@@ -30,7 +30,7 @@ class AdminUsers {
         $this->setNome();
         $this->setData();
         if ($this->Error == null):
-            $this->Update();
+            $this->UpdateImage();
         endif;
     }
 
@@ -87,12 +87,20 @@ class AdminUsers {
      */
 
     private function setData() {
+        $cover = (!empty($this->Data['user_cover']) ? $this->Data['user_cover'] : NULL);
+
+        unset($this->Data['user_cover']);
+        $this->Data = array_map('strip_tags', $this->Data);
+        $this->Data = array_map('trim', $this->Data);
+
+        $this->Data['user_cover'] = (!empty($cover) ? $cover : NULL);
+
         if (!Check::Email($this->Data['user_email'])):
             $this->Error = ['<b>Oppss, email Inválido</b>, por favor preencha corretamente o campo.', WS_ALERT];
             $this->Data['user_email'] = null;
             $this->Result = null;
         endif;
-        
+
         $this->Data['user_level'] = 5;
         $this->Data['user_registration'] = date('Y-m-d H:i:s', time());
         $this->Data['user_lastupdate'] = date('Y-m-d H:i:s', time());
@@ -100,6 +108,53 @@ class AdminUsers {
             $this->Data['user_password'] = md5($this->Data['user_password']);
         else:
             unset($this->Data['user_password']);
+        endif;
+    }
+    
+    private function deletaArquivo($Url) {
+        if (file_exists($Url) && !is_dir($Url)):
+            unlink($Url);
+        endif;
+    }
+    
+    private function CreateImage() {
+        if ($this->Data['user_cover']):
+            $upload = new upload();
+            $upload->Image($this->Data['user_cover'], $this->Data['user_name']);
+        endif;
+
+        if (isset($upload) && $upload->getResult()):
+            $this->Data['user_cover'] = $upload->getResult();
+            $this->Create();
+        else:
+            $this->Data['user_cover'] = null;
+            $_SESSION['errCapa'] = "<b>ERRO AO ENVIAR CAPA: </b>Tipo de arquivo inválido, envie imagens JPG e PNG!";
+            $this->Create();
+        endif;
+    }
+
+    private function UpdateImage() {
+
+        if (is_array($this->Data['user_cover'])):
+            $WsUsers = new WsUsers();
+            $WsUsers->setUser_id($this->Users);
+            $WsUsers->Execute()->find();
+
+            $this->deletaArquivo('../uploads/' . $WsUsers->Execute()->getResult()->user_cover);
+
+            $upload = new Upload;
+            $upload->Image($this->Data['user_cover'], $this->Data['user_name']);
+        endif;
+
+        if (isset($upload) && $upload->getResult()):
+            $this->Data['user_cover'] = $upload->getResult();
+            $this->Update();
+        else:
+            unset($this->Data['user_cover']);
+            if (!empty($upload) && $upload->getError()):
+                WSErro("<b>ERRO AO ENVIAR CAPA: </b>" . $upload->getError(), E_USER_WARNING);
+            endif;
+            $this->Update();
         endif;
     }
 

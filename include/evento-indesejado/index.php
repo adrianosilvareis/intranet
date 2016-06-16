@@ -1,12 +1,17 @@
-<script src="/intranet/include/evento-indesejado/js/app.js"></script>
-<script src="/intranet/include/evento-indesejado/js/config/config.values.js"></script>
-<script src="/intranet/include/evento-indesejado/js/config/routes.config.js"></script>
-<script src="/intranet/include/evento-indesejado/js/controllers/registro.ctrl.js"></script>
-<script src="/intranet/include/evento-indesejado/js/controllers/registros.ctrl.js"></script>
-<script src="/intranet/include/evento-indesejado/js/controllers/masterList.ctrl.js"></script>
+<?php
+if (!PRODUCAO):
+    define("EVENTO", HOME . "/include/evento-indesejado/js");
+    Register::addRegister("<script src='" . EVENTO . "/app.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/config/config.values.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/config/routes.config.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/controllers/registro.ctrl.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/controllers/registros.ctrl.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/controllers/masterList.ctrl.js'></script>");
+endif;
+?>
 
 <div ng-app="ej" class="conteiner">
-    
+
     <div ng-view></div>
-    
+
 </div>

@@ -23,7 +23,11 @@ function notify(title, icon, content, link) {
 }
 
 $(function () {
-    $(".formDate").mask("99/99/9999 99:99:99", {placeholder: " "});
+    $(".formDateTime").mask("99/99/9999 99:99:99", {placeholder: " "});
+});
+
+$(function () {
+    $(".formDate").mask("99/99/9999", {placeholder: " "});
 });
 
 $("documents").ready(function () {

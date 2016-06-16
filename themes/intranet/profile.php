@@ -11,11 +11,9 @@
         $UserId = $_SESSION['userlogin']['user_id'];
 
         if ($ClienteData && $ClienteData['SendPostForm']):
+            $ClienteData['user_cover'] = ( $_FILES['user_cover']['tmp_name'] ? $_FILES['user_cover'] : null);
             unset($ClienteData['SendPostForm']);
             
-            var_dump($ClienteData);
-            
-            extract($ClienteData);
             require('admin/_models/AdminUsers.class.php');
             $cadastra = new AdminUsers;
             $ClienteData['user_level'] = null;
@@ -36,8 +34,15 @@
         endif;
         ?>
 
-        <form method="post" name="UserEditForm" >
-
+        <form method="post" name="UserEditForm" enctype="multipart/form-data" >
+            
+            <div class="col-md-12 well">
+                <label>
+                    Enviar Foto:
+                    <input type="file" name="user_cover" class="form-control"/>
+                </label>
+            </div>
+            
             <div class="col-md-12 well">
                 <label class="col-md-5">
                     Nome:
@@ -89,12 +94,12 @@
             <div class="col-md-8 well">
                 <label class="col-md-6">
                     Senha:
-                    <input type="password" name="user_password" required="true" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                    <input type="password" name="user_password" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
                 </label>
 
                 <label class="col-md-6">
                     Confirmação:
-                    <input type="password" name="user_confirme" required="true" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                    <input type="password" name="user_confirme" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
                 </label>
             </div>
 

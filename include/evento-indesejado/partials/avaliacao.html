@@ -3,63 +3,121 @@
     <a href="#/painel" class="btn btn-primary">Painel de controle</a>
     <a href="#/registro/{{reg.reg_id}}" class="btn btn-default">Evento</a>
 </div>
-<div ng-if="message" class="alert alert-danger">
-    {{message}}
+
+<div ng-if="message.texto" class="alert {{message.class}}">
+    {{message.texto}}
 </div>
 
-<form name="avaliacaoForm"  ng-submit="save(reg)">
-        <div class="well">
+<div ng-include="'/intranet/include/evento-indesejado/partials/message-avaliacao.html'"></div>
+
+<form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)" >
+    <div class="well">
+
+        <label>Avaliação das causas do evento:</label>
+        <div class="clearfix"></div>
+
+        <div class="form-group col-md-4">
+            <label>Processos:</label>
+            <textarea class="form-control" name="reg_aval_processo" rows="3" placeholder="Erro nos processos." ng-model="reg.reg_aval_processo" ng-disabled="reg.reg_finalizado === '1'"></textarea>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Matéria-Prima:</label>
+            <textarea class="form-control" name="reg_aval_materia_prima" rows="3" placeholder="Problema com matéria-prima" ng-model="reg.reg_aval_materia_prima" ng-disabled="reg.reg_finalizado === '1'"></textarea>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Mão de Obra:</label>
+            <textarea class="form-control" name="reg_aval_mao_obra" rows="3" placeholder="Erro operacional" ng-model="reg.reg_aval_mao_obra" ng-disabled="reg.reg_finalizado === '1'"></textarea>
+        </div>
+
+        <div class="col-md-12">
+            <img style="width: 100%; height: 100px;"  src="/intranet/include/evento-indesejado/img/fish.png" class="img-responsive" title="fish">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Equipamentos:</label>
+            <textarea class="form-control" name="reg_aval_equipamento" rows="3" placeholder="Problema com equipamentos" ng-model="reg.reg_aval_equipamento" ng-disabled="reg.reg_finalizado === '1'"></textarea>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Meio Ambiente:</label>
+            <textarea class="form-control" name="reg_aval_meio_ambiente" rows="3" placeholder="Problemas no meio ambiente" ng-model="reg.reg_aval_meio_ambiente" ng-disabled="reg.reg_finalizado === '1'"></textarea>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Outros:</label>
+            <textarea class="form-control" name="reg_aval_outros" rows="3" placeholder="Outras causas" ng-model="reg.reg_aval_outros" ng-disabled="reg.reg_finalizado === '1'"></textarea>
+        </div>
+
+    </div>
+
+
+    <div class="well">
+
+        <div class="form-group" ng-if="reg.reg_finalizado == '0'">
+            <label>Anexo:</label>
+            <input class="form-control" type="file" ngf-select="onFileSelect(uploads)" multiple="true" ng-model="uploads" ng-disabled="reg.reg_finalizado == '1'"/>
+        </div>
+
+        <div class="form-group row" ng-if="reg.images.length > 0">
+            <label>Imagens:</label>
             
-            <label>Avaliação das causas do evento:</label>
-            <div class="clearfix"></div>
-           
-            <div class="form-group col-md-4">
-                <label>Processos:</label>
-                <textarea class="form-control" name="reg_aval_processo" rows="3" placeholder="Erro nos processos." ng-model="reg.reg_aval_processo" ng-disabled="reg.reg_finalizado=== '1'"></textarea>
-            </div>
+            <div class="row">
+                <div class="col-md-2" ng-repeat="img in reg.images" ng-if="reg.reg_finalizado == '1'">
 
-            <div class="form-group col-md-4">
-                <label>Matéria-Prima:</label>
-                <textarea class="form-control" name="reg_aval_materia_prima" rows="3" placeholder="Problema com matéria-prima" ng-model="reg.reg_aval_materia_prima" ng-disabled="reg.reg_finalizado=== '1'"></textarea>
-            </div>
+                    <a href="" data-toggle="modal" data-target="#{{img.image_id}}">
+                        <img src="/intranet/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail" style="height: 105px; float: left; margin-left: 15px;"/>
+                    </a>
+                    <div id="{{img.image_id}}" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <img ng-src="/intranet/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="form-group col-md-4">
-                <label>Mão de Obra:</label>
-                <textarea class="form-control" name="reg_aval_mao_obra" rows="3" placeholder="Erro operacional" ng-model="reg.reg_aval_mao_obra" ng-disabled="reg.reg_finalizado=== '1'"></textarea>
+                <div class="col-md-2" ng-repeat="img in reg.images" ng-if="reg.reg_finalizado == '0'">
+                    <img ng-src="{{img.TYNY}}"  alt="{{img.FILE.name}}" class="img-responsive img-thumbnail" style="height: 105px">
+                    <a href="" class="del" title="remover" ng-click="removeFile(img)">remover</a>
+                </div>
             </div>
-
-            <div class="col-md-12">
-                <img style="width: 100%; height: 100px;"  src="/intranet/include/evento-indesejado/img/fish.png" class="img-responsive" title="fish">
-            </div>
-
-            <div class="form-group col-md-4">
-                <label>Equipamentos:</label>
-                <textarea class="form-control" name="reg_aval_equipamento" rows="3" placeholder="Problema com equipamentos" ng-model="reg.reg_aval_equipamento" ng-disabled="reg.reg_finalizado=== '1'"></textarea>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label>Meio Ambiente:</label>
-                <textarea class="form-control" name="reg_aval_meio_ambiente" rows="3" placeholder="Problemas no meio ambiente" ng-model="reg.reg_aval_meio_ambiente" ng-disabled="reg.reg_finalizado=== '1'"></textarea>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label>Outros:</label>
-                <textarea class="form-control" name="reg_aval_outros" rows="3" placeholder="Outras causas" ng-model="reg.reg_aval_outros" ng-disabled="reg.reg_finalizado=== '1'"></textarea>
-            </div>
-
         </div>
 
-        <div class="form-group">
-            <label>Causa Principal:</label>
-            <textarea class="form-control" rows="3" name="reg_causa_principal" placeholder="Causa Principal"  ng-required="true" ng-minlength="10" ng-model="reg.reg_causa_principal" ng-disabled="reg.reg_finalizado=== '1'"></textarea>
+        <div class="form-group row" ng-if="reg.files.length > 0">
+            <label>Arquivos:</label>
+            <ul ng-if="reg.reg_finalizado == '1'">
+                <a href="/intranet/uploads/{{file.file_url}}" title="{{file.file_name}}" target="_black" 
+                   ng-repeat="file in reg.files" class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
+                    {{file.file_name}}
+                </a>
+            </ul>
+
+            <ul class="list-group" ng-if="reg.reg_finalizado == '0'">
+                <li ng-repeat="file in reg.files" class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
+                    {{file.FILE.name}}<a href="" class="del" title="remover" ng-click="removeFile(file)">remover</a>
+                </li>
+            </ul>
         </div>
 
-        <div class="form-group">
-            <label>Proposta de ação corretiva:</label>
-            <textarea class="form-control" rows="3" name="reg_acao_corretiva" placeholder="Proposta de Ação corretiva"  ng-required="true" ng-minlength="10" ng-model="reg.reg_acao_corretiva" ng-disabled="reg.reg_finalizado=== '1'"></textarea>
+        <div class="progress" ng-if="reg.reg_finalizado == '0'">
+            <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 1%;"></div>
         </div>
-        
-        <div class="btn-group" >
-            <button type="submit" class="btn btn-success" style="width: 200px;" ng-disabled="avaliacaoForm.$invalid || causaValid()" ng-if="reg.reg_finalizado === '0'">Salvar</button>
-        </div>
-    </form>
+
+    </div>
+
+    <div class="form-group">
+        <label>Causa Principal:</label>
+        <textarea class="form-control" rows="3" name="reg_causa_principal" placeholder="Causa Principal"  ng-required="true" ng-minlength="10" ng-model="reg.reg_causa_principal" ng-disabled="reg.reg_finalizado === '1'"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Proposta de ação corretiva:</label>
+        <textarea class="form-control" rows="3" name="reg_acao_corretiva" placeholder="Proposta de Ação corretiva"  ng-required="true" ng-minlength="10" ng-model="reg.reg_acao_corretiva" ng-disabled="reg.reg_finalizado === '1'"></textarea>
+    </div>
+
+    <div class="btn-group" >
+        <button type="submit" class="btn btn-success" style="width: 200px;" ng-disabled="avaliacaoForm.$invalid || causaValid()" ng-if="reg.reg_finalizado === '0'">Salvar</button>
+    </div>
+</form>

@@ -17,7 +17,7 @@
                      class="img-responsive">
             </div>
             <div class="col-md-6">
-                <h1>Misão</h1>
+                <h1>Missão</h1>
                 <h3>É o compromisso que o Tommasi assume com seus clientes</h3>
                 <p style="font-size: 1.2em;">“Assegurar, de forma sustentável, soluções laboratoriais seguras, precisas e em tempo hábil”.</p>
             </div>

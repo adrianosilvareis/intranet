@@ -23,7 +23,7 @@ if (!empty($request)):
 
         $request->reg_date_resposta = date('Y-m-d H:i:s');
         $request->reg_date_lastupdate = date('Y-m-d H:i:s');
-        $request->user_lastupdate = $request->user_lastupdate->user_id;
+        $request->user_lastupdate = $user->user_id;
         $request->reg_finalizado = 1;
         unset($request->user_cadastro);
         unset($request->user_recebimento);
