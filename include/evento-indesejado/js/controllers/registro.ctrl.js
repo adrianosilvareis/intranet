@@ -108,13 +108,19 @@ angular.module('ej').controller('registro', function ($scope, objetoAPI, config,
     var _preview = function (data) {
         if (Array.isArray(data)) {
             data.filter(function (file) {
-                if (file.FILE.type.indexOf('image') !== -1)
+                if (file.FILE.type.indexOf('image') !== -1 && !file.ERROS)
                     $scope.reg.images.push(file);
+
             });
+            
             data.filter(function (file) {
-                if (file.FILE.type.indexOf('image') === -1)
+                if (file.FILE.type.indexOf('image') === -1 && !file.ERROS)
                     $scope.reg.files.push(file);
             });
+            
+            complete();
+        } else {
+            message(data, 'alert-danger');
             complete();
         }
     };

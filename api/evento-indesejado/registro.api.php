@@ -30,7 +30,52 @@ if (!empty($request)):
         unset($request->area_recebimento);
 
         $Read->setThis($request);
-        $Read->Execute()->update(NULL, "reg_id");
+        $update = $Read->Execute()->update(NULL, "reg_id");
+
+        if ($update):
+            $regId = $request->reg_id;
+            $Upload = new Upload();
+            $regFile = new NcRegFile();
+            $regImage = new NcRegImage();
+
+            if (!empty($request->files)):
+                foreach ($request->files as $file):
+                    if (!empty($file->FILE)):
+                        $Title = Check::Name(substr($file->FILE->name, 0, strrpos($file->FILE->name, '.')));
+                        $FileName = $Title . strrchr($file->FILE->name, '.');
+
+                        $Upload->File((array) $file->FILE, null, null, 50);
+
+                        $regFile->setFile_name($FileName);
+                        $regFile->setFile_url($Upload->getResult());
+                        $regFile->setFile_date(date('Y-m-d H:i:s'));
+                        $regFile->setReg_id($regId);
+
+                        $regFile->Execute()->insert();
+                    endif;
+                endforeach;
+            endif;
+
+            if (!empty($request->images)):
+                foreach ($request->images as $img):
+                    if (!empty($img->FILE)):
+                        $Title = Check::Name(substr($img->FILE->name, 0, strrpos($img->FILE->name, '.')));
+                        $FileName = $Title . strrchr($img->FILE->name, '.');
+
+                        $Upload->Image((array) $img->FILE);
+                        unlink($img->FILE->tmp_name);
+
+                        $regImage->setImage_name($FileName);
+                        $regImage->setImage_url($Upload->getResult());
+                        $regImage->setImage_date(date('Y-m-d H:i:s'));
+                        $regImage->setReg_id($regId);
+
+                        $regImage->Execute()->insert();
+                    endif;
+                endforeach;
+            endif;
+        endif;
+
         echo "Registro editado com sucesso!";
     else:
         //adicionar
@@ -46,7 +91,6 @@ if (!empty($request)):
 
         $Read->setThis($request);
         $insert = $Read->Execute()->insert();
-        $insert = true;
 
         if ($insert):
             $regId = $Read->Execute()->MaxFild('reg_id');
@@ -70,7 +114,7 @@ if (!empty($request)):
                     $Title = Check::Name(substr($file->FILE->name, 0, strrpos($file->FILE->name, '.')));
                     $FileName = $Title . strrchr($file->FILE->name, '.');
 
-                    $Upload->File((array) $file->FILE);
+                    $Upload->File((array) $file->FILE, null, null, 50);
 
                     $regFile->setFile_name($FileName);
                     $regFile->setFile_url($Upload->getResult());

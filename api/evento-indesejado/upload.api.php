@@ -12,11 +12,10 @@ if (!empty($_FILES['files'])):
 
     $i = 0;
     foreach ($gbFiles as $File) :
-        $imgName = 'temp' . substr(md5(time() + $i), 0, 5);
-        $Upload->File($File, $imgName, 'temp', 50);
+        $Upload->File($File, null, 'temp', 50);
 
         if ($Upload->getError() && stripos($Upload->getError(), 'image')):
-            $Upload->Image($File, $imgName, null, 'temp');
+            $Upload->Image($File, null, null, 'temp');
         endif;
         
         $File['tmp_name'] = BASEDIR . '/uploads/' . $Upload->getResult();
@@ -27,6 +26,10 @@ if (!empty($_FILES['files'])):
         $RESP[$i]['FILE'] = $File;
         $i++;
     endforeach;
-
-    echo json_encode($RESP);
+    if($Upload->getResult()):
+        echo json_encode($RESP);
+    else:
+        echo $Upload->getError();
+    endif;
+    
 endif;

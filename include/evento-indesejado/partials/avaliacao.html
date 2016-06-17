@@ -62,7 +62,7 @@
 
         <div class="form-group row" ng-if="reg.images.length > 0">
             <label>Imagens:</label>
-            
+
             <div class="row">
                 <div class="col-md-2" ng-repeat="img in reg.images" ng-if="reg.reg_finalizado == '1'">
 
@@ -79,8 +79,10 @@
                 </div>
 
                 <div class="col-md-2" ng-repeat="img in reg.images" ng-if="reg.reg_finalizado == '0'">
-                    <img ng-src="{{img.TYNY}}"  alt="{{img.FILE.name}}" class="img-responsive img-thumbnail" style="height: 105px">
-                    <a href="" class="del" title="remover" ng-click="removeFile(img)">remover</a>
+                    <div ng-if="img.TYNY">
+                        <img ng-src="{{img.TYNY}}"  alt="{{img.FILE.name}}" class="img-responsive img-thumbnail" style="height: 105px">
+                        <a href="" class="del" title="remover" ng-click="removeFile(img)">remover</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,9 +97,11 @@
             </ul>
 
             <ul class="list-group" ng-if="reg.reg_finalizado == '0'">
-                <li ng-repeat="file in reg.files" class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
-                    {{file.FILE.name}}<a href="" class="del" title="remover" ng-click="removeFile(file)">remover</a>
-                </li>
+                <div ng-repeat="file in reg.files">
+                    <li ng-if="file.FILE" class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
+                        {{file.FILE.name}}<a href="" class="del" title="remover" ng-click="removeFile(file)">remover</a>
+                    </li>
+                </div>
             </ul>
         </div>
 
