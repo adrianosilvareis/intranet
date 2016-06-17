@@ -26,9 +26,9 @@
                 <tr ng-repeat='reg in registros'>
                     <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
                     <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.user_recebimento}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.user_cadastro}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_impacto_paciente}}</a></td>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.recebimento.user_nickname}}</a></td>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.cadastro.user_nickname}}</a></td>
+                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.impacto}}</a></td>
                     <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro | timestampBr}}</a></td>
                     <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_resposta | timestampBr}}</a></td>
                 </tr>

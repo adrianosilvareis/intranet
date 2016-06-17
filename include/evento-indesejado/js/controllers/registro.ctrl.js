@@ -40,7 +40,19 @@ angular.module('ej').controller('registro', function ($scope, objetoAPI, config,
         $scope.message.texto = texto;
         $scope.message.class = classe;
     };
-
+    
+    $scope.addUser = function(user){
+        $scope.reg.user_recebimento = user.user_id;
+        $scope.reg.user = user;
+        delete $scope.user_search;
+    };
+    
+    $scope.addArea = function(area){
+        $scope.reg.area_recebimento = area.area_id;
+        $scope.reg.setor = area;
+        delete $scope.area_search;
+    };
+    
     $scope.addOrigem = function (origem) {
         if ($scope.reg.disabled)
             return;

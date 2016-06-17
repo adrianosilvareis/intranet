@@ -1,13 +1,13 @@
 
 <div style="margin-top: 15px;">
     
-    <div class="alert alert-danger" ng-show="avaliacaoForm.$dirty && causaValid()">
+    <div class="alert alert-danger" ng-show="registroForm.$dirty && causaValid()">
         Por Favor, Preencha ao menos um campo <b>avaliação das causas</b>.
         O campo <b>avaliação das causas</b> deve ter no mínimo 5 caracteres.
     </div>
     
-    <div ng-messages="avaliacaoForm.reg_causa_principal.$error">
-        <div ng-message="required" class="alert alert-danger" ng-show="avaliacaoForm.reg_causa_principal.$dirty">
+    <div ng-messages="registroForm.reg_causa_principal.$error">
+        <div ng-message="required" class="alert alert-danger" ng-show="registroForm.reg_causa_principal.$dirty">
             Por Favor, Preencha o campo <b>causa principal</b>.
         </div>
 
@@ -16,8 +16,8 @@
         </div>
     </div>
     
-    <div ng-messages="avaliacaoForm.reg_acao_corretiva.$error">
-        <div ng-message="required" class="alert alert-danger" ng-show="avaliacaoForm.reg_acao_corretiva.$dirty">
+    <div ng-messages="registroForm.reg_acao_corretiva.$error">
+        <div ng-message="required" class="alert alert-danger" ng-show="registroForm.reg_acao_corretiva.$dirty">
             Por Favor, Preencha o campo <b>proposta de ação corretiva</b>.
         </div>
 

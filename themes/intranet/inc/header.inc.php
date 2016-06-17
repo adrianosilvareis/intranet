@@ -22,10 +22,10 @@
                 $size = $NcRegistro->Execute()->getResult()[0]->size;
 
                 echo "<script>"
-                . "var title = 'Notificação de não conformidade';"
+                . "var title = 'Notificação de Evento Indesejado';"
                 . "var icon = '" . HOME . "/themes/" . THEME . "/images/ncon.png';"
                 . "var content = 'Olá, você ou seu setor tem {$size} notificações que precisão de atenção!';"
-                . "var link = '" . HOME . "/plugin/nao-conformidade/&exe=user/list';"
+                . "var link = '" . HOME . "/plugin/evento-indesejado/';"
                 . "var notification = $size;"
                 . "</script>";
             endif;
@@ -48,7 +48,7 @@
                     <li><a class="icon profile radius" title="Perfil" href="<?= HOME ?>/profile">Perfíl</a></li>
                 <?php endif; ?>
                 <li><a class="icon logout radius" title="Sair dos sistema" href="<?= HOME ?>/&logoff=true">Sair</a></li>
-                <li><a class="badge" title="Eventos aguardando resposta" href="<?= HOME ?>/plugin/nao-conformidade/&exe=user/list"><?= (!empty($size) ? $size : ""); ?></a></li>
+                <li><a class="badge" title="Eventos aguardando resposta" href="<?= HOME ?>/plugin/evento-indesejado/"><?= (!empty($size) ? $size : ""); ?></a></li>
             </ul>
         <?php endif; ?>
 
@@ -56,9 +56,7 @@
             <h1 class="notitle logo shadow-right"><?= SITENAME ?><a title="<?= SITENAME ?>" href="<?= HOME ?>"><img src="<?= HOME . '/themes/' . THEME ?>/images/header-trans-inverse.png" alt="<?= SITENAME ?>" class="img-responsive"></a></h1>
 
             <?php require "menu.inc.php"; ?>
-
-            <?php // require "login.inc.php";    ?>
-
+            
             <?php include "parabens.inc.php"; ?>
             <!-- modal -->
         </header>

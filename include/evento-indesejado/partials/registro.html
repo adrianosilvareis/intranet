@@ -8,15 +8,15 @@
     {{message.texto}}
 </div>
 
-<div ng-include="'/intranet/include/evento-indesejado/partials/message-registro.html'"></div>
+<div ng-include="'/intranet/include/evento-indesejado/partials/message/message-registro.html'"></div>
 
 <form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)">
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#example-multiple-optgroups').multiselect();
-            $('#multiple-selected').multiselect();
-        });
+                $(document).ready(function () {
+                    $('#example-multiple-optgroups').multiselect();
+                    $('#multiple-selected').multiselect();
+                });
     </script>
 
     <div class="well">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="form-group row" ng-if="reg.files.length > 0">
             <label>Arquivos:</label>
             <ul ng-if="reg.disabled">
@@ -111,28 +111,72 @@
                 <input type="checkbox" autocomplete="off" name="reg_impacto_paciente" ng-model="reg.reg_impacto_paciente" ng-disabled="reg.disabled"> 
             </label>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label>Setor detectado:</label>
-            <div ng-if="reg.disabled" style="padding: 7px; border: 1px solid #CCC">
-                {{reg.area.area_content}}
+    <div class="well">
+        <div class="col-md-4 form-group" ng-show="!reg.disabled">
+            <label>Encontre o setor</label>
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-search"></span>
+                <input type="text" class="form-control" name="area_search" ng-model="area_search"/>
             </div>
-
-            <select class="form-control" name="area_recebimento" ng-model="reg.area_recebimento" ng-options="area.area_id as area.area_title for area in areas" ng-required="true" ng-if="!reg.disabled">
-                <option value="">Selecione um setor</option>
-            </select>
         </div>
 
-        <div class="form-group">
+        <div class="col-md-8 form-group">
+            <label>Aréa Resposável</label>
+            <div class="form-control">
+                {{reg.setor.area_title}}
+            </div>
+        </div>
+
+        <table class="table table-hover table-striped table-responsive" ng-if="area_search">
+            <thead>
+                <tr>
+                    <th>Nome do setor</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="area in areas| filter:area_search | limitTo: 5">
+                    <td><a ng-click="addArea(area)">{{area.area_title}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="well">
+        <div class="col-md-4 form-group" ng-show="!reg.disabled">
+            <label>Encontre o usuário</label>
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-search"></span>
+                <input type="text" class="form-control" name="user_search" ng-model="user_search"/>
+            </div>
+        </div>
+
+        <div class="col-md-8 form-group">
             <label>Usuário responsável:</label>
-            <div ng-if="reg.disabled" style="padding: 7px; border: 1px solid #CCC">
-                {{reg.user.user_nickname}}
+            <div class="form-control">
+                {{reg.user.user_name}} {{reg.user.user_lastname}}
             </div>
-
-            <select class="form-control" name="user_recebimento" ng-model="reg.user_recebimento" ng-options="user.user_id as user.user_nickname +  ' - ' +  user.user_name +  ' ' +  user.user_lastname for user in users" ng-required="true" ng-if="!reg.disabled">
-                <option value="">Selecione um responsável</option>
-            </select>
         </div>
+
+        <table class="table table-hover table-striped table-responsive" ng-if="user_search">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="user in users| filter:user_search | limitTo:5">
+                    <td><a ng-click="addUser(user)">{{user.user_nickname}}</a></td>
+                    <td><a ng-click="addUser(user)">{{user.user_name}}</a></td>
+                    <td><a ng-click="addUser(user)">{{user.user_lastname}}</a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="well">
@@ -156,6 +200,6 @@
     </div>
     <hr>
     <div class="btn-group" ng-if="!reg.disabled">
-        <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="registroForm.$invalid || origemValid()"/>
+        <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="registroForm.$invalid || origemValid() || !reg.user || !reg.setor"/>
     </div>
 </form>

@@ -1,8 +1,16 @@
 
 <div style="margin-top: 15px;">
-    
+
+    <div class="alert alert-danger" ng-show="registroForm.user_search.$dirty && !reg.user">
+        Por Favor, Selecione um <b>usuário responsável</b>.
+    </div>
+
+    <div class="alert alert-danger" ng-show="registroForm.area_search.$dirty && !reg.setor">
+        Por Favor, Selecione um <b>setor responsável</b>.
+    </div>
+
     <div class="alert alert-danger" ng-show="registroForm.$dirty && origemValid()">
-        Por Favor, Preencha o campo <b>origem outros</b> ou selecione uma origem da não conformidade.
+        Por Favor, Selecione a <b>origem do evento</b> indesejado ou preencha o campo outros
     </div>
 
     <div ng-messages="registroForm.reg_descricao.$error">
@@ -12,18 +20,6 @@
 
         <div ng-message="minlength" class="alert alert-danger">
             O campo <b>descrição</b> deve ter no mínimo 10 caracteres.
-        </div>
-    </div>
-
-    <div ng-messages="registroForm.setor_responsavel.$error">
-        <div ng-message="required" class="alert alert-danger" ng-show="registroForm.setor_recebimento.$dirty">
-            Por Favor, Selenione um <b>setor responsável</b>.
-        </div>
-    </div>
-
-    <div ng-messages="registroForm.user_recebimento.$error">
-        <div ng-message="required" class="alert alert-danger" ng-show="registroForm.user_recebimento.$dirty">
-            Por Favor, Selenione um <b>usuário responsável</b>.
         </div>
     </div>
 
