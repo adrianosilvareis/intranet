@@ -7,6 +7,9 @@ if (!PRODUCAO):
     Register::addRegister("<script src='" . EVENTO . "/controllers/registro.ctrl.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/controllers/registros.ctrl.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/controllers/masterList.ctrl.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/controllers/admin/dashboard.ctrl.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/controllers/admin/origens.ctrl.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/controllers/admin/origem.ctrl.js'></script>");
 endif;
 ?>
 

@@ -1,13 +1,13 @@
 <div class="form-group">
-            <label>Setor detectado:</label>
-            <div ng-if="reg.disabled" style="padding: 7px; border: 1px solid #CCC">
-                {{reg.area.area_content}}
-            </div>
+    <label>Setor detectado:</label>
+    <div ng-if="reg.disabled" style="padding: 7px; border: 1px solid #CCC">
+        {{reg.area.area_content}}
+    </div>
 
-            <select class="form-control" name="area_recebimento" ng-model="reg.area_recebimento" ng-options="area.area_id as area.area_title for area in areas" ng-required="true" ng-if="!reg.disabled">
-                <option value="">Selecione um setor</option>
-            </select>
-        </div>
+    <select class="form-control" name="area_recebimento" ng-model="reg.area_recebimento" ng-options="area.area_id as area.area_title for area in areas" ng-required="true" ng-if="!reg.disabled">
+        <option value="">Selecione um setor</option>
+    </select>
+</div>
 
 
 <div>
@@ -34,8 +34,8 @@
         </thead>
 
         <tbody>
-            <tr ng-repeat="area in areas | filter:area_search | limitTo: 5">
-                <td><a ng-click="addArea(area)">{{area.area_title}}</a></td>
+            <tr ng-repeat="area in areas| filter:area_search | limitTo: 5">
+                <td><a ng-click="addArea(area)">{{area.area_title}}</a></td>  
             </tr>
         </tbody>
     </table>

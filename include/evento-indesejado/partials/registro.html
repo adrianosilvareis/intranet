@@ -138,7 +138,7 @@
 
             <tbody>
                 <tr ng-repeat="area in areas| filter:area_search | limitTo: 5">
-                    <td><a ng-click="addArea(area)">{{area.area_title}}</a></td>
+                    <td><a class="btn" ng-click="addArea(area)">{{area.area_title}}</a></td>
                 </tr>
             </tbody>
         </table>
@@ -171,9 +171,9 @@
 
             <tbody>
                 <tr ng-repeat="user in users| filter:user_search | limitTo:5">
-                    <td><a ng-click="addUser(user)">{{user.user_nickname}}</a></td>
-                    <td><a ng-click="addUser(user)">{{user.user_name}}</a></td>
-                    <td><a ng-click="addUser(user)">{{user.user_lastname}}</a></td>
+                    <td><a class="btn" ng-click="addUser(user)">{{user.user_nickname}}</a></td>
+                    <td><a class="btn" ng-click="addUser(user)">{{user.user_name}}</a></td>
+                    <td><a class="btn" ng-click="addUser(user)">{{user.user_lastname}}</a></td>
                 </tr>
             </tbody>
         </table>

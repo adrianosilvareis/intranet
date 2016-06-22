@@ -1,37 +1,77 @@
 angular.module('ej').config(function ($routeProvider) {
 
-    var link = "/intranet/include/evento-indesejado/";
+    var link = "/intranet/include/evento-indesejado/partials";
 
+    /**
+     * Acesso ao seu usuario
+     */
     $routeProvider
             .when("/registro", {
-                templateUrl: link + "partials/registro.html",
+                templateUrl: link + "/registro.html",
                 controller: 'registro'
             });
 
     $routeProvider
             .when("/registro/:regId", {
-                templateUrl: link + "partials/registro.html",
+                templateUrl: link + "/registro.html",
                 controller: 'registro'
             });
 
     $routeProvider
             .when("/avaliacao/:regId", {
-                templateUrl: link + "partials/avaliacao.html",
+                templateUrl: link + "/avaliacao.html",
                 controller: 'registro'
             });
 
     $routeProvider
             .when("/painel", {
-                templateUrl: link + "partials/painel.html",
+                templateUrl: link + "/painel.html",
                 controller: 'registros'
             });
 
     $routeProvider
             .when("/painel/:local", {
-                templateUrl: link + "partials/painel_master.html",
+                templateUrl: link + "/painel_master.html",
                 controller: 'masterList'
             });
-    
+
+
+    /**
+     * Acesso restrito, Admin
+     */
+
+    //Dashboard ADMIN
+    $routeProvider
+            .when("/admin", {
+                templateUrl: link + '/admin/index.html',
+                controller: 'dashboard'
+            });
+
+    //Origens
+    $routeProvider
+            .when("/admin/origens", {
+                templateUrl: link + '/admin/origens/listar.html',
+                controller: 'origens'
+            });
+
+    //criação de origem
+    $routeProvider
+            .when("/admin/origem", {
+                templateUrl: link + '/admin/origens/origem.html',
+                controller: 'origem'
+            });
+
+    //Edição de origem
+    $routeProvider
+            .when("/admin/origem/:id", {
+                templateUrl: link + '/admin/origens/origem.html',
+                controller: 'origem'
+            });
+
+
+    /**
+     * Debug
+     */
     $routeProvider
             .when("/teste", {
                 templateUrl: link + "partials/teste.html",
