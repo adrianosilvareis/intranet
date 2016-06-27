@@ -1,4 +1,4 @@
-angular.module('ej').controller('registros', function ($scope, objetoAPI, config) {
+angular.module('eventoIndesejado').controller('registros', function ($scope, objetoAPI, config) {
     
     $scope.abertos_enviados = [];
     $scope.fechados_enviados = [];

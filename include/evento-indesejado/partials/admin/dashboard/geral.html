@@ -1,0 +1,84 @@
+<section>
+    <div class="page-header">
+        <h1>DASHBOARD<small>Painel de Gerenciamento</small></h1>
+    </div>
+    <!-- Total de registros -->
+    <!-- Total de Registros por Setor -->
+    <!-- Total de Regisotrs por usuario -->
+    <!-- Total de Registors Aberto -->
+
+    <article>
+        <ul class="list-group" role="tablist">
+            <li class="list-group-item active">Geral</li>
+            <li class="list-group-item">Total de Registros: <span class="badge">{{registros.length}}</span></li>
+            <li class="list-group-item">Total de Registros Abertos:<span class="badge">{{regAtivos.length}}</span></li>
+            <li class="list-group-item">Total de Usuários com evento registrado:<span class="badge">{{userReg.length}}</span></li>
+            <li class="list-group-item">Total de Áreas com evento registrado:<span class="badge">{{areaReg.length}}</span></li>
+        </ul>
+    </article>
+
+
+    <div class="col-md-4">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Quantidade X Usuarios</th>
+                    <th class="text-center">%</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="reg in userReg| orderBy:'quant':true | limitTo:5">
+                    <td>
+                        <span class="badge">{{reg.quant}}</span>
+                        {{reg.usuario.user_nickname}}
+                    </td>
+                    <td class="bar-container"><span class="bar bar-info" style="width: {{reg.pcent * 3}}%; max-width: 100px;">{{reg.pcent}}%</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Quantidade X Cadastros</th>
+                    <th class="text-center">%</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="reg in cadastroReg| orderBy:'quant':true | limitTo:5">
+                    <td>
+                        <span class="badge">{{reg.quant}}</span>
+                        {{reg.usuario.user_nickname}}
+                    </td>
+                    <td class="bar-container"><span class="bar bar-success" style="width: {{reg.pcent}}%; max-width: 100px;">{{reg.pcent}}%</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Quantidade X Areas</th>
+                    <th class="text-center">%</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="reg in areaReg| orderBy:'quant':true | limitTo:5">
+                    <td><span class="badge">{{reg.quant}}</span>
+                        {{reg.areas.area_title}}</td>
+                    <td class="bar-container">
+                        <span class="bar bar-danger" style="width: {{reg.pcent * 3}}%; max-width: 100px;">{{reg.pcent}}%</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>

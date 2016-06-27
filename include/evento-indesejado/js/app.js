@@ -1,1 +1,1 @@
-angular.module('ej', ['ngRoute','filterDefault', 'objetoAPI','ngFileUpload', 'ngMessages']);
+angular.module('eventoIndesejado', ['ngRoute','filterDefault', 'objetoAPI','ngFileUpload', 'ngMessages']);

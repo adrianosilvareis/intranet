@@ -10,10 +10,13 @@ if (!PRODUCAO):
     Register::addRegister("<script src='" . EVENTO . "/controllers/admin/dashboard.ctrl.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/controllers/admin/origens.ctrl.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/controllers/admin/origem.ctrl.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/filters/ativos.filter.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/filters/regUsuarios.filter.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/filters/regAreas.filter.js'></script>");
 endif;
 ?>
 
-<div ng-app="ej" class="conteiner">
+<div ng-app="eventoIndesejado" class="conteiner">
 
     <div ng-view></div>
 

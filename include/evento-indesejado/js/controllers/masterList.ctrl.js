@@ -1,4 +1,4 @@
-angular.module('ej').controller('masterList', function ($scope, objetoAPI, $routeParams, config) {
+angular.module('eventoIndesejado').controller('masterList', function ($scope, objetoAPI, $routeParams, config) {
 
     $scope.title = "";
     $scope.status = "";

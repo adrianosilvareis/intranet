@@ -2,6 +2,41 @@
     Less 
     @copyrigth S. Reis, Adriano 2016
 */
+/* GRAGICOS */
+.bar {
+  float: left;
+  height: 30px;
+  padding: 5px;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+}
+.bar-success {
+  background-color: #39ff5a;
+  color: #000;
+}
+.bar-info {
+  background-color: #aeb9cc;
+  color: #000;
+}
+.bar-warning {
+  background-color: #A0A314;
+  color: #000;
+}
+.bar-danger {
+  background-color: #bb2124;
+  color: #000;
+}
+.bar-container {
+  width: 100px;
+  float: right;
+}
+.bar-container:after {
+  box-sizing: border-box;
+  clear: both;
+  display: table;
+  content: " ";
+}
 .reset * {
   padding: 0;
   margin: 0;
@@ -26,6 +61,12 @@
 .trigger a:hover {
   background: #09f;
   color: #fff;
+}
+/* telas menores */
+@media (max-width: 1100px) {
+  .container-mobile {
+    width: 100%;
+  }
 }
 /*HELPER CLASS*/
 /*/accept.png*/

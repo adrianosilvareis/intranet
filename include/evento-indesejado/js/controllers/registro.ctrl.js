@@ -1,4 +1,4 @@
-angular.module('ej').controller('registro', function ($scope, objetoAPI, config, $routeParams, Upload) {
+angular.module('eventoIndesejado').controller('registro', function ($scope, objetoAPI, config, $routeParams, Upload) {
 
     $scope.registros = [];
     $scope.origens = [];

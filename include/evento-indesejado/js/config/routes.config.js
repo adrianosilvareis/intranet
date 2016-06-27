@@ -1,4 +1,4 @@
-angular.module('ej').config(function ($routeProvider) {
+angular.module('eventoIndesejado').config(function ($routeProvider) {
 
     var link = "/intranet/include/evento-indesejado/partials";
 
@@ -35,18 +35,6 @@ angular.module('ej').config(function ($routeProvider) {
                 controller: 'masterList'
             });
 
-
-    /**
-     * Acesso restrito, Admin
-     */
-
-    //Dashboard ADMIN
-    $routeProvider
-            .when("/admin", {
-                templateUrl: link + '/admin/index.html',
-                controller: 'dashboard'
-            });
-
     //Origens
     $routeProvider
             .when("/admin/origens", {
@@ -66,6 +54,23 @@ angular.module('ej').config(function ($routeProvider) {
             .when("/admin/origem/:id", {
                 templateUrl: link + '/admin/origens/origem.html',
                 controller: 'origem'
+            });
+
+    /**
+     * Acesso restrito, Admin
+     */
+
+    //Dashboard ADMIN
+    $routeProvider
+            .when("/admin", {
+                templateUrl: link + '/admin/index.html',
+                controller: 'dashboard'
+            });
+    //Dashboard ADMIN
+    $routeProvider
+            .when("/admin/:dash", {
+                templateUrl: link + '/admin/index.html',
+                controller: 'dashboard'
             });
 
 

@@ -4,6 +4,8 @@
     Description:
         Formata o painel admin do projeto do curso de PHP OO da UPINSIDE.
 */
+
+
 body{font-family: 'Open Sans', sans-serif;}
 body.login{background: #09f;}
 body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}

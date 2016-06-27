@@ -1,0 +1,40 @@
+/* GRAGICOS */
+.bar{
+    float: left;
+    height: 30px;
+    padding: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+
+    &-success {
+        background-color: @success;
+        color: @color-basic;
+    }
+
+    &-info {
+        background-color: @info;
+        color: @color-basic;
+    }
+
+    &-warning{
+        background-color: @alert;
+        color: @color-basic;
+    }
+
+    &-danger {
+        background-color: @danger;
+        color: @color-basic;
+    }
+}
+
+.bar-container{
+    width: 100px;
+    float: right;
+}
+.bar-container:after{
+    box-sizing: border-box;
+    clear: both;
+    display: table;
+    content: " ";
+}

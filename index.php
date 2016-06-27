@@ -37,7 +37,7 @@ $Session = new Session;
         ?>
         
         <div class="section">
-            <div class="container">
+            <div class="container container-mobile">
                 <?php
                 if (!require($Link->getPatch())):
                     WSErro('Erro ao incluir arquivo de navegação!', WS_ERROR, true);

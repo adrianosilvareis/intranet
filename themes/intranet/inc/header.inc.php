@@ -10,21 +10,21 @@
         <?php
         if ($Login->CheckLogin()):
             $sql = "SELECT count(r.reg_id) as size FROM nc_registro r "
-                    . "WHERE (r.user_recebimento = :user_id OR r.area_recebimento = :setor_id) "
+                    . "WHERE (r.user_recebimento = :user_id OR r.area_recebimento = :area_id) "
                     . "AND r.reg_finalizado = 0";
 
             extract($_SESSION['userlogin']);
-
+            
             $NcRegistro = new NcRegistro();
-            $NcRegistro->Execute()->FullRead($sql, "user_id={$area_id}&setor_id={$area_id}");
-
+            $NcRegistro->Execute()->FullRead($sql, "user_id={$user_id}&area_id={$area_id}");
+            
             if ($NcRegistro->Execute()->getResult()):
                 $size = $NcRegistro->Execute()->getResult()[0]->size;
 
                 echo "<script>"
                 . "var title = 'Notificação de Evento Indesejado';"
                 . "var icon = '" . HOME . "/themes/" . THEME . "/images/ncon.png';"
-                . "var content = 'Olá, você ou seu setor tem {$size} notificações que precisão de atenção!';"
+                . "var content = 'Olá, você ou seu setor tem {$size} notificaçõe(s) que precisão de atenção!';"
                 . "var link = '" . HOME . "/plugin/evento-indesejado/';"
                 . "var notification = $size;"
                 . "</script>";

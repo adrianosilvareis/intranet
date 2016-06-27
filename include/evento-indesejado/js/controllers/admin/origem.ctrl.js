@@ -1,4 +1,4 @@
-angular.module("ej").controller('origem', function ($scope, $routeParams, $http, config) {
+angular.module("eventoIndesejado").controller('origem', function ($scope, $routeParams, $http, config) {
     $scope.origem = {};
     var origens = [];
 
@@ -43,10 +43,10 @@ angular.module("ej").controller('origem', function ($scope, $routeParams, $http,
             origem.edited ?
                     $scope.message.send = "Origem atualizada com sucesso!"
                     : $scope.message.send = "Origem adicionado com sucesso!";
-                    
+
             $scope.message.class = "alert alert-success";
             $scope.message.status = 200;
-            
+
             delete origem;
         });
     };

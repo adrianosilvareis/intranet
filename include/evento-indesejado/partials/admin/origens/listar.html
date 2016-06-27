@@ -1,5 +1,7 @@
 <div ng-include="'/intranet/include/evento-indesejado/partials/admin/menu.html'"></div>
 
+<div ng-if="message" ng-class="message.class">{{message.send}}</div>
+
 <a class="btn btn-primary" href="#/admin/origem">Nova Origem</a>
 <p ng-show="origens.length > 0">Total de Origens: {{origens.length}}</p>
 
