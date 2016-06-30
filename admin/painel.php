@@ -37,6 +37,7 @@ endif;
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/admin.css" />   
+        <link rel="stylesheet" href="css/default.css" />   
     </head>
 
     <body class="painel">

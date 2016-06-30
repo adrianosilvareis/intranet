@@ -1,5 +1,8 @@
 angular.module('eventoIndesejado').controller('dashboard', function ($scope, $routeParams, $http, config, $filter) {
 
+    //
+    //Variaveis
+    //
     $scope.registros = [];
     $scope.regAtivos = [];
     $scope.userReg = [];
@@ -8,6 +11,18 @@ angular.module('eventoIndesejado').controller('dashboard', function ($scope, $ro
     var _areas = [];
     var _totalRegistros = 0;
 
+    //
+    //Função que inicia o controller
+    //
+    var init = function () {
+        carregarRegistros();
+        carregarUsuarios();
+        carregarAreas();
+    };
+
+    //
+    //Funções decarregamento
+    //
     var carregarUsuarios = function () {
         $http.get(config.apiURL + "/usuarios.api.php").success(function (data) {
             _user = data;
@@ -35,6 +50,9 @@ angular.module('eventoIndesejado').controller('dashboard', function ($scope, $ro
         });
     };
 
+    //
+    //Joiner entre duas tabelas
+    //
     var contUser = 0;
     var _mixinUser = function () {
         contUser++;
@@ -71,7 +89,9 @@ angular.module('eventoIndesejado').controller('dashboard', function ($scope, $ro
         }
     };
 
-
+    //
+    //Rotas para includes
+    //
     var link = "/intranet/include/evento-indesejado/partials/admin/dashboard/";
     $scope.partials = "";
 
@@ -81,7 +101,17 @@ angular.module('eventoIndesejado').controller('dashboard', function ($scope, $ro
         $scope.partials = $scope.partials = link + "geral.html";
     }
 
-    carregarRegistros();
-    carregarUsuarios();
-    carregarAreas();
+    //
+    // Efeitos visuais
+    //
+//    $scope.showHide = function (item) {
+//        $(item).toggle('slow');
+//        event.preventDefault();
+//    };
+
+    //
+    // iniciar controller
+    //
+    init();
+
 });

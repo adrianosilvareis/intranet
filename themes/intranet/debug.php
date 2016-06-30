@@ -1,6 +1,12 @@
-<?php
+<a data-toggle="collapse" href="#2">
+    Collapsible Group Item #1
+</a>
+<div id="2" class="collapse">
+    body
+</div>
 
-$_SESSION['userlogin']['user_level'] = 1;
-
-var_dump($_SESSION['userlogin']);
-?>
+<ul >
+    <li>first</li>
+    <li>second</li>
+    <li>third</li>
+</ul>
