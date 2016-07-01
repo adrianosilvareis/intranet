@@ -37,7 +37,24 @@ endif;
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/admin.css" />   
-        <link rel="stylesheet" href="css/default.css" />   
+        <link rel="stylesheet" href="css/default.css" />  
+
+        <?php if (!PRODUCAO): ?>  
+            <script src="../_lib/angular.min.js"></script>
+            <script src="../_lib/jquery.min.js"></script>
+            <script src="../_lib/jquery/jmask.min.js"></script>
+            <script src="../_lib/cdn/combo.js"></script>
+            <script src="../js/angular/services/objetoAPI.module.js"></script>
+            <script src="../js/angular/services/objetoAPI.services.js"></script>
+        <?php else: ?>
+            <script src="../js/lib.min.js"></script>
+            <script src="../js/all.min.js"></script>
+            <script src="../cdn/combo.js"></script>
+        <?php endif; ?>
+
+        <script src="__jsc/tiny_mce/tiny_mce.js"></script>
+        <script src="__jsc/tiny_mce/plugins/tinybrowser/tb_tinymce.js.php"></script>
+        <script src="__jsc/admin.js"></script>
     </head>
 
     <body class="painel">
@@ -136,20 +153,6 @@ endif;
         </footer>
 
     </body>
-
-    <?php if (!PRODUCAO): ?>  
-        <script src="../_lib/jquery.min.js"></script>
-        <script src="../_lib/jquery/jmask.min.js"></script>
-        <script src="../_lib/cdn/combo.js"></script>
-    <?php else: ?>
-        <script src="../js/lib.min.js"></script>
-        <script src="../cdn/combo.js"></script>
-    <?php endif; ?>
-
-    <script src="__jsc/tiny_mce/tiny_mce.js"></script>
-    <script src="__jsc/tiny_mce/plugins/tinybrowser/tb_tinymce.js.php"></script>
-    <script src="__jsc/admin.js"></script>
-
 </html>
 <?php
 ob_end_flush();
