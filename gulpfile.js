@@ -42,9 +42,14 @@ gulp.task('uglify', ['clean'], function () {
 //htmlmin pode ser implementado.
 
 gulp.task('cssmin', function () {
-    return gulp.src('_lib/bootstrap/css/bootstrap.css')
-            .pipe(cleanCSS())
-            .pipe(concat('bootstrap.min.css'))
+    return es.merge([
+        gulp.src('_lib/bootstrap/css/bootstrap.css')
+                .pipe(cleanCSS())
+                .pipe(concat('bootstrap.min.css')),
+        gulp.src('_lib/angular/css/ng-animation.css')
+                .pipe(cleanCSS())
+                .pipe(concat('ng-animation.min.css'))
+    ])
             .pipe(gulp.dest('dist/css'));
 });
 

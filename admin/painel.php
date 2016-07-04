@@ -36,11 +36,14 @@ endif;
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/reset.css" />
-        <link rel="stylesheet" href="css/admin.css" />   
+        <link rel="stylesheet" href="css/admin.css" />
         <link rel="stylesheet" href="css/default.css" />  
+        <link rel="stylesheet" href="../_lib/angular/css/ng-animation.css" />  
 
-        <?php if (!PRODUCAO): ?>  
+        <?php if (!PRODUCAO): ?>
             <script src="../_lib/angular.min.js"></script>
+            <script src="../_lib/angular/angular-route.min.js"></script>
+            <script src="../_lib/angular/angular-animate.min.js"></script>
             <script src="../_lib/jquery.min.js"></script>
             <script src="../_lib/jquery/jmask.min.js"></script>
             <script src="../_lib/cdn/combo.js"></script>

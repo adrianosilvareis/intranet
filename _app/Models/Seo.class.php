@@ -263,6 +263,7 @@ class Seo {
 
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/bootstrap.min.css'/>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/ng-animation.min.css'/>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/bootstrap-multiselect.css'/>" . "\n";
 
         $this->seoLibs .= "<!--CDN-->\n";
@@ -318,6 +319,7 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/_lib/jquery.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/jquery/jmask.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-animate.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-messages.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-route.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/ng-file-upload-all.min.js'></script>" . "\n";
@@ -325,6 +327,7 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap-multiselect.min.js'></script>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap-multiselect.css' type=\"text/css\"/>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap.css'>" . "\n";
+        $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/angular/css/ng-animation.css'>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/css/default.css'/>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/intranet.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/progressBar.js'></script>" . "\n";
