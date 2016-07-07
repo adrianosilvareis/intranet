@@ -1,7 +1,7 @@
 angular.module("eventoIndesejado").filter("regAreas", function () {
     return function (input) {
         var map = input.map(function (reg) {
-            return reg.area_recebimento;
+            return reg.area_title;
         });
         
         var verifica = [];

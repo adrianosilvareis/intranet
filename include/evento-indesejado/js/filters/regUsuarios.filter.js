@@ -2,14 +2,14 @@ angular.module("eventoIndesejado").filter("regUsuarios", function () {
     return function (input, cadastro) {
         if (cadastro) {
             var map = input.map(function (reg) {
-                return reg.user_cadastro;
+                return reg.cadastro_nickname;
             });
         } else {
             var map = input.map(function (reg) {
-                return reg.user_recebimento;
+                return reg.recebido_nickname;
             });
         }
-
+        
         var verifica = [];
         var lista = [];
         map.filter(function (reg) {
@@ -23,7 +23,7 @@ angular.module("eventoIndesejado").filter("regUsuarios", function () {
                 lista[pos] = {user_id: reg, quant: cont};
             }
         });
-
+        
         return lista;
     };
 });

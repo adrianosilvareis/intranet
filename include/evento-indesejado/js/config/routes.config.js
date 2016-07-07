@@ -63,16 +63,21 @@ angular.module('eventoIndesejado').config(function ($routeProvider) {
     //Dashboard ADMIN
     $routeProvider
             .when("/admin", {
-                templateUrl: link + '/admin/index.html',
+                templateUrl: link + '/admin/dashboard/geral.html',
                 controller: 'dashboard'
             });
     //Dashboard ADMIN
     $routeProvider
-            .when("/admin/:dash", {
-                templateUrl: link + '/admin/index.html',
+            .when("/admin/charts", {
+                templateUrl: link + '/admin/dashboard/charts.html',
                 controller: 'dashboard'
             });
-
+    //Dashboard ADMIN
+    $routeProvider
+            .when("/admin/report", {
+                templateUrl: link + '/admin/dashboard/report.html',
+                controller: 'dashboard'
+            });
 
     /**
      * Debug

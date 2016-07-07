@@ -1,16 +1,40 @@
-<ul class="list-group">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">
-        <a ng-click="showHide('#submenu')">second</a>
-        <ul id="submenu" class="list-group" style="display: none;">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-    </li>
-    <li class="list-group-item">Morbi leo risus</li>
-    <li class="list-group-item">Porta ac consectetur ac</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-</ul>
+<div ng-include="'/intranet/include/evento-indesejado/partials/admin/menu.html'"></div>
+<div ng-include="'/intranet/include/evento-indesejado/partials/admin/dashboard/menu.html'"></div>
+
+<section class="col-md-10">
+    <div class="page-header">
+        <h1>DASHBOARD<small>Eventos aguardando respostas</small></h1>
+    </div>
+    
+    <div class="input-group" style="margin-bottom: 15px;">
+        <span class="input-group-addon glyphicon glyphicon-search"></span>
+        <input class="form-control" type="text" ng-model="search" placeholder="pesquisa"/>
+    </div>
+    
+    <table class="table table-hover table-striped table-responsive">
+        <thead>
+            <tr class="danger">
+                <th>Reg ID</th>
+                <th>IP</th>
+                <th>DATA</th>
+                <th>USER</th>
+                <th>NOME</th>
+                <th>SOBRE NOME</th>
+                <th>ABERTO POR</th>
+                <th>SETOR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="reg in regAtivos | filter:search track by reg.reg_id">
+                <td>{{::reg.reg_id}}</td>
+                <td>{{::(reg.reg_impacto_paciente == '1' ? "sim" : "não")}}</td>
+                <td>{{::reg.reg_date_cadastro|timestampBr}}</td>
+                <td>{{::reg.recebido_nickname}}</td>
+                <td>{{::reg.recebido_name}}</td>
+                <td>{{::reg.recebido_lastname}}</td>
+                <td>{{::reg.cadastro_nickname}}</td>
+                <td>{{::reg.area_title}}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
