@@ -58,14 +58,20 @@
   float: left;
   width: 100%;
 }
-.blue-default {
-  background-color: #006699;
-}
-.blue-default .item a {
+.blue-default a {
   color: #EEEEEE;
+  text-decoration: none;
+}
+.blue-default .item {
+  background-color: #006699;
+  border: 1px solid #CCC;
+  border-radius: 5px;
 }
 .blue-default .item:hover {
   background-color: #003d66;
+}
+.blue-default .active {
+  background: #4AAA40 !important;
 }
 .blue-default .header {
   font-weight: bold;
@@ -74,7 +80,6 @@
 .menu_list {
   display: block;
   padding: 15px;
-  border: 1px solid #CCC;
 }
 .menu_list .header {
   padding: 10px;
@@ -82,9 +87,5 @@
 }
 .menu_list .item {
   padding: 5px;
-}
-.menu_list .item a {
-  padding: 5px;
-  text-align: center;
 }
 /*# sourceMappingURL=default.css.map */

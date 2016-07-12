@@ -38,7 +38,7 @@ endif;
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/admin.css" />
         <link rel="stylesheet" href="css/default.css" />  
-        <link rel="stylesheet" href="../_lib/angular/css/ng-animation.css" />  
+        <link rel="stylesheet" href="../_lib/angular/css/ng-animation.css" />
 
         <?php if (!PRODUCAO): ?>
             <script src="../_lib/angular.min.js"></script>

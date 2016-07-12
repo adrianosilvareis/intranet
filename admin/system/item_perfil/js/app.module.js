@@ -1,1 +1,1 @@
-angular.module("itemPerfil", ['objetoAPI', 'ngRoute']);   
+angular.module("itemPerfil", ['objetoAPI', 'ngRoute', 'ngAnimate']);   

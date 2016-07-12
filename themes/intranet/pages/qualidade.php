@@ -1,12 +1,23 @@
 <?php
 $dir = filter_input(INPUT_GET, "ftp", FILTER_DEFAULT);
 $file = filter_input(INPUT_GET, "file", FILTER_DEFAULT);
+$style = filter_input(INPUT_GET, 'style', FILTER_DEFAULT);
 
-$Ftp = new Ftp(HOME . "/pages/qualidade/");
+$Ftp = new Ftp(HOME . "/pages/qualidade/", $style);
 
 echo $Ftp->getBread($dir);
 $Ftp->setConn(FTP_HOST);
 $Ftp->setLogin(FTP_USER, FTP_PASS);
+
+echo "<div class='row'>";
+if (!empty($style) && $style == 'lista'):
+    ?>
+    <a href="<?= $Ftp->getPage() . "&ftp=" . $Ftp->getUrl(); ?>&style=bloco" class="btn btn-success" style="float: right; width: 100px;">Bloco</a>
+<?php else: ?>
+    <a href="<?= $Ftp->getPage() . "&ftp=" . $Ftp->getUrl(); ?>&style=lista" class="btn btn-primary" style="float: right; width: 100px;">Lista</a>
+<?php
+endif;
+echo "</div>";
 ?>
 
 <div class="well">
@@ -15,24 +26,40 @@ $Ftp->setLogin(FTP_USER, FTP_PASS);
 
     if (empty($file)):
         $i = 0;
-        echo "<div class=\"row\">";
+
+        $class = ($style == 'lista' ? 'list-group' : 'row');
+        echo "<div class=\"$class\">";
 
         foreach ($lista as $url):
 
             $title = $Ftp->UrlToDir($url);
 
             if ($title != '.tmb' && $title != '.quarantine'):
-                if ($i % 6 == 0):
-                    echo "</div><div class=\"row\">";
+
+                if (empty($style) || $style == "bloco"):
+                    if ($i % 6 == 0):
+                        echo "</div><div class=\"row\">";
+                    endif;
                 endif;
 
-                if ($Ftp->ftp_is_dir($url)):
-                    $Ftp->getIcon("&ftp=$url", $title, "pasta");
+                if (empty($style) || $style == "bloco"):
+                    if ($Ftp->ftp_is_dir($url)):
+                        $Ftp->getIcon("&ftp=$url", $title, "pasta");
+                    else:
+                        $File = $Ftp->UrlToFile($url);
+                        $Ftp->getIcon("&file=$url", $File['fileName'], $File['type'], true);
+                    endif;
+                    $i++;
                 else:
-                    $File = $Ftp->UrlToFile($url);
-                    $Ftp->getIcon("&file=$url", $File['fileName'], $File['type'], true);
+                    if ($Ftp->ftp_is_dir($url)):
+                        $Ftp->getList("&ftp=$url", $title, "pasta");
+                    else:
+                        $File = $Ftp->UrlToFile($url);
+                        $Ftp->getList("&file=$url", $File['fileName'], $File['type'], true);
+                    endif;
+                    $i++;
                 endif;
-                $i++;
+
             endif;
 
         endforeach;

@@ -1,10 +1,22 @@
 .blue-default{
-    background-color: @blue;
-    .item a{color: @ligth;}
-
+    a{
+        color: @ligth;
+        text-decoration: none;
+    }
+    .item{
+        background-color: @blue;
+        border: 1px solid #CCC;
+        border-radius: 5px;
+    }
+    
     .item:hover{
         background-color: @dark-blue;
     }
+    
+    .active{
+        background: @green !important;
+    }
+    
     .header{
         font-weight: bold;
         background: @green;
@@ -12,7 +24,7 @@
 }
 
 .menu_list{
-    display: block;padding: 15px;border: 1px solid #CCC;
+    display: block;padding: 15px;
     
     .header{
         padding: 10px;
@@ -20,9 +32,5 @@
     }
     .item{
         padding: 5px;
-        a{  
-            padding: 5px;
-            text-align: center;
-        }
     }
 }

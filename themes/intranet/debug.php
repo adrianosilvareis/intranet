@@ -1,5 +1,5 @@
-<?php 
-
-    var_dump($_SESSION['userlogin']);
-    
-    $_SESSION['userlogin']['user_level'] = 1;
+<ul class="list-group">
+    <li class="list-group-item">first</li>
+    <li>second</li>
+    <li>third</li>
+</ul>

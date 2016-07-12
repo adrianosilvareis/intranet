@@ -14,9 +14,12 @@ class Ftp {
     private $Pager;
     private $Result;
     private $Error;
+    private $Url;
+    private $Style;
 
-    function __construct($Pager = null) {
+    function __construct($Pager = null, $Style = null) {
         $this->Pager = $Pager;
+        $this->Style = $Style;
     }
 
     function setConn($host) {
@@ -38,10 +41,10 @@ class Ftp {
         if (!file_exists(DOCUMENT_ROOT . NAME . '/ftp/temp')):
             mkdir(DOCUMENT_ROOT . NAME . '/ftp/temp');
         endif;
-        
+
         // open some file to write to
         $handle = fopen(DOCUMENT_ROOT . NAME . '/ftp' . $local_file, 'w');
-        
+
         // try to download $remote_file and save it to $handle
         if (ftp_fget($this->Conn, $handle, $remote_file, FTP_ASCII, 0)) {
             echo "successfully written to $local_file\n";
@@ -55,17 +58,17 @@ class Ftp {
 
         $nav = "<ol class='breadcrumb'>\n<li><a href=\"$this->Pager&ftp=.\" title=\"inicio\" ><strong>Inicio</strong></a></li>\n";
 
-        if (!empty($dir)) {
-            
+        if (!empty($dir) && $dir != '/') {
+
             $link = Check::array_filter_shift(explode("/", $dir));
-            
-            $url = "";
+
+            $this->Url = "";
             for ($i = 0; $i < count($link); $i++):
                 $key = $link[$i];
                 if (!empty($key) && $key != "."):
-                    $url .= $key . '/';
+                    $this->Url .= $key . '/';
                     $nav .= (($i != count($link) - 1) ?
-                                    "<li><a href=\"$this->Pager&ftp=$url\" title=\"$key\" ><strong>$key</strong></a></li> \n" :
+                                    "<li><a href=\"$this->Pager&ftp=$this->Url&style=$this->Style\" title=\"$key\" ><strong>$key</strong></a></li> \n" :
                                     "<li class='active'>$key</li>\n");
                 endif;
             endfor;
@@ -81,11 +84,33 @@ class Ftp {
         endif;
 
         echo "<div class=col-md-2 ftp-icon>
-                <a href=\"$this->Pager$url\" title=\"$title\" " . ($isFile ? "target=\"_blank\"" : "") . ">
+                <a href=\"$this->Pager$url&style=$this->Style\" title=\"$title\" " . ($isFile ? "target=\"_blank\"" : "") . ">
                     <img class='img-responsive' src=\"$img\" alt=\"$title\">
                 </a>
                 <p>" . $title . "</p>
              </div>";
+    }
+
+    function getList($url, $title, $type = null, $isFile = null) {
+        $img = FTP_HOME . "/images/$type.png";
+        if (!file_exists(getcwd() . "/ftp/images/$type.png") && $isFile):
+            $img = FTP_HOME . "/images/arquivos.png";
+        endif;
+
+        echo "<li class='list-group-item'>
+                <a href=\"$this->Pager$url&style=$this->Style\" title=\"$title\" " . ($isFile ? "target=\"_blank\"" : "") . ">
+                    <img width='30px;' style='float:left;' src=\"$img\" alt=\"$title\">
+                    <div>$title</div>
+                </a>
+             </li>";
+    }
+
+    function getUrl() {
+        return $this->Url;
+    }
+
+    function getPage() {
+        return $this->Pager;
     }
 
     function UrlToDir($url) {
