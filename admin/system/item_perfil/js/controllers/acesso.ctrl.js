@@ -1,6 +1,7 @@
 angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, config, $timeout) {
 
     var itens = [];
+    var position = 0;
 
     $scope.carregando = true;
     $scope.list = [];
@@ -9,29 +10,20 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
 
     $scope.menu = function (item) {
         item.class = (item.class === 'active' ? null : 'active');
-
-        cleanList($scope.list3);
-        cleanList($scope.list2);
-        if (item.class && item.class === 'active') {
-            $timeout(function () {
-                menu($scope.list2, item.acesso_id);
-            }, 100 * 6);
-        }
-    };
-
-    $scope.menu2 = function (item) {
-        cleanList($scope.list3);
-        $timeout(function () {
-            menu($scope.list3, item.acesso_id);
-        }, 100 * 6);
+        menu($scope.list2, item.acesso_id);
     };
 
     var menu = function (list, condition) {
+        var tam = list.length;
+        cleanList(list);
+        
         var data = itens.filter(function (item) {
             return item.acesso_parent === condition;
         });
-
-        addItem(list, data);
+        
+        $timeout(function () {
+            addItem(list, data);
+        }, 100 * tam);
     };
 
     var carregarItens = function () {
@@ -42,6 +34,9 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
         });
     };
 
+    //
+    // ESTILIZAR
+    //
     var addItem = function (list, data) {
         var i = 0;
         data.filter(function (item) {
