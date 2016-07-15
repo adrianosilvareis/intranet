@@ -57,7 +57,7 @@ function __autoload($Class_name) {
      * ****************************************
      */
     $cDir = ['Conn', 'Helpers', 'Beans', 'Models', 'library'];
-    $pDir = ['contadores-de-impressao', 'fast-exames', 'agenda', 'os-nao-pagas', 'nao-conformidade', 'downtime'];
+    $pDir = ['contadores-de-impressao', 'fast-exames', 'agenda', 'os-nao-pagas', 'nao-conformidade', 'downtime', 'sft'];
     $iDir = null;
 
     foreach ($cDir as $dirName):

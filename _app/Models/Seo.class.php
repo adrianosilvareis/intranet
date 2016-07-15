@@ -245,8 +245,8 @@ class Seo {
 
         if ($this->Data):
             $this->setTags();
-            
-        //importa as bibliotecas corretas de acordo com a versão do sistema
+
+            //importa as bibliotecas corretas de acordo com a versão do sistema
             if (PRODUCAO):
                 $this->setProd();
             else:

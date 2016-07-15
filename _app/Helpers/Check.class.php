@@ -166,7 +166,22 @@ class Check {
 
         return ["return" => $retorno, "days" => $days, "hours" => $hours, "mins" => $mins, "secs" => $secs];
     }
-
+    
+     /**
+     * 
+     * @param INT $Valor
+     */
+    public static function Monetize($Valor){
+        
+        $number = doubleval($Valor);
+        
+        $format_number = number_format($number, 2, ',', ' ');
+        
+        $monetize = "R$ " . $format_number;
+        
+        return $monetize;
+    }
+    
     /**
      * Equivalente a strtotime
      */

@@ -76,10 +76,13 @@
             endif;
             ?>                
             <form class="navbar-form navbar-left" name="search" action="" method="post">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Pesquisar" name="s">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Pesquisar na intranet" name="s" title="Pequise algume coisa na intranet">
+                    <span class="input-group-addon">
+                        <button type="submit" class="glyphicon glyphicon-search" name="sendsearch" style="background: none; border: none; width: 100%;" title="Pequise algume coisa na intranet"></button>
+                    </span>
                 </div>
-                <button type="submit" class="btn btn-default" name="sendsearch">Buscar</button>
+                <!--<button type="submit" class="btn btn-default" name="sendsearch">Buscar</button>-->
             </form>
 
             <!-- modal -->
@@ -87,7 +90,8 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="https://webmail-seguro.com.br/tommasi.com.br/" target="_blank">WebMail</a></li>
-                <li><a href="<?= HOME ?>/pages/contato" title="contato por email">Contato</a></li>
+                
+                        <li><a href="<?= HOME ?>/pages/institucional" title="Institucional">Institucional</a></li>
 
             </ul>
 

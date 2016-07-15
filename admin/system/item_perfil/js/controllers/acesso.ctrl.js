@@ -8,22 +8,27 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
     $scope.list2 = [];
     $scope.list3 = [];
 
-    $scope.menu = function (item) {
-        item.class = (item.class === 'active' ? null : 'active');
-        menu($scope.list2, item.acesso_id);
+    $scope.menu = function (item, pos) {
+        position = pos;
+        if (position === 0)
+            menu($scope.list2, item.acesso_id);
+        if (position === 1)
+            menu($scope.list3, item.acesso_id);
     };
 
     var menu = function (list, condition) {
-        var tam = list.length;
-        cleanList(list);
-        
+
         var data = itens.filter(function (item) {
             return item.acesso_parent === condition;
         });
-        
+
+
         $timeout(function () {
             addItem(list, data);
-        }, 100 * tam);
+        }, 100 * list.length);
+
+        if (position === 0)
+            clearItens(list);
     };
 
     var carregarItens = function () {
@@ -49,7 +54,7 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
         });
     };
 
-    var cleanList = function (list) {
+    var clearItens = function (list) {
         for (var i = 0; i < list.length; i++) {
             $timeout(function () {
                 list.pop();

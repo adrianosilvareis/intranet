@@ -4,6 +4,7 @@ angular.module('eventoIndesejado').controller('registros', function ($scope, obj
     $scope.fechados_enviados = [];
     $scope.abertos_recebidos = [];
     $scope.fechados_recebidos = [];
+    $scope.carregando = true;
     
     var session = [];
 
@@ -32,6 +33,7 @@ angular.module('eventoIndesejado').controller('registros', function ($scope, obj
         $scope.fechados_recebidos = data.filter(function (reg) {
             return reg.reg_finalizado == '1' && session.user_id == reg.user_recebimento || reg.reg_finalizado == '1' && session.area_id == reg.area_recebimento;
         });
+        $scope.carregando = false;
     };
 
     var carregarSession = function () {

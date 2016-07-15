@@ -1,0 +1,7 @@
+SELECT p.part_data_regist as 'data', p.part_nm_paciente as 'nome paciente', p.part_os_ospart as 'OS', p.part_vl_debito as 'debito',
+    p.part_vl_desc as 'Desconto', p.part_vl_liquido as 'Liquido', p.part_vl_pago as 'valor pago', p.part_vl_total as 'total',
+    a.aten_nm_nmaten as 'Atendente Nome', a.aten_us_usaten as 'Atendente User', 
+    u.unid_cod_codigo as 'Unidade Codigo', u.unid_nm_nmunid as 'Unidade Nome'
+    
+ FROM sft_output_part p JOIN sft_input_aten a ON(a.aten_id_idaten = p.fk_aten)
+    JOIN sft_input_unid u ON(u.unid_id_idunid = p.fk_unid);

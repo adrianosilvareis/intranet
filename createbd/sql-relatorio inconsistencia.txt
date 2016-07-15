@@ -1,0 +1,17 @@
+SELECT i.inco_dt_regis as 'data', i.inco_ob_obsinco as 'OBS', i.inco_os_numos as 'OS',
+a.aten_nm_nmaten as 'Atendente', a.aten_us_usaten as 'USER',
+m.descricao as 'convenio', c.codigo as 'COD. CONV.',
+n.ncon_nm_nmncon as 'Não conformidade',
+s.status_nm_descricao as 'Status',
+u.unid_nm_nmunid as 'Unidade', u.unid_cod_codigo as 'Uni. num.'
+
+FROM sft_output_inco i 
+JOIN sft_input_aten a ON(a.aten_id_idaten = i.fk_aten)
+JOIN fat_convenio c ON(c.id = i.fk_conv)
+JOIN fat_mascara_convenio m ON(m.id = c.mascara_convenio_id)
+JOIN sft_input_ncon n ON(n.ncon_id_idncon = i.fk_ncon)
+JOIN sft_input_stat s ON(s.status_id_idstatus = i.fk_stat)
+JOIN sft_input_unid u ON(u.unid_id_idunid = i.fk_unid)
+
+-- Adicionar apenas o periodo
+WHERE i.inco_dt_regis >= '2016-01-01' AND i.inco_dt_regis <= '2016-04-30';

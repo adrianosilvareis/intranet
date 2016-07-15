@@ -38,9 +38,9 @@ endif;
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/admin.css" />
         <link rel="stylesheet" href="css/default.css" />  
-        <link rel="stylesheet" href="../_lib/angular/css/ng-animation.css" />
 
         <?php if (!PRODUCAO): ?>
+            <link rel="stylesheet" href="../_lib/angular/css/ng-animation.css" />
             <script src="../_lib/angular.min.js"></script>
             <script src="../_lib/angular/angular-route.min.js"></script>
             <script src="../_lib/angular/angular-animate.min.js"></script>
@@ -50,6 +50,7 @@ endif;
             <script src="../js/angular/services/objetoAPI.module.js"></script>
             <script src="../js/angular/services/objetoAPI.services.js"></script>
         <?php else: ?>
+            <link rel="stylesheet" href="../css/ng-animation.css" />
             <script src="../js/lib.min.js"></script>
             <script src="../js/all.min.js"></script>
             <script src="../cdn/combo.js"></script>

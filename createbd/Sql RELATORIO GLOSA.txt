@@ -1,0 +1,15 @@
+SELECT g.glos_dt_regis as 'data', g.glos_ob_obsglos as 'OBS', g.glos_os_numos as 'OS', g.glos_vl_vlos as 'Valor',
+
+a.aten_nm_nmaten as 'Atendente', a.aten_us_usaten as 'USER',
+m.descricao as 'Convenio', c.codigo as 'Cod. Convenio',
+n.ncon_nm_nmncon as 'Não conformidade', s.status_nm_descricao as 'Status',
+u.unid_cod_codigo as 'Numero Unidade', u.unid_nm_nmunid as 'Unidade'
+
+FROM sft_output_glos g
+JOIN sft_input_aten a ON(a.aten_id_idaten = g.fk_aten)
+JOIN fat_convenio c ON(c.id = g.fk_conv)
+JOIN fat_mascara_convenio m ON(m.id = c.mascara_convenio_id)
+JOIN sft_input_ncon n ON(n.ncon_id_idncon = g.fk_ncon)
+JOIN sft_input_stat s ON(s.status_id_idstatus = g.fk_stat)
+JOIN sft_input_unid u ON(u.unid_id_idunid = g.fk_unid)
+WHERE g.glos_dt_regis >= '2015-01-01' AND g.glos_dt_regis <= '2016-04-30';

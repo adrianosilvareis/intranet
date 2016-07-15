@@ -3,100 +3,106 @@
     <a href="#/registro" class="btn btn-primary">Novo Registro</a>
 </div>
 
-<div class="col-md-6">
-    <h1><small>Recebidos</small></h1>
-
-    <article class="well">
-        <a href="#/painel/abertos_recebidos" title="Ampliar" class="btn glyphicon glyphicon-resize-full" style="float: right;"></a>
-        
-        <h1><small>Aberto</small></h1>        
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>COD ID</th>
-                    <th>Descrição</th>
-                    <th>Data Abertura</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr ng-repeat='reg in abertos_recebidos| limitTo:3'>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro| timestampBr}}</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </article>
-
-    <article class="well">
-        <a href="#/painel/fechados_recebidos" title="Ampliar" class="btn glyphicon glyphicon-resize-full" style="float: right;"></a>
-        <h1><small>Fechados</small></h1>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>COD ID</th>
-                    <th>Descrição</th>
-                    <th>Data Abertura</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr ng-repeat='reg in fechados_recebidos| limitTo:3'>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro| timestampBr}}</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </article>
-
+<div ng-if="carregando">
+    <img src="/intranet/css/carregando.gif"/>
 </div>
 
-<div class="col-md-6">
-    <h1><small>Enviados</small></h1>
+<div ng-show="!carregando">
+    <div class="col-md-6">
+        <h1><small>Recebidos</small></h1>
 
-    <article class="well">
-        <a href="#/painel/abertos_enviados" title="Ampliar" class="btn glyphicon glyphicon-resize-full" style="float: right;"></a>
-        <h1><small>Aberto</small></h1>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>COD ID</th>
-                    <th>Descrição</th>
-                    <th>Data Abertura</th>
-                </tr>
-            </thead>
+        <article class="well">
+            <a href="#/painel/abertos_recebidos" title="Ampliar" class="btn glyphicon glyphicon-resize-full" style="float: right;"></a>
 
-            <tbody>
-                <tr ng-repeat='reg in abertos_enviados| limitTo:3'>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro| timestampBr}}</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </article>
+            <h1><small>Aberto</small></h1>        
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>COD ID</th>
+                        <th>Descrição</th>
+                        <th>Data Abertura</th>
+                    </tr>
+                </thead>
 
-    <article class="well">
-        <a href="#/painel/fechados_enviados" title="Ampliar" class="btn glyphicon glyphicon-resize-full" style="float: right;"></a>
-        <h1><small>Fechados</small></h1>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>COD ID</th>
-                    <th>Descrição</th>
-                    <th>Data Abertura</th>
-                </tr>
-            </thead>
+                <tbody>
+                    <tr ng-repeat='reg in abertos_recebidos| limitTo:3'>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro| timestampBr}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
 
-            <tbody>
-                <tr ng-repeat='reg in fechados_enviados| limitTo:3'>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
-                    <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro| timestampBr}}</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </article>
+        <article class="well">
+            <a href="#/painel/fechados_recebidos" title="Ampliar" class="btn glyphicon glyphicon-resize-full" style="float: right;"></a>
+            <h1><small>Fechados</small></h1>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>COD ID</th>
+                        <th>Descrição</th>
+                        <th>Data Abertura</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat='reg in fechados_recebidos| limitTo:3'>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro| timestampBr}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+
+    </div>
+
+    <div class="col-md-6">
+        <h1><small>Enviados</small></h1>
+
+        <article class="well">
+            <a href="#/painel/abertos_enviados" title="Ampliar" class="btn glyphicon glyphicon-resize-full" style="float: right;"></a>
+            <h1><small>Aberto</small></h1>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>COD ID</th>
+                        <th>Descrição</th>
+                        <th>Data Abertura</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat='reg in abertos_enviados| limitTo:3'>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro| timestampBr}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+
+        <article class="well">
+            <a href="#/painel/fechados_enviados" title="Ampliar" class="btn glyphicon glyphicon-resize-full" style="float: right;"></a>
+            <h1><small>Fechados</small></h1>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>COD ID</th>
+                        <th>Descrição</th>
+                        <th>Data Abertura</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat='reg in fechados_enviados| limitTo:3'>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_id}}</a></td>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_descricao}}</a></td>
+                        <td><a href="#/registro/{{reg.reg_id}}">{{reg.reg_date_cadastro| timestampBr}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+    </div>
 </div>
