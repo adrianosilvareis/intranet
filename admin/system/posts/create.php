@@ -64,7 +64,7 @@
 
                 <label class="label_small">
                     <span class="field">Data:</span>
-                    <input type="text" class="formDate center" name="post_date" value="<?php
+                    <input type="text" class="formTimestamp center" name="post_date" value="<?php
                     if (isset($post['post_date'])): echo $post['post_date'];
                     else: echo date('d/m/Y H:i:s');
                     endif;

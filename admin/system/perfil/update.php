@@ -54,7 +54,7 @@
 
                 <label class="label_small">
                     <span class="field">Data:</span>
-                    <input type="text" class="formDate center" name="perfil_date" value="<?php
+                    <input type="text" class="formTimestamp center" name="perfil_date" value="<?php
                     if (isset($perfil['perfil_date'])): echo $perfil['perfil_date'];
                     else: echo date("d/m/Y H:i:s");
                     endif;

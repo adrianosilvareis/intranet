@@ -53,7 +53,7 @@ endif;
 
                 <label class="label_small">
                     <span class="field">Data:</span>
-                    <input type="text" class="formDate center" name="area_date" value="<?= date('d/m/Y H:i:s'); ?>" />
+                    <input type="text" class="formTimestamp center" name="area_date" value="<?= date('d/m/Y H:i:s'); ?>" />
                 </label>
                 
                 <label class="label_small">

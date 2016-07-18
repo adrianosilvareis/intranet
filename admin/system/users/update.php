@@ -10,7 +10,6 @@
 
         if ($ClienteData && $ClienteData['SendPostForm']):
             unset($ClienteData['SendPostForm']);
-
             require_once '_models/AdminUsers.class.php';
             $AdminUsers = new AdminUsers;
             $AdminUsers->ExeUpdate($User, $ClienteData);
@@ -54,10 +53,17 @@
                 <input type="email" name="user_email" value="<?php if (!empty($ClienteData['user_email'])) echo $ClienteData['user_email']; ?>" title="Informe seu e-mail" required />
             </label>
 
-            <label class="label">
-                <span class="field">Senha:</span>
-                <input type="password" name="user_password" value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern=".{6,12}" />
-            </label>
+            <div class="label_line">
+                <label class="label_medium">
+                    <span class="field">Senha:</span>
+                    <input type="password" name="user_password" value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern=".{6,12}" required />
+                </label>
+
+                <label class="label_medium">
+                    <span class="field">Data Nascimento:</span>
+                    <input class="formDate" type="text" name="user_birthday" value="<?php if (!empty($ClienteData['user_birthday'])) echo $ClienteData['user_birthday']; ?>" title="Informe sua data de nascimento" required />
+                </label>
+            </div>
 
             <div class="label_line">
                 <label class="label_medium">

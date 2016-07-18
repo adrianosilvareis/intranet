@@ -15,6 +15,7 @@ class WsUsers extends Beans {
     private $user_lastname;
     private $user_email;
     private $user_password;
+    private $user_birthday;
     private $user_registration;
     private $user_lastupdate;
     private $user_level;
@@ -38,6 +39,7 @@ class WsUsers extends Beans {
             'user_lastname' => $this->getUser_lastname(),
             'user_email' => $this->getUser_email(),
             'user_password' => $this->getUser_password(),
+            'user_birthday' => $this->getUser_birthday(),
             'user_registration' => $this->getUser_registration(),
             'user_lastupdate' => $this->getUser_lastupdate(),
             'user_level' => $this->getUser_level(),
@@ -61,6 +63,7 @@ class WsUsers extends Beans {
         $this->setUser_lastname((isset($object->user_lastname) ? $object->user_lastname : null));
         $this->setUser_email((isset($object->user_email) ? $object->user_email : null));
         $this->setUser_password((isset($object->user_password) ? $object->user_password : null));
+        $this->setUser_birthday((isset($object->user_birthday) ? $object->user_birthday : null));
         $this->setUser_registration((isset($object->user_registration) ? $object->user_registration : null));
         $this->setUser_lastupdate((isset($object->user_lastupdate) ? $object->user_lastupdate : null));
         $this->setUser_level((isset($object->user_level) ? $object->user_level : null));
@@ -106,6 +109,10 @@ class WsUsers extends Beans {
 
     function getUser_password() {
         return $this->user_password;
+    }
+
+    function getUser_birthday() {
+        return $this->user_birthday;
     }
 
     function getUser_registration() {
@@ -156,6 +163,10 @@ class WsUsers extends Beans {
         $this->user_password = $user_password;
     }
 
+    function setUser_birthday($user_birthday) {
+        $this->user_birthday = $user_birthday;
+    }
+
     function setUser_registration($user_registration) {
         $this->user_registration = $user_registration;
     }
@@ -179,6 +190,6 @@ class WsUsers extends Beans {
     function setPerfil_id($perfil_id) {
         $this->perfil_id = $perfil_id;
     }
-    
-    
+
+
 }

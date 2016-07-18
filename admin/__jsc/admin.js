@@ -3,7 +3,8 @@ $(function() {
     //Shadowbox.init();
 
         //MASCARAS
-        $(".formDate").mask("99/99/9999 99:99:99", {placeholder: " "});
+        $(".formTimestamp").mask("99/99/9999 99:99:99", {placeholder: " "});
+        $(".formDate").mask("99/99/9999", {placeholder: " "});
 
 
     //TinyMCE

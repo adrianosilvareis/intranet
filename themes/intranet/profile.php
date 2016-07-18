@@ -35,14 +35,14 @@
         ?>
 
         <form method="post" name="UserEditForm" enctype="multipart/form-data" >
-            
+
             <div class="col-md-12 well">
                 <label>
                     Enviar Foto:
                     <input type="file" name="user_cover" class="form-control"/>
                 </label>
             </div>
-            
+
             <div class="col-md-12 well">
                 <label class="col-md-5">
                     Nome:
@@ -90,6 +90,14 @@
                     <input type="email" name="user_email" value="<?= $user_email; ?>" title="Informe seu e-mail" class="form-control" required />
                 </label>
             </div>
+
+            <div class="col-md-12">
+                <label class="col-md-4 well">
+                    Data de Nascimento:
+                    <input class="form-control formDate" text="text" name="user_birthday" value="<?= date('d/m/Y', strtotime($user_birthday)); ?>" title="data nascimento" required/>
+                </label>
+            </div>
+
 
             <div class="col-md-8 well">
                 <label class="col-md-6">

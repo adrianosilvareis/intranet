@@ -4,8 +4,10 @@ $count = ($Link->getData()['count'] ? $Link->getData()['count'] : '0');
 $View = new View();
 $tpl_cat = $View->Load('article_m');
 $tpl_age = $View->Load('agenda_m');
-$tpl_inc = $View->Load('inco_list');
-$tpl_par = $View->Load('part_list');
+$tpl_ani = $View->Load('niver_m');
+$tpl_inco = $View->Load('inco_list');
+$tpl_part = $View->Load('part_list');
+$tpl_glos = $View->Load('glos_list');
 ?>
 
 <section class="section">
@@ -83,13 +85,52 @@ $tpl_par = $View->Load('part_list');
             endforeach;
             echo "</div>\n";
         endif;
+        
+        /**
+         * Aniversariantes do Mês
+         */
+        $readAni = new AppNiver();
+        $readAni->Execute()->FullRead("SELECT * FROM app_niver "
+                . "WHERE niver_nome LIKE '%' :link '%' OR niver_setor LIKE '%' :link '%' "
+                . "ORDER BY niver_data", "link={$search}", true);
+        ?>
 
+        <hr>
+        <section class="section">
+            <header>
+                <h2>Aniversáriantes do mês:</h2>
+                <p>Sua pesquisa por <?= $search; ?> retornou <?= $readAni->Execute()->getRowCount(); ?> resultados:</p>
+            </header>
+        </section>
+        
+        <?php
+        if (!$readAni->Execute()->getResult()):
+            WSErro("Desculpe, sua pesquisa não encontrou mais aniveráriantes. Você pode resulmir sua pesquisa ou tentar outros termos!", WS_INFOR);
+        else:
+            $cc = 0;
+            echo "<div class='row'>\n";
+            foreach ($readAni->Execute()->getResult() as $ani):
+
+                echo ($cc % 4 == 0 ? "<div class='row'>\n</div>\n" : "");
+                echo "<div class='col-md-3'>";
+                $ani->niver_data = date('d/m/Y', strtotime($ani->niver_data));
+                $View->Show((array) $ani, $tpl_ani);
+                echo "</div>\n";
+                $cc++;
+            endforeach;
+            echo "</div>\n";
+        endif;
+        
         $Pager->ExePaginator("ws_posts", "post_status = 1 AND (post_title LIKE '%' :link '%' OR post_content LIKE '%' :link '%')", "link={$search}");
 
         echo '<nav class="paginator">';
         echo $Pager->getPaginator();
         echo '</nav>';
-
+        
+        /**
+         * Inconsistência
+         */
+        
         $readInco = new SftOutputInco();
 
         $sql = "SELECT i.inco_dt_regis as 'data', i.inco_ob_obsinco as 'OBS', i.inco_os_numos as 'os',"
@@ -105,8 +146,8 @@ $tpl_par = $View->Load('part_list');
                 . "JOIN sft_input_ncon n ON(n.ncon_id_idncon = i.fk_ncon)"
                 . "JOIN sft_input_stat s ON(s.status_id_idstatus = i.fk_stat)"
                 . "JOIN sft_input_unid u ON(u.unid_id_idunid = i.fk_unid)"
-                . "WHERE u.unid_nm_nmunid LIKE '%' :link '%' OR a.aten_nm_nmaten LIKE '%' :link '%'"
-                . "ORDER by i.inco_dt_regis DESC LIMIT 50;";
+                . "WHERE u.unid_nm_nmunid LIKE '%' :link '%' OR a.aten_nm_nmaten LIKE '%' :link '%' OR m.descricao LIKE '%' :link '%' "
+                . "ORDER BY u.unid_nm_nmunid, i.inco_dt_regis DESC LIMIT 50;";
 
         $readInco->Execute()->FullRead($sql, "link={$search}", true);
         ?>
@@ -140,14 +181,16 @@ $tpl_par = $View->Load('part_list');
                     <tbody>";
             foreach ($readInco->Execute()->getResult() as $inc):
                 $inc->data = date("d/m/Y", strtotime($inc->data));
-                $View->Show((array) $inc, $tpl_inc);
+                $View->Show((array) $inc, $tpl_inco);
             endforeach;
             echo "</tbody>"
             . "</table >";
             echo "</div>\n";
         endif;
         
-        
+        /**
+         * Os Particular
+         */
         $readPart = new SftOutputPart();
         $sql = "SELECT 
             p.part_data_regist as 'data', p.part_nm_paciente as 'paciente', p.part_os_ospart as 'os', p.part_vl_debito as 'debito',
@@ -156,7 +199,8 @@ $tpl_par = $View->Load('part_list');
             u.unid_nm_nmunid as 'unidade'
             FROM sft_output_part p JOIN sft_input_aten a ON(a.aten_id_idaten = p.fk_aten)
             JOIN sft_input_unid u ON(u.unid_id_idunid = p.fk_unid)
-            WHERE u.unid_nm_nmunid LIKE '%' :link '%' OR a.aten_nm_nmaten LIKE '%' :link '%'";
+            WHERE u.unid_nm_nmunid LIKE '%' :link '%' OR a.aten_nm_nmaten LIKE '%' :link '%'
+            ORDER BY u.unid_nm_nmunid, p.part_data_regist DESC";
         
         $readPart->Execute()->FullRead($sql, "link={$search}", true);
         
@@ -198,30 +242,74 @@ $tpl_par = $View->Load('part_list');
                 $par->liquido = Check::Monetize($par->liquido);
                 $par->pago = Check::Monetize($par->pago);
                 $par->debito = Check::Monetize($par->debito);
-                $View->Show((array) $par, $tpl_par);
+                $View->Show((array) $par, $tpl_part);
             endforeach;
             echo "</tbody>"
             . "</table >";
             echo "</div>\n";
         endif;
         
+        /**
+         * Glosa
+         */
+        $readGlos = new SftOutputGlos();
+        $sql = "SELECT g.glos_dt_regis as 'data', g.glos_ob_obsglos as 'OBS', g.glos_os_numos as 'os', g.glos_vl_vlos as 'valor', "
+                . "a.aten_nm_nmaten as 'atendente', a.aten_us_usaten as 'user_aten',"
+                . "m.descricao as 'convenio', c.codigo as 'Cod. Convenio',"
+                . "n.ncon_nm_nmncon as 'nao_conformidade', s.status_nm_descricao as 'status',"
+                . "u.unid_cod_codigo as 'numero_unidade', u.unid_nm_nmunid as 'unidade'"
+                . "FROM sft_output_glos g "
+                . "JOIN sft_input_aten a ON(a.aten_id_idaten = g.fk_aten) "
+                . "JOIN fat_convenio c ON(c.id = g.fk_conv) "
+                . "JOIN fat_mascara_convenio m ON(m.id = c.mascara_convenio_id) "
+                . "JOIN sft_input_ncon n ON(n.ncon_id_idncon = g.fk_ncon) "
+                . "JOIN sft_input_stat s ON(s.status_id_idstatus = g.fk_stat) "
+                . "JOIN sft_input_unid u ON(u.unid_id_idunid = g.fk_unid) "
+                . "WHERE a.aten_nm_nmaten LIKE '%' :link '%' OR u.unid_nm_nmunid LIKE '%' :link '%' OR m.descricao LIKE '%' :link '%' "
+                . "ORDER BY u.unid_nm_nmunid, g.glos_dt_regis DESC";
         
-//        SELECT g.glos_dt_regis as 'data', g.glos_ob_obsglos as 'OBS', g.glos_os_numos as 'OS', g.glos_vl_vlos as 'Valor',
-//        a.aten_nm_nmaten as 'atendente', a.aten_us_usaten as 'user_aten',
-//        m.descricao as 'convenio', c.codigo as 'Cod. Convenio',
-//        n.ncon_nm_nmncon as 'nao_conformidade', s.status_nm_descricao as 'status',
-//        u.unid_cod_codigo as 'numero_unidade', u.unid_nm_nmunid as 'unidade'
-//
-//        FROM sft_output_glos g
-//        JOIN sft_input_aten a ON(a.aten_id_idaten = g.fk_aten)
-//        JOIN fat_convenio c ON(c.id = g.fk_conv)
-//        JOIN fat_mascara_convenio m ON(m.id = c.mascara_convenio_id)
-//        JOIN sft_input_ncon n ON(n.ncon_id_idncon = g.fk_ncon)
-//        JOIN sft_input_stat s ON(s.status_id_idstatus = g.fk_stat)
-//        JOIN sft_input_unid u ON(u.unid_id_idunid = g.fk_unid)
-//        WHERE u.unid_nm_nmunid like "%alto%";
-
+        $readGlos->Execute()->FullRead($sql, "link={$search}", true);
+        
         ?>
 
+        <hr>
+        <section class="section">
+            <header>
+                <h2>Glosa:</h2>
+                <p>Sua pesquisa por <?= $search; ?> retornou <?= $readGlos->Execute()->getRowCount(); ?> resultados:</p>
+            </header>
+        </section>
+        
+        <?php
+        if (!$readGlos->Execute()->getResult()):
+            WSErro("Desculpe, sua pesquisa não encontrou glosas. Você pode resulmir sua pesquisa ou tentar outros termos!", WS_INFOR);
+        else:
+            $cc = 0;
+            echo "<div class='row' style='height: 280px; overflow: auto;'>\n";
+            echo "<table class='table table-hover table-striped'>";
+            echo "<thead>
+                        <tr>
+                            <th>OS</th>
+                            <th>Atendente</th>
+                            <th>data</th>
+                            <th>convenio</th>
+                            <th>Valor</th>
+                            <th>Não conformidade</th>
+                            <th>Unidade</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
+            foreach ($readGlos->Execute()->getResult() as $glos):
+                $glos->valor = Check::Monetize($glos->valor);
+                $glos->convenio = Check::Words($glos->convenio, 2);
+                $View->Show((array) $glos, $tpl_glos);
+            endforeach;
+            echo "</tbody>"
+            . "</table >";
+            echo "</div>\n";
+        endif;
+        ?>
+        <hr>
     </div>
 </section>
