@@ -91,11 +91,39 @@ class Login {
         $WsUsers->Execute()->Query("{$login} AND #user_password#");
         if ($WsUsers->Execute()->getResult()):
             $this->Result = $WsUsers->Execute()->getResult()[0];
-            var_dump($this->Result);
             $this->Result->area_trabalho = $this->getAreaTrabalho($this->Result->area_id);
+            $this->Result->perfil = $this->getPerfil($this->Result->perfil_id);
             return true;
         else:
             return false;
+        endif;
+    }
+
+    private function getPerfil($perfil_id) {
+        $Read = new WsPerfil();
+        $Read->setPerfil_id($perfil_id);
+        $query = $Read->Execute()->Query("#perfil_id#");
+
+        if ($Read->Execute()->getResult()):
+            $query[0]->acessos = $this->getAcessos($query[0]->perfil_id);
+            return $query[0];
+        else:
+            WSErro("Perfil não foi encontrado!", WS_ERROR);
+            return null;
+        endif;
+    }
+
+    private function getAcessos($acessos_id) {
+        $Read = new WsAcesso();
+        $Read->Execute()->FullRead("SELECT a.* FROM ws_acesso a "
+                . " JOIN ws_perfil_has_ws_acesso pa ON(pa.acesso_id = a.acesso_id)"
+                . " WHERE pa.perfil_id = :perfil", "perfil={$acessos_id}");
+
+        if ($Read->Execute()->getResult()):
+            return $Read->Execute()->getResult();
+        else:
+            WSErro("Acessos não encontrado para este perfil!", WS_ERROR);
+            return null;
         endif;
     }
 

@@ -16,7 +16,7 @@ class WsAcesso extends Beans {
     private $acesso_name;
     private $acesso_status;
     private $acesso_date;
-    
+    private $acesso_tag;
 
     function __construct() {
         $this->Controle = new Controle('ws_acesso');
@@ -35,6 +35,7 @@ class WsAcesso extends Beans {
             'acesso_name' => $this->getAcesso_name(),
             'acesso_status' => $this->getAcesso_status(),
             'acesso_date' => $this->getAcesso_date(),
+            'acesso_tag' => $this->getAcesso_tag(),
             'acesso_id' => $this->getAcesso_id()
         ]));
         return $this->Controle->getDados();
@@ -53,6 +54,7 @@ class WsAcesso extends Beans {
         $this->setAcesso_name((isset($object->acesso_name) ? $object->acesso_name : null));
         $this->setAcesso_status((isset($object->acesso_status) ? $object->acesso_status : null));
         $this->setAcesso_date((isset($object->acesso_date) ? $object->acesso_date : null));
+        $this->setAcesso_tag((isset($object->acesso_tag) ? $object->acesso_tag : null));
     }
 
     /**
@@ -98,6 +100,10 @@ class WsAcesso extends Beans {
         return $this->acesso_date;
     }
 
+    function getAcesso_tag() {
+        return $this->acesso_tag;
+    }
+
     function setAcesso_id($acesso_id) {
         $this->acesso_id = $acesso_id;
     }
@@ -126,5 +132,8 @@ class WsAcesso extends Beans {
         $this->acesso_date = $acesso_date;
     }
 
+    function setAcesso_tag($acesso_tag) {
+        $this->acesso_tag = $acesso_tag;
+    }
 
 }

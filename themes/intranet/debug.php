@@ -1,5 +1,3 @@
-<ul class="list-group">
-    <li class="list-group-item">first</li>
-    <li>second</li>
-    <li>third</li>
-</ul>
+<?php
+
+var_dump(Check::AcessoTags("evento"));

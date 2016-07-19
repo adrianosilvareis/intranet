@@ -1,0 +1,30 @@
+<div class="item-container">
+    <h1>Itens do perfil</h1>
+
+    <div ng-show="carregando">
+        <img src="css/carregando.gif">
+    </div>
+
+    <div ng-show="!carregando">
+        <ul class="blue-default menu_list column-3">
+            <li class="item bouncy-slide-left"  ng-class="item.class" ng-repeat="item in list track by $index"><a ng-disabled="disable" href="" ng-click="menu(item)">[{{item.acesso_id}}] {{item.acesso_title}}</a></li>
+        </ul>
+
+        <ul class="blue-default menu_list column-3">
+            <li class="item bouncy-slide-left" ng-class="item.class" ng-repeat="item in list2 track by $index" ><a href="" ng-click="menu(item)" >[{{item.acesso_id}}] {{item.acesso_title}}</a></li>
+        </ul>
+
+        <ul class="blue-default menu_list column-3">
+            <li class="item bouncy-slide-left" ng-class="item.class" ng-repeat="item in list3 track by $index" ><a href="" ng-click="menu(item)">[{{item.acesso_id}}] {{item.acesso_title}}</a></li>
+        </ul>
+
+        <ul class="blue-default menu_list column-3">
+            <li class="item header">Select</li>
+            <li class="item bouncy-slide-left" ng-repeat="item in select track by item.acesso_id"><a href="" ng-click="remover(item)">[{{item.acesso_id}}] {{item.acesso_title}}</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <hr>
+    
+    <a class="btn green" ng-click="salvar()">Salvar</a>
+</div>

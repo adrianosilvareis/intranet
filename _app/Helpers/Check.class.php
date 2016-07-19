@@ -166,22 +166,22 @@ class Check {
 
         return ["return" => $retorno, "days" => $days, "hours" => $hours, "mins" => $mins, "secs" => $secs];
     }
-    
-     /**
+
+    /**
      * 
      * @param INT $Valor
      */
-    public static function Monetize($Valor){
-        
+    public static function Monetize($Valor) {
+
         $number = doubleval($Valor);
-        
+
         $format_number = number_format($number, 2, ',', ' ');
-        
+
         $monetize = "R$ " . $format_number;
-        
+
         return $monetize;
     }
-    
+
     /**
      * Equivalente a strtotime
      */
@@ -362,6 +362,29 @@ class Check {
         else:
             return false;
         endif;
+    }
+
+    public static function UserAcesso($acesso) {
+        $acessos = $_SESSION['userlogin']['perfil']->acessos;
+
+
+        foreach ($acessos as $value) :
+            if ($value->acesso_name == $acesso):
+                return $value;
+            endif;
+        endforeach;
+    }
+
+    public static function AcessoTags($tag) {
+        $acessos = $_SESSION['userlogin']['perfil']->acessos;
+        $list = array();
+        foreach ($acessos as $acesso):
+            if ($acesso->acesso_tag == $tag):
+                $list[] = $acesso;
+            endif;
+        endforeach;
+
+        return $list;
     }
 
     /**
