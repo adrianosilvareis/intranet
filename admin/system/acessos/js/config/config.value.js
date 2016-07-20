@@ -1,3 +1,4 @@
 angular.module('itemPerfil').value('config', {
-    apiURL: "/intranet/api/perfil"
+    URL: CONFIG,
+    urlAPI: CONFIG.API + "/perfil"
 });

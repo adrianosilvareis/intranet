@@ -1,3 +1,4 @@
+<script src="/intranet/_app/Config.inc.js.php"></script>
 <script src="system/acessos/js/app.module.js"></script>
 <script src="system/acessos/js/config/config.value.js"></script>
 <script src="system/acessos/js/config/config.routes.js"></script>

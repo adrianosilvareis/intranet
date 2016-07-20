@@ -10,7 +10,7 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
     
     
     $scope.salvar = function(){
-        console.log($scope.select);
+        console.log(config.URL.API);
     };
     
     //
@@ -50,7 +50,7 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
     // Carregas todos os itens   
     //
     var carregarItens = function () {
-        objetoAPI.getObjeto(config.apiURL + '/acesso.api.php').success(function (data) {
+        objetoAPI.getObjeto(config.urlAPI + '/acesso').success(function (data) {
             $scope.carregando = false;
             todosItens = data;
             menu($scope.list, null);

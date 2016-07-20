@@ -355,6 +355,8 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/maxlength.filter.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/name.filter.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/timestampBr.filter.js'></script>" . "\n";
+        $this->seoLibs .= "<!--CONFIG-->\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_app/Config.inc.js.php'></script>" . "\n";
     }
 
 }
