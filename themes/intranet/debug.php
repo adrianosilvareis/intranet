@@ -1,3 +1,5 @@
 <?php
 
-var_dump(Check::AcessoTags("evento"));
+header('HTTP/1.0 404 Not Found');
+
+echo "TESTE";

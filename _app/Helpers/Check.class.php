@@ -387,6 +387,18 @@ class Check {
         return $list;
     }
 
+    public static function JsonReturn($result, $message, $status) {
+        if ($result):
+            echo json_encode($result);
+        else:
+            $error = [
+                'mensage' => $message,
+                'status' => $status
+            ];
+            echo json_encode($error);
+        endif;
+    }
+
     /**
      * Não permite que usuarios não logados vejam as paginas, quando em manutenção.     * 
      * 

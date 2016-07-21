@@ -64,7 +64,7 @@
                 <article<?php if ($posti % 2 == 0) echo ' class="right" '; ?> <?= $status; ?>>
                     <div class="img thumb_small"></div>
                     
-                    <h1><a target="_blank" href="../artigo/<?= $perfil_name; ?>" title="Ver Post"><?= Check::Words($perfil_title, 5) ?></a></h1>
+                    <h1><a href="painel.php?exe=perfil/update&perfilId=<?= $perfil_id; ?>" title="Ver Post"><?= Check::Words($perfil_title, 5) ?></a></h1>
                     <p class="post_views"><strong>Descrição:</strong> <?= Check::Words($perfil_content, 5) ?></p>
                     <ul class="info post_actions">
                         <li><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($perfil_date)); ?>Hs</li>

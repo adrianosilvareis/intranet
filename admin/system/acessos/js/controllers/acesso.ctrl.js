@@ -1,4 +1,4 @@
-angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, config, $timeout) {
+angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, config, $timeout, $routeParams) {
 
     var todosItens = [];
 
@@ -7,19 +7,19 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
     $scope.list2 = [];
     $scope.list3 = [];
     $scope.select = [];
-    
-    
-    $scope.salvar = function(){
+    $scope.perfilId = "";
+
+    $scope.salvar = function () {
         console.log(config.URL.API);
     };
-    
+
     //
     // remove o item selecionado
     //
     $scope.remover = function (item) {
         $scope.select.splice($scope.select.indexOf(item), 1);
     };
-    
+
     //
     // abre a lista de acordo com item selecionado, alem de adicionalo a lista de seleção.
     //
@@ -45,7 +45,7 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
             }, 100 * $scope.list3.length);
         }
     };
-    
+
     //
     // Carregas todos os itens   
     //
@@ -54,6 +54,22 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
             $scope.carregando = false;
             todosItens = data;
             menu($scope.list, null);
+        });
+    };
+
+    //
+    //
+    //
+    var carregarPerfil = function () {
+        $scope.perfilId = $routeParams.id;
+        objetoAPI.getObjeto(config.urlAPI + '/perfilHasAcesso&id=' + $routeParams.id).success(function (data) {
+            if (data.status) {
+                $scope.select = [];
+            } else {
+                addItem($scope.select, data);
+            }
+        }).error(function (error) {
+            console.log(error);
         });
     };
 
@@ -91,4 +107,5 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
     };
 
     carregarItens();
+    carregarPerfil();
 });

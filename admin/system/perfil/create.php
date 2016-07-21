@@ -9,7 +9,7 @@
         <?php
         $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($post) && $post['SendPostForm']):
-            $post['perfil_status'] = ( $post['SendPostForm'] == 'Cadastrar' ? '0' : '1');
+            $post['perfil_status'] = '1';
             unset($post['SendPostForm']);
 
             require '_models/AdminPerfil.class.php';
@@ -50,7 +50,6 @@
             </div><!--/line-->
 
             <input type="submit" class="btn blue" value="Cadastrar" name="SendPostForm" />
-            <input type="submit" class="btn green" value="Cadastrar & Publicar" name="SendPostForm" />
             <a href="painel.php?exe=perfil/index" class="btn default" >VOLTAR</a>
         </form>
 
