@@ -4,6 +4,10 @@
     <div ng-show="carregando">
         <img src="css/carregando.gif">
     </div>
+    
+    <div ng-if="alert.message" ng-class="alert.class">
+        {{alert.message}}
+    </div>
 
     <div ng-show="!carregando">
         <ul class="blue-default menu_list column-3">

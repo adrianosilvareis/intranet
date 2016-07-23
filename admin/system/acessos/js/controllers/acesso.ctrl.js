@@ -8,9 +8,21 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
     $scope.list3 = [];
     $scope.select = [];
     $scope.perfilId = "";
+    $scope.alert = {};
 
     $scope.salvar = function () {
-        console.log(config.URL.API);
+        var objeto = {
+            id: $scope.perfilId,
+            list: $scope.select
+        };
+        
+        objetoAPI.saveObjeto(config.urlAPI + '/perfilHasAcesso', objeto).success(function(data){
+            $scope.alert = data;
+            $scope.alert.class = 'trigger accept';
+        }).error(function(error){
+            $scope.alert = error;
+            $scope.alert.class = 'trigger danger';
+        });
     };
 
     //
@@ -58,7 +70,7 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
     };
 
     //
-    //
+    // carregar itens do perfil
     //
     var carregarPerfil = function () {
         $scope.perfilId = $routeParams.id;

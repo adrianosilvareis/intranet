@@ -44,7 +44,7 @@ define('TWITTER', 'Adriano_EngPro');
 
 //TRATAMENTO DE ERROS #####################
 //CSS Constantes :: Mensagens de Erro
-define("WS_ACCEPT", 'accept');
+define("WS_ACCEPT", 'accept'); 
 define("WS_INFOR", 'infor');
 define("WS_ALERT", 'alerte');
 define("WS_ERROR", 'error');
