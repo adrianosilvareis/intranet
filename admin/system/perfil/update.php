@@ -64,7 +64,7 @@
             </div><!--/line-->
 
             <input type="submit" class="btn blue" value="Atualizar" name="SendPostForm" />
-            <a href="painel.php?exe=acessos/index#/<?= $perfilid; ?>" class="btn green" >Adicionar Itens</a>
+            <a href="painel.php?exe=acessos/index#/perfil/<?= $perfilid; ?>" class="btn green" >Adicionar Itens</a>
             <a href="painel.php?exe=perfil/index" class="btn default" >VOLTAR</a>
         </form>
 

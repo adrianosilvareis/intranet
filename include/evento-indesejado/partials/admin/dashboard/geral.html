@@ -1,7 +1,11 @@
 <div ng-include="'/intranet/include/evento-indesejado/partials/admin/menu.html'"></div>
 <div ng-include="'/intranet/include/evento-indesejado/partials/admin/dashboard/menu.html'"></div>
 
-<section class="col-md-10">
+<div ng-if="carregando">
+    <img src="/intranet/css/carregando.gif">
+</div>
+
+<section class="col-md-10" ng-if="!carregando">
     <div class="page-header">
         <h1>DASHBOARD<small>Painel de Gerenciamento</small></h1>
     </div>

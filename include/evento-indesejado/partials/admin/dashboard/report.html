@@ -1,39 +1,66 @@
 <div ng-include="'/intranet/include/evento-indesejado/partials/admin/menu.html'"></div>
 <div ng-include="'/intranet/include/evento-indesejado/partials/admin/dashboard/menu.html'"></div>
 
-<section class="col-md-10">
+<div ng-if="carregando">
+    <img src="/intranet/css/carregando.gif">
+</div>
+
+<section class="col-md-10" ng-if="!carregando">
+
     <div class="page-header">
-        <h1>DASHBOARD<small>Eventos aguardando respostas</small></h1>
+        <h1>DASHBOARD<small>Eventos {{tipo.title}}</small></h1>
     </div>
-    
+
+    <div style="float: left;">
+        <label>Total de eventos</label>
+        <select ng-model="limit">
+            <option value="null">Todos</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+        </select>
+    </div>
+
+    <div style="float: right; margin-bottom: 15px;">
+        <button class="btn btn-primary" ng-click="listTipo()" ng-show="!tipo.status">Todos os Registros</button>
+        <button class="btn btn-success" ng-click="listTipo()" ng-show="tipo.status">Apenas Registros abertos</button>
+    </div>
+
+    <div class="clearfix"></div>
+
     <div class="input-group" style="margin-bottom: 15px;">
         <span class="input-group-addon glyphicon glyphicon-search"></span>
         <input class="form-control" type="text" ng-model="search" placeholder="pesquisa"/>
     </div>
-    
+
     <table class="table table-hover table-striped table-responsive">
         <thead>
             <tr class="danger">
-                <th>Reg ID</th>
-                <th>IP</th>
-                <th>DATA</th>
-                <th>USER</th>
-                <th>NOME</th>
-                <th>SOBRE NOME</th>
-                <th>ABERTO POR</th>
-                <th>SETOR</th>
+                <th title="Número do registro">Reg ID</th>
+                <th title="Impacto ao paciente">IP</th>
+                <th title="Data do cadastro">DATA</th>
+                <th title="Usuário que recebeu">USER</th>
+                <th title="Primeiro nome de quem recebeu">NOME</th>
+                <th title='Sobrenome de quem recebeu'>SOBRE NOME</th>
+                <th title='Setor responsável pelo evento'>SETOR</th>
+                <th title='Usuário que registrou o evento'>ABERTO POR</th>
+                <th title='Usuário que registrou o evento'>SITUAÇÃO</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="reg in regAtivos | filter:search track by reg.reg_id">
-                <td>{{::reg.reg_id}}</td>
-                <td>{{::(reg.reg_impacto_paciente == '1' ? "sim" : "não")}}</td>
-                <td>{{::reg.reg_date_cadastro|timestampBr}}</td>
-                <td>{{::reg.recebido_nickname}}</td>
-                <td>{{::reg.recebido_name}}</td>
-                <td>{{::reg.recebido_lastname}}</td>
-                <td>{{::reg.cadastro_nickname}}</td>
-                <td>{{::reg.area_title}}</td>
+            <tr ng-repeat="reg in list | filter:search | orderBy:reg.reg_date_cadastro:true | limitTo:limit track by reg.reg_id">
+                <td><a href="#/admin/registro/{{::reg.reg_id}}">{{::reg.reg_id}}</a></td>
+                <td><a href="#/admin/registro/{{::reg.reg_id}}">{{::(reg.reg_impacto_paciente == '1' ? "sim" : "não")}}</a></td>
+                <td><a href="#/admin/registro/{{::reg.reg_id}}">{{::reg.reg_date_cadastro|timestampBr}}</a></td>
+                <td><a href="#/admin/registro/{{::reg.reg_id}}">{{::reg.recebido_nickname}}</a></td>
+                <td><a href="#/admin/registro/{{::reg.reg_id}}">{{::reg.recebido_name}}</a></td>
+                <td><a href="#/admin/registro/{{::reg.reg_id}}">{{::reg.recebido_lastname}}</a></td>
+                <td><a href="#/admin/registro/{{::reg.reg_id}}">{{::reg.area_title}}</a></td>
+                <td><a href="#/admin/registro/{{::reg.reg_id}}">{{::reg.cadastro_nickname}}</a></td>
+                <td><a href="#/admin/registro/{{::reg.reg_id}}">{{::(reg.reg_finalizado == '1' ? "FINALIZADO" : "ABERTO")}}</a></td>
             </tr>
         </tbody>
     </table>

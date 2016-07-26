@@ -24,7 +24,7 @@
 
         <ul class="blue-default menu_list column-3">
             <li class="item header">Select</li>
-            <li class="item bouncy-slide-left" ng-repeat="item in select track by item.acesso_id"><a href="" ng-click="remover(item)">[{{item.acesso_id}}] {{item.acesso_title}}</a></li>
+            <li class="item bouncy-slide-left" ng-repeat="item in select track by $index"><a href="" ng-click="remover(item)">[{{item.acesso_id}}] {{item.acesso_title}}</a></li>
         </ul>
     </div>
     <div class="clear"></div>

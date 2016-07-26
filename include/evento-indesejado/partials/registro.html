@@ -10,7 +10,11 @@
 
 <div ng-include="'/intranet/include/evento-indesejado/partials/message/message-registro.html'"></div>
 
-<form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)">
+<div ng-if="carregando">
+    <img src="/intranet/css/carregando.gif">
+</div>
+
+<form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)" ng-if="!carregando">
 
     <script type="text/javascript">
                 $(document).ready(function () {
@@ -125,7 +129,7 @@
         <div class="col-md-8 form-group">
             <label>Aréa Resposável</label>
             <div class="form-control">
-                {{reg.setor.area_title}}
+                {{reg.area.area_title}}
             </div>
         </div>
 
@@ -193,13 +197,13 @@
         <div class="form-group  col-md-6">
             <label>Data da ação corretiva:</label>
             <div ng-if="reg.disabled" style="padding: 7px; border: 1px solid #CCC">
-                {{reg.reg_date_correcao| timestampBr}}
+                {{reg.reg_date_correcao| dateBr}}
             </div>
             <input type="text" class="form-control formDate" name="reg_date_correcao" ng-model="reg.reg_date_correcao" ng-required="true" ng-minlength='10' ng-if="!reg.disabled"/>
         </div>
     </div>
     <hr>
     <div class="btn-group" ng-if="!reg.disabled">
-        <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="registroForm.$invalid || origemValid() || !reg.user || !reg.setor"/>
+        <input class="btn btn-success" style="width: 200px;" type="submit" value="Salvar" name="SendPostForm" ng-disabled="registroForm.$invalid || origemValid() || !reg.user || !reg.area"/>
     </div>
 </form>

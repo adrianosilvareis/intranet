@@ -10,11 +10,7 @@
 
 <div ng-include="'/intranet/include/evento-indesejado/partials/message/message-avaliacao.html'"></div>
 
-<div ng-if="carregando">
-    <img src="/intranet/css/carregando.gif">
-</div>
-
-<form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)" ng-if="!carregando">
+<form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)" >
     <div class="well">
 
         <label>Avaliação das causas do evento:</label>

@@ -3,11 +3,15 @@ angular.module('eventoIndesejado').controller('dashboard', function ($scope, $ro
     //
     //Variaveis
     //
+    $scope.list = [];
+    $scope.limit = 5;
     $scope.registros = [];
     $scope.regAtivos = [];
     $scope.userReg = [];
     $scope.areaReg = [];
-
+    $scope.carregando = true;
+    $scope.tipo = {};
+    $scope.tipo.title = "aguardando resposta";
 
     //
     //Funções decarregamento
@@ -18,12 +22,27 @@ angular.module('eventoIndesejado').controller('dashboard', function ($scope, $ro
             $scope.totalRegistros = data.length;
             $scope.regAtivos = $filter("regAtivo")(data);
             $scope.totalRegistrosAbertos = $scope.regAtivos.length;
+            $scope.list = $scope.regAtivos;
             
             $scope.userReg = $filter('regUsuarios')($scope.regAtivos);
             $scope.areaReg = $filter('regAreas')($scope.regAtivos);
             _pCent($scope.userReg);
             _pCent($scope.areaReg);
+            
+            $scope.carregando = false;
         });
+    };
+    
+    $scope.listTipo = function(){
+        if(!$scope.tipo.status){
+            $scope.tipo.title = "registrados";
+            $scope.list = $scope.registros;
+        }else{
+            $scope.tipo.title = "aguardando resposta";
+            $scope.list = $scope.regAtivos;
+        }
+        
+        $scope.tipo.status = !$scope.tipo.status;
     };
     
     var _pCent = function (loop) {

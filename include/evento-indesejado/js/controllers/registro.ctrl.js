@@ -1,5 +1,6 @@
 angular.module('eventoIndesejado').controller('registro', function ($scope, objetoAPI, config, $routeParams, Upload) {
-
+    
+    $scope.carregando = true;
     $scope.registros = [];
     $scope.origens = [];
     $scope.areas = [];
@@ -40,19 +41,19 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
         $scope.message.texto = texto;
         $scope.message.class = classe;
     };
-    
-    $scope.addUser = function(user){
+
+    $scope.addUser = function (user) {
         $scope.reg.user_recebimento = user.user_id;
         $scope.reg.user = user;
         delete $scope.user_search;
     };
-    
-    $scope.addArea = function(area){
+
+    $scope.addArea = function (area) {
         $scope.reg.area_recebimento = area.area_id;
-        $scope.reg.setor = area;
+        $scope.reg.area = area;
         delete $scope.area_search;
     };
-    
+
     $scope.addOrigem = function (origem) {
         if ($scope.reg.disabled)
             return;
@@ -124,12 +125,12 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
                     $scope.reg.images.push(file);
 
             });
-            
+
             data.filter(function (file) {
                 if (file.FILE.type.indexOf('image') === -1 && !file.ERROS)
                     $scope.reg.files.push(file);
             });
-            
+
             complete();
         } else {
             message(data, 'alert-danger');
@@ -148,7 +149,7 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
                 $scope.reg = registro;
                 $scope.reg.disabled = true;
                 registro.edited = true;
-
+                $scope.carregando = false;
                 _carregarOther();
             } else {
                 message('Registro não encontrado', 'alert-danger');

@@ -79,12 +79,15 @@ angular.module('eventoIndesejado').config(function ($routeProvider) {
                 controller: 'dashboard'
             });
 
-    /**
-     * Debug
-     */
     $routeProvider
-            .when("/teste", {
-                templateUrl: link + "partials/teste.html",
+            .when("/admin/registro/:regId", {
+                templateUrl: link + '/admin/dashboard/registro.html',
+                controller: 'registro'
+            });
+
+    $routeProvider
+            .when("/admin/avaliacao/:regId", {
+                templateUrl: link + '/admin/dashboard/avaliacao.html',
                 controller: 'registro'
             });
 

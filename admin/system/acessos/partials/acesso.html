@@ -1,0 +1,43 @@
+<div class="content form_create">
+
+    <article>
+
+        <header>
+            <h1>Criar Acesso</h1>
+        </header>
+        
+        <form name="PostForm" action="" method="post" enctype="multipart/form-data">
+            <label class="label">
+                <span class="field">Titulo:</span>
+                <input type="text" name="category_title" />
+            </label>
+
+            <label class="label">
+                <span class="field">Conteúdo:</span>
+                <textarea name="category_content" rows="5"></textarea>
+            </label>
+
+            <div class="label_line">
+
+                <label class="label_small">
+                    <span class="field">Data:</span>
+                    <input type="text" class="formTimestamp center" name="category_date" value="" />
+                </label>
+
+                <label class="label_small left">
+                    <span class="field">Seção:</span>
+                    <select name="category_parent">
+                        <option value="null"> Selecione a Seção: </option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="gbform"></div>
+
+            <input type="submit" class="btn green" value="Cadastrar Acesso" />
+        </form>
+
+    </article>
+
+    <div class="clear"></div>
+</div> <!-- content home -->

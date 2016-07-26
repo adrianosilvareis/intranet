@@ -26,6 +26,14 @@ switch ($method) {
                 'message' => 'Salvo com sucesso!',
                 'status' => 200
             ];
+            
+            //deleta todos os dados deste pefil
+            $Read->delete("perfil_id={$request->id}");
+            
+            foreach ($request->list as $value) :
+                $Read->insert("perfil_id=$request->id&acesso_id=$value->acesso_id");
+            endforeach;
+            
             echo json_encode($message);
         endif;
         break;
