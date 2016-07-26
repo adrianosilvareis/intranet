@@ -1,1 +1,1 @@
-angular.module("itemPerfil", ['objetoAPI', 'ngRoute', 'ngAnimate']);   
+angular.module("itemPerfil", ['objetoAPI', 'ngRoute', 'ngAnimate', 'filterDefault']);   

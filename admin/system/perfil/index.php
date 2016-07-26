@@ -3,7 +3,7 @@
     <section>
         
         <a href="painel.php?exe=perfil/create" class="user_cad">Novo Perfil</a>
-        <a href="painel.php?exe=acessos/list" class="user_cad">Itens de perfil</a>
+        <a href="painel.php?exe=acessos/index" class="user_cad">Itens de perfil</a>
         
         <header>
             <h1>Perfis:</h1>

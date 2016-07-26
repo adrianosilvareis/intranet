@@ -49,6 +49,9 @@ endif;
             <script src="../_lib/cdn/combo.js"></script>
             <script src="../js/angular/services/objetoAPI.module.js"></script>
             <script src="../js/angular/services/objetoAPI.services.js"></script>
+            <script src="../js/angular/filter/filter.module.js"></script>
+            <script src="../js/angular/filter/dateBr.filter.js"></script>
+            <script src="../js/angular/filter/timestampBr.filter.js"></script>
         <?php else: ?>
             <link rel="stylesheet" href="../css/ng-animation.css" />
             <script src="../js/lib.min.js"></script>
