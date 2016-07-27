@@ -17,13 +17,13 @@ switch ($method) {
         if ($request->acesso_id):
             //update
             $Read->setThis($request);
-            $update = $Read->Execute()->update(NULL, 'acesso_id');
-            echo json_encode($update);
+            $Read->Execute()->update(NULL, 'acesso_id');
+            echo json_encode($request);
         else:
             //salvar
             $Read->setThis($request);
             $insert = $Read->Execute()->insert();
-            echo json_encode($insert);
+            echo json_encode($request);
         endif;
         break;
     case "DELETE":
@@ -32,7 +32,7 @@ switch ($method) {
         $delete = $Read->Execute()->delete();
         echo json_encode($delete);
         break;
-    
+
     default:
         break;
 }

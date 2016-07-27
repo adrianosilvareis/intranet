@@ -14,7 +14,7 @@
     <img src="/intranet/css/carregando.gif">
 </div>
 
-<form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)" ng-if="!carregando">
+<form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)" ng-if="!carregando && !message.status">
 
     <script type="text/javascript">
                 $(document).ready(function () {
@@ -28,7 +28,7 @@
         <label>Origem do evento:</label>
         <div class="form-group" ng-if="!reg.disabled">
             <ul class="list-group" ng-model="origem" ng-require="true" >
-                <a id="origem_{{origem.origem_id}}}" href="" class="list-group-item col-md-3" style="float: left; text-align: center; min-width: 250px;"
+                <a id="origem_{{origem.origem_id}}}" href="" class="list-group-item col-md-3" style="float: left; text-align: center; min-height: 70px;"
                    title="{{origem.origem_title}}" ng-repeat="origem in origens" ng-click="addOrigem(origem)" ng-class="activeItem(origem)"
                    >{{origem.origem_title}}</a>
             </ul>

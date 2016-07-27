@@ -72,7 +72,7 @@ class Controle extends Business {
         else:
             $Syntax['Condition'] = implode(', ', $Syntax['Condition']);
         endif;
-
+        
         $Sql = "UPDATE {$this->Table} SET {$Syntax['Condition']} WHERE {$Syntax['Id']}";
         $this->Execute($Sql);
         $this->Result = $this->Commit();

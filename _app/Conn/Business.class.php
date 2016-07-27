@@ -156,7 +156,11 @@ abstract class Business extends ConexaoBancoDeDados {
 
     protected function Execute($Sql) {
         $this->Stmt = $this->prepare($Sql, $this->InfoConexaoBD);
-
+        
+        if($this->Dados && array_search('false', $this->Dados)):
+            $this->Dados[array_search('false', $this->Dados)] = '0';
+        endif;
+        
         if ($this->Dados && array_key_exists('limit', $this->Dados)) {
             $Limit = (int) $this->Dados['limit'];
             $this->Stmt->bindParam(':limit', $Limit, PDO::PARAM_INT);
@@ -228,7 +232,7 @@ abstract class Business extends ConexaoBancoDeDados {
             $Links[] = "#" . $value . "#";
         endforeach;
         unset($Keys);
-
+        
         return ['Fields' => $Fields, 'Values' => $Values, 'Condition' => $Condition, 'Links' => $Links];
     }
 

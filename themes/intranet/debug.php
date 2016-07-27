@@ -1,9 +1,9 @@
 <?php
 
-$data = '25/07/2016';
-echo Check::Data($data);
-echo "<br>";
-echo date('Y-m-d H:i:s');
-echo "<br>";
-echo date('Y-m-d', strtotime(Check::Data($data)));
-//date('Y-m-d', strtotime(Check::Data($request->reg_date_correcao)));
+$WsAcesso = new WsAcesso();
+
+
+$WsAcesso->setAcesso_id(1);
+$WsAcesso->setAcesso_status(false);
+
+var_dump($WsAcesso->Execute()->update(null, 'acesso_id'));

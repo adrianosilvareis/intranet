@@ -4,8 +4,9 @@ angular.module("itemPerfil").controller('acessos', function ($scope, objetoAPI, 
     
     $scope.status = function(acesso){
         acesso.acesso_status = !acesso.acesso_status;
-        
-        console.log(acesso.acesso_status);
+        objetoAPI.saveObjeto(config.urlAPI + '/acesso', acesso).success(function(data){
+            console.log(data);
+        }).error(error);
     };
     
     var carregarAcessos = function () {

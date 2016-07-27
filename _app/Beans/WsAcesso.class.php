@@ -93,6 +93,7 @@ class WsAcesso extends Beans {
     }
 
     function getAcesso_status() {
+        $this->acesso_status = ($this->acesso_status ? '1' : 'false');
         return $this->acesso_status;
     }
 

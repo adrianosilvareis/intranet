@@ -152,8 +152,12 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
                 $scope.carregando = false;
                 _carregarOther();
             } else {
+                $scope.carregando = false;
+                $scope.message.status = 404;
                 message('Registro não encontrado', 'alert-danger');
             }
+        }else{
+            $scope.carregando = false;
         }
     };
 
