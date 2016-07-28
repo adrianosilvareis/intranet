@@ -5,8 +5,9 @@ $Read = new WsAcesso();
 switch ($method) {
     case "GET":
         //retorna todos os itens
-        if ($id):
-            $Read->Execute()->find("acesso_id");
+        if (isset($id)):
+            $Read->setAcesso_id($id);
+            $Read->Execute()->find();
             Check::JsonReturn($Read->Execute()->getResult(), 'Acesso não encontrado!', '404');
         else:
             $Read->Execute()->findAll();

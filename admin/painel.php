@@ -52,6 +52,8 @@ endif;
             <script src="../js/angular/filter/filter.module.js"></script>
             <script src="../js/angular/filter/dateBr.filter.js"></script>
             <script src="../js/angular/filter/timestampBr.filter.js"></script>
+            <script src="../js/angular/directive/uiFormat.module.js"></script>
+            <script src="../js/angular/directive/uiTimestampBr.directive.js"></script>
         <?php else: ?>
             <link rel="stylesheet" href="../css/ng-animation.css" />
             <script src="../js/lib.min.js"></script>

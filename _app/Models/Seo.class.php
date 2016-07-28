@@ -351,6 +351,7 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiCep.directive.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiSite.directive.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiTel.directive.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiTimestampBr.directive.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/filter.module.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/maxlength.filter.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filter/name.filter.js'></script>" . "\n";

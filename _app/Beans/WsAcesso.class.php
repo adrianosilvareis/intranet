@@ -52,7 +52,7 @@ class WsAcesso extends Beans {
         $this->setAcesso_title((isset($object->acesso_title) ? $object->acesso_title : null));
         $this->setAcesso_content((isset($object->acesso_content) ? $object->acesso_content : null));
         $this->setAcesso_name((isset($object->acesso_name) ? $object->acesso_name : null));
-        $this->setAcesso_status((isset($object->acesso_status) ? $object->acesso_status : null));
+        $this->setAcesso_status((isset($object->acesso_status) ? $this->acesso_status : null));
         $this->setAcesso_date((isset($object->acesso_date) ? $object->acesso_date : null));
         $this->setAcesso_tag((isset($object->acesso_tag) ? $object->acesso_tag : null));
     }
@@ -93,7 +93,9 @@ class WsAcesso extends Beans {
     }
 
     function getAcesso_status() {
-        $this->acesso_status = ($this->acesso_status ? '1' : 'false');
+        if (isset($this->acesso_status)):
+            $this->acesso_status = ($this->acesso_status ? '1' : 'false');
+        endif;
         return $this->acesso_status;
     }
 

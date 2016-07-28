@@ -2,8 +2,13 @@
 
     <section>
 
-        <h1>Acessos:</h1>
+        <a href="painel.php?exe=acessos/index#/create" class="user_cad">Novo Item</a>
+        <a href="painel.php?exe=perfil/index" class="user_cad">Perfis</a>
 
+        <header>
+            <h1>Acessos:</h1>
+        </header>
+        
         <section ng-repeat="acesso in acessos| filter:{acesso_parent:null}">
 
             <header>

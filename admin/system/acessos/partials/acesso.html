@@ -6,35 +6,42 @@
             <h1>Criar Acesso</h1>
         </header>
         
-        <form name="PostForm" action="" method="post" enctype="multipart/form-data">
+        <form name="PostForm" ng-submit="salvar(acesso)">
             <label class="label">
                 <span class="field">Titulo:</span>
-                <input type="text" name="category_title" />
+                <input type="text" name="category_title" ng-model="acesso.acesso_title"/>
             </label>
 
             <label class="label">
                 <span class="field">Conteúdo:</span>
-                <textarea name="category_content" rows="5"></textarea>
+                <textarea name="category_content" rows="5" ng-model="acesso.acesso_content"></textarea>
             </label>
 
             <div class="label_line">
 
                 <label class="label_small">
-                    <span class="field">Data:</span>
-                    <input type="text" class="formTimestamp center" name="category_date" value="" />
+                    <span class="field">Tag:</span>
+                    <input type="text" class="center" name="acesso_tag" value="" ng-model="acesso.acesso_tag"/>
                 </label>
 
-                <label class="label_small left">
+                <label class="label_small">
+                    <span class="field">Data:</span>
+                    <input type="text" class="center" name="acesso_date" value="" ng-model="acesso.acesso_date" ui-timestampbr/>
+                </label>
+
+                <label class="label_small">
                     <span class="field">Seção:</span>
-                    <select name="category_parent">
-                        <option value="null"> Selecione a Seção: </option>
+                    <select name="category_parent" ng-model="acesso.acesso_parent" 
+                            ng-options="secao.acesso_id as secao.acesso_title group by secao.acesso_tag for secao in secoes">
+                        <option value=""> Selecione a Seção: </option>
                     </select>
                 </label>
             </div>
 
             <div class="gbform"></div>
 
-            <input type="submit" class="btn green" value="Cadastrar Acesso" />
+            <input type="submit" class="btn green" value="Salvar Acesso" />
+            <a href="painel.php?exe=acessos/index#/" class="btn default">voltar</a>
         </form>
 
     </article>
