@@ -5,7 +5,10 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
     var _id = "";
 
     $scope.salvar = function (acesso) {
-        console.log(acesso);
+       objetoAPI.saveObjeto(config.urlAPI + '/acesso', acesso).success(function(data){
+           //apos os testes receber o acesso
+           $scope.acesso = data;
+       }).error(error);
     };
 
     var carregarSecao = function () {
@@ -30,7 +33,6 @@ angular.module("itemPerfil").controller('acesso', function ($scope, objetoAPI, c
     };
 
     var success = function (data) {
-        console.log(config.urlAPI + "/acesso/&id=" + _id);
         $scope.acesso = data;
     };
 

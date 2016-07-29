@@ -15,15 +15,21 @@ switch ($method) {
         endif;
         break;
     case "POST":
-        if ($request->acesso_id):
+        if (!empty($request->acesso_id)):
             //update
             $Read->setThis($request);
             $Read->Execute()->update(NULL, 'acesso_id');
             echo json_encode($request);
         else:
             //salvar
+            $request->acesso_tag = Check::Name($request->acesso_tag);
+            $request->acesso_status = true;
+            $request->acesso_name = Check::Name($request->acesso_title);
             $Read->setThis($request);
             $insert = $Read->Execute()->insert();
+            if ($insert):
+                $request->acesso_id = (int) $Read->Execute()->MaxFild("acesso_id");
+            endif;
             echo json_encode($request);
         endif;
         break;

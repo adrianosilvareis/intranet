@@ -9,24 +9,24 @@
         <form name="PostForm" ng-submit="salvar(acesso)">
             <label class="label">
                 <span class="field">Titulo:</span>
-                <input type="text" name="category_title" ng-model="acesso.acesso_title"/>
+                <input type="text" name="category_title" ng-model="acesso.acesso_title" placeholder="titulo do acesso"/>
             </label>
 
             <label class="label">
                 <span class="field">Conteúdo:</span>
-                <textarea name="category_content" rows="5" ng-model="acesso.acesso_content"></textarea>
+                <textarea name="category_content" rows="5" ng-model="acesso.acesso_content" placeholder="Descrição do acesso"></textarea>
             </label>
 
             <div class="label_line">
 
                 <label class="label_small">
                     <span class="field">Tag:</span>
-                    <input type="text" class="center" name="acesso_tag" value="" ng-model="acesso.acesso_tag"/>
+                    <input type="text" class="center" name="acesso_tag" value="" placeholder="Ex.: Fast-exames" ng-model="acesso.acesso_tag"/>
                 </label>
 
                 <label class="label_small">
                     <span class="field">Data:</span>
-                    <input type="text" class="center" name="acesso_date" value="" ng-model="acesso.acesso_date" ui-timestampbr/>
+                    <input type="text" class="center" name="acesso_date" value="" ng-model="acesso.acesso_date" placeholder="dd/mm/aaaa hh:mm:ss" ui-timestampbr/>
                 </label>
 
                 <label class="label_small">
