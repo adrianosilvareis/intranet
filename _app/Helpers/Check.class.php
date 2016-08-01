@@ -364,27 +364,46 @@ class Check {
         endif;
     }
 
-    public static function UserAcesso($acesso) {
+    /**
+     * Verifica se o usuario logado tem acesso o acesso informado!
+     * 
+     * @param type $acesso
+     * @return boolean
+     */
+    public static function UserPermission($acesso, $system = NULL) {
         $acessos = $_SESSION['userlogin']['perfil']->acessos;
 
+        $acesso_name = self::Name($acesso);
+        $Read = new WsAcesso();
+        $Read->setAcesso_name($acesso_name);
+        $Read->setAcesso_tag($acesso_name);
 
-        foreach ($acessos as $value) :
-            if ($value->acesso_name == $acesso):
-                return $value;
-            endif;
-        endforeach;
+        $Read->Execute()->Query("(#acesso_name# OR #acesso_tag#)");
+        $result = $Read->Execute()->getResult();
+
+        if ($result):
+            foreach ($acessos as $value) :
+                if ($value->acesso_id == $result[0]->acesso_id):
+                    return true;
+                endif;
+            endforeach;
+            
+            $message = "Não tem permissão";
+            $status = WS_ALERT;
+            self::mensagem($system, false, $message, $status);
+        else:
+            $message = "Acesso não encontrado";
+            $status = WS_INFOR;
+            self::mensagem($system, false, $message, $status);
+        endif;
     }
 
-    public static function AcessoTags($tag) {
-        $acessos = $_SESSION['userlogin']['perfil']->acessos;
-        $list = array();
-        foreach ($acessos as $acesso):
-            if ($acesso->acesso_tag == $tag):
-                $list[] = $acesso;
-            endif;
-        endforeach;
-
-        return $list;
+    private static function mensagem($system, $result, $message, $status) {
+        if (!empty($system)):
+            self::JsonReturn($result, $message, $status);
+        else:
+            WSErro($message, $status);
+        endif;
     }
 
     public static function JsonReturn($result, $message, $status) {

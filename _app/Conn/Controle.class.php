@@ -40,7 +40,7 @@ class Controle extends Business {
     public function insert($Dados = null) {
         if (!$Dados):
             $Dados = $this->getDados();
-        endif;
+        endif;        
         $Syntax = $this->setWhile($Dados);
         $Sql = "INSERT INTO {$this->Table} ({$Syntax['Fields']}) VALUES ({$Syntax['Values']})";
         $this->Execute($Sql);

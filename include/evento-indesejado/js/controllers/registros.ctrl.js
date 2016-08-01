@@ -1,4 +1,6 @@
-angular.module('eventoIndesejado').controller('registros', function ($scope, objetoAPI, config) {
+angular.module('eventoIndesejado').controller('registros', function ($scope, objetoAPI, config, $location) {
+    
+    $location.auth = "evento indesejado";
     
     $scope.abertos_enviados = [];
     $scope.fechados_enviados = [];

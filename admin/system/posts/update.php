@@ -60,7 +60,7 @@
             <div class="label_line">
                 <label class="label_medium">
                     <span class="field">Enviar Capa:</span>
-                    <input type="file" name="post_cover" />
+                    <input type="file" name="post_cover" class="max"/>
                 </label>
                 
                 <label class="label_small">

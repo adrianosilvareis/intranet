@@ -41,6 +41,7 @@ endif;
 
         <?php if (!PRODUCAO): ?>
             <link rel="stylesheet" href="../_lib/angular/css/ng-animation.css" />
+            <script src='../_app/Config.inc.js.php'></script>
             <script src="../_lib/angular.min.js"></script>
             <script src="../_lib/angular/angular-route.min.js"></script>
             <script src="../_lib/angular/angular-animate.min.js"></script>
@@ -59,6 +60,7 @@ endif;
             <script src="../js/lib.min.js"></script>
             <script src="../js/all.min.js"></script>
             <script src="../cdn/combo.js"></script>
+            <script src='../_app/Config.inc.js.php'></script>
         <?php endif; ?>
 
         <script src="__jsc/tiny_mce/tiny_mce.js"></script>

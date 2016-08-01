@@ -5,6 +5,10 @@
         <img src="css/carregando.gif">
     </div>
     
+    <div class="trigger infor" ng-if="message.status">
+      {{message.mensage}}
+    </div>
+    
     <div ng-if="alert.message" ng-class="alert.class">
         {{alert.message}}
     </div>

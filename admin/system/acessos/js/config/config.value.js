@@ -1,4 +1,5 @@
 angular.module('itemPerfil').value('config', {
     URL: CONFIG,
-    urlAPI: CONFIG.API + "/perfil"
+    urlAPI: CONFIG.API + "/perfil",
+    perfilUsuario: perfilUsuario
 });

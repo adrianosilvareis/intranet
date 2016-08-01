@@ -1,4 +1,5 @@
-<?php require("Config.inc.php"); ?>
+<?php require_once ("Config.inc.php"); ?>
+<?php session_start() ?>
 
 var CONFIG = {
     BASEDIR: "<?= BASEDIR ?>",
@@ -7,3 +8,4 @@ var CONFIG = {
     API: "<?= HOME ?>/api"
 };
 
+var perfilUsuario = <?php echo json_encode($_SESSION['userlogin']['perfil']); ?>

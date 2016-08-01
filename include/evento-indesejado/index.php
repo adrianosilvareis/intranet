@@ -13,6 +13,7 @@ if (!PRODUCAO):
     Register::addRegister("<script src='" . EVENTO . "/filters/ativos.filter.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/filters/regUsuarios.filter.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/filters/regAreas.filter.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/services/authentication.services.js'></script>");
 endif;
 ?>
 

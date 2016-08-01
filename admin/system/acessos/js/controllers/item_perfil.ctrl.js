@@ -1,7 +1,8 @@
 angular.module("itemPerfil").controller('item_perfil', function ($scope, objetoAPI, config, $timeout, $routeParams) {
 
     var todosItens = [];
-
+    
+    $scope.message = {};
     $scope.carregando = true;
     $scope.list = [];
     $scope.list2 = [];
@@ -15,11 +16,11 @@ angular.module("itemPerfil").controller('item_perfil', function ($scope, objetoA
             id: $scope.perfilId,
             list: $scope.select
         };
-        
-        objetoAPI.saveObjeto(config.urlAPI + '/perfilHasAcesso', objeto).success(function(data){
+
+        objetoAPI.saveObjeto(config.urlAPI + '/perfilHasAcesso', objeto).success(function (data) {
             $scope.alert = data;
             $scope.alert.class = 'trigger accept';
-        }).error(function(error){
+        }).error(function (error) {
             $scope.alert = error;
             $scope.alert.class = 'trigger danger';
         });
@@ -63,9 +64,13 @@ angular.module("itemPerfil").controller('item_perfil', function ($scope, objetoA
     //
     var carregarItens = function () {
         objetoAPI.getObjeto(config.urlAPI + '/acesso').success(function (data) {
+            if (Array.isArray(data)) {
+                todosItens = data;
+                menu($scope.list, null);
+            } else {
+                $scope.message = data;
+            }
             $scope.carregando = false;
-            todosItens = data;
-            menu($scope.list, null);
         });
     };
 

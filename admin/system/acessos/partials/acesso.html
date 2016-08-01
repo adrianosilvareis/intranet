@@ -6,7 +6,15 @@
             <h1>Criar Acesso</h1>
         </header>
         
-        <form name="PostForm" ng-submit="salvar(acesso)">
+        <div ng-if="carregando">
+            <img ng-src="{{carregando}}">
+        </div>
+        
+        <div class="trigger accept" ng-if="message">
+            {{message}}
+        </div>
+        
+        <form name="PostForm" ng-submit="salvar(acesso)" ng-if="!carregando">
             <label class="label">
                 <span class="field">Titulo:</span>
                 <input type="text" name="category_title" ng-model="acesso.acesso_title" placeholder="titulo do acesso"/>

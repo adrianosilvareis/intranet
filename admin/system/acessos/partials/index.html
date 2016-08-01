@@ -9,7 +9,15 @@
             <h1>Acessos:</h1>
         </header>
         
-        <section ng-repeat="acesso in acessos| filter:{acesso_parent:null}">
+        <div ng-if="carregando">
+            <img ng-src="{{carregando}}">
+        </div>
+        
+        <div class="trigger infor" ng-if="message.status">
+            {{message.mensage}}
+        </div>
+        
+        <section ng-repeat="acesso in acessos| filter:{acesso_parent:null}" ng-if="!carregando">
 
             <header>
                 <h1>{{acesso.acesso_title}}  <span> </span></h1>

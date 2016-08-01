@@ -23,7 +23,7 @@ switch ($method) {
         else:
             //salvar
             $request->acesso_tag = Check::Name($request->acesso_tag);
-            $request->acesso_status = true;
+            $request->acesso_status = 1;
             $request->acesso_name = Check::Name($request->acesso_title);
             $Read->setThis($request);
             $insert = $Read->Execute()->insert();
