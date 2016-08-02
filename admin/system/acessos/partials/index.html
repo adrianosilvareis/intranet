@@ -34,6 +34,7 @@
             <article ng-repeat="subacessos in acessos|filter:{acesso_parent:acesso.acesso_id}:true" style="height: 200px;">
 
                 <h1><a target="_blank" href="painel.php?exe=acessos/index#/update/{{subacessos.acesso_id}}" title="Editar">{{subacessos.acesso_title}}</a></h1>
+                <p><small>{{subacessos.acesso_content}}</small></p>
                 <ul class="info post_actions">
                     <li><strong>Data:</strong>{{subacessos.acesso_date| timestampBr | limitTo:16}} Hs</li>
                     <li><a class="act_edit" target="_blank" href="painel.php?exe=acessos/index#/update/{{subacessos.acesso_id}}" title="Editar">Editar</a></li>

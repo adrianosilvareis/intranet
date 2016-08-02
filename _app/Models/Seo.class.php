@@ -347,6 +347,7 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/js/jquery/event/classe.event.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/services/objetoAPI.module.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/services/objetoAPI.services.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/services/accessControlProvider.services.js'></script>";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiFormat.module.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiCep.directive.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/directive/uiSite.directive.js'></script>" . "\n";
