@@ -66,6 +66,9 @@ class NcOrigem {
     }
 
     function getOrigem_status() {
+        if (isset($this->origem_status)):
+            $this->origem_status = ($this->origem_status ? '1' : 'false');
+        endif;
         return $this->origem_status;
     }
 

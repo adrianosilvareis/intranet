@@ -217,24 +217,24 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
 
     var _carregarOther = function () {
 
-        objetoAPI.getObjeto(config.apiURL + "/registroHasOrigem.api.php").success(function (data) {
+        objetoAPI.getObjeto(config.apiURL + "/registroHasOrigem").success(function (data) {
             _registerHasOrigens = data;
             _mixins();
         });
 
-        objetoAPI.getObjeto(config.apiURL + "/registroHasFile.api.php").success(function (data) {
+        objetoAPI.getObjeto(config.apiURL + "/registroHasFile").success(function (data) {
             _registerHasFile = data;
             _mixins();
         });
 
-        objetoAPI.getObjeto(config.apiURL + "/registroHasImage.api.php").success(function (data) {
+        objetoAPI.getObjeto(config.apiURL + "/registroHasImage").success(function (data) {
             _registerHasImage = data;
             _mixins();
         });
     };
 
     var _carregarOrigens = function () {
-        objetoAPI.getObjeto(config.apiURL + "/origem.api.php")
+        objetoAPI.getObjeto(config.apiURL + "/origem")
                 .success(function (data) {
                     $scope.origens = data;
                     _mixins();
@@ -246,7 +246,7 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
     };
 
     var _carregarAreas = function () {
-        objetoAPI.getObjeto(config.apiURL + "/area.api.php")
+        objetoAPI.getObjeto(config.apiURL + "/area")
                 .then(
                         function (success) {
                             $scope.areas = success.data;
@@ -273,7 +273,7 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
                 );
     };
     var _carregarUsers = function () {
-        objetoAPI.getObjeto(config.apiURL + '/usuarios.api.php')
+        objetoAPI.getObjeto(config.apiURL + '/usuarios')
                 .then(
                         function (success) {
                             $scope.users = success.data;

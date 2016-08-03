@@ -1,5 +1,6 @@
 angular.module("eventoIndesejado").value("config", {
-    apiURL: "/intranet/api/evento-indesejado",
+    URL: CONFIG,
+    apiURL: CONFIG.API + "/evento-indesejado",
     session: "/intranet/api/session/session.api.php",
     perfilUsuario: perfilUsuario
 });

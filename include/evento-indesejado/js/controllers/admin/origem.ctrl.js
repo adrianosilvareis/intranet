@@ -19,7 +19,6 @@ angular.module("eventoIndesejado").controller('origem', function ($scope, $route
             })[0];
 
             if ($scope.origem) {
-                $scope.origem.edited = true;
                 $scope.message.send = "";
                 $scope.message.class = "";
                 $scope.message.status = 200;
@@ -32,14 +31,14 @@ angular.module("eventoIndesejado").controller('origem', function ($scope, $route
     };
 
     var carregarOrigens = function () {
-        $http.get(config.apiURL + "/origem.api.php").success(function (data) {
+        $http.get(config.apiURL + "/origem").success(function (data) {
             origens = data;
             params();
         });
     };
 
     $scope.salvar = function (origem) {
-        $http.post(config.apiURL + "/origem.api.php", origem).success(function (data) {
+        $http.post(config.apiURL + "/origem", origem).success(function (data) {
             origem.edited ?
                     $scope.message.send = "Origem atualizada com sucesso!"
                     : $scope.message.send = "Origem adicionado com sucesso!";

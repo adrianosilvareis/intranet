@@ -85,6 +85,9 @@ class WsAreaTrabalho extends Beans {
     }
 
     function getArea_status() {
+        if (isset($this->area_status)):
+            $this->area_status = ($this->area_status ? '1' : 'false');
+        endif;
         return $this->area_status;
     }
 

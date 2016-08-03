@@ -57,7 +57,7 @@ angular.module('eventoIndesejado').controller('masterList', function ($scope, ob
     };
 
     var carregarUsers = function () {
-        objetoAPI.getObjeto(config.apiURL + '/usuarios.api.php')
+        objetoAPI.getObjeto(config.apiURL + '/usuarios')
                 .then(
                         function (success) {
                             _users = success.data;

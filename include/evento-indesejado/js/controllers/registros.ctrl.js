@@ -1,5 +1,5 @@
 angular.module('eventoIndesejado').controller('registros', function ($scope, objetoAPI, config) {
-        
+    
     $scope.abertos_enviados = [];
     $scope.fechados_enviados = [];
     $scope.abertos_recebidos = [];
@@ -12,8 +12,6 @@ angular.module('eventoIndesejado').controller('registros', function ($scope, obj
         carregarSession();
         carregarRegistros();
     };
-
-//    reg_finalizado | user_cadastro | user_recebimento | area_recebimento
 
     var registros = function (data) {
         //enviados

@@ -20,6 +20,7 @@ class WsUsers extends Beans {
     private $user_lastupdate;
     private $user_level;
     private $user_cover;
+    private $user_status;
     private $area_id;
     private $perfil_id;
 
@@ -44,6 +45,7 @@ class WsUsers extends Beans {
             'user_lastupdate' => $this->getUser_lastupdate(),
             'user_level' => $this->getUser_level(),
             'user_cover' => $this->getUser_cover(),
+            'user_status' => $this->getUser_status(),
             'area_id' => $this->getArea_id(),
             'perfil_id' => $this->getPerfil_id(),
             'user_id' => $this->getUser_id()
@@ -68,6 +70,7 @@ class WsUsers extends Beans {
         $this->setUser_lastupdate((isset($object->user_lastupdate) ? $object->user_lastupdate : null));
         $this->setUser_level((isset($object->user_level) ? $object->user_level : null));
         $this->setUser_cover((isset($object->user_cover) ? $object->user_cover : null));
+        $this->setUser_status((isset($object->user_status) ? $object->user_status : null));
         $this->setArea_id((isset($object->area_id) ? $object->area_id : null));
         $this->setPerfil_id((isset($object->perfil_id) ? $object->perfil_id : null));
     }
@@ -131,6 +134,13 @@ class WsUsers extends Beans {
         return $this->user_cover;
     }
 
+    function getUser_status() {
+        if (isset($this->user_status)):
+            $this->user_status = ($this->user_status ? '1' : 'false');
+        endif;
+        return $this->user_status;
+    }
+
     function getArea_id() {
         return $this->area_id;
     }
@@ -183,6 +193,10 @@ class WsUsers extends Beans {
         $this->user_cover = $user_cover;
     }
 
+    function setUser_status($user_status) {
+        $this->user_status = $user_status;
+    }
+
     function setArea_id($area_id) {
         $this->area_id = $area_id;
     }
@@ -190,6 +204,5 @@ class WsUsers extends Beans {
     function setPerfil_id($perfil_id) {
         $this->perfil_id = $perfil_id;
     }
-
 
 }

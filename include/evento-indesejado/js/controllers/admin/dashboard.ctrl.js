@@ -1,4 +1,4 @@
-angular.module('eventoIndesejado').controller('dashboard', function ($scope, $routeParams, $http, config, $filter) {
+angular.module('eventoIndesejado').controller('dashboard', function ($scope, $http, config, $filter) {
 
     //
     //Variaveis
@@ -17,7 +17,7 @@ angular.module('eventoIndesejado').controller('dashboard', function ($scope, $ro
     //Funções decarregamento
     //
     var carregarRegistros = function () {
-        $http.get(config.apiURL + "/registroDashboard.api.php").success(function (data) {
+        $http.get(config.apiURL + "/registroDashboard").success(function (data) {
             $scope.registros = data;
             $scope.totalRegistros = data.length;
             $scope.regAtivos = $filter("regAtivo")(data);
