@@ -8,13 +8,13 @@
     {{message.texto}}
 </div>
 
-<div ng-include="'/intranet/include/evento-indesejado/partials/message/message-registro.html'"></div>
+<div ng-include="urlMessage"></div>
 
 <div ng-if="carregando">
-    <img src="/intranet/css/carregando.gif">
+    <img ng-src="{{gifLoad}}">
 </div>
 
-<form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)" ng-if="!carregando && !message.status">
+<form name="registroForm" style="margin-bottom: 25px;" ng-submit="save(reg)" ng-show="!carregando && !message.status">
 
     <script type="text/javascript">
                 $(document).ready(function () {
@@ -132,7 +132,7 @@
                 {{reg.area.area_title}}
             </div>
         </div>
-
+        
         <table class="table table-hover table-striped table-responsive" ng-if="area_search">
             <thead>
                 <tr>

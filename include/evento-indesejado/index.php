@@ -1,4 +1,8 @@
 <?php
+if (!Check::UserPermission('evento-indesejado')):
+    header("Location: " . HOME . "/401");
+endif;
+
 if (!PRODUCAO):
     define("EVENTO", HOME . "/include/evento-indesejado/js");
     Register::addRegister("<script src='" . EVENTO . "/app.js'></script>");

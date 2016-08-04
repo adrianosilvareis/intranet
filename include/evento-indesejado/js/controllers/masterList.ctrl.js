@@ -81,7 +81,7 @@ angular.module('eventoIndesejado').controller('masterList', function ($scope, ob
     };
 
     var carregarRegistros = function () {
-        objetoAPI.getObjeto(config.apiURL + '/registro.api.php')
+        objetoAPI.getObjeto(config.apiURL + '/registro')
                 .then(
                         function (success) {
                             _registros = success.data;

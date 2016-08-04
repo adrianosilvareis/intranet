@@ -12,4 +12,8 @@ angular.module("objetoAPI").service("objetoAPI", function ($http) {
     this.saveObjeto = function (url, objeto) {
         return $http.post(url, objeto);
     };
+
+    this.deleteObjeto = function (url) {
+        return $http.delete(url);
+    };
 });

@@ -1,16 +1,40 @@
 angular.module('eventoIndesejado').controller('registro', function ($scope, objetoAPI, config, $routeParams, Upload) {
-    
+
+    //
+    //variaveis
+    //
+    $scope.partials = CONFIG.HOME + '/include/evento-indesejado/partials';
+    $scope.urlMessage = CONFIG.HOME + '/include/evento-indesejado/partials/message/message-registro.html';
+    $scope.gifLoad = CONFIG.HOME + '/css/carregando.gif';
     $scope.carregando = true;
+    $scope.area_search = "";
     $scope.registros = [];
     $scope.origens = [];
     $scope.areas = [];
     $scope.users = [];
     $scope.reg = {};
 
+    //
+    //variaveis privadas
+    //
     var _registerHasOrigens = [];
     var _registerHasFile = [];
     var _registerHasImage = [];
 
+    //
+    //inicio da palicação
+    //
+    var init = function () {
+        _carregarUsers();
+        _carregarAreas();
+        _carregarOrigens();
+        _objetcInit();
+        _params();
+    };
+
+    //
+    //iniciar objeto message e registro
+    //
     _objetcInit = function () {
         if ($scope.message === undefined)
             $scope.message = {};
@@ -29,31 +53,32 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
             $scope.reg.files = [];
     };
 
-    var init = function () {
-        _carregarRegistros();
-        _carregarUsers();
-        _carregarAreas();
-        _carregarOrigens();
-        _objetcInit();
-    };
-
     var message = function (texto, classe) {
         $scope.message.texto = texto;
         $scope.message.class = classe;
     };
 
+    //
+    //Adicionar usuario
+    //    
     $scope.addUser = function (user) {
         $scope.reg.user_recebimento = user.user_id;
         $scope.reg.user = user;
         delete $scope.user_search;
     };
 
+    //
+    //Adicionar area
+    //    
     $scope.addArea = function (area) {
         $scope.reg.area_recebimento = area.area_id;
         $scope.reg.area = area;
         delete $scope.area_search;
     };
 
+    //
+    //Adicionar origem
+    //    
     $scope.addOrigem = function (origem) {
         if ($scope.reg.disabled)
             return;
@@ -67,12 +92,17 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
         }
     };
 
+    //
+    //origem selecionada
+    //    
     $scope.activeItem = function (origem) {
         if (origem.classe)
             return "list-group-item-success";
     };
 
-
+    //
+    //Validação de formulario para origem
+    //    
     $scope.origemValid = function () {
         if ($scope.reg.origens && $scope.reg.origens.length > 0 || $scope.reg.reg_origem_outros && $scope.reg.reg_origem_outros.length > 3)
             return false;
@@ -80,6 +110,9 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
         return true;
     };
 
+    //
+    //Validação de formulario para avaliação de causa
+    //
     $scope.causaValid = function () {
         var _size = 5;
         if ($scope.reg.reg_aval_processo && $scope.reg.reg_aval_processo.length > _size || $scope.reg.reg_aval_materia_prima && $scope.reg.reg_aval_materia_prima.length > _size || $scope.reg.reg_aval_mao_obra && $scope.reg.reg_aval_mao_obra.length > _size || $scope.reg.reg_aval_equipamento && $scope.reg.reg_aval_equipamento.length > _size || $scope.reg.reg_aval_meio_ambiente && $scope.reg.reg_aval_meio_ambiente.length > _size || $scope.reg.reg_aval_outros && $scope.reg.reg_aval_outros.length > _size || $scope.reg.reg_aval_outros && $scope.reg.reg_aval_outros.length > _size)
@@ -88,11 +121,16 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
         return true;
     };
 
+    //
+    //Remover arquivo selecionado
+    //
     $scope.removeFile = function (file) {
+
+        var urlFile = file.FILE.tmp_name;
         if ($scope.reg.disabled)
             return;
 
-        objetoAPI.saveObjeto(config.apiURL + '/removeFile.api.php', file).success(function (data) {
+        objetoAPI.deleteObjeto(config.apiURL + '/upload/&file=' + urlFile).success(function (data) {
             $scope.reg.images = $scope.reg.images.filter(function (imagem) {
                 if (imagem !== file)
                     return imagem;
@@ -105,12 +143,15 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
         });
     };
 
+    //
+    //Upload de arquivo automatico
+    //
     $scope.onFileSelect = function (files) {
         if (!files)
             return;
         start();
         Upload.upload({
-            url: config.apiURL + '/upload.api.php',
+            url: config.apiURL + '/upload',
             data: {files: files}
         }).then(function (resp) {
             delete $scope.uploads;
@@ -118,6 +159,9 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
         });
     };
 
+    //
+    //Visualização de arquivo adicionado
+    //
     var _preview = function (data) {
         if (Array.isArray(data)) {
             data.filter(function (file) {
@@ -137,34 +181,118 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
             complete();
         }
     };
-
+    
+    //
+    //verifica que foi passado id de um registro
+    //
     var _params = function () {
         if ($routeParams.regId) {
             var idRegistro = $routeParams.regId;
-            var registro = $scope.registros.filter(function (reg) {
-                return reg.reg_id == idRegistro;
-            })[0];
-
-            if (registro) {
-                $scope.reg = registro;
-                $scope.reg.disabled = true;
-                registro.edited = true;
+            _carregarRegistro(idRegistro);
+            _carregarOther();
+        } else {
+            if ($scope.origens && $scope.areas && $scope.users) {
                 $scope.carregando = false;
-                _carregarOther();
-            } else {
-                $scope.carregando = false;
-                $scope.message.status = 404;
-                message('Registro não encontrado', 'alert-danger');
             }
-        }else{
-            $scope.carregando = false;
         }
     };
+    
+    //
+    //Carrega o registor quando há
+    //
+    var _carregarRegistro = function (regId) {
+        objetoAPI.getObjeto(config.apiURL + '/registro/&id=' + regId)
+                .then(
+                        function (success) {
+                            $scope.reg = success.data;
+                            $scope.reg.disabled = true;
+                            _mixins();
+                        },
+                        function (error) {
+                            message('Registro não encontrado', 'alert-danger');
+                            $scope.message.status = 404;
+                            console.log(error);
+                        }
+                );
+    };
 
+    //
+    //Carregar manyToMany de origens, arquivos, imagens para o registro
+    //
+    var _carregarOther = function () {
+
+        objetoAPI.getObjeto(config.apiURL + "/registroHasOrigem").success(function (data) {
+            _registerHasOrigens = data;
+            _mixins();
+        });
+
+        objetoAPI.getObjeto(config.apiURL + "/registroHasFile").success(function (data) {
+            _registerHasFile = data;
+            _mixins();
+        });
+
+        objetoAPI.getObjeto(config.apiURL + "/registroHasImage").success(function (data) {
+            _registerHasImage = data;
+            _mixins();
+        });
+    };
+
+    //
+    //carregar origens
+    //
+    var _carregarOrigens = function () {
+        objetoAPI.getObjeto(config.apiURL + "/origem")
+                .success(function (data) {
+                    $scope.origens = data;
+                    _mixins();
+                })
+                .error(function (error) {
+                    message('Erro ao carregar Origens', 'alert-danger');
+                    console.log(error);
+                });
+    };
+
+    //
+    //carregar Areas
+    //
+    var _carregarAreas = function () {
+        objetoAPI.getObjeto(config.apiURL + "/area")
+                .then(
+                        function (success) {
+                            $scope.areas = success.data;
+                            _mixins();
+                        },
+                        function (error) {
+                            message('Erro ao carregar areas de trabalho', 'alert-danger');
+                            console.log(error);
+                        }
+                );
+    };
+
+    //
+    //carregar usuarios
+    //
+    var _carregarUsers = function () {
+        objetoAPI.getObjeto(config.apiURL + '/usuarios')
+                .then(
+                        function (success) {
+                            $scope.users = success.data;
+                            _mixins();
+                        },
+                        function (error) {
+                            message('Erro ao carregar Usuários', 'alert-danger');
+                            console.log(error);
+                        }
+                );
+    };
+    
+    //
+    //Quando tudo estiver carregado, executa a adição das informações ao registro
+    //
     var cont = 0;
     var _mixins = function () {
         cont++;
-        if (cont == 6) {
+        if (cont === 7) {
 
             $scope.reg.files = [];
             $scope.reg.files = _registerHasFile.filter(function (file) {
@@ -197,16 +325,24 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
             $scope.reg.user = $scope.users.filter(function (user) {
                 return user.user_id == $scope.reg.user_recebimento;
             })[0];
+
+            $scope.carregando = false;
         }
     };
-
+    
+    //
+    //Savar registro
+    //
     $scope.save = function (registro) {
-        objetoAPI.saveObjeto(config.apiURL + "/registro.api.php", registro).success(function (data) {
-            message(data, 'alert-success');
+        objetoAPI.saveObjeto(config.apiURL + "/registro", registro).success(function (data) {
+            message("adicionado com sucesso!", 'alert-success');
             _novoRegistro();
         });
     };
 
+    //
+    //Limpar formulario
+    //
     _novoRegistro = function () {
         reset();
         delete $scope.reg;
@@ -215,75 +351,8 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
         $scope.registroForm.$setPristine();
     };
 
-    var _carregarOther = function () {
-
-        objetoAPI.getObjeto(config.apiURL + "/registroHasOrigem").success(function (data) {
-            _registerHasOrigens = data;
-            _mixins();
-        });
-
-        objetoAPI.getObjeto(config.apiURL + "/registroHasFile").success(function (data) {
-            _registerHasFile = data;
-            _mixins();
-        });
-
-        objetoAPI.getObjeto(config.apiURL + "/registroHasImage").success(function (data) {
-            _registerHasImage = data;
-            _mixins();
-        });
-    };
-
-    var _carregarOrigens = function () {
-        objetoAPI.getObjeto(config.apiURL + "/origem")
-                .success(function (data) {
-                    $scope.origens = data;
-                    _mixins();
-                })
-                .error(function (error) {
-                    message('Erro ao carregar Origens', 'alert-danger');
-                    console.log(error);
-                });
-    };
-
-    var _carregarAreas = function () {
-        objetoAPI.getObjeto(config.apiURL + "/area")
-                .then(
-                        function (success) {
-                            $scope.areas = success.data;
-                            _mixins();
-                        },
-                        function (error) {
-                            message('Erro ao carregar areas de trabalho', 'alert-danger');
-                            console.log(error);
-                        }
-                );
-    };
-
-    var _carregarRegistros = function () {
-        objetoAPI.getObjeto(config.apiURL + '/registro.api.php')
-                .then(
-                        function (success) {
-                            $scope.registros = success.data;
-                            _params();
-                        },
-                        function (error) {
-                            message('Erro ao carregar Registros', 'alert-danger');
-                            console.log(error);
-                        }
-                );
-    };
-    var _carregarUsers = function () {
-        objetoAPI.getObjeto(config.apiURL + '/usuarios')
-                .then(
-                        function (success) {
-                            $scope.users = success.data;
-                            _mixins();
-                        },
-                        function (error) {
-                            message('Erro ao carregar Usuários', 'alert-danger');
-                            console.log(error);
-                        }
-                );
-    };
+    //
+    //iniciar aplicação
+    //
     init();
 });
