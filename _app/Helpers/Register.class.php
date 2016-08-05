@@ -12,6 +12,18 @@ class Register {
     private static $Register;
 
     /**
+     * Registro de script js a ser lançado no fim da pagina.
+     * Ex.: http://localhost/intranet/_cdn/_scripts.conf.js
+     * 
+     * @param string $url
+     */
+    public static function addScript($url) {
+        $script = "<script src='$url'></script>";
+        self::$Data = $script;
+        self::setData();
+    }
+
+    /**
      * Registro de tags a ser lançado no fim da pagina.
      * Ex.: <script src='http://localhost/intranet/_cdn/_scripts.conf.js'></script>
      * 

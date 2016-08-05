@@ -4,6 +4,31 @@ $Read = new NcRegistro();
 
 $user = (object) $_SESSION['userlogin'];
 
+function setDados($request) {
+    $origens = (isset($request['origens']) ? $request['origens'] : null);
+    $images = (isset($request['images']) ? $request['images'] : null);
+    $files = (isset($request['files']) ? $request['files'] : null);
+    $area = (isset($request['area']) ? $request['area'] : null);
+    $user = (isset($request['user']) ? $request['user'] : null);
+
+    unset($request['origens']);
+    unset($request['images']);
+    unset($request['files']);
+    unset($request['area']);
+    unset($request['user']);
+
+    $request = array_map("trim", $request);
+    $request = array_map("strip_tags", $request);
+
+    $request['origens'] = $origens;
+    $request['images'] = $images;
+    $request['files'] = $files;
+    $request['area'] = $area;
+    $request['user'] = $user;
+
+    return (object) $request;
+}
+
 function addOrigens($origens, $regId) {
     if (!empty($origens)):
 
@@ -92,6 +117,7 @@ switch ($method) {
             unset($request->user_recebimento);
             unset($request->area_recebimento);
 
+            $request = setDados((array) $request);
             $Read->setThis($request);
             $update = $Read->Execute()->update(NULL, "reg_id");
 
@@ -108,6 +134,7 @@ switch ($method) {
             $request->reg_date_correcao = Check::Data($request->reg_date_correcao);
             $request->reg_date_lastupdate = date('Y-m-d H:i:s');
 
+            $request = setDados((array) $request);
             $Read->setThis($request);
             $insert = $Read->Execute()->insert();
 

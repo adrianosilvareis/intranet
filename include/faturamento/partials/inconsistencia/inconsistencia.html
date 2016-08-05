@@ -1,0 +1,161 @@
+<section class="jumbotron">
+    <h1>Inconsistência</h1>
+    <a href="#/home" class="btn btn-primary">HOME</a>
+</section>
+
+<form>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-8">
+                <label>Ordem de serviço</label>
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-barcode"></span>
+                    <input type="text" class="form-control" placeholder="Ordem de serviço">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label>Status da guia</label>
+                <br>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary active">
+                        <input type="radio" id="option1"> OK
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" id="option2"> Perda
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" id="option3"> DevDoc
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label>Convênio</label>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                    <input type="text" class="form-control" placeholder="encontre o convênio aqui">
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="Convênio">
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Cod</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>556</td>
+                        <td>Aguia branca</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Unidade</label>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                    <input type="text" class="form-control" placeholder="encontre a unidade aqui">
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="Unidade">
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Cod</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>22</td>
+                        <td>Laranjeiras</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Atendente</label>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                    <input type="text" class="form-control" placeholder="encontre o atendente aqui">
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="Atendente">
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Cod</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>324</td>
+                        <td>Fabiano</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Não conformidade</label>
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-exclamation-sign"></span>
+                    <select class="form-control">
+                        <option value="">Selecione uma não conformidade</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Data do registro</label>
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                    <input type="date" class="form-control"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Observação</label>
+        <textarea class="form-control" placeholder="observação"></textarea>
+    </div>
+
+    <hr>
+
+    <a href="" class="btn btn-block btn-default">Novo</a>
+    <input type="submit" class="btn btn-block btn-primary" value="Salvar"/>
+</form>
+
+<div ng-include="partials + '/footer.html'"></div>

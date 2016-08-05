@@ -1,0 +1,37 @@
+<div class="jumbotron">
+    <h1>Não conformidade</h1>
+    <a href="#/home" class="btn btn-primary">HOME</a>
+    <a href="#/admin" class="btn btn-warning">Administrador</a>
+    <a href="#/naoconformidades" class="btn btn-warning">Não conformidades</a>
+</div>
+
+<form>
+
+    <div class="form-group">
+        <label>Titulo</label>
+        <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon glyphicon-tag"></span>
+            <input type="text" class="form-control" placeholder="Titulo">
+        </div>
+    </div>    
+
+    <div class="form-group">
+        <label>Descrição</label>
+        <textarea class="form-control" placeholder="Descrição"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Data</label>
+        <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon glyphicon-calendar"></span>
+            <input type="date" class="form-control">
+        </div>
+    </div>
+    
+    <hr>
+    <a href="" class="btn btn-block btn-default">Novo</a>
+    <input type="submit" class="btn btn-block btn-primary" value="Salvar"/>
+    
+</form>
+
+<div ng-include="partials + '/footer.html'"></div>

@@ -43,7 +43,7 @@ endif;
             <select  required="true" title="Ação a executar" name="fe_acoes" class="form-control">
                 <option value="">Selecione uma ação</option>
                 <?php
-                $FeAcoes->setAcao_status(true);
+                $FeAcoes->setAcao_status(1);
                 $FeAcoes->Execute()->FullRead("SELECT * FROM fe_acoes WHERE acao_status = :acao_status ORDER by acao_descricao");
                 foreach ($FeAcoes->Execute()->getResult() as $acao):
                     extract((array) $acao);
@@ -59,7 +59,7 @@ endif;
             <select  required="true" title="Material" name="fe_material" class="form-control">
                 <option value="">Selecione um material</option>
                 <?php
-                $FeMaterial->setMat_status(true);
+                $FeMaterial->setMat_status(1);
                 $FeMaterial->Execute()->Query("#mat_status#");
                 $FeMaterial->Execute()->FullRead("SELECT * FROM fe_material WHERE mat_status=:mat_status ORDER BY mat_descricao");
                 foreach ($FeMaterial->Execute()->getResult() as $material):
@@ -76,7 +76,7 @@ endif;
             <select  required="true" title="Setor Solicitante" name="ws_setor_soli" class="form-control">
                 <option value="">Selecione um setor</option>
                 <?php
-                $WsSetor->setSetor_status(true);
+                $WsSetor->setSetor_status(1);
                 $WsSetor->Execute()->Query("setor_status=1 AND setor_type!=2 AND setor_type!=1 AND (setor_category='geral' OR setor_category='fast-exames')");
                 foreach ($WsSetor->Execute()->getResult() as $setor):
                     extract((array) $setor);

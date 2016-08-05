@@ -346,7 +346,7 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
     _novoRegistro = function () {
         reset();
         delete $scope.reg;
-        _carregarRegistros();
+        _carregarRegistro();
         _objetcInit();
         $scope.registroForm.$setPristine();
     };
