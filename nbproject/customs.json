@@ -1,5 +1,12 @@
 {
-    "elements": {},
+    "elements": {
+        "ui-alert": {
+            "attributes": {
+                "title": {},
+                "status": {}
+            }
+        }
+    },
     "attributes": {
         "ngf-select": {
             "context": "input"

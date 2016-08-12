@@ -12,7 +12,7 @@
     <div ng-if="alert.message" ng-class="alert.class">
         {{alert.message}}
     </div>
-
+    
     <div ng-show="!carregando">
         <ul class="blue-default menu_list column-3">
             <li class="item bouncy-slide-left"  ng-class="item.class" ng-repeat="item in list track by $index"><a ng-disabled="disable" href="" ng-click="menu(item)">[{{item.acesso_id}}] {{item.acesso_title}}</a></li>

@@ -1,6 +1,7 @@
 <section class="jumbotron">
     <h1>Inconsistências</h1>
     <a href="#/inconsistencia" class="btn btn-primary">Nova inconsistência</a>
+    <a href="#/glosas" class="btn btn-primary">Glosas</a>
     <a href="#/admin" class="btn btn-warning">Administrador</a>
 </section>
 
@@ -8,6 +9,10 @@
     <span class="input-group-addon glyphicon glyphicon-search"></span>
     <input type="text" class="form-control" placeholder="encontre o que você procura aqui"/>
 </div>
+
+<ui-alert ng-if="info.status" title="info.status" status="info.status">
+    {{info.message}}
+</ui-alert>
 
 <table class="table table-hover table-striped">
     <thead>
@@ -22,7 +27,8 @@
             <th>Faturista</th>
         </tr>
     </thead>
-    <tbody>
+    
+    <tbody ng-if="!info.status">
         <tr>
             <td>data</td>
             <td>os</td>
@@ -35,5 +41,3 @@
         </tr>
     </tbody>
 </table>
-
-<div ng-include="partials + '/footer.html'"></div>

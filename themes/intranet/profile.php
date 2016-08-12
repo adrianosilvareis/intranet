@@ -13,7 +13,7 @@
         if ($ClienteData && $ClienteData['SendPostForm']):
             $ClienteData['user_cover'] = ( $_FILES['user_cover']['tmp_name'] ? $_FILES['user_cover'] : null);
             unset($ClienteData['SendPostForm']);
-            
+
             require('admin/_models/AdminUsers.class.php');
             $cadastra = new AdminUsers;
             $ClienteData['user_level'] = null;
@@ -39,19 +39,25 @@
             <div class="col-md-12 well">
                 <label>
                     Enviar Foto:
-                    <input type="file" name="user_cover" class="form-control"/>
+                    <input type="file" name="user_cover"/>
                 </label>
             </div>
 
             <div class="col-md-12 well">
                 <label class="col-md-5">
                     Nome:
-                    <input type="text" name="user_name" value="<?= $user_name; ?>" title="Informe seu primeiro nome" class="form-control" required />
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-tag"></span>
+                        <input type="text" name="user_name" value="<?= $user_name; ?>" title="Informe seu primeiro nome" class="form-control" required />
+                    </div>
                 </label>
 
                 <label class="col-md-7">
                     Sobrenome:
-                    <input type="text" name="user_lastname" value="<?= $user_lastname; ?>" title="Informe seu sobrenome" class="form-control" required />
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-tags"></span>
+                        <input type="text" name="user_lastname" value="<?= $user_lastname; ?>" title="Informe seu sobrenome" class="form-control" required />
+                    </div>
                 </label>
             </div>
 
@@ -61,40 +67,53 @@
             <div class="col-md-12 well">
                 <label class="col-md-4">
                     Setor:
-                    <select class="form-control" name="area_id">
-                        <option value="">Selecione uma area de trabalho</option>
-                        <?php
-                        if (!empty($type)):
-                            $WsSetor = new WsAreaTrabalho();
-                            $WsSetor->setCategory_id($type);
-                            $WsSetor->setCategory_parent($type);
-                            $WsSetor->Execute()->FullRead("SELECT * FROM ws_area_trabalho WHERE (category_id = :category_id OR category_parent = :category_parent) AND area_status = 1");
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-map-marker"></span>
 
-                            foreach ($WsSetor->Execute()->getResult() as $setor) :
-                                $select = (isset($area_id) && $area_id == $setor->area_id ? "selected='selected'" : '');
-                                echo "\n<option value='{$setor->area_id}' {$select}>{$setor->area_title}</option>";
-                            endforeach;
-                        endif;
-                        ?>
-                    </select>
+                        <select class="form-control" name="area_id">
+                            <option value="">Selecione uma area de trabalho</option>
+                            <?php
+                            if (!empty($type)):
+                                $WsSetor = new WsAreaTrabalho();
+                                $WsSetor->setCategory_id($type);
+                                $WsSetor->setCategory_parent($type);
+                                $WsSetor->Execute()->FullRead("SELECT * FROM ws_area_trabalho WHERE (category_id = :category_id OR category_parent = :category_parent) AND area_status = 1");
+
+                                foreach ($WsSetor->Execute()->getResult() as $setor) :
+                                    $select = (isset($area_id) && $area_id == $setor->area_id ? "selected='selected'" : '');
+                                    echo "\n<option value='{$setor->area_id}' {$select}>{$setor->area_title}</option>";
+                                endforeach;
+                            endif;
+                            ?>
+                        </select>
+                    </div>
                 </label>
 
                 <label class="col-md-4">
                     User:
-                    <input type="text" name="user_nickname" value="<?= (!empty($user_nickname) ? $user_nickname : ""); ?>" title="Usuario" class="form-control" disabled />
-                    <input type="hidden" name="user_nickname" value="<?= (!empty($user_nickname) ? $user_nickname : ""); ?>" title="Usuario" class="form-control" />
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-user"></span>
+                        <input type="text" name="user_nickname" value="<?= (!empty($user_nickname) ? $user_nickname : ""); ?>" title="Usuario" class="form-control" disabled />
+                        <input type="hidden" name="user_nickname" value="<?= (!empty($user_nickname) ? $user_nickname : ""); ?>" title="Usuario" class="form-control" />
+                    </div>
                 </label>
 
                 <label class="col-md-4">
                     E-mail:
-                    <input type="email" name="user_email" value="<?= $user_email; ?>" title="Informe seu e-mail" class="form-control" required />
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-envelope"></span>
+                        <input type="email" name="user_email" value="<?= $user_email; ?>" title="Informe seu e-mail" class="form-control" required />
+                    </div>
                 </label>
             </div>
 
             <div class="col-md-12">
                 <label class="col-md-4 well">
                     Data de Nascimento:
-                    <input class="form-control formDate" text="text" name="user_birthday" value="<?= date('d/m/Y', strtotime($user_birthday)); ?>" title="data nascimento" required/>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                        <input class="form-control formDate" text="date" name="user_birthday" value="<?= date('d/m/Y', strtotime($user_birthday)); ?>" title="data nascimento" required/>
+                    </div>
                 </label>
             </div>
 
@@ -102,12 +121,18 @@
             <div class="col-md-8 well">
                 <label class="col-md-6">
                     Senha:
-                    <input type="password" name="user_password" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-lock"></span>
+                        <input type="password" name="user_password" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                    </div>
                 </label>
 
                 <label class="col-md-6">
                     Confirmação:
-                    <input type="password" name="user_confirme" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-info-sign"></span>
+                        <input type="password" name="user_confirme" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                    </div>
                 </label>
             </div>
 

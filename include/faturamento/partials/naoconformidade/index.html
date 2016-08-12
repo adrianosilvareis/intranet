@@ -10,17 +10,28 @@
     <input type="text" class="form-control" placeholder="encontre o que você procura aqui"/>
 </div>
 
+<ui-alert ng-if="info.status" title="info.status" status="info.status">
+    {{info.message}}
+</ui-alert>
+
 <table class="table table-hover">
     <thead>
         <tr>
-            <th></th>
+            <th>Titulo</th>
+            <th>Contéudo</th>
+            <th>Data</th>
+            <th>Ações</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody ng-if="!info.status">
         <tr>
-            <td></td>
+            <td>Numero do cartão</td>
+            <td>Faltou ou errou o numero do cartão do cliente</td>
+            <td>12/08/2016</td>
+            <td>
+                <a class="btn btn-info" href="" ng-click="" ng-if="true">Ativar</a>
+                <a class="btn btn-danger" href="" ng-click="" ng-if="true">Desativar</a>
+            </td>
         </tr>
     </tbody>
 </table>
-
-<div ng-include="partials + '/footer.html'"></div>

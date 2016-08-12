@@ -56,12 +56,12 @@
             <div class="label_line">
                 <label class="label_medium">
                     <span class="field">Senha:</span>
-                    <input type="password" name="user_password" value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern=".{6,12}" required />
+                    <input type="password" name="user_password" value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern=".{6,12}" />
                 </label>
 
                 <label class="label_medium">
                     <span class="field">Data Nascimento:</span>
-                    <input class="formDate" type="text" name="user_birthday" value="<?php if (!empty($ClienteData['user_birthday'])) echo $ClienteData['user_birthday']; ?>" title="Informe sua data de nascimento" required />
+                    <input class="formDate" type="text" name="user_birthday" value="<?php if (!empty($ClienteData['user_birthday'])) echo date('d/m/Y', strtotime($ClienteData['user_birthday'])) ?>" title="Informe sua data de nascimento" required />
                 </label>
             </div>
 

@@ -1,8 +1,6 @@
 <?php
 
-$mensagem = [
-    'error' => '404',
-    'mensagem' => 'Arquivo não encontrado!'
-];
+$status = '404';
+$message = 'Arquivo não encontrado!';
 
-echo json_encode($mensagem);
+Check::JsonReturn(false, $message, $status);

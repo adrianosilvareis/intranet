@@ -234,7 +234,7 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 .ultable li{float: left; display: block; border: 1px solid #333; border-top: none; width: 100%; font-size: 14px;}
 .ultable li span{float: left; padding: 15px; border-right: 1px solid #ccc; min-height: 22px}
 .ultable li .center{text-align: center;}
-.ultable li .ui{width: 7.8%;}
+.ultable li .ui{width: 79px;}
 .ultable li .un{width: 210px;}
 .ultable li .ue{width: 200px;}
 .ultable li .ur{width: 7.8%;}

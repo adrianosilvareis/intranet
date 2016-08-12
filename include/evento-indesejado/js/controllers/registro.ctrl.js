@@ -181,7 +181,7 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
             complete();
         }
     };
-    
+
     //
     //verifica que foi passado id de um registro
     //
@@ -196,7 +196,7 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
             }
         }
     };
-    
+
     //
     //Carrega o registor quando há
     //
@@ -285,7 +285,7 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
                         }
                 );
     };
-    
+
     //
     //Quando tudo estiver carregado, executa a adição das informações ao registro
     //
@@ -295,26 +295,31 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
         if (cont === 7) {
 
             $scope.reg.files = [];
-            $scope.reg.files = _registerHasFile.filter(function (file) {
-                return file.reg_id == $scope.reg.reg_id;
-            });
+            if (Array.isArray(_registerHasFile)) {
+                $scope.reg.files = _registerHasFile.filter(function (file) {
+                    return file.reg_id == $scope.reg.reg_id;
+                });
+            }
 
             $scope.reg.images = [];
-            $scope.reg.images = _registerHasImage.filter(function (image) {
-                return image.reg_id == $scope.reg.reg_id;
-            });
-
-
-            var origens = _registerHasOrigens.filter(function (origem) {
-                return origem.reg_id == $scope.reg.reg_id;
-            });
-
-            $scope.reg.origens = [];
-            origens.filter(function (origem) {
-                $scope.reg.origens = $scope.origens.filter(function (ori) {
-                    return ori.origem_id == origem.origem_id;
+            if (Array.isArray(_registerHasImage)) {
+                $scope.reg.images = _registerHasImage.filter(function (image) {
+                    return image.reg_id == $scope.reg.reg_id;
                 });
-            });
+            }
+
+            if (Array.isArray(_registerHasOrigens)) {
+                var origens = _registerHasOrigens.filter(function (origem) {
+                    return origem.reg_id == $scope.reg.reg_id;
+                });
+                
+                $scope.reg.origens = [];
+                origens.filter(function (origem) {
+                    $scope.reg.origens = $scope.origens.filter(function (ori) {
+                        return ori.origem_id == origem.origem_id;
+                    });
+                });
+            }
 
             $scope.reg.area = [];
             $scope.reg.area = $scope.areas.filter(function (area) {
@@ -329,7 +334,7 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
             $scope.carregando = false;
         }
     };
-    
+
     //
     //Savar registro
     //

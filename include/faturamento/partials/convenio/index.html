@@ -10,6 +10,10 @@
     <input type="text" class="form-control" placeholder="encontre o que você procura aqui"/>
 </div>
 
+<ui-alert ng-if="info.status" title="info.status" status="info.status">
+    {{info.message}}
+</ui-alert>
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -19,8 +23,9 @@
             <th>Data criação</th>
         </tr>
     </thead>
+    
     <tbody>
-        <tr>
+        <tr ng-if="!info.status">
             <td>500</td>
             <td>Aguia branca</td>
             <td>Aguia branca - Periodico</td>
@@ -28,5 +33,3 @@
         </tr>
     </tbody>
 </table>
-
-<div ng-include="partials + '/footer.html'"></div>

@@ -5,13 +5,17 @@
     <a href="#/convenios" class="btn btn-warning">Convênios</a>
 </div>
 
-<form>
+<ui-alert ng-if="info.status" title="info.status" status="info.status">
+    {{info.message}}
+</ui-alert>
+    
+<form ng-submit="save(conv)">
 
     <div class="form-group">
         <label>Titulo</label>
         <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon glyphicon-tag"></span>
-            <input type="text" class="form-control" placeholder="Titulo">
+            <input type="text" class="form-control" placeholder="Titulo" ng-model="conv.conv_title">
         </div>
     </div>
 
@@ -19,7 +23,7 @@
         <label>Subtitulo</label>
         <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon glyphicon glyphicon-tags"></span>
-            <input type="text" class="form-control" placeholder="SubTitulo">
+            <input type="text" class="form-control" placeholder="SubTitulo" ng-model="conv.conv_describe">
         </div>
     </div>
 
@@ -29,45 +33,37 @@
                 <label>Codigo</label>
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon glyphicon glyphicon-barcode"></span>
-                    <input type="text" class="form-control" placeholder="Codigo">
-                </div>
-            </div>
-            <div class="col-md-4">                
-                <label>Data</label>
-                <div class="input-group">
-                    <span class="input-group-addon glyphicon glyphicon glyphicon glyphicon-calendar"></span>
-                    <input type="date" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label>Post ID</label>
-                <div class="input-group">
-                    <span class="input-group-addon glyphicon glyphicon glyphicon glyphicon-magnet"></span>
-                    <input type="text" class="form-control" placeholder="Titulo da postagem">
+                    <input type="text" class="form-control" placeholder="Codigo do convênio" ng-model="conv.conv_code">
                 </div>
             </div>
 
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Titulo da postagem</th>
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Petrobras</td>
-                        <td>http://teste</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="col-md-4">
+                <label>Post</label>
+                <div class="input-group" ng-show="!conv.post">
+                    <span class="input-group-addon glyphicon glyphicon glyphicon glyphicon-magnet"></span>
+                    <input type="text" class="form-control" placeholder="Titulo da postagem" ng-model="search">
+                </div>
+
+                <div ng-if="conv.post">
+                    <a href="" ng-click="removePost()">
+                        <img ng-src="{{tinyImg(conv.post.post_cover)}}" title="{{conv.post.post_title}}" class="img img-thumbnail">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-12" style="margin-top: 15px;" ng-if="search">
+                <div ng-repeat="post in posts| filter:search | limitTo: 10" style="float: left;">
+                    <a href="" ng-click="addPost(post)">
+                        <img ng-src="{{tinyImg(post.post_cover)}}" title="{{post_title}}" class="img img-thumbnail">
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <hr>
-    <a href="" class="btn btn-block btn-default">Novo</a>
+    <a href="" class="btn btn-block btn-default" ng-click="novo()">Novo</a>
     <input type="submit" class="btn btn-block btn-primary" value="Salvar"/>
 
 </form>
-
-<div ng-include="partials + '/footer.html'"></div>

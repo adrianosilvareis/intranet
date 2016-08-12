@@ -61,6 +61,7 @@ gulp.task('copy', function () {
         gulp.src('_lib/bootstrap/css/bootstrap-*.css').pipe(gulp.dest('dist/css')),
         gulp.src('admin/**').pipe(gulp.dest('dist/admin')),
         gulp.src('api/**').pipe(gulp.dest('dist/api')),
+        gulp.src('api/.htaccess').pipe(gulp.dest('dist/api')),
         gulp.src('ftp/images/**').pipe(gulp.dest('dist/ftp/images')),
         gulp.src('include/**').pipe(gulp.dest('dist/include')),
         gulp.src('themes/**').pipe(gulp.dest('dist/themes')),

@@ -114,7 +114,6 @@ angular.module('eventoIndesejado').controller('masterList', function ($scope, ob
             Registros(_registros);
         }
 
-
     };
 
     init();

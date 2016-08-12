@@ -257,6 +257,7 @@ class Seo {
 
     private function setProd() {
         $this->seoLibs .= "<!--LIBS PRODUCAO-->\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_app/Config.inc.js.php'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/lib.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/all.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/plugins.min.js'></script>" . "\n";

@@ -411,7 +411,7 @@ class Check {
             echo json_encode($result);
         else:
             $error = [
-                'mensage' => $message,
+                'message' => $message,
                 'status' => $status
             ];
             echo json_encode($error);

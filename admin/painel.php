@@ -56,7 +56,7 @@ endif;
             <script src="../js/angular/directive/uiFormat.module.js"></script>
             <script src="../js/angular/directive/uiTimestampBr.directive.js"></script>
         <?php else: ?>
-            <link rel="stylesheet" href="../css/ng-animation.css" />
+            <link rel="stylesheet" href="../css/ng-animation.min.css" />
             <script src="../js/lib.min.js"></script>
             <script src="../js/all.min.js"></script>
             <script src="../cdn/combo.js"></script>
@@ -120,13 +120,6 @@ endif;
                             <ul class="sub">
                                 <li><a href="painel.php?exe=setor_type/create">Criar Tipo</a></li>
                                 <li><a href="painel.php?exe=setor_type/index">Listar / Editar Tipo</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="li<?php if (in_array('youtube', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Videos Youtube</a>
-                            <ul class="sub">
-                                <li><a href="painel.php?exe=youtube/create">Criar Videos</a></li>
-                                <li><a href="painel.php?exe=youtube/index">Listar / Editar Videos</a></li>
                             </ul>
                         </li>
 

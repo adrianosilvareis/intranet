@@ -93,7 +93,7 @@ class AdminUsers {
         $this->Data = array_map('strip_tags', $this->Data);
         $this->Data = array_map('trim', $this->Data);
 
-        $this->Data['user_birthday'] = date("Y-m-d", strtotime(Check::Data($this->Data['user_birthday'])));
+        $this->Data['user_birthday'] = Check::Data($this->Data['user_birthday']);
         $this->Data['user_cover'] = (!empty($cover) ? $cover : NULL);
 
         if (!Check::Email($this->Data['user_email'])):

@@ -1,7 +1,7 @@
 angular.module("itemPerfil").controller('item_perfil', function ($scope, objetoAPI, config, $timeout, $routeParams) {
 
     var todosItens = [];
-    
+
     $scope.message = {};
     $scope.carregando = true;
     $scope.list = [];
@@ -37,7 +37,12 @@ angular.module("itemPerfil").controller('item_perfil', function ($scope, objetoA
     // abre a lista de acordo com item selecionado, alem de adicionalo a lista de seleção.
     //
     $scope.menu = function (item) {
-        if ($scope.select.indexOf(item) === -1) {
+
+        var existe = $scope.select.some(function (element) {
+            return element.acesso_id === item.acesso_id;
+        });
+        
+        if (!existe) {
             $scope.select.push(item);
         }
 

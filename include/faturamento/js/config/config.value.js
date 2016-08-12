@@ -1,6 +1,7 @@
 angular.module('faturamento').value('config', {
     URL: CONFIG,
-    apiURL: CONFIG.API + "/faturamento",
+    urlAPI: CONFIG.API + "/faturamento",
+    tiny: CONFIG.HOME + '/tim.php?src=',
     partials: CONFIG.HOME + '/include/faturamento/partials',
     perfilUsuario: perfilUsuario
 });
