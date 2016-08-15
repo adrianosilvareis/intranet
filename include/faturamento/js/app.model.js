@@ -1,1 +1,1 @@
-angular.module('faturamento', ['ngRoute','objetoAPI']);
+angular.module('faturamento', ['ngRoute', 'objetoAPI', 'filterDefault']);

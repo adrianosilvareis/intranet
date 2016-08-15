@@ -87,9 +87,6 @@ class SftInconsistenciaGuia extends Beans {
     }
 
     function getInco_status() {
-        if (isset($this->inco_status)) {
-            $this->inco_status = ($this->inco_status ? '1' : 'false');
-        }
         return $this->inco_status;
     }
 

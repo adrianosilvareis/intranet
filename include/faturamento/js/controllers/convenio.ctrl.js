@@ -1,7 +1,7 @@
 angular.module('faturamento').controller('convenio', function ($scope, config, $routeParams, objetoAPI, posts) {
     
     $scope.info = {};
-
+    $scope.posts = posts.data;
     //
     // Funções publicas
     //
@@ -42,6 +42,7 @@ angular.module('faturamento').controller('convenio', function ($scope, config, $
 
     //remove post do convênio
     $scope.removePost = function () {
+        $scope.conv.post_id = null;
         delete $scope.conv.post;
     };
 

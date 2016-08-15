@@ -1,24 +1,24 @@
-angular.module('faturamento').controller('naoconformidades', function ($scope, config, objetoAPI) {
+angular.module('faturamento').controller('naoconformidades', function ($scope, objetoAPI, config, naoconformidades) {
 
     $scope.info = {};
-    $scope.ncon = [];
+    $scope.naoconformidades = [];
 
-    var carregarNcon = function () {
-        objetoAPI.getObjeto(config.urlAPI + '/naoconformidade').success(success).error(error);
+    $scope.alterarStatus = function (ncon) {
+        ncon.ncon_status = (ncon.ncon_status == '1' ? '0' : '1');
+        objetoAPI.saveObjeto(config.urlAPI + '/naoconformidade', ncon)
+                .success(function (data) {
+                    ncon = data;
+                });
     };
 
-    var success = function (data) {
+    var init = function () {
+        var data = naoconformidades.data;
         if (Array.isArray(data)) {
-            $scope.ncon = data;
+            $scope.naoconformidades = data;
         } else {
             $scope.info = data;
         }
     };
 
-    var error = function (error) {
-        console.log(error);
-        $scope.info = error;
-    };
-
-    carregarNcon();
+    init();
 });

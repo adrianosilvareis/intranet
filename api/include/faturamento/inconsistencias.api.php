@@ -2,6 +2,24 @@
 
 $Read = new SftInconsistenciaGuia();
 
+function setDados($request, $userlogin = null) {
+
+    unset($request->aten);
+    unset($request->unid);
+    unset($request->conv);
+
+    $userlogin = (!empty($userlogin) ? (object) $userlogin : null);
+    $request = (object) array_map("trim", (array) $request);
+    $request = (object) array_map("strip_tags", (array) $request);
+
+    if (empty($request->inco_id)) {
+        $request->faturista_id = $userlogin->user_id;
+        $request->inco_date = date('Y-m-d');
+    }
+
+    return $request;
+}
+
 switch ($method) {
     case "GET":
         //retorna todos os itens
@@ -17,11 +35,13 @@ switch ($method) {
     case "POST":
         if (!empty($request->inco_id)):
             //update
+            $request = setDados($request);
             $Read->setThis($request);
             $Read->Execute()->update(NULL, 'inco_id');
             echo json_encode($request);
         else:
             //salvar
+            $request = setDados($request, $userlogin);
             $Read->setThis($request);
             $insert = $Read->Execute()->insert();
             if ($insert):

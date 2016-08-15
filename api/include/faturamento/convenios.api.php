@@ -27,7 +27,14 @@ switch ($method) {
         if (isset($id)):
             $Read->setConv_id($id);
             $Read->Execute()->find();
-            Check::JsonReturn($Read->Execute()->getResult(), 'Convênio não encontrado!', '404');
+            if ($Read->Execute()->getResult()) :
+                echo json_encode($Read->Execute()->getResult());
+            else :
+                http_response_code(404);
+            endif;
+        elseif (!empty($query) && $query == 'ativos'):
+            $Read->Execute()->Query("conv_status=1");
+            Check::JsonReturn($Read->Execute()->getResult(), 'Nenhuma convênio cadastrada!', '204');
         else:
             $Read->Execute()->findAll();
             Check::JsonReturn($Read->Execute()->getResult(), 'Nenhuma convênio cadastrada!', '204');

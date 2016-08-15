@@ -6,8 +6,8 @@
 </div>
 
 <div class="input-group col-md-4" style="float: right;">
+    <input type="text" class="form-control" placeholder="encontre o que você procura aqui" ng-model="search"/>
     <span class="input-group-addon glyphicon glyphicon-search"></span>
-    <input type="text" class="form-control" placeholder="encontre o que você procura aqui"/>
 </div>
 
 <ui-alert ng-if="info.status" title="info.status" status="info.status">
@@ -17,19 +17,30 @@
 <table class="table table-hover">
     <thead>
         <tr>
+            <th>ID</th>
             <th>COD</th>
             <th>Titulo</th>
             <th>SubTitulo</th>
             <th>Data criação</th>
+            <th>Post</th>
+            <th>Ação</th>
         </tr>
     </thead>
-    
-    <tbody>
-        <tr ng-if="!info.status">
-            <td>500</td>
-            <td>Aguia branca</td>
-            <td>Aguia branca - Periodico</td>
-            <td>05/08/2016</td>
+
+    <tbody ng-if="!info.status">
+        <tr ng-repeat="conv in convenios| filter:search track by conv.conv_id">
+            <td><a href="#/convenio/{{conv.conv_id}}">{{::conv.conv_id}}</a></td>
+            <td><a href="#/convenio/{{conv.conv_id}}">{{::conv.conv_code}}</a></td>
+            <td><a href="#/convenio/{{conv.conv_id}}">{{::conv.conv_title}}</a></td>
+            <td><a href="#/convenio/{{conv.conv_id}}">{{::conv.conv_describe}}</a></td>
+            <td><a href="#/convenio/{{conv.conv_id}}">{{::conv.conv_date|dateBr}}</a></td>
+            <td>
+                <img ng-src="{{::carregaPost(conv.post_id)}}"/>
+            </td>
+            <td>
+                <a href="" class="btn btn-success" ng-show="conv.conv_status == 1" ng-click="alterarStatus(conv)">Ativar</a>
+                <a href="" class="btn btn-danger" ng-hide="conv.conv_status == 1" ng-click="alterarStatus(conv)">Desativar</a>
+            </td>
         </tr>
     </tbody>
 </table>

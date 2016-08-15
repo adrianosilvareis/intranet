@@ -33,7 +33,7 @@ angular.module('faturamento').directive('uiAlert', function (config) {
 
             $timeout(function () {
                 status($scope.status);
-            }, 100 * 11);
+            }, 100 * 10);
         }
     };
 

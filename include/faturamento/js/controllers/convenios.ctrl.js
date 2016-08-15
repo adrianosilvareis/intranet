@@ -1,25 +1,35 @@
-angular.module('faturamento').controller('convenios', function ($scope, config, objetoAPI) {
+angular.module('faturamento').controller('convenios', function ($scope, config, objetoAPI, convenios, posts) {
 
     $scope.info = {};
-    $scope.conv = [];
+    $scope.convenios = [];
 
-    var carregarConvenios = function () {
-        objetoAPI.getObjeto(config.urlAPI + '/convenios').success(success).error(error);
-    };
-
-    var success = function (data) {
+    var init = function () {
+        var data = convenios.data;
         if (Array.isArray(data)) {
-            $scope.conv = data;
+            $scope.convenios = data;
         } else {
             $scope.info = data;
         }
     };
 
-    var error = function (error) {
-        console.log(error);
-        $scope.info = error;
+    $scope.alterarStatus = function (conv) {
+        conv.conv_status = (conv.conv_status == '1' ? '0' : '1');
+
+        objetoAPI.saveObjeto(config.urlAPI + '/convenios', conv)
+                .success(function (data) {
+                    conv = data;
+                });
     };
 
-    carregarConvenios();
+    //carrega o post do convenio
+    $scope.carregaPost = function (idPost) {
+        var _posts = posts.data;
+        var post = _posts.filter(function (post) {
+            return post.post_id === idPost;
+        })[0];
 
+        return config.tiny + config.URL.HOME + "/uploads/" + post.post_cover + "&w=50&h=50";
+    };
+
+    init();
 });
