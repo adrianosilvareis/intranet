@@ -30,6 +30,7 @@ angular.module('faturamento').controller('inconsistencia', function ($scope, con
 
     $scope.novo = function () {
         $scope.inco = {};
+        $scope.info = {};
     };
 
     $scope.save = function (inco) {

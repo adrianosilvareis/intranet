@@ -7,6 +7,7 @@ Register::addScript($url . '/js/config/interceptors.config.js');
 Register::addScript($url . '/js/config/config.value.js');
 Register::addScript($url . '/js/directives/uiAlert.directive.js');
 Register::addScript($url . '/js/directives/uiFormatOs.directive.js');
+Register::addScript($url . '/js/directives/uiNumber.directive.js');
 Register::addScript($url . '/js/controllers/convenio.ctrl.js');
 Register::addScript($url . '/js/controllers/convenios.ctrl.js');
 Register::addScript($url . '/js/controllers/naoconformidade.ctrl.js');

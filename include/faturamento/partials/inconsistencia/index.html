@@ -5,9 +5,20 @@
     <a href="#/admin" class="btn btn-warning">Administrador</a>
 </section>
 
+<select ng-model="limit">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+    <option value="500">500</option>
+    <option value="1000">1000</option>
+    <option value="">Todos</option>
+</select>
+
 <div class="input-group col-md-4" style="float: right;">
+    <input type="text" class="form-control" placeholder="encontre o que você procura aqui" ng-model="search"/>
     <span class="input-group-addon glyphicon glyphicon-search"></span>
-    <input type="text" class="form-control" placeholder="encontre o que você procura aqui"/>
 </div>
 
 <ui-alert ng-if="info.status" title="info.status" status="info.status">
@@ -17,6 +28,7 @@
 <table class="table table-hover table-striped">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Data</th>
             <th>OS</th>
             <th>Atendente</th>
@@ -27,17 +39,18 @@
             <th>Faturista</th>
         </tr>
     </thead>
-    
-    <tbody ng-if="!info.status">
-        <tr>
-            <td>data</td>
-            <td>os</td>
-            <td>aten</td>
-            <td>unid</td>
-            <td>conv</td>
-            <td>ncon</td>
-            <td>statu</td>
-            <td>fatur</td>
+
+    <tbody>
+        <tr ng-repeat="inco in inconsistencias|filter:search|limitTo:limit track by inco.inco_id">
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_id}}</a></td>
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_date}}</a></td>
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_os}}</a></td>
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.aten.user_nickname}}</a></td>
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.unid.postos_nome}}</a></td>
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.conv.conv_title}}</a></td>
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.ncon.ncon_title}}</a></td>
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_status}}</a></td>
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.fatur.user_name}}</a></td>
         </tr>
     </tbody>
 </table>

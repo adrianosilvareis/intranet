@@ -58,7 +58,7 @@ class SftGlosaGuia extends Beans {
         $this->setGlosa_status((isset($object->glosa_status) ? $object->glosa_status : null));
         $this->setGlosa_os((isset($object->glosa_os) ? $object->glosa_os : null));
         $this->setGlosa_obs((isset($object->glosa_obs) ? $object->glosa_obs : null));
-        $this->setGlosa_obs((isset($object->glosa_value) ? $object->glosa_value : null));
+        $this->setGlosa_value((isset($object->glosa_value) ? $object->glosa_value : null));
         $this->setConv_id((isset($object->conv_id) ? $object->conv_id : null));
         $this->setNcon_id((isset($object->ncon_id) ? $object->ncon_id : null));
         $this->setAten_id((isset($object->aten_id) ? $object->aten_id : null));

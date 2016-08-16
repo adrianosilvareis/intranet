@@ -5,7 +5,24 @@ angular.module('faturamento')
             $routeProvider
                     .when('/', {
                         templateUrl: partials + '/inconsistencia/index.html',
-                        controller: 'inconsistencias'
+                        controller: 'inconsistencias',
+                        resolve: {
+                            inconsistencias: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/inconsistencias');
+                            },
+                            unidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/unidades&query=ativos');
+                            },
+                            convenios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/convenios&query=ativos');
+                            },
+                            naoconformidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/naoconformidade&query=ativos');
+                            },
+                            atendentes: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/atendentes&query=ativos');
+                            }
+                        }
                     });
 
             $routeProvider
@@ -57,13 +74,41 @@ angular.module('faturamento')
             $routeProvider
                     .when('/glosa', {
                         templateUrl: partials + '/glosa/glosa.html',
-                        controller: 'glosa'
+                        controller: 'glosa',
+                        resolve: {
+                            unidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/unidades&query=ativos');
+                            },
+                            convenios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/convenios&query=ativos');
+                            },
+                            naoconformidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/naoconformidade&query=ativos');
+                            },
+                            atendentes: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/atendentes&query=ativos');
+                            }
+                        }
                     });
 
             $routeProvider
                     .when('/glosa/:id', {
                         templateUrl: partials + '/glosa/glosa.html',
-                        controller: 'glosa'
+                        controller: 'glosa',
+                        resolve: {
+                            unidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/unidades&query=ativos');
+                            },
+                            convenios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/convenios&query=ativos');
+                            },
+                            naoconformidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/naoconformidade&query=ativos');
+                            },
+                            atendentes: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/atendentes&query=ativos');
+                            }
+                        }
                     });
 
             $routeProvider

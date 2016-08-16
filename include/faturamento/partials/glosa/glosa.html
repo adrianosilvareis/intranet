@@ -3,29 +3,36 @@
     <a href="#/glosas" class="btn btn-primary">Glosas</a>
 </section>
 
-<form>
+<ui-alert ng-if="info.status" title="info.status" status="info.status">
+    {{info.message}}
+</ui-alert>
+{{glosa}}
+<form ng-submit="save(glosa)">
     <div class="form-group">
         <div class="row">
             <div class="col-md-8">
                 <label>Ordem de serviço</label>
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-barcode"></span>
-                    <input type="text" class="form-control" placeholder="Ordem de serviço">
+                    <input type="text" class="form-control" placeholder="Ordem de serviço"  ng-model="glosa.glosa_os" ui-format-os>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <label>Status da guia</label>
                 <br>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary active">
-                        <input type="radio" id="option1"> OK
+                <div class="btn-group">
+                    <label class="btn btn-primary">
+                        <input type="radio" ng-model="glosa.glosa_status" value="OK">
+                        OK
                     </label>
                     <label class="btn btn-primary">
-                        <input type="radio" id="option2"> Perda
+                        <input type="radio" ng-model="glosa.glosa_status" value="Perda">
+                        Perda
                     </label>
                     <label class="btn btn-primary">
-                        <input type="radio" id="option3"> DevDoc
+                        <input type="radio" ng-model="glosa.glosa_status" value="DevDoc">
+                        DevDoc
                     </label>
                 </div>
             </div>
@@ -39,25 +46,29 @@
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-search"></span>
-                    <input type="text" class="form-control" placeholder="encontre o convênio aqui">
+                    <input type="text" class="form-control" placeholder="encontre o convênio aqui" ng-model="search_conv">
                 </div>
             </div>
 
             <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="Convênio">
+                <span class="form-control">{{glosa.conv.conv_title}}</span>
             </div>
 
-            <table class="table table-hover">
+            <table class="table table-hover" ng-show="search_conv">
                 <thead>
                     <tr>
-                        <th>Cod</th>
-                        <th>Nome</th>
+                        <th>ID</th>
+                        <th>Código</th>
+                        <th>Título</th>
+                        <th>SubTitulo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>556</td>
-                        <td>Aguia branca</td>
+                    <tr ng-repeat="conv in convenios | filter:search_conv | limitTo:5 track by conv.conv_id">
+                        <td><a href="" ng-click="addConvenio(conv)">{{::conv.conv_id}}</a></td>
+                        <td><a href="" ng-click="addConvenio(conv)">{{::conv.conv_code}}</a></td>
+                        <td><a href="" ng-click="addConvenio(conv)">{{::conv.conv_title}}</a></td>
+                        <td><a href="" ng-click="addConvenio(conv)">{{::conv.conv_describe}}</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -70,25 +81,27 @@
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-search"></span>
-                    <input type="text" class="form-control" placeholder="encontre a unidade aqui">
+                    <input type="text" class="form-control" placeholder="encontre a unidade aqui" ng-model="search_unid">
                 </div>
             </div>
 
             <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="Unidade">
+                <span class="form-control">{{glosa.unid.postos_nome}}</span>
             </div>
 
-            <table class="table table-hover">
+            <table class="table table-hover" ng-show="search_unid">
                 <thead>
                     <tr>
-                        <th>Cod</th>
+                        <th>ID</th>
+                        <th>Número</th>
                         <th>Nome</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>22</td>
-                        <td>Laranjeiras</td>
+                    <tr ng-repeat="posto in unidades | filter:search_unid | limitTo:5 track by posto.postos_id">
+                        <td><a href="" ng-click="addUnidade(posto)">{{::posto.postos_id}}</a></td>
+                        <td><a href="" ng-click="addUnidade(posto)">{{::posto.postos_numero}}</a></td>
+                        <td><a href="" ng-click="addUnidade(posto)">{{::posto.postos_nome}}</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -101,25 +114,35 @@
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-search"></span>
-                    <input type="text" class="form-control" placeholder="encontre o atendente aqui">
+                    <input type="text" class="form-control" placeholder="encontre o atendente aqui" ng-model="search_aten">
                 </div>
             </div>
 
             <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="Atendente">
+                <span class="form-control">{{glosa.aten.user_nickname}}</span>
             </div>
 
-            <table class="table table-hover">
+            <table class="table table-hover" ng-show="search_aten">
                 <thead>
                     <tr>
-                        <th>Cod</th>
+                        <th>ID</th>
+                        <th>USER</th>
                         <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th>CAPA</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>324</td>
-                        <td>Fabiano</td>
+                    <tr ng-repeat="aten in atendentes | filter:search_aten | limitTo:5 track by aten.user_id">
+                        <td><a href="" ng-click="addAtendente(aten)">{{::aten.user_id}}</a></td>
+                        <td><a href="" ng-click="addAtendente(aten)">{{::aten.user_nickname}}</a></td>
+                        <td><a href="" ng-click="addAtendente(aten)">{{::aten.user_name}}</a></td>
+                        <td><a href="" ng-click="addAtendente(aten)">{{::aten.user_lastname}}</a></td>
+                        <td>
+                            <a href="" ng-click="addAtendente(aten)">
+                                <img ng-if="aten.user_cover" ng-src="{{carregaImg(aten.user_cover)}}"/>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -132,7 +155,8 @@
                 <label>Não conformidade</label>
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-exclamation-sign"></span>
-                    <select class="form-control">
+                    <select class="form-control" ng-model="glosa.ncon_id" 
+                            ng-options="ncon.ncon_id as ncon.ncon_title + ' - ' + ncon.ncon_content for ncon in naoconformidades">
                         <option value="">Selecione uma não conformidade</option>
                     </select>
                 </div>
@@ -141,7 +165,7 @@
                 <label>Valor da Guia</label>
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-usd"></span>
-                    <input type="number" class="form-control"/>
+                    <input type="text" class="form-control" ng-model="glosa.glosa_value" ui-number/>
                 </div>
             </div>
         </div>
@@ -149,11 +173,11 @@
 
     <div class="form-group">
         <label>Observação</label>
-        <textarea class="form-control" placeholder="observação"></textarea>
+        <textarea class="form-control" placeholder="observação" ng-model="glosa.glosa_obs"></textarea>
     </div>
 
     <hr>
 
-    <a href="" class="btn btn-block btn-default">Novo</a>
+    <a href="" class="btn btn-block btn-default" ng-click="novo()">Novo</a>
     <input type="submit" class="btn btn-block btn-primary" value="Salvar"/>
 </form>
