@@ -1,1 +1,1 @@
-angular.module('faturamento', ['ngRoute', 'objetoAPI', 'filterDefault']);
+angular.module('faturamento', ['ngRoute', 'objetoAPI', 'filterDefault', 'fileUploads', 'uiFormat']);

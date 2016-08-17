@@ -1,13 +1,25 @@
 <section class="jumbotron">
     <h1>Glosas</h1>
-    <a href="#/glosa" class="btn btn-primary">Nova Glosa</a>
+    <a href="#/glosa" class="btn btn-success">Nova Glosa</a>
     <a href="#/inconsistencias" class="btn btn-primary">Inconsistências</a>
+    <a href="#/os-nao-pagas" class="btn btn-primary">Os Não pagas</a>
     <a href="#/admin" class="btn btn-warning">Administrador</a>
 </section>
 
+<select ng-model="limit">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+    <option value="500">500</option>
+    <option value="1000">1000</option>
+    <option value="">Todos</option>
+</select>
+
 <div class="input-group col-md-4" style="float: right;">
     <span class="input-group-addon glyphicon glyphicon-search"></span>
-    <input type="text" class="form-control" placeholder="encontre o que você procura aqui"/>
+    <input type="text" class="form-control" placeholder="encontre o que você procura aqui" ng-model="search"/>
 </div>
 
 <ui-alert ng-if="info.status" title="info.status" status="info.status">
@@ -17,6 +29,7 @@
 <table class="table table-hover table-striped">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Data</th>
             <th>OS</th>
             <th>Atendente</th>
@@ -28,18 +41,19 @@
             <th>Faturista</th>
         </tr>
     </thead>
-    
-    <tbody ng-if="!info.status">
-        <tr>
-            <td>data</td>
-            <td>os</td>
-            <td>aten</td>
-            <td>unid</td>
-            <td>conv</td>
-            <td>ncon</td>
-            <td>R$ 200</td>
-            <td>statu</td>
-            <td>fatur</td>
+
+    <tbody>
+        <tr ng-repeat="glosa in glosas | filter:search | limitTo:limit">
+            <td>{{glosa.glosa_id}}</td>
+            <td>{{glosa.glosa_date|dateBr}}</td>
+            <td>{{glosa.glosa_os}}</td>
+            <td>{{glosa.aten.user_nickname}}</td>
+            <td>{{glosa.unid.postos_nome}}</td>
+            <td>{{glosa.conv.conv_title}}</td>
+            <td>{{glosa.ncon.ncon_title}}</td>
+            <td>{{glosa.glosa_value|currency}}</td>
+            <td>{{glosa.glosa_status}}</td>
+            <td>{{glosa.fatur.user_name}}</td>
         </tr>
     </tbody>
 </table>

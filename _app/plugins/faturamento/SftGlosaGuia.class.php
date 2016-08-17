@@ -90,9 +90,6 @@ class SftGlosaGuia extends Beans {
     }
 
     function getGlosa_status() {
-        if (isset($this->glosa_status)) {
-            $this->glosa_status = ($this->glosa_status ? '1' : 'false');
-        }
         return $this->glosa_status;
     }
 

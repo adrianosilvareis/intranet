@@ -1,4 +1,4 @@
-angular.module("faturamento").directive("uiNumber", function () {
+angular.module("uiFormat").directive("uiNumber", function () {
     return {
         require: "ngModel",
         link: function (scope, element, attrs, ctrl) {

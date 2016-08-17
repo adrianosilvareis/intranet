@@ -50,11 +50,11 @@ endif;
             <script src="../_lib/cdn/combo.js"></script>
             <script src="../js/angular/services/objetoAPI.module.js"></script>
             <script src="../js/angular/services/objetoAPI.services.js"></script>
-            <script src="../js/angular/filter/filter.module.js"></script>
-            <script src="../js/angular/filter/dateBr.filter.js"></script>
-            <script src="../js/angular/filter/timestampBr.filter.js"></script>
-            <script src="../js/angular/directive/uiFormat.module.js"></script>
-            <script src="../js/angular/directive/uiTimestampBr.directive.js"></script>
+            <script src="../js/angular/filterDefault/filter.module.js"></script>
+            <script src="../js/angular/filterDefault/dateBr.filter.js"></script>
+            <script src="../js/angular/filterDefault/timestampBr.filter.js"></script>
+            <script src="../js/angular/uiFormat/uiFormat.module.js"></script>
+            <script src="../js/angular/uiFormat/uiTimestampBr.directive.js"></script>
         <?php else: ?>
             <link rel="stylesheet" href="../css/ng-animation.min.css" />
             <script src="../js/lib.min.js"></script>

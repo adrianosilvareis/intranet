@@ -3,7 +3,7 @@
 $Read = new SftGlosaGuia();
 
 function setDados($request, $userlogin = null) {
-
+    
     unset($request->aten);
     unset($request->unid);
     unset($request->conv);
@@ -12,7 +12,7 @@ function setDados($request, $userlogin = null) {
     $request = (object) array_map("trim", (array) $request);
     $request = (object) array_map("strip_tags", (array) $request);
     $request->glosa_value = (float) str_replace(',', '.', $request->glosa_value);
-
+    
     if (empty($request->glosa_id)) {
         $request->faturista_id = $userlogin->user_id;
         $request->glosa_date = date('Y-m-d');

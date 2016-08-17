@@ -68,7 +68,24 @@ angular.module('faturamento')
             $routeProvider
                     .when('/glosas', {
                         templateUrl: partials + '/glosa/index.html',
-                        controller: 'glosas'
+                        controller: 'glosas',
+                        resolve: {
+                            glosas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/glosas');
+                            },
+                            unidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/unidades&query=ativos');
+                            },
+                            convenios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/convenios&query=ativos');
+                            },
+                            naoconformidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/naoconformidade&query=ativos');
+                            },
+                            atendentes: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/atendentes&query=ativos');
+                            }
+                        }
                     });
 
             $routeProvider
@@ -109,6 +126,17 @@ angular.module('faturamento')
                                 return objetoAPI.getObjeto(config.urlAPI + '/atendentes&query=ativos');
                             }
                         }
+                    });
+
+            $routeProvider
+                    .when('/os-nao-pagas', {
+                        templateUrl: partials + '/os-nao-pagas/index.html'
+                    });
+                    
+            $routeProvider
+                    .when('/os-nao-pagas/uploads', {
+                        templateUrl: partials + '/os-nao-pagas/uploads.html',
+                        controller: 'uploadParticular'
                     });
 
             $routeProvider

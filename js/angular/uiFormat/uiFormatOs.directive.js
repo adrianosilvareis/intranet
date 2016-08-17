@@ -1,4 +1,4 @@
-angular.module("faturamento").directive("uiFormatOs", function () {
+angular.module("uiFormat").directive("uiFormatOs", function () {
     return {
         require: "ngModel",
         link: function (scope, element, attrs, ctrl) {

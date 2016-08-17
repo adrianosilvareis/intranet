@@ -10,6 +10,12 @@
     "attributes": {
         "ngf-select": {
             "context": "input"
+        },
+        "placeholder": {
+            "context": "input"
+        },
+        "file-model": {
+            "context": "input"
         }
     }
 }

@@ -130,7 +130,7 @@ angular.module('eventoIndesejado').controller('registro', function ($scope, obje
         if ($scope.reg.disabled)
             return;
 
-        objetoAPI.deleteObjeto(config.apiURL + '/upload/&file=' + urlFile).success(function (data) {
+        objetoAPI.deleteObjeto(config.apiURL + '/upload/&fileUrl=' + urlFile).success(function (data) {
             $scope.reg.images = $scope.reg.images.filter(function (imagem) {
                 if (imagem !== file)
                     return imagem;

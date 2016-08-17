@@ -1,0 +1,35 @@
+<section class="jumbotron">
+    <h1>Os Não Pagas</h1>
+    <a href="#/os-nao-pagas" class="btn btn-primary">Os Não pagas</a>
+    <a href="#/inconsistencias" class="btn btn-primary">Inconsistências</a>
+    <a href="#/glosas" class="btn btn-primary">Glosas</a>
+    <a href="#/admin" class="btn btn-warning">Administrador</a>
+</section>
+
+<ui-alert ng-if="info.status" title="info.status" status="info.status">
+    {{info.message}}
+</ui-alert>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Uploads</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <form ng-submit="submit()">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" type="file" file-model="arquivo">
+                            <span class="input-group-btn">
+                                <input class="btn btn-success" type="submit" value="Go" name="sendPostForm"/>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

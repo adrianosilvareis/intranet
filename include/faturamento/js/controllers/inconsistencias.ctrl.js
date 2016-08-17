@@ -3,6 +3,7 @@ angular.module('faturamento').controller('inconsistencias', function ($scope, in
     $scope.info = {};
     $scope.limit = 5;
     $scope.inconsistencias = [];
+    
     var init = function () {
         var data = inconsistencias.data;
         if (Array.isArray(data)) {
@@ -12,6 +13,7 @@ angular.module('faturamento').controller('inconsistencias', function ($scope, in
             $scope.info = data;
         }
     };
+    
     var setAdicionais = function () {
         var Unidades = (Array.isArray(unidades.data) ? unidades.data : []);
         var Convenios = (Array.isArray(convenios.data) ? convenios.data : []);
@@ -41,5 +43,6 @@ angular.module('faturamento').controller('inconsistencias', function ($scope, in
             })[0];
         });
     };
+    
     init();
 });

@@ -15,7 +15,8 @@ $request = json_decode(file_get_contents("php://input"));
 $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
 $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 $query = filter_input(INPUT_GET, "query", FILTER_DEFAULT);
-$fileUrl = filter_input(INPUT_GET, "file", FILTER_DEFAULT);
+$fileUrl = filter_input(INPUT_GET, "fileUrl", FILTER_DEFAULT);
+$file = $teste = $_FILES['file'];
 
 $Link = new Link();
 
