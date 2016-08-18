@@ -16,7 +16,7 @@ $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
 $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 $query = filter_input(INPUT_GET, "query", FILTER_DEFAULT);
 $fileUrl = filter_input(INPUT_GET, "fileUrl", FILTER_DEFAULT);
-$file = $teste = $_FILES['file'];
+$file = (isset($_FILES['file']) ? $_FILES['file'] : null);
 
 $Link = new Link();
 

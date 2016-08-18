@@ -13,11 +13,9 @@ class SftParticular extends Beans {
     private $part_date;
     private $part_nm_paciente;
     private $part_os;
-    private $part_vl_debito;
-    private $part_vl_desc;
     private $part_vl_liquido;
     private $part_vl_pago;
-    private $part_vl_total;
+    private $part_vl_debito;
     private $aten_id;
     private $unid_id;
 
@@ -35,11 +33,9 @@ class SftParticular extends Beans {
             'part_date' => $this->getPart_date(),
             'part_nm_paciente' => $this->getPart_nm_paciente(),
             'part_os' => $this->getPart_os(),
-            'part_vl_debito' => $this->getPart_vl_debito(),
-            'part_vl_desc' => $this->getPart_vl_desc(),
-            'part_vl_liquido' => $this->getPart_vl_liquido(),
+            'part_vl_liquido' => $this->getPart_vl_liquido(),            
             'part_vl_pago' => $this->getPart_vl_pago(),
-            'part_vl_total' => $this->getPart_vl_total(),
+            'part_vl_debito' => $this->getPart_vl_debito(),
             'aten_id' => $this->getAten_id(),
             'unid_id' => $this->getUnid_id(),
             'part_id_idpart' => $this->getPart_id()
@@ -57,11 +53,9 @@ class SftParticular extends Beans {
         $this->setPart_date((isset($object->part_date) ? $object->part_date : null));
         $this->setPart_nm_paciente((isset($object->part_nm_paciente) ? $object->part_nm_paciente : null));
         $this->setPart_os((isset($object->part_os) ? $object->part_os : null));
-        $this->setPart_vl_debito((isset($object->part_vl_debito) ? $object->part_vl_debito : null));
-        $this->setPart_vl_desc((isset($object->part_vl_desc) ? $object->part_vl_desc : null));
         $this->setPart_vl_liquido((isset($object->part_vl_liquido) ? $object->part_vl_liquido : null));
         $this->setPart_vl_pago((isset($object->part_vl_pago) ? $object->part_vl_pago : null));
-        $this->setPart_vl_total((isset($object->part_vl_total) ? $object->part_vl_total : null));
+        $this->setPart_vl_debito((isset($object->part_vl_debito) ? $object->part_vl_debito : null));
         $this->setAten_id((isset($object->aten_id) ? $object->aten_id : null));
         $this->setUnid_id((isset($object->unid_id) ? $object->unid_id : null));
     }
@@ -97,14 +91,6 @@ class SftParticular extends Beans {
         return $this->part_os;
     }
 
-    function getPart_vl_debito() {
-        return $this->part_vl_debito;
-    }
-
-    function getPart_vl_desc() {
-        return $this->part_vl_desc;
-    }
-
     function getPart_vl_liquido() {
         return $this->part_vl_liquido;
     }
@@ -113,8 +99,8 @@ class SftParticular extends Beans {
         return $this->part_vl_pago;
     }
 
-    function getPart_vl_total() {
-        return $this->part_vl_total;
+    function getPart_vl_debito() {
+        return $this->part_vl_debito;
     }
 
     function getAten_id() {
@@ -141,14 +127,6 @@ class SftParticular extends Beans {
         $this->part_os = $part_os;
     }
 
-    function setPart_vl_debito($part_vl_debito) {
-        $this->part_vl_debito = $part_vl_debito;
-    }
-
-    function setPart_vl_desc($part_vl_desc) {
-        $this->part_vl_desc = $part_vl_desc;
-    }
-
     function setPart_vl_liquido($part_vl_liquido) {
         $this->part_vl_liquido = $part_vl_liquido;
     }
@@ -157,8 +135,8 @@ class SftParticular extends Beans {
         $this->part_vl_pago = $part_vl_pago;
     }
 
-    function setPart_vl_total($part_vl_total) {
-        $this->part_vl_total = $part_vl_total;
+    function setPart_vl_debito($part_vl_debito) {
+        $this->part_vl_debito = $part_vl_debito;
     }
 
     function setAten_id($aten_id) {
@@ -168,5 +146,5 @@ class SftParticular extends Beans {
     function setUnid_id($unid_id) {
         $this->unid_id = $unid_id;
     }
-
+    
 }

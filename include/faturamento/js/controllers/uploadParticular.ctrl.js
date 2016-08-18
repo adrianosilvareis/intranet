@@ -2,6 +2,9 @@ angular.module('faturamento').controller('uploadParticular', function ($scope, c
 
     $scope.info = {};
     
+    $scope.voltar = function(){
+        delete $scope.erros;
+    }
     
     $scope.submit = function () {
         if ($scope.arquivo) {
@@ -22,13 +25,12 @@ angular.module('faturamento').controller('uploadParticular', function ($scope, c
             message: "Arquivo Salvo com sucesso!",
             status: '200'
         };
-        console.log('sucesso: ');
         console.log(data);
+        $scope.erros = data;
     };
 
     var error = function (error) {
         $scope.info = error;
-        console.log('error: ');
         console.log(error);
     };
 });
