@@ -43,7 +43,7 @@
     </thead>
 
     <tbody>
-        <tr ng-repeat="glosa in glosas | filter:search | limitTo:limit">
+        <tr ng-repeat="glosa in glosas | filter:search | limitTo:limit track by glosa.glosa_id">
             <td>{{glosa.glosa_id}}</td>
             <td>{{glosa.glosa_date|dateBr}}</td>
             <td>{{glosa.glosa_os}}</td>

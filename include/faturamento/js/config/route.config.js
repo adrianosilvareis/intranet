@@ -2,8 +2,13 @@ angular.module('faturamento')
         .config(function ($routeProvider) {
 
             var partials = CONFIG.HOME + '/include/faturamento/partials';
+
             $routeProvider
                     .when('/', {
+                        templateUrl: partials + '/index.html'
+                    });
+            $routeProvider
+                    .when('/inconsistencias', {
                         templateUrl: partials + '/inconsistencia/index.html',
                         controller: 'inconsistencias',
                         resolve: {
@@ -130,9 +135,21 @@ angular.module('faturamento')
 
             $routeProvider
                     .when('/os-nao-pagas', {
-                        templateUrl: partials + '/os-nao-pagas/index.html'
+                        templateUrl: partials + '/os-nao-pagas/index.html',
+                        controller: 'particular',
+                        resolve: {
+                            particular: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/particular');
+                            },
+                            unidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/unidades');
+                            },
+                            atendentes: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/atendentes');
+                            }
+                        }
                     });
-                    
+
             $routeProvider
                     .when('/os-nao-pagas/uploads', {
                         templateUrl: partials + '/os-nao-pagas/uploads.html',
@@ -204,7 +221,40 @@ angular.module('faturamento')
 
             $routeProvider
                     .when('/error', {
-                        templateUrl: partials + '/error.html',
+                        templateUrl: partials + '/error.html'
+                    });
+
+            $routeProvider
+                    .when('/report/inconsistencias', {
+                        templateUrl: partials + '/relatorios/inconsistencias.html',
+                        controller: 'inconsistencias',
+                        resolve: {
+                            inconsistencias: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/inconsistencias');
+                            },
+                            unidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/unidades&query=ativos');
+                            },
+                            convenios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/convenios&query=ativos');
+                            },
+                            naoconformidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/naoconformidade&query=ativos');
+                            },
+                            atendentes: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/atendentes&query=ativos');
+                            }
+                        }
+                    });
+
+            $routeProvider
+                    .when('/report/glosas', {
+                        templateUrl: partials + '/relatorios/glosas.html'
+                    });
+
+            $routeProvider
+                    .when('/report/os-nao-pagas', {
+                        templateUrl: partials + '/relatorios/os-nao-pagas.html'
                     });
 
             $routeProvider.otherwise({redirectTo: '/'});

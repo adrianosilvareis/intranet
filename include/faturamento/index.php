@@ -14,6 +14,7 @@ Register::addScript($url . '/js/controllers/glosa.ctrl.js');
 Register::addScript($url . '/js/controllers/glosas.ctrl.js');
 Register::addScript($url . '/js/controllers/inconsistencia.ctrl.js');
 Register::addScript($url . '/js/controllers/inconsistencias.ctrl.js');
+Register::addScript($url . '/js/controllers/particular.ctrl.js');
 Register::addScript($url . '/js/controllers/uploadParticular.ctrl.js');
 Register::addScript($url . '/js/interceptors/timestamp.interceptor.js');
 Register::addScript($url . '/js/interceptors/error.interceptor.js');

@@ -9,7 +9,7 @@ angular.module('faturamento').controller('uploadParticular', function ($scope, c
     $scope.submit = function () {
         if ($scope.arquivo) {
             var file = $scope.arquivo;
-            fileUpload.uploadFileToUrl(config.urlAPI + '/particular', file)
+            fileUpload.uploadFileToUrl(config.urlAPI + '/uploadparticular', file)
                     .success(success)
                     .error(error);
         } else {
