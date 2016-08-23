@@ -1,14 +1,171 @@
-<div class="row">
-    <div class="row" style="width: 50%; background: blue; text-align: center; color: #FFF; margin-top: 5px;">
-        50%
+<section class="jumbotron">
+    <h1>Inconsistências <small>Resumo</small></h1>
+    <a class="btn btn-primary">Glosa</a>
+    <a class="btn btn-primary">Os Não Pagas</a>
+    <a href="#/report" class="btn btn-success">Relatórios</a>
+
+    <div style="float: right;">
+        <button class="btn btn-default" title="Lista" ng-click="view = 'lista'"><span class="glyphicon glyphicon-th-list"></span></button>
+        <button class="btn btn-default" title="Estatisticas" ng-click="view = 'estatisticas'"><span class="glyphicon glyphicon-stats"></span></button>
     </div>
-    <div class="row" style="width: 30%; background: blue; text-align: center; color: #FFF; margin-top: 5px;">
-        30%
+</section>
+
+<div class="row well">
+
+    <div class="col-md-6">
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                    <input type="text" class="form-control" ui-datebr ng-model="dataInicial" placeholder="Data incial Ex.: 10/08/2016"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                    <input type="text" class="form-control" ui-datebr ng-model="dataFinal" placeholder="Data final Ex.: 10/08/2016"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <button class="btn btn-primary" ng-click="filtrarData(dataInicial, dataFinal)" style="width: 100%;">
+                Filtrar
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </div>
     </div>
-    <div class="row" style="width: 35%; background: blue; text-align: center; color: #FFF; margin-top: 5px;">
-        35%
+
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="search" placeholder="encontre o que você quer aqui"/>
+                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <button class="btn btn-success" ng-click="toCsv(inconsistencias)">Exportar para .CSV</button>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button class="btn btn-primary" ng-click="filtrar(search)" style="width: 100%;">
+                    Filtrar
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="row" style="width: 75%; background: blue; text-align: center; color: #FFF; margin-top: 5px;">
-        75%
-    </div>
+
 </div>
+
+<article ng-show="view === 'estatisticas'">
+    <h1>Estatisticas</h1>
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="bg-primary"  style="border-radius: 5px; padding: 25px; height: 150px; font-size: 1.8em;">
+                Total de Inconsistências<br>
+                <p class="text-center">{{inconsistencias.length}}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="bg-primary"  style="border-radius: 5px; padding: 25px; height: 150px; font-size: 1.8em;">
+                Total de Atendentes<br>
+                <p class="text-center">{{atendentes.length}}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="bg-primary"  style="border-radius: 5px; padding: 25px; height: 150px; font-size: 1.8em;">
+                Total de Convênios <br>
+                <p class="text-center">{{convenios.length}}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <article class="col-md-4">
+            <h1>Por Postos</h1>
+            <div ng-repeat="un in unidades| orderBy:filtered" ng-show="filtered.length > 0">
+                <div ng-repeat="inco in inconsistencias| filter:{postos_id:un.postos_id}:true as filtered"></div>
+                {{un.postos_nome}} - 
+                {{filtered.length}}
+            </div>
+        </article>
+
+        <article class="col-md-4">
+            <h1>Por Atendentes</h1>
+            <div ng-repeat="aten in atendentes| orderBy:filtered" ng-show="filtered.length > 0">
+                <div ng-repeat="inco in inconsistencias| filter:{aten_id:aten.user_id}:true as filtered"></div>
+                {{aten.user_nickname}} - 
+                {{filtered.length}}
+            </div>
+        </article>
+
+        <article class="col-md-4">
+            <h1>Por Convênios</h1>
+            <div ng-repeat="conv in convenios| orderBy:filtered" ng-show="filtered.length > 0">
+                <div ng-repeat="inco in inconsistencias| filter:{conv_id:conv.conv_id}:true as filtered"></div>
+                {{conv.conv_name}} - 
+                {{filtered.length}}
+            </div>
+        </article>
+
+    </div>
+</article>
+
+<article ng-show="view === 'lista'">
+    <h1>Listagem</h1>
+
+    <select ng-model="limit">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="500">500</option>
+        <option value="1000">1000</option>
+        <option value="">Todos</option>
+    </select>
+
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>OS</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Unidade</th>
+                    <th>Atendente</th>
+                    <th>Convênio</th>
+                    <th>Não Conformidade</th>
+                    <th>Obs</th>
+                    <th>Faturista</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="inco in inconsistencias| orderBy:inco.inco_date:true | limitTo:limit">
+                    <td>{{inco.inco_os}}</td>
+                    <td>{{inco.inco_date|dateBr}}</td>
+                    <td>{{inco.inco_status}}</td>
+                    <td>{{inco.unid.postos_nome}}</td>
+                    <td>{{inco.aten.user_nickname}}</td>
+                    <td>{{inco.conv.conv_title}}</td>
+                    <td>{{inco.ncon.ncon_title}}</td>
+                    <td>{{inco.inco_obs}}</td>
+                    <td>{{inco.fatur.user_name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</article>

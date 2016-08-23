@@ -33,7 +33,9 @@ switch ($method) {
         endif;
         break;
     case "POST":
-        if (!empty($request->inco_id)):
+        if (!empty($request) && is_array($request)):
+            var_dump($request);
+        elseif (!empty($request->inco_id)):
             //update
             $request = setDados($request);
             $Read->setThis($request);

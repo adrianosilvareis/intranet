@@ -42,7 +42,7 @@
     </thead>
 
     <tbody>
-        <tr ng-repeat="inco in inconsistencias|filter:search|limitTo:limit track by inco.inco_id">
+        <tr ng-repeat="inco in inconsistencias |orderBy:inco.inco_date:true |filter:search |limitTo:limit track by inco.inco_id">
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_id}}</a></td>
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_date}}</a></td>
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_os}}</a></td>

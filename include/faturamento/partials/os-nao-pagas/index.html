@@ -30,6 +30,7 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>OS</th>
             <th>Nome do Paciente</th>
             <th>Data da OS</th>
             <th>Valor Total</th>
@@ -40,8 +41,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="part in particulares |filter:search |limitTo:limit track by part.part_id">
+        <tr ng-repeat="part in particulares |orderBy:part.part_date:true |filter:search |limitTo:limit track by part.part_id">
             <td>{{::part.part_id}}</td>
+            <td>{{::part.part_os}}</td>
             <td>{{::part.part_nm_paciente}}</td>
             <td>{{::part.part_date|dateBr}}</td>
             <td>{{::part.part_vl_liquido|currency}}</td>

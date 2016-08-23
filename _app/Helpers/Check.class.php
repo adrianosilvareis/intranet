@@ -50,6 +50,25 @@ class Check {
         return $gbFiles;
     }
 
+    public static function ToCsv($filename, $file) {
+        
+        $filename = $filename . '.csv';
+
+        header('Content-type: text/csv');
+        header("Content-Disposition: attachement; filename=$filename");
+
+        $output = fopen("php://output", "w");
+        $header = array_keys($file[0]);
+        
+        fputcsv($output, $header);
+
+        foreach ($file as $row) {
+            fputcsv($output, $row);
+        }
+
+        fclose($output);
+    }
+
     /**
      * <b>Tranforma URL:</b> Tranforma uma string no formato de URL amigável e retorna o a string convertida!
      * @param STRING $Name = Uma string qualquer
@@ -387,7 +406,7 @@ class Check {
                     return true;
                 endif;
             endforeach;
-            
+
             $message = "Não tem permissão";
             $status = WS_ALERT;
             self::mensagem($system, false, $message, $status);

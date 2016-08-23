@@ -225,6 +225,11 @@ angular.module('faturamento')
                     });
 
             $routeProvider
+                    .when('/report', {
+                        templateUrl: partials + '/relatorios/relatorios.html'
+                    });
+
+            $routeProvider
                     .when('/report/inconsistencias', {
                         templateUrl: partials + '/relatorios/inconsistencias.html',
                         controller: 'inconsistencias',
