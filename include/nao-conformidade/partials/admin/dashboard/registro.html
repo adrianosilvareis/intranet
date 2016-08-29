@@ -1,0 +1,102 @@
+<div ng-include="partials + '/admin/menu.html'"></div>
+<div ng-include="partials + '/admin/dashboard/menu.html'"></div>
+
+<div ng-if="carregando">
+    <img ng-src="{{gifLoad}}">
+</div>
+
+<section class="col-md-10" ng-show="!carregando">
+    
+    <a href="#/admin/avaliacao/{{reg.reg_id}}" class="btn btn-default">Avaliação</a>
+    
+    <div class="well">
+        <label>Origem do evento:</label>
+        <div class="form-group" ng-if="reg.disabled">
+            <ul class="list-group">
+                <li class="list-group-item col-md-3" style="float: left; text-align: center;" ng-repeat="origem in reg.origens">{{origem.origem_title}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form-group row" ng-if="reg.images.length > 0">
+        <label>Imagens:</label>
+        <div class="row">
+            <div class="col-md-2" ng-repeat="img in reg.images" ng-if="reg.disabled">
+                <a href="" data-toggle="modal" data-target="#{{img.image_id}}">
+                    <img src="/intranet/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail" style="height: 105px; float: left; margin-left: 15px;"/>
+                </a>
+                <div id="{{img.image_id}}" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <img src="/intranet/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row" ng-if="reg.files.length > 0">
+        <label>Arquivos:</label>
+        <ul ng-if="reg.disabled">
+            <div  ng-repeat="file in reg.files">
+                <a href="/intranet/uploads/{{file.file_url}}" title="{{file.file_name}}" target="_black" 
+                   class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
+                    {{file.file_name}}
+                </a>
+            </div>
+        </ul>
+    </div>
+
+    <div class="well">
+        <div class="form-group">
+            <label>Descrição:</label>
+            <textarea class="form-control" rows="3" name="reg_descricao" placeholder="Descrição do ocorrido" ng-model="reg.reg_descricao" ng-disabled="reg.disabled"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="btn btn-primary">
+                Houve impacto para o paciente ? 
+                <input type="checkbox" autocomplete="off" name="reg_impacto_paciente" ng-model="reg.reg_impacto_paciente" ng-disabled="reg.disabled"> 
+            </label>
+        </div>
+    </div>
+
+    <div class="well">
+        <div class="col-md-12 form-group">
+            <label>Aréa Resposável</label>
+            <div class="form-control">
+                {{reg.area.area_title}}
+            </div>
+        </div>
+    </div>
+
+    <div class="well">
+        <div class="col-md-12 form-group">
+            <label>Usuário responsável:</label>
+            <div class="form-control">
+                {{reg.user.user_name}} {{reg.user.user_lastname}}
+            </div>
+        </div>
+    </div>
+
+    <div class="well">
+        <div class="form-group">
+            <label>Correção Imediata:</label>
+            <textarea class="form-control" rows="3" name="reg_correcao_imediata" placeholder="Correção imediata" ng-model="reg.reg_correcao_imediata" ng-disabled="reg.disabled"></textarea>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Responsável pela execução da açao:</label>
+            <input type="text" class="form-control" name="reg_user_correcao" ng-model="reg.reg_user_correcao" ng-disabled="reg.disabled"/>
+        </div>
+
+        <div class="form-group  col-md-6">
+            <label>Data da ação corretiva:</label>
+            <div ng-if="reg.disabled" style="padding: 7px; border: 1px solid #CCC">
+                {{reg.reg_date_correcao| dateBr}}
+            </div>
+            <input type="text" class="form-control formDate" name="reg_date_correcao" ng-model="reg.reg_date_correcao" ng-if="!reg.disabled"/>
+        </div>
+    </div>
+</section>

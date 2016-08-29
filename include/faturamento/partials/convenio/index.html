@@ -28,7 +28,7 @@
     </thead>
 
     <tbody ng-if="!info.status">
-        <tr ng-repeat="conv in convenios| filter:search track by conv.conv_id">
+        <tr ng-repeat="conv in convenios| orderBy:conv.conv_date:true | filter:search track by conv.conv_id">
             <td><a href="#/convenio/{{conv.conv_id}}">{{::conv.conv_id}}</a></td>
             <td><a href="#/convenio/{{conv.conv_id}}">{{::conv.conv_code}}</a></td>
             <td><a href="#/convenio/{{conv.conv_id}}">{{::conv.conv_title}}</a></td>

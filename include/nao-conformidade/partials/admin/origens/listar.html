@@ -1,0 +1,37 @@
+<div ng-include="'/intranet/include/nao-conformidade/partials/admin/menu.html'"></div>
+
+<div ng-if="message" ng-class="message.class">{{message.send}}</div>
+
+<a class="btn btn-primary" href="#/admin/origem">Nova Origem</a>
+<p ng-show="origens.length > 0">Total de Origens: {{origens.length}}</p>
+
+<p class="alert alert-danger text-center" ng-show="origens.length <= 0">Nenhuma Origem Cadastrada</p>
+
+<table class="table table-responsive table-hover" ng-if="origens.length > 0">
+
+    <thead>
+        <tr class="active">
+            <th class="text-center">
+                DESCRIÇÃO
+                <div class="form-inline">
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-search"></span>
+                        <input type="text" class="form-control" ng-model="search"/>
+                    </div>
+                </div>
+            </th>
+            <th class="text-center">Ação</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr ng-repeat="origem in origens | filter:search">
+            <td>{{origem.origem_title}}</td>
+            <td class="text-center">
+                <a href="#/admin/origem/{{origem.origem_id}}" class="btn btn-primary">EDITAR</a>
+                <a href="" class="btn btn-success" ng-show="origem.origem_status == '0'" ng-click="AlterarStatus(origem)">ATIVAR</a>
+                <a href="" class="btn btn-warning" ng-show="origem.origem_status == '1'" ng-click="AlterarStatus(origem)">DESATIVAR</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

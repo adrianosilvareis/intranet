@@ -1,0 +1,15 @@
+<div ng-include="'/intranet/include/nao-conformidade/partials/admin/menu.html'"></div>
+
+<div ng-class="message.class">{{message.send}}</div>
+
+<div class="container" style="margin-bottom: 15px;">
+    <div class="form-group">
+        <label>Descrição</label>
+        <input type="text" class="form-control" ng-model="origem.origem_title" placeholder="Descrição da Origem"/>
+    </div>
+    
+    <div class="btn-group">
+        <a class="btn btn-success" href="" ng-click="salvar(origem)" ng-disabled="!origem.origem_title">Salvar</a>
+        <a class="btn btn-default" href="#/admin/origens">Voltar</a>
+    </div>
+</div>

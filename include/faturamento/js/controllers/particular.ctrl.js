@@ -1,8 +1,13 @@
-angular.module('faturamento').controller('particular', function ($scope, particular, unidades, atendentes) {
+angular.module('faturamento').controller('particular', function ($scope, $filter, objetoAPI, config, particular, unidades, atendentes) {
 
-    $scope.particulares = [];
+
     $scope.info = {};
+    $scope.view = "estatisticas";
     $scope.limit = 5;
+    var Particulares = [];
+    $scope.particulares = [];
+    $scope.unidades = [];
+    $scope.atendentes = [];
 
     var init = function () {
         var data = particular.data;
@@ -15,19 +20,39 @@ angular.module('faturamento').controller('particular', function ($scope, particu
     };
 
     var setAdicionais = function () {
-        var Unidades = (Array.isArray(unidades.data) ? unidades.data : []);
-        var Atendentes = (Array.isArray(atendentes.data) ? atendentes.data : []);
+        $scope.unidades = (Array.isArray(unidades.data) ? unidades.data : []);
+        $scope.atendentes = (Array.isArray(atendentes.data) ? atendentes.data : []);
 
         $scope.particulares.map(function (data) {
             //adiciona o posto
-            data.unid = Unidades.filter(function (unid) {
+            data.unid = $scope.unidades.filter(function (unid) {
                 return data.unid_id === unid.postos_id;
             })[0];
             //adiciona atendente
-            data.aten = Atendentes.filter(function (aten) {
+            data.aten = $scope.atendentes.filter(function (aten) {
                 return data.aten_id === aten.user_id;
             })[0];
         });
+
+        Particulares = $scope.particulares;
+    };
+
+    $scope.filtrarData = function (dataInicial, dataFinal) {
+        $scope.particulares = Particulares.filter(function (part) {
+            if (part.part_date >= dataInicial && part.part_date <= dataFinal)
+                return part;
+        });
+    };
+
+    $scope.filtrar = function (search) {
+        $scope.particulares = $filter('filter')(Particulares, search);
+    };
+
+    $scope.toCsv = function (particulares) {
+        objetoAPI.saveObjeto(config.urlAPI + '/particular', particulares)
+                .success(function (data) {
+                    console.log(data);
+                });
     };
 
     init();

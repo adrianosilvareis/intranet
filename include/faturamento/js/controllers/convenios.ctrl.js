@@ -23,10 +23,16 @@ angular.module('faturamento').controller('convenios', function ($scope, config, 
 
     //carrega o post do convenio
     $scope.carregaPost = function (idPost) {
+        if (!idPost)
+            return;
+
         var _posts = posts.data;
         var post = _posts.filter(function (post) {
             return post.post_id === idPost;
         })[0];
+
+        if (post.post_cover === undefined)
+            return;
 
         return config.tiny + config.URL.HOME + "/uploads/" + post.post_cover + "&w=50&h=50";
     };

@@ -1,7 +1,7 @@
 <section class="jumbotron">
     <h1>Inconsistências <small>Resumo</small></h1>
-    <a href="#/report/glosas" class="btn btn-primary">Glosa</a>
-    <a href="#/report/os-nao-pagas" class="btn btn-primary">Os Não Pagas</a>
+    <a class="btn btn-primary">Glosa</a>
+    <a class="btn btn-primary">Os Não Pagas</a>
     <a href="#/report" class="btn btn-success">Relatórios</a>
 
     <div style="float: right;">
@@ -63,7 +63,7 @@
         </div>
     </div>
 
-</div>    
+</div>
 
 <article ng-show="view === 'estatisticas'">
     <h1>Estatisticas</h1>
@@ -98,18 +98,8 @@
             <h1>Por Postos</h1>
             <div ng-repeat="un in unidades| orderBy:filtered" ng-show="filtered.length > 0">
                 <div ng-repeat="inco in inconsistencias| filter:{postos_id:un.postos_id}:true as filtered"></div>
-                <div class="col-md-6">
-                    {{un.postos_nome}} - 
-                    {{filtered.length}}
-                </div>
-                <div class="col-md-6">
-                    <div ng-if="filtered.length > 0" class="progress">
-                        <div class="progress-bar progress-bar-danger progress-bar-striped" 
-                             style="width: {{progressSize(inconsistencias.length, filtered.length)}}%">
-                            {{progressSize(inconsistencias.length, filtered.length)}}%
-                        </div>
-                    </div>
-                </div>
+                {{un.postos_nome}} - 
+                {{filtered.length}}
             </div>
         </article>
 
@@ -117,18 +107,8 @@
             <h1>Por Atendentes</h1>
             <div ng-repeat="aten in atendentes| orderBy:filtered" ng-show="filtered.length > 0">
                 <div ng-repeat="inco in inconsistencias| filter:{aten_id:aten.user_id}:true as filtered"></div>
-                <div class="col-md-6">
-                    {{aten.user_nickname}} - 
-                    {{filtered.length}}
-                </div>
-                <div class="col-md-6">
-                    <div ng-if="filtered.length > 0" class="progress">
-                        <div class="progress-bar progress-bar-primary progress-bar-striped" 
-                             style="width: {{progressSize(inconsistencias.length, filtered.length)}}%">
-                            {{progressSize(inconsistencias.length, filtered.length)}}%
-                        </div>
-                    </div>
-                </div>
+                {{aten.user_nickname}} - 
+                {{filtered.length}}
             </div>
         </article>
 
@@ -136,18 +116,8 @@
             <h1>Por Convênios</h1>
             <div ng-repeat="conv in convenios| orderBy:filtered" ng-show="filtered.length > 0">
                 <div ng-repeat="inco in inconsistencias| filter:{conv_id:conv.conv_id}:true as filtered"></div>
-                <div class="col-md-6">
-                    {{conv.conv_name}} - 
-                    {{filtered.length}}
-                </div>
-                <div class="col-md-6">
-                    <div ng-if="filtered.length > 0" class="progress">
-                        <div class="progress-bar progress-bar-success progress-bar-striped" 
-                             style="width: {{progressSize(inconsistencias.length, filtered.length)}}%">
-                            {{progressSize(inconsistencias.length, filtered.length)}}%
-                        </div>
-                    </div>
-                </div>
+                {{conv.conv_name}} - 
+                {{filtered.length}}
             </div>
         </article>
 

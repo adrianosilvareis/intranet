@@ -254,12 +254,41 @@ angular.module('faturamento')
 
             $routeProvider
                     .when('/report/glosas', {
-                        templateUrl: partials + '/relatorios/glosas.html'
+                        templateUrl: partials + '/relatorios/glosas.html',
+                        resolve: {
+                            glosas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/glosas');
+                            },
+                            unidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/unidades&query=ativos');
+                            },
+                            convenios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/convenios&query=ativos');
+                            },
+                            naoconformidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/naoconformidade&query=ativos');
+                            },
+                            atendentes: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/atendentes&query=ativos');
+                            }
+                        }
                     });
 
             $routeProvider
                     .when('/report/os-nao-pagas', {
-                        templateUrl: partials + '/relatorios/os-nao-pagas.html'
+                        templateUrl: partials + '/relatorios/os-nao-pagas.html',
+                        controller: 'particular',
+                        resolve: {
+                            particular: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/particular');
+                            },
+                            unidades: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/unidades');
+                            },
+                            atendentes: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/atendentes');
+                            }
+                        }
                     });
 
             $routeProvider.otherwise({redirectTo: '/'});

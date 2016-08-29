@@ -325,6 +325,8 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-route.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-locale_pt-br.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/ng-file-upload-all.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/angular-sanitize.min.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/_lib/angular/ng-csv.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap.min.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/bootstrap/js/bootstrap-multiselect.min.js'></script>" . "\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/bootstrap/css/bootstrap-multiselect.css' type=\"text/css\"/>" . "\n";
@@ -363,7 +365,7 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filterDefault/name.filter.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filterDefault/timestampBr.filter.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filterDefault/dateBr.filter.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/js/angular/fileUploads/app.model.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/fileUploads/app.module.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/fileUploads/directive/fileModel.directive.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/fileUploads/services/fileUpload.service.js'></script>" . "\n";
         $this->seoLibs .= "<!--CONFIG-->\n";

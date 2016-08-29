@@ -50,23 +50,50 @@ class Check {
         return $gbFiles;
     }
 
+    /**
+     * Recebe um array e o nome do arquivo que sera retornado, e transforma em um arquivo .csv
+     * @param string $filename
+     * @param array $file
+     */
     public static function ToCsv($filename, $file) {
-        
+
         $filename = $filename . '.csv';
 
         header('Content-type: text/csv');
         header("Content-Disposition: attachement; filename=$filename");
 
         $output = fopen("php://output", "w");
-        $header = array_keys($file[0]);
+        $header = array_keys((array) $file[0]);
         
-        fputcsv($output, $header);
+        fputcsv($output, $header, ";");
 
         foreach ($file as $row) {
-            fputcsv($output, $row);
+            fputcsv($output, $row, ";");
         }
 
         fclose($output);
+    }
+
+    /**
+     * Converte string em float, retirando as virgulas incorretas
+     * 
+     * @param string $num
+     * @return float
+     */
+    public static function toFloat($num) {
+        $dotPos = strrpos($num, '.');
+        $commaPos = strrpos($num, ',');
+        $sep = (($dotPos > $commaPos) && $dotPos) ? $dotPos :
+                ((($commaPos > $dotPos) && $commaPos) ? $commaPos : false);
+
+        if (!$sep) {
+            return floatval(preg_replace("/[^0-9]/", "", $num));
+        }
+
+        return floatval(
+                preg_replace("/[^0-9]/", "", substr($num, 0, $sep)) . '.' .
+                preg_replace("/[^0-9]/", "", substr($num, $sep + 1, strlen($num)))
+        );
     }
 
     /**

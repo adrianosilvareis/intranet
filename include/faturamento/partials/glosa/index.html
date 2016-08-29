@@ -44,16 +44,16 @@
 
     <tbody>
         <tr ng-repeat="glosa in glosas |orderBy:glosa.glosa_date:true |filter:search |limitTo:limit track by glosa.glosa_id">
-            <td>{{glosa.glosa_id}}</td>
-            <td>{{glosa.glosa_date|dateBr}}</td>
-            <td>{{glosa.glosa_os}}</td>
-            <td>{{glosa.aten.user_nickname}}</td>
-            <td>{{glosa.unid.postos_nome}}</td>
-            <td>{{glosa.conv.conv_title}}</td>
-            <td>{{glosa.ncon.ncon_title}}</td>
-            <td>{{glosa.glosa_value|currency}}</td>
-            <td>{{glosa.glosa_status}}</td>
-            <td>{{glosa.fatur.user_name}}</td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.glosa_id}}</a></td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.glosa_date|dateBr}}</a></td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.glosa_os}}</a></td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.aten.user_nickname}}</a></td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.unid.postos_nome}}</a></td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.conv.conv_title}}</a></td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.ncon.ncon_title}}</a></td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.glosa_value|currency}}</a></td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.glosa_status}}</a></td>
+            <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.fatur.user_name}}</a></td>
         </tr>
     </tbody>
 </table>

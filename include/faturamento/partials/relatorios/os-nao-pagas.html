@@ -1,0 +1,152 @@
+<section class="jumbotron">
+    <h1>Inconsistências <small>Resumo</small></h1>
+    <a href="#/report/inconsistencias" class="btn btn-primary">Inconsistências</a>
+    <a href="#/report/glosas" class="btn btn-primary">Glosa</a>
+    <a href="#/report" class="btn btn-success">Relatórios</a>
+
+    <div style="float: right;">
+        <button class="btn btn-default" title="Lista" ng-click="view = 'lista'"><span class="glyphicon glyphicon-th-list"></span></button>
+        <button class="btn btn-default" title="Estatisticas" ng-click="view = 'estatisticas'"><span class="glyphicon glyphicon-stats"></span></button>
+    </div>
+</section>
+
+<div class="row well">
+
+    <div class="col-md-6">
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                    <input type="text" class="form-control" ui-datebr ng-model="dataInicial" placeholder="Data incial Ex.: 10/08/2016"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                    <input type="text" class="form-control" ui-datebr ng-model="dataFinal" placeholder="Data final Ex.: 10/08/2016"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <button class="btn btn-primary" ng-click="filtrarData(dataInicial, dataFinal)" style="width: 100%;">
+                Filtrar
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="search" placeholder="encontre o que você quer aqui"/>
+                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <button class="btn btn-success" ng-click="toCsv(particulares)">Exportar para .CSV</button>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button class="btn btn-primary" ng-click="filtrar(search)" style="width: 100%;">
+                    Filtrar
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<article ng-show="view === 'estatisticas'">
+    <h1>Estatisticas</h1>
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="bg-primary"  style="border-radius: 5px; padding: 25px; height: 150px; font-size: 1.8em;">
+                Total de Inconsistências<br>
+                <p class="text-center">{{particulares.length}}</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="bg-primary"  style="border-radius: 5px; padding: 25px; height: 150px; font-size: 1.8em;">
+                Total de Atendentes<br>
+                <p class="text-center">{{atendentes.length}}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">     
+        <article class="col-md-6">
+            <h1>Por Postos</h1>
+            <div ng-repeat="un in unidades | orderBy:filtered" ng-show="filtered.length > 0">
+                <div ng-repeat="part in particulares | filter:{unid_id:un.postos_id}:true as filtered"></div>
+                {{un.postos_nome}} - 
+                {{filtered.length}}
+            </div>
+        </article>
+
+        <article class="col-md-6">
+            <h1>Por Atendentes</h1>
+            <div ng-repeat="aten in atendentes | orderBy:filtered.length" ng-show="filtered.length > 0">
+                <div ng-repeat="part in particulares | filter:{aten_id:aten.user_id}:true as filtered"></div>
+                {{aten.user_nickname}} - 
+                {{filtered.length}}
+            </div>
+        </article>
+
+    </div>
+</article>
+
+<article ng-show="view === 'lista'">
+    <h1>Listagem</h1>
+
+    <select ng-model="limit">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="500">500</option>
+        <option value="1000">1000</option>
+        <option value="">Todos</option>
+    </select>
+
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>OS</th>
+                    <th>Data</th>
+                    <th>Nome do paciente</th>
+                    <th>Unidade</th>
+                    <th>Atendente</th>
+                    <th>Valor Total</th>
+                    <th>Valor Pago</th>
+                    <th>Valor Debito</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="part in particulares | orderBy:part.inco_date:true | limitTo:limit">
+                    <td>{{part.part_os}}</td>
+                    <td>{{part.part_date|dateBr}}</td>
+                    <td>{{part.part_nm_paciente}}</td>
+                    <td>{{part.unid.postos_nome}}</td>
+                    <td>{{part.aten.user_nickname}}</td>
+                    <td>{{part.part_vl_liquido|currency}}</td>
+                    <td>{{part.part_vl_pago|currency}}</td>
+                    <td>{{part.part_vl_debito|currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</article>

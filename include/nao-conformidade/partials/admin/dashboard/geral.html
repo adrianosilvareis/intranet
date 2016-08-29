@@ -1,0 +1,72 @@
+<div ng-include="'/intranet/include/nao-conformidade/partials/admin/menu.html'"></div>
+<div ng-include="'/intranet/include/nao-conformidade/partials/admin/dashboard/menu.html'"></div>
+
+<div ng-if="carregando">
+    <img src="/intranet/css/carregando.gif">
+</div>
+
+<section class="col-md-10" ng-if="!carregando">
+    <div class="page-header">
+        <h1>DASHBOARD<small>Painel de Gerenciamento</small></h1>
+    </div>
+
+    <article>
+        <ul class="list-group" role="tablist">
+            <li class="list-group-item active">Geral</li>
+            <li class="list-group-item">Total de Registros: <span class="badge">{{::totalRegistros}}</span></li>
+            <li class="list-group-item">Total de Registros Abertos:<span class="badge">{{::totalRegistrosAbertos}}</span></li>
+        </ul>
+    </article>
+
+
+    <div class="col-md-6 well">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Usuarios</th>
+                    <th>Quantidade</th>
+                    <th class="text-center">%</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="reg in userReg| orderBy:'quant':true | limitTo:5 track by reg.user_id">
+                    <td>{{::reg.user_id}}</td>
+                    <td><span class="badge">{{::reg.quant}}</span></td>
+                    <td class="bar-container"><span class="bar bar-info" style="width:{{::reg.pcent}}">{{::reg.pcent}}</span></td>
+                </tr>
+                <tr class="alert-danger">
+                    <td colspan="2">Total de usuários</td>
+                    <td>{{userReg.length}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="col-md-6 well">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Areas</th>
+                    <th>Quantidade</th>
+                    <th class="text-center">%</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="reg in areaReg| orderBy:'quant':true | limitTo:5 track by reg.area_id">
+                    <td>{{::reg.area_id}}</td>
+                    <td><span class="badge">{{::reg.quant}}</span></td>
+                    <td class="bar-container">
+                        <span class="bar bar-danger" style="width: {{::reg.pcent}};">{{::reg.pcent}}</span>
+                    </td>
+                </tr>
+                <tr class="alert-danger">
+                    <td colspan="2">Total de áreas</td>
+                    <td>{{areaReg.length}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>

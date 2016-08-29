@@ -65,7 +65,7 @@ gulp.task('copy', function () {
         gulp.src('ftp/images/**').pipe(gulp.dest('dist/ftp/images')),
         gulp.src('include/**').pipe(gulp.dest('dist/include')),
         gulp.src('themes/**').pipe(gulp.dest('dist/themes')),
-        gulp.src('uploads/**').pipe(gulp.dest('dist/uploads')),
+//        gulp.src('uploads/**').pipe(gulp.dest('dist/uploads')),
         gulp.src('css/**').pipe(gulp.dest('dist/css')),
         gulp.src('.htaccess').pipe(gulp.dest('dist/')),
         gulp.src('*.php*').pipe(gulp.dest('dist/'))

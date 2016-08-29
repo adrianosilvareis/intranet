@@ -25,7 +25,7 @@
         </tr>
     </thead>
     <tbody ng-if="!info.status">
-        <tr ng-repeat="ncon in naoconformidades | filter:search track by ncon.ncon_id">
+        <tr ng-repeat="ncon in naoconformidades| orderBy: ncon.ncon_date:true | filter:search track by ncon.ncon_id">
             <td><a href="#/naoconformidade/{{ncon.ncon_id}}">{{::ncon.ncon_id}}</a></td>
             <td><a href="#/naoconformidade/{{ncon.ncon_id}}">{{::ncon.ncon_title}}</a></td>
             <td><a href="#/naoconformidade/{{ncon.ncon_id}}">{{::ncon.ncon_content}}</a></td>

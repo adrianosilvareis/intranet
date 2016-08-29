@@ -6,8 +6,8 @@ angular.module('faturamento')
                     $scope.info = {};
                     $scope.view = "estatisticas";
                     $scope.limit = 5;
-                    $scope.inconsistencias = [];
                     var Inconsistencias = [];
+                    $scope.inconsistencias = [];
                     $scope.unidades = [];
                     $scope.convenios = [];
                     $scope.atendentes = [];
@@ -66,11 +66,25 @@ angular.module('faturamento')
                         $scope.inconsistencias = $filter('filter')(Inconsistencias, search);
                     };
 
+                    $scope.progressSize = function (size, position) {
+                        var result = 100 * position / size;
+                        return parseInt(result);
+                    };
+
                     $scope.toCsv = function (inconsistencias) {
-                        console.log(inconsistencias);
                         objetoAPI.saveObjeto(config.urlAPI + '/inconsistencias', inconsistencias)
                                 .success(function (data) {
-                                    console.log(data);
+
+                                    var uri = 'data:text/csv;charset=utf-8,' + escape(data);
+
+                                    var downloadLink = document.createElement("a");
+                                    downloadLink.href = uri;
+                                    downloadLink.download = "data.csv";
+
+                                    document.body.appendChild(downloadLink);
+                                    downloadLink.click();
+                                    document.body.removeChild(downloadLink);
+
                                 });
                     };
 
