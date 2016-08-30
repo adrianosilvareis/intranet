@@ -8,15 +8,15 @@
         <header>
             <h1>Acessos:</h1>
         </header>
-        
+
         <div ng-if="carregando">
             <img ng-src="{{carregando}}">
         </div>
-        
+
         <div class="trigger infor" ng-if="message.status">
             {{message.mensage}}
         </div>
-        
+
         <section ng-repeat="acesso in acessos| filter:{acesso_parent:null}" ng-if="!carregando">
 
             <header>
@@ -31,22 +31,37 @@
 
             <h2>Sub acessos:</h2>
 
-            <article ng-repeat="subacessos in acessos|filter:{acesso_parent:acesso.acesso_id}:true" style="height: 200px;">
+            <article ng-repeat="subacessos in acessos| filter:{acesso_parent:acesso.acesso_id}:true" style="height: 200px;">
 
-                <h1><a target="_blank" href="painel.php?exe=acessos/index#/update/{{subacessos.acesso_id}}" title="Editar">{{subacessos.acesso_title}}</a></h1>
-                <p><small>{{subacessos.acesso_content}}</small></p>
+                <h1><a href="painel.php?exe=acessos/index#/update/{{subacessos.acesso_id}}" title="Editar">{{subacessos.acesso_title}}</a></h1>
+                <!--<p><small>{{subacessos.acesso_content}}</small></p>-->
                 <ul class="info post_actions">
                     <li><strong>Data:</strong>{{subacessos.acesso_date| timestampBr | limitTo:16}} Hs</li>
-                    <li><a class="act_edit" target="_blank" href="painel.php?exe=acessos/index#/update/{{subacessos.acesso_id}}" title="Editar">Editar</a></li>
+                    <li><a class="act_edit" href="painel.php?exe=acessos/index#/update/{{subacessos.acesso_id}}" title="Editar">Editar</a></li>
                     <li><a ng-class="(subacessos.acesso_status ? 'act_inative' : 'act_ative')" href="" title="alterar status" ng-click="status(subacessos)">Status</a></li>
                 </ul>
 
                 <h3><small>ITENS</small></h3>
-                <ul ng-repeat="item in acessos|filter:{acesso_parent:subacessos.acesso_id}:true">                    
+                <ul ng-repeat="item in acessos| filter:{acesso_parent:subacessos.acesso_id}:true">                    
                     <li>
                         <p class="post_views">
-                            <strong><a target="_blank" href="painel.php?exe=acessos/index#/update/{{item.acesso_id}}" title="editar">{{item.acesso_title}}</a></strong>: {{item.acesso_content}} 
+                            <strong>
+                                <a href="painel.php?exe=acessos/index#/update/{{item.acesso_id}}" title="editar">
+                                    {{item.acesso_title}}
+                                </a>
+                            </strong> 
                         </p>
+                        <ul>
+                            <li ng-repeat="sub in acessos| filter:{acesso_parent:item.acesso_id}:true">
+                                <p class="post_views">
+                                    <strong>
+                                        <a href="painel.php?exe=acessos/index#/update/{{sub.acesso_id}}" title="editar">
+                                           >> {{sub.acesso_title}}
+                                        </a>
+                                    </strong>
+                                </p>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </article>

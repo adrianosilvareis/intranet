@@ -31,6 +31,7 @@ angular.module('faturamento').controller('inconsistencia', function ($scope, con
     $scope.novo = function () {
         $scope.inco = {};
         $scope.info = {};
+        $scope.incoForm.$setPristine();
     };
 
     $scope.save = function (inco) {
@@ -43,6 +44,7 @@ angular.module('faturamento').controller('inconsistencia', function ($scope, con
                             message: 'Inconsistência salva com sucesso!',
                             status: '200'
                         };
+                        $scope.incoForm.$setPristine();
                     } else {
                         console.log(data);
                     }

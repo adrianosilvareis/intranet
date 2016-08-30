@@ -205,7 +205,7 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 .cat_list section section header .info{padding: 10px; margin-bottom: 20px; background: #fbfbfb; display: block; width: 908px;}
 
 .cat_list section section h2{font-size: 18px; margin: 15px 0 !important; font-weight: 600; color: #999}
-.cat_list section section article{float: left; width: 256px; padding: 20px; background: #eee; margin: 0 20px 20px 0;}
+.cat_list section section article{float: left; width: 25%; padding: 20px; background: #eee; margin: 0 20px 20px 0;}
 .cat_list section section .right{margin-right: 0;}
 .cat_list section section article h1{font-size: 14px}
 .cat_list section section article .info{width: 256px;}

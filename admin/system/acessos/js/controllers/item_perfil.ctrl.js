@@ -4,9 +4,11 @@ angular.module("itemPerfil").controller('item_perfil', function ($scope, objetoA
 
     $scope.message = {};
     $scope.carregando = true;
+    $scope.showPlugin = true;
     $scope.list = [];
     $scope.list2 = [];
     $scope.list3 = [];
+    $scope.list4 = [];
     $scope.select = [];
     $scope.perfilId = "";
     $scope.alert = {};
@@ -41,7 +43,7 @@ angular.module("itemPerfil").controller('item_perfil', function ($scope, objetoA
         var existe = $scope.select.some(function (element) {
             return element.acesso_id === item.acesso_id;
         });
-        
+
         if (!existe) {
             $scope.select.push(item);
         }
@@ -56,11 +58,22 @@ angular.module("itemPerfil").controller('item_perfil', function ($scope, objetoA
             }, 100 * $scope.list2.length);
 
         } else if ($scope.list2.indexOf(item) !== -1) {
+            $scope.showPlugin = true;
+
             clearItens($scope.list3);
 
             $timeout(function () {
                 menu($scope.list3, item.acesso_id);
             }, 100 * $scope.list3.length);
+
+        } else if ($scope.list3.indexOf(item) !== -1) {
+            $scope.showPlugin = false;
+            
+            clearItens($scope.list4);
+            
+            $timeout(function () {
+                menu($scope.list4, item.acesso_id);
+            }, 100 * $scope.list4.length);
         }
     };
 

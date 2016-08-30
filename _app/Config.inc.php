@@ -17,7 +17,7 @@ define('INCLUDE_PATH', HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH);
 define('PRODUCAO', FALSE);
 
 //CONFIGURACAO DO BANCO ####################
-define("DB_HOST", "localhost");
+define("DB_HOST", "192.168.0.50");
 define("DB_USER", "root");
 define("DB_PASS", "root");
 define("DB_NAME", "ws_intranet");
@@ -94,10 +94,10 @@ function Plugins() {
         ['url' => 'os-nao-pagas', 'title' => 'Financeiro'],
         ['url' => 'downtime', 'title' => 'DownTimes'],
         ['url' => 'fast-exames', 'title' => 'Fast Exames'],
-        ['url' => 'nao-conformidade', 'title' => 'Não Conformidade']
+        ['url' => 'nao-conformidade', 'title' => 'Não Conformidade'],
+        ['url' => 'faturamento', 'title' => 'Faturamento']
     ];
     
-//        ['url' => 'faturamento', 'title' => 'SFT']
     return $plugins;
 }
 

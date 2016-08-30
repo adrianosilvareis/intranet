@@ -5,8 +5,19 @@ angular.module('faturamento')
 
             $routeProvider
                     .when('/', {
-                        templateUrl: partials + '/index.html'
+                        templateUrl: partials + '/index.html',
+                        resolve: {
+                            access: function ($location) {
+                                var liberado = perfilUsuario.acessos.some(function (auth) {
+                                    return auth.acesso_name === 'faturamento';
+                                });
+
+                                if (!liberado)
+                                    $location.path('/report')
+                            }
+                        }
                     });
+
             $routeProvider
                     .when('/inconsistencias', {
                         templateUrl: partials + '/inconsistencia/index.html',
@@ -220,11 +231,6 @@ angular.module('faturamento')
                     });
 
             $routeProvider
-                    .when('/error', {
-                        templateUrl: partials + '/error.html'
-                    });
-
-            $routeProvider
                     .when('/report', {
                         templateUrl: partials + '/relatorios/relatorios.html'
                     });
@@ -289,6 +295,16 @@ angular.module('faturamento')
                                 return objetoAPI.getObjeto(config.urlAPI + '/atendentes');
                             }
                         }
+                    });
+
+            $routeProvider
+                    .when('/error', {
+                        templateUrl: partials + '/error.html'
+                    });
+
+            $routeProvider
+                    .when('/auth', {
+                        templateUrl: partials + '/unauth.html'
                     });
 
             $routeProvider.otherwise({redirectTo: '/'});

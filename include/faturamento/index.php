@@ -1,7 +1,7 @@
 <?php
-$url = HOME . '/include/faturamento';
 
 if (!PRODUCAO):
+    $url = HOME . '/include/faturamento';
     Register::addScript($url . '/js/app.module.js');
     Register::addScript($url . '/js/config/route.config.js');
     Register::addScript($url . '/js/config/interceptors.config.js');
