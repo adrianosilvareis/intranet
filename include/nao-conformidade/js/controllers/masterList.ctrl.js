@@ -105,8 +105,8 @@ angular.module('naoConformidade').controller('masterList', function ($scope, obj
                     if (reg.user_cadastro === user.user_id)
                         reg.cadastro = user;
 
-                    reg.reg_impacto_paciente == 1 ?
-                            reg.impacto = "Sim" :
+                    reg.reg_impacto_paciente == 1 ? 
+                            reg.impacto = "Sim" : 
                             reg.impacto = "Não";
 
                 });

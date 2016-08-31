@@ -195,7 +195,7 @@ angular.module('naoConformidade')
                     });
 
             $routeProvider.otherwise({redirectTo: '/painel'});
-        })
+        });
 //        .run(function ($rootScope, $location, accessControlProvider) {
 //            $rootScope.$on("$routeChangeStart", function (event, next, current) {
 //

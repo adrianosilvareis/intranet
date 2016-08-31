@@ -1,11 +1,12 @@
 angular.module("naoConformidade").filter("regUsuarios", function () {
     return function (input, cadastro) {
+        var map = [];
         if (cadastro) {
-            var map = input.map(function (reg) {
+            map = input.map(function (reg) {
                 return reg.cadastro_nickname;
             });
         } else {
-            var map = input.map(function (reg) {
+            map = input.map(function (reg) {
                 return reg.recebido_nickname;
             });
         }

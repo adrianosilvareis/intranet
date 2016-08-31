@@ -13,7 +13,7 @@ angular.module('faturamento')
                                 });
 
                                 if (!liberado)
-                                    $location.path('/report')
+                                    $location.path('/report');
                             }
                         }
                     });

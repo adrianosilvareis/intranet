@@ -7,42 +7,59 @@
     {{info.message}}
 </ui-alert>
 
-<form ng-submit="save(glosa)">
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-8">
+<form ng-submit="save(glosa)" name="glosaForm">
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group"
+                 ng-class="{ 'has-error' : glosaForm.glosa_os.$invalid && !glosaForm.glosa_os.$pristine }">
                 <label>Ordem de serviço</label>
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-barcode"></span>
-                    <input type="text" class="form-control" placeholder="Ordem de serviço"  ng-model="glosa.glosa_os" ui-format-os>
+                    <input type="text" class="form-control" placeholder="Ordem de serviço"  
+                           name="glosa_os" required ng-minlength="10" ng-model="glosa.glosa_os" ui-format-os>
                 </div>
-            </div>
-
-            <div class="col-md-4">
-                <label>Status da guia</label>
-                <br>
-                <div class="btn-group">
-                    <label class="btn btn-primary">
-                        <input type="radio" ng-model="glosa.glosa_status" value="OK">
-                        OK
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="radio" ng-model="glosa.glosa_status" value="Perda">
-                        Perda
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="radio" ng-model="glosa.glosa_status" value="DevDoc">
-                        DevDoc
-                    </label>
-                </div>
+                <p ng-show="incoForm.inco_os.$error.required && !incoForm.inco_os.$pristine" class="help-block">
+                    O número da OS é obrigatório
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </p>
+                <p ng-show="incoForm.inco_os.$error.minlength" class="help-block">
+                    Ordem de serviço deve ter no mínimo 10 caracteres
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </p>
             </div>
         </div>
 
+        <div class="col-md-4">
+            <label>Status da guia</label>
+            <br>
+            <div class="btn-group">
+                <label class="btn btn-primary">
+                    <input type="radio" ng-model="glosa.glosa_status" value="Devolvido Un" name="glosa_status" required>
+                    Devolvido Un
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" ng-model="glosa.glosa_status" value="Perda" name="glosa_status" required>
+                    Perda
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" ng-model="glosa.glosa_status" value="Recursado" name="glosa_status" required>
+                    Recursado
+                </label>
+            </div>
+            <div class="form-group has-error">
+                <p ng-show="glosaForm.glosa_status.$error.required" class="help-block">
+                    Status não selecionado
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </p>
+            </div>
+        </div>
     </div>
+    
+    <div class="row">
+        <div class="form-group">
+            <label>Convênio</label>
 
-    <div class="form-group">
-        <label>Convênio</label>
-        <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-search"></span>
@@ -64,7 +81,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="conv in convenios | filter:search_conv | limitTo:5 track by conv.conv_id">
+                    <tr ng-repeat="conv in convenios| filter:search_conv | limitTo:5 track by conv.conv_id">
                         <td><a href="" ng-click="addConvenio(conv)">{{::conv.conv_id}}</a></td>
                         <td><a href="" ng-click="addConvenio(conv)">{{::conv.conv_code}}</a></td>
                         <td><a href="" ng-click="addConvenio(conv)">{{::conv.conv_title}}</a></td>
@@ -98,7 +115,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="posto in unidades | filter:search_unid | limitTo:5 track by posto.postos_id">
+                    <tr ng-repeat="posto in unidades| filter:search_unid | limitTo:5 track by posto.postos_id">
                         <td><a href="" ng-click="addUnidade(posto)">{{::posto.postos_id}}</a></td>
                         <td><a href="" ng-click="addUnidade(posto)">{{::posto.postos_numero}}</a></td>
                         <td><a href="" ng-click="addUnidade(posto)">{{::posto.postos_nome}}</a></td>
@@ -133,7 +150,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="aten in atendentes | filter:search_aten | limitTo:5 track by aten.user_id">
+                    <tr ng-repeat="aten in atendentes| filter:search_aten | limitTo:5 track by aten.user_id">
                         <td><a href="" ng-click="addAtendente(aten)">{{::aten.user_id}}</a></td>
                         <td><a href="" ng-click="addAtendente(aten)">{{::aten.user_nickname}}</a></td>
                         <td><a href="" ng-click="addAtendente(aten)">{{::aten.user_name}}</a></td>
@@ -156,7 +173,7 @@
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-exclamation-sign"></span>
                     <select class="form-control" ng-model="glosa.ncon_id" 
-                            ng-options="ncon.ncon_id as ncon.ncon_title + ' - ' + ncon.ncon_content for ncon in naoconformidades">
+                            ng-options="ncon.ncon_id as ncon.ncon_title +      ' - ' +      ncon.ncon_content for ncon in naoconformidades">
                         <option value="">Selecione uma não conformidade</option>
                     </select>
                 </div>

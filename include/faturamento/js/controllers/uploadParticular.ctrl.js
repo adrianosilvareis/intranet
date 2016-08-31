@@ -4,7 +4,7 @@ angular.module('faturamento').controller('uploadParticular', function ($scope, c
     
     $scope.voltar = function(){
         delete $scope.erros;
-    }
+    };
     
     $scope.submit = function () {
         if ($scope.arquivo) {
