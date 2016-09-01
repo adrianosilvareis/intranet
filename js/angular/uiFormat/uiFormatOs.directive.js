@@ -5,6 +5,7 @@ angular.module("uiFormat").directive("uiFormatOs", function () {
             var _formatOs = function (os) {
                 if (os === undefined)
                     os = "";
+                var mil = os.indexOf("*");
                 os = os.replace(/[^0-9]+/g, "");
                 if (os.length > 3) {
                     os = os.substring(0, 3) + "-" + os.substring(3);
@@ -12,7 +13,7 @@ angular.module("uiFormat").directive("uiFormatOs", function () {
                 if (os.length > 9) {
                     os = os.substring(0, 9) + "-" + os.substring(9);
                 }
-                if (os.length > 13) {
+                if (os.length > 10 && mil > -1) {
                     os = os.replace("-", "");
                     os = os.replace("-", "");
                     os = os.substring(0, 4) + "-" + os.substring(4);

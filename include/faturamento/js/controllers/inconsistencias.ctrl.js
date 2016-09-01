@@ -13,14 +13,26 @@ angular.module('faturamento')
                     $scope.atendentes = [];
                     $scope.naoconformidades = [];
 
-                    var init = function () {
-                        var data = inconsistencias.data;
+                    var init = function (data) {
+                        var data = data;
                         if (Array.isArray(data)) {
                             $scope.inconsistencias = data;
                             setAdicionais();
                         } else {
                             $scope.info = data;
                         }
+                    };
+
+                    var carregarInco = function () {
+                        objetoAPI.getObjeto(config.urlAPI + '/inconsistencias')
+                                .success(function (data) {
+                                    $scope.inconsistencias = [];
+                                    init(data);
+                                })
+                                .error(function (error) {
+                                    console.log('error');
+                                    console.log(error);
+                                });
                     };
 
                     var setAdicionais = function () {
@@ -55,6 +67,16 @@ angular.module('faturamento')
                         Inconsistencias = $scope.inconsistencias;
                     };
 
+                    $scope.remover = function (inco) {
+                        objetoAPI.deleteObjeto(config.urlAPI + '/inconsistencias/&id=' + inco.inco_id)
+                                .success(function () {
+                                    carregarInco();
+                                })
+                                .error(function (error) {
+                                    console.log(error);
+                                });
+                    };
+
                     $scope.filtrarData = function (dataInicial, dataFinal) {
                         $scope.inconsistencias = Inconsistencias.filter(function (inco) {
                             if (inco.inco_date >= dataInicial && inco.inco_date <= dataFinal)
@@ -72,6 +94,10 @@ angular.module('faturamento')
                     };
 
                     $scope.toCsv = function (inconsistencias) {
+                        
+                        if (inconsistencias.length === 0)
+                            return;
+                        
                         objetoAPI.saveObjeto(config.urlAPI + '/inconsistencias', inconsistencias)
                                 .success(function (data) {
 
@@ -88,5 +114,5 @@ angular.module('faturamento')
                                 });
                     };
 
-                    init();
+                    init(inconsistencias.data);
                 });

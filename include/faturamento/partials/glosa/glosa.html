@@ -19,11 +19,11 @@
                     <input type="text" class="form-control" placeholder="Ordem de serviço"  
                            name="glosa_os" required ng-minlength="10" ng-model="glosa.glosa_os" ui-format-os>
                 </div>
-                <p ng-show="incoForm.inco_os.$error.required && !incoForm.inco_os.$pristine" class="help-block">
+                <p ng-show="glosaForm.glosa_os.$error.required && !glosaForm.glosa_os.$pristine" class="help-block">
                     O número da OS é obrigatório
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
                 </p>
-                <p ng-show="incoForm.inco_os.$error.minlength" class="help-block">
+                <p ng-show="glosaForm.glosa_os.$error.minlength" class="help-block">
                     Ordem de serviço deve ter no mínimo 10 caracteres
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
                 </p>
@@ -55,15 +55,15 @@
             </div>
         </div>
     </div>
-    
-    <div class="row">
-        <div class="form-group">
-            <label>Convênio</label>
 
+    <div class="form-group" 
+         ng-class="{ 'has-error' : !glosa.conv_id && !glosaForm.search_conv.$pristine }">
+        <label>Convênio</label>
+        <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-search"></span>
-                    <input type="text" class="form-control" placeholder="encontre o convênio aqui" ng-model="search_conv">
+                    <input name="search_conv" type="text" class="form-control" placeholder="encontre o convênio aqui" ng-model="search_conv">
                 </div>
             </div>
 
@@ -71,6 +71,10 @@
                 <span class="form-control">{{glosa.conv.conv_title}}</span>
             </div>
 
+            <p ng-show="!glosa.conv_id && !glosaForm.search_conv.$pristine" class="help-block">
+                Ops, você esqueceu de selecionar o convênio
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+            </p>
             <table class="table table-hover" ng-show="search_conv">
                 <thead>
                     <tr>
@@ -92,19 +96,25 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error' : !glosa.postos_id && !glosaForm.search_unid.$pristine }">
         <label>Unidade</label>
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-search"></span>
-                    <input type="text" class="form-control" placeholder="encontre a unidade aqui" ng-model="search_unid">
+                    <input name="search_unid" type="text" class="form-control" placeholder="encontre a unidade aqui" ng-model="search_unid">
                 </div>
             </div>
 
             <div class="col-md-8">
                 <span class="form-control">{{glosa.unid.postos_nome}}</span>
             </div>
+
+            <p ng-show="!glosa.postos_id && !glosaForm.search_unid.$pristine" class="help-block">
+                Ops, você esqueceu de selecionar a unidade
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+            </p>
 
             <table class="table table-hover" ng-show="search_unid">
                 <thead>
@@ -125,19 +135,25 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error' : !glosa.aten_id && !glosaForm.search_aten.$pristine }">
         <label>Atendente</label>
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-search"></span>
-                    <input type="text" class="form-control" placeholder="encontre o atendente aqui" ng-model="search_aten">
+                    <input name="search_aten" type="text" class="form-control" placeholder="encontre o atendente aqui" ng-model="search_aten">
                 </div>
             </div>
 
             <div class="col-md-8">
                 <span class="form-control">{{glosa.aten.user_nickname}}</span>
             </div>
+
+            <p ng-show="!glosa.aten_id && !glosaForm.search_aten.$pristine" class="help-block">
+                Ops, você esqueceu de selecionar o atendente
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+            </p>
 
             <table class="table table-hover" ng-show="search_aten">
                 <thead>
@@ -166,27 +182,43 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
+
+    <div class="row">
+        
+        <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error' : glosaForm.ncon_id.$error.required}">
                 <label>Não conformidade</label>
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-exclamation-sign"></span>
-                    <select class="form-control" ng-model="glosa.ncon_id" 
-                            ng-options="ncon.ncon_id as ncon.ncon_title +      ' - ' +      ncon.ncon_content for ncon in naoconformidades">
+                    <select class="form-control" ng-model="glosa.ncon_id" name="ncon_id" required
+                            ng-options="ncon.ncon_id as ncon.ncon_title +  ' - ' +  ncon.ncon_content for ncon in naoconformidades">
                         <option value="">Selecione uma não conformidade</option>
                     </select>
                 </div>
+                <p ng-show="glosaForm.ncon_id.$error.required" class="help-block">
+                    Selecione uma não conformidade
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </p>
             </div>
-            <div class="col-md-6">
+        </div>
+        
+        <div class="col-md-6">
+            <div class="form-group" 
+                 ng-class="{ 'has-error' : glosaForm.glosa_value.$invalid && !glosaForm.glosa_value.$pristine }">
                 <label>Valor da Guia</label>
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-usd"></span>
-                    <input type="text" class="form-control" ng-model="glosa.glosa_value" ui-number/>
+                    <input name="glosa_value" required type="text" class="form-control" ng-model="glosa.glosa_value" ui-number/>
                 </div>
+                <p ng-show="glosaForm.glosa_value.$invalid && !glosaForm.glosa_value.$pristine" class="help-block">
+                    Valor da os não foi informado
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </p>
             </div>
         </div>
+        
     </div>
+
 
     <div class="form-group">
         <label>Observação</label>
@@ -196,5 +228,6 @@
     <hr>
 
     <a href="" class="btn btn-block btn-default" ng-click="novo()">Novo</a>
-    <input type="submit" class="btn btn-block btn-primary" value="Salvar"/>
+    <input type="submit" class="btn btn-block btn-primary" value="Salvar"
+           ng-disabled="glosaForm.$invalid || !glosa.aten_id || !glosa.postos_id || !glosa.conv_id"/>
 </form>

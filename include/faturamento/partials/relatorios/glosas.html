@@ -1,7 +1,7 @@
 <section class="jumbotron">
-    <h1>Inconsistências <small>Resumo</small></h1>
-    <a class="btn btn-primary">Glosa</a>
-    <a class="btn btn-primary">Os Não Pagas</a>
+    <h1>Glosa <small>Resumo</small></h1>
+    <a href="#/report/inconsistencias" class="btn btn-primary">Inconsistências</a>
+    <a href="#/report/os-nao-pagas" class="btn btn-primary">Os Não Pagas</a>
     <a href="#/report" class="btn btn-success">Relatórios</a>
 
     <div style="float: right;">
@@ -51,7 +51,7 @@
         </div>
         <div class="col-md-12">
             <div class="col-md-4">
-                <button class="btn btn-success" ng-click="toCsv(inconsistencias)">Exportar para .CSV</button>
+                <button class="btn btn-success" ng-click="toCsv(glosas)">Exportar para .CSV</button>
             </div>
             <div class="col-md-4"></div>
             <div class="col-md-4">
@@ -71,8 +71,8 @@
 
         <div class="col-md-4">
             <div class="bg-primary"  style="border-radius: 5px; padding: 25px; height: 150px; font-size: 1.8em;">
-                Total de Inconsistências<br>
-                <p class="text-center">{{inconsistencias.length}}</p>
+                Total de Glosas<br>
+                <p class="text-center">{{glosas.length}}</p>
             </div>
         </div>
 
@@ -97,27 +97,57 @@
         <article class="col-md-4">
             <h1>Por Postos</h1>
             <div ng-repeat="un in unidades| orderBy:filtered" ng-show="filtered.length > 0">
-                <div ng-repeat="inco in inconsistencias| filter:{postos_id:un.postos_id}:true as filtered"></div>
-                {{un.postos_nome}} - 
-                {{filtered.length}}
+                <div ng-repeat="glosa in glosas| filter:{postos_id:un.postos_id}:true as filtered"></div>
+                <div class="col-md-6">
+                    {{un.postos_nome}} - 
+                    {{filtered.length}}
+                </div>
+                <div class="col-md-6">
+                    <div ng-if="filtered.length > 0" class="progress">
+                        <div class="progress-bar progress-bar-danger progress-bar-striped" 
+                             style="width: {{progressSize(glosas.length, filtered.length)}}%">
+                            {{progressSize(glosas.length, filtered.length)}}%
+                        </div>
+                    </div>
+                </div>
             </div>
         </article>
 
         <article class="col-md-4">
             <h1>Por Atendentes</h1>
             <div ng-repeat="aten in atendentes| orderBy:filtered" ng-show="filtered.length > 0">
-                <div ng-repeat="inco in inconsistencias| filter:{aten_id:aten.user_id}:true as filtered"></div>
-                {{aten.user_nickname}} - 
-                {{filtered.length}}
+                <div ng-repeat="glosa in glosas| filter:{aten_id:aten.user_id}:true as filtered"></div>
+                <div class="col-md-6">
+                    {{aten.user_nickname}} - 
+                    {{filtered.length}}
+                </div>
+                <div class="col-md-6">
+                    <div ng-if="filtered.length > 0" class="progress">
+                        <div class="progress-bar progress-bar-danger progress-bar-striped" 
+                             style="width: {{progressSize(glosas.length, filtered.length)}}%">
+                            {{progressSize(glosas.length, filtered.length)}}%
+                        </div>
+                    </div>
+                </div>
             </div>
         </article>
 
         <article class="col-md-4">
             <h1>Por Convênios</h1>
             <div ng-repeat="conv in convenios| orderBy:filtered" ng-show="filtered.length > 0">
-                <div ng-repeat="inco in inconsistencias| filter:{conv_id:conv.conv_id}:true as filtered"></div>
-                {{conv.conv_name}} - 
-                {{filtered.length}}
+                <div ng-repeat="glosa in glosas| filter:{conv_id:conv.conv_id}:true as filtered"></div>
+                <div class="col-md-6">
+                    {{conv.conv_name}} - 
+                    {{filtered.length}}
+                </div>
+                <div class="col-md-6">
+                    <div ng-if="filtered.length > 0" class="progress">
+                        <div class="progress-bar progress-bar-danger progress-bar-striped" 
+                             style="width: {{progressSize(glosas.length, filtered.length)}}%">
+                            {{progressSize(glosas.length, filtered.length)}}%
+                        </div>
+                    </div>
+                </div>
             </div>
         </article>
 
@@ -149,21 +179,23 @@
                     <th>Atendente</th>
                     <th>Convênio</th>
                     <th>Não Conformidade</th>
+                    <th>Valor</th>
                     <th>Obs</th>
                     <th>Faturista</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="inco in inconsistencias| orderBy:inco.inco_date:true | limitTo:limit">
-                    <td>{{inco.inco_os}}</td>
-                    <td>{{inco.inco_date|dateBr}}</td>
-                    <td>{{inco.inco_status}}</td>
-                    <td>{{inco.unid.postos_nome}}</td>
-                    <td>{{inco.aten.user_nickname}}</td>
-                    <td>{{inco.conv.conv_title}}</td>
-                    <td>{{inco.ncon.ncon_title}}</td>
-                    <td>{{inco.inco_obs}}</td>
-                    <td>{{inco.fatur.user_name}}</td>
+                <tr ng-repeat="glosa in glosas| orderBy:glosa.glosa_date:true | limitTo:limit">
+                    <td>{{glosa.glosa_os}}</td>
+                    <td>{{glosa.glosa_date|dateBr}}</td>
+                    <td>{{glosa.glosa_status}}</td>
+                    <td>{{glosa.unid.postos_nome}}</td>
+                    <td>{{glosa.aten.user_nickname}}</td>
+                    <td>{{glosa.conv.conv_title}}</td>
+                    <td>{{glosa.ncon.ncon_title}}</td>
+                    <td>{{glosa.glosa_value|currency}}</td>
+                    <td>{{glosa.glosa_obs}}</td>
+                    <td>{{glosa.fatur.user_name}}</td>
                 </tr>
             </tbody>
         </table>

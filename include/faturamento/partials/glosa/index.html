@@ -39,6 +39,7 @@
             <th>Value</th>
             <th>Status</th>
             <th>Faturista</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -54,6 +55,7 @@
             <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.glosa_value|currency}}</a></td>
             <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.glosa_status}}</a></td>
             <td><a href="#/glosa/{{glosa.glosa_id}}">{{glosa.fatur.user_name}}</a></td>
+            <td><button title="delete" ng-click="remover(glosa)" class="btn btn-warning glyphicon glyphicon-trash"></button></td>
         </tr>
     </tbody>
 </table>

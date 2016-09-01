@@ -38,6 +38,7 @@
             <th>Não Conformidade</th>
             <th>Status</th>
             <th>Faturista</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -52,6 +53,7 @@
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.ncon.ncon_title}}</a></td>
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_status}}</a></td>
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.fatur.user_name}}</a></td>
+            <td><button title="delete" ng-click="remover(inco)" class="btn btn-warning glyphicon glyphicon-trash"></button></td>
         </tr>
     </tbody>
 </table>

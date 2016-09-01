@@ -261,6 +261,7 @@ angular.module('faturamento')
             $routeProvider
                     .when('/report/glosas', {
                         templateUrl: partials + '/relatorios/glosas.html',
+                        controller: 'glosas',
                         resolve: {
                             glosas: function (objetoAPI, config) {
                                 return objetoAPI.getObjeto(config.urlAPI + '/glosas');

@@ -39,8 +39,8 @@
                     OK
                 </label>
                 <label class="btn btn-primary">
-                    <input type="radio" ng-model="inco.inco_status" name="inco_status" value="Perda" required>
-                    Perda
+                    <input type="radio" ng-model="inco.inco_status" name="inco_status" value="Aguardando" required>
+                    Aguardando
                 </label>
                 <label class="btn btn-primary">
                     <input type="radio" ng-model="inco.inco_status" name="inco_status" value="DevDoc" required>
@@ -56,28 +56,27 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="form-group">
-            <label>Convênio</label>
-
-            <div class="form-group" 
-                 ng-class="{ 'has-error' : !inco.conv_id && !incoForm.search_conv.$pristine }">
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-addon glyphicon glyphicon-search"></span>
-                        <input name="search_conv" type="text" class="form-control" placeholder="encontre o convênio aqui" ng-model="search_conv">
-                    </div>
+    <div class="form-group" 
+         ng-class="{ 'has-error' : !inco.conv_id && !incoForm.search_conv.$pristine }">
+        <label>Convênio</label>
+        <div class="row">
+            
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                    <input name="search_conv" type="text" class="form-control" placeholder="encontre o convênio aqui" ng-model="search_conv">
                 </div>
-
-                <div class="col-md-8">
-                    <span class="form-control">{{inco.conv.conv_title}}</span>
-                </div>
-
-                <p ng-show="!inco.conv_id && !incoForm.search_conv.$pristine" class="help-block">
-                    Ops, você esqueceu de selecionar o convênio
-                    <span class="glyphicon glyphicon-exclamation-sign"></span>
-                </p>
             </div>
+
+            <div class="col-md-8">
+                <span class="form-control">{{inco.conv.conv_title}}</span>
+            </div>
+
+            <p ng-show="!inco.conv_id && !incoForm.search_conv.$pristine" class="help-block">
+                Ops, você esqueceu de selecionar o convênio
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+            </p>
+
             <table class="table table-hover" ng-show="search_conv">
                 <thead>
                     <tr>
@@ -99,9 +98,10 @@
         </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : !inco.postos_id && !incoForm.search_unid.$pristine }">
+    <div class="form-group" 
+         ng-class="{ 'has-error' : !inco.postos_id && !incoForm.search_unid.$pristine }">
         <label>Unidade</label>
-        <div class="row">               
+        <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-search"></span>
@@ -134,11 +134,11 @@
                     </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
 
-    <div class="form-group"  ng-class="{ 'has-error' : !inco.aten_id && !incoForm.search_aten.$pristine }">
+    <div class="form-group" 
+         ng-class="{ 'has-error' : !inco.aten_id && !incoForm.search_aten.$pristine }">
         <label>Atendente</label>
         <div class="row">
             <div class="col-md-4">
@@ -184,24 +184,24 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error' : incoForm.ncon_id.$error.required}">
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group"
-                     ng-class="{ 'has-error' : incoForm.ncon_id.$error.required}">
-                    <label>Não conformidade</label>
-                    <div class="input-group">
-                        <span class="input-group-addon glyphicon glyphicon-exclamation-sign"></span>
-                        <select class="form-control" ng-model="inco.ncon_id" name="ncon_id" required
-                                ng-options="ncon.ncon_id as ncon.ncon_title +  ' - ' +  ncon.ncon_content for ncon in naoconformidades">
-                            <option value="">Selecione uma não conformidade</option>
-                        </select>
-                    </div>
-                    <p ng-show="incoForm.ncon_id.$error.required" class="help-block">
-                        Selecione uma não conformidade
-                        <span class="glyphicon glyphicon-exclamation-sign"></span>
-                    </p>
+
+                <label>Não conformidade</label>
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-exclamation-sign"></span>
+                    <select class="form-control" ng-model="inco.ncon_id" name="ncon_id" required
+                            ng-options="ncon.ncon_id as ncon.ncon_title +    ' - ' +    ncon.ncon_content for ncon in naoconformidades">
+                        <option value="">Selecione uma não conformidade</option>
+                    </select>
                 </div>
+                <p ng-show="incoForm.ncon_id.$error.required" class="help-block">
+                    Selecione uma não conformidade
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </p>
+
             </div>
         </div>
     </div>

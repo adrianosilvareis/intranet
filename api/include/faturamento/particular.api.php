@@ -1,40 +1,32 @@
 <?php
 
-$Read = new SftParticular();
+require 'models/AdminPart.class.php';
+
+$AdminPart = new AdminPart();
 
 switch ($method) {
     case "GET":
         //retorna todos os itens
         if (isset($id)):
-            $Read->setPart_id($id);
-            $Read->Execute()->find();
-            Check::JsonReturn($Read->Execute()->getResult(), 'Os não encontrada!', '404');
+            $AdminPart->Find($id);
         else:
-            $Read->Execute()->findAll();
-            Check::JsonReturn($Read->Execute()->getResult(), 'Nenhuma OS cadastrada!', '204');
+            $AdminPart->FindAll();
         endif;
         break;
     case "POST":
-        if (!empty($request->part_id)):
+        if (!empty($request) && is_array($request)):
+            $AdminPart->ExeExport($request);
+        elseif (!empty($request->part_id)):
             //update
-            $Read->setThis($request);
-            $Read->Execute()->update(NULL, 'part_id');
-            echo json_encode($request);
+            $AdminPart->ExeUpdate($id, $request);
         else:
             //salvar
-            $Read->setThis($request);
-            $insert = $Read->Execute()->insert();
-            if ($insert):
-                $request->part_id = (int) $Read->Execute()->MaxFild('part_id');
-            endif;
-            echo json_encode($request);
+            $AdminPart->ExeCreate($request);
         endif;
         break;
     case "DELETE":
         //deleta arquivo
-        $Read->setPart_id($id);
-        $delete = $Read->Execute()->delete();
-        echo json_encode($delete);
+        $AdminPart->ExeDelete($id);
         break;
 
     default:
