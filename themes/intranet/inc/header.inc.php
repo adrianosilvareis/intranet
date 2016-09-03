@@ -54,7 +54,9 @@
 
         <header style="margin-top: 55px;">
             <h1 class="notitle logo shadow-right"><?= SITENAME ?><a title="<?= SITENAME ?>" href="<?= HOME ?>"><img src="<?= HOME . '/themes/' . THEME ?>/images/header-trans-inverse.png" alt="<?= SITENAME ?>" class="img-responsive"></a></h1>
-
+            
+            <?php require "informativo.inc.php"; ?>
+            
             <?php require "menu.inc.php"; ?>
             
             <?php include "parabens.inc.php"; ?>

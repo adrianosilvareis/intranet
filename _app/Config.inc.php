@@ -57,7 +57,7 @@ function __autoload($Class_name) {
      * ****************************************
      */
     $cDir = ['Conn', 'Helpers', 'Beans', 'Models', 'library'];
-    $pDir = ['contadores-de-impressao', 'fast-exames', 'agenda', 'os-nao-pagas', 'nao-conformidade', 'downtime', 'sft', 'faturamento'];
+    $pDir = ['contadores-de-impressao', 'fast-exames', 'agenda', 'nao-conformidade', 'downtime', 'sft', 'faturamento'];
     $iDir = null;
 
     foreach ($cDir as $dirName):
@@ -91,11 +91,10 @@ function Plugins() {
         ['url' => 'aniversarios', 'title' => 'Aniversariantes do Mês'],
         ['url' => 'contadores-de-impressao', 'title' => 'Contadores de impressão'],
         ['url' => 'agenda', 'title' => 'Agenda'],
-        ['url' => 'os-nao-pagas', 'title' => 'Financeiro'],
+        ['url' => 'faturamento', 'title' => 'Faturamento'],
         ['url' => 'downtime', 'title' => 'DownTimes'],
         ['url' => 'fast-exames', 'title' => 'Fast Exames'],
-        ['url' => 'nao-conformidade', 'title' => 'Não Conformidade'],
-        ['url' => 'faturamento', 'title' => 'Faturamento']
+        ['url' => 'nao-conformidade', 'title' => 'Não Conformidade']        
     ];
     
     return $plugins;
