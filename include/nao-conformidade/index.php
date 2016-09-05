@@ -8,6 +8,10 @@ if (!PRODUCAO):
     Register::addRegister("<script src='" . EVENTO . "/app.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/config/config.values.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/config/routes.config.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/config/interceptors.config.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/interceptors/error.interceptor.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/interceptors/loading.interceptor.js'></script>");
+    Register::addRegister("<script src='" . EVENTO . "/interceptors/timestamp.interceptor.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/controllers/registro.ctrl.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/controllers/registros.ctrl.js'></script>");
     Register::addRegister("<script src='" . EVENTO . "/controllers/masterList.ctrl.js'></script>");
@@ -21,7 +25,13 @@ endif;
 ?>
 
 <div ng-app="naoConformidade" class="conteiner">
+    
+     <div ng-show="loading" class="col-md-offset-4">
+        <img src="<?= HOME . "/include/nao-conformidade/img/carregando.gif"; ?>" class="img img-responsive"/>
+    </div>
 
-    <div ng-view></div>
+    <div ng-hide="loading">
+        <div ng-view></div>
+    </div>
 
 </div>

@@ -8,4 +8,5 @@ var CONFIG = {
     API: "<?= HOME ?>/api"
 };
 
-var perfilUsuario = <?php echo json_encode($_SESSION['userlogin']['perfil']); ?>
+var perfilUsuario = <?php echo json_encode($_SESSION['userlogin']['perfil']); ?>;
+var userLogin = <?php echo json_encode($_SESSION['userlogin']); ?>;

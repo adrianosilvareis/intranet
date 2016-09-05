@@ -56,10 +56,8 @@
                         endif;
                         ?>
                         <li class="divider"></li>
-                        <li class="active"><a>Aplicativos</a></li>
-                        <li><a href="<?= HOME ?>/sft_redirect" target="_blank">SFT - Tommasi</a></li>
-                        <li class="divider"></li>
                         <li class="active"><a>Páginas</a></li>
+                        <li><a href="<?= HOME ?>/pages/aniversarios" title="Aniversáriantes do mês">Aniversáriantes</a></li>
                         <li><a href="<?= HOME ?>/pages/institucional" title="Missão, Visão, Valores">Institucional</a></li>
                         <li><a href="<?= HOME ?>/pages/qualidade">Qualidade</a></li>
                         <li><a href="<?= HOME ?>/pages/contato" title="contato por email">Contato</a></li>

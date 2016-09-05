@@ -184,6 +184,11 @@ class Seo {
                         $this->Data = ['Fale conosco - ' . SITENAME, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
                         break;
 
+                    //SEO:: Contato
+                    case 'aniversarios':
+                        $this->Data = ['Parabéns colegas - ' . SITENAME, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];
+                        break;
+
                     //SEO:: Qualidade
                     case 'qualidade':
                         $this->Data = ['Formularios da Qualidade - ' . SITENAME, SITEDESC, HOME, INCLUDE_PATH . '/images/site.png'];

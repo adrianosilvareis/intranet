@@ -115,28 +115,32 @@
                         <input class="form-control formDate" text="date" name="user_birthday" value="<?= date('d/m/Y', strtotime($user_birthday)); ?>" title="data nascimento" required/>
                     </div>
                 </label>
-            </div>
 
+                <div id="updatePassword">
+                    <div class="col-md-8 well">
+                        <label class="col-md-6">
+                            Senha:
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-lock"></span>
+                                <input type="password" name="user_password" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                            </div>
+                        </label>
 
-            <div class="col-md-8 well">
-                <label class="col-md-6">
-                    Senha:
-                    <div class="input-group">
-                        <span class="input-group-addon glyphicon glyphicon-lock"></span>
-                        <input type="password" name="user_password" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                        <label class="col-md-6">
+                            Confirmação:
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-info-sign"></span>
+                                <input type="password" name="user_confirme" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
+                            </div>
+                        </label>
                     </div>
-                </label>
-
-                <label class="col-md-6">
-                    Confirmação:
-                    <div class="input-group">
-                        <span class="input-group-addon glyphicon glyphicon-info-sign"></span>
-                        <input type="password" name="user_confirme" value="" title="Informe sua senha [ de 6 a 12 caracteres! ]" pattern = ".{6,12}" class="form-control" />
-                    </div>
-                </label>
+                </div>
+                
+                <a id="openPass" class="btn btn-default">Alterar senha</a>
             </div>
-
+            
             <div class="col-md-12">
+                <hr>
                 <input type="submit" name="SendPostForm" value="Atualizar Perfil" class="btn btn-primary btn-lg" />
             </div>
         </form>

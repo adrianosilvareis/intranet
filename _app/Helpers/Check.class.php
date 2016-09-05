@@ -56,17 +56,17 @@ class Check {
      * @param array $file
      */
     public static function ToCsv($filename, $file) {
-
+        
         $filename = $filename . '.csv';
-
+        
         header('Content-type: text/csv');
         header("Content-Disposition: attachement; filename=$filename");
-
+        
         $output = fopen("php://output", "w");
         $header = array_keys((array) $file[0]);
-        
-        fputcsv($output, $header, ";");
 
+        fputcsv($output, $header, ";");
+        
         foreach ($file as $row) {
             fputcsv($output, $row, ";");
         }
@@ -257,6 +257,21 @@ class Check {
         return $Result;
     }
 
+    public static function AreaById($area_id) {
+        $WsAreaTrabalho = new WsAreaTrabalho();
+        $WsAreaTrabalho->setArea_id($area_id);
+        
+        $WsAreaTrabalho->Execute()->find();
+        
+        return $WsAreaTrabalho->Execute()->getResult();
+    }
+
+    /**
+     * Encontra o tipo de setor a partir da descrição
+     * 
+     * @param string $TypeName
+     * @return int
+     */
     public static function SetTypeByName($TypeName) {
         $Read = new WsSetorType();
         $Read->setType_content($TypeName);
@@ -270,6 +285,11 @@ class Check {
         endif;
     }
 
+    /**
+     * Encontra o Id da area a partir da descrição.
+     * @param string $TypeName
+     * @return int
+     */
     public static function AreaTypeByName($TypeName) {
         $Read = new WsAreaCategory();
         $Read->setCategory_title($TypeName);

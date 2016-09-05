@@ -32,6 +32,13 @@ $(function () {
 
 $("documents").ready(function () {
 
+    $("#updatePassword").hide();
+
+    $("#openPass").click(function (e) {
+        e.preventDefault();
+        $("#updatePassword").toggle('slow');
+    });
+
     // Obtém todos os cookies do documento
     var cookies = document.cookie;
 
@@ -43,7 +50,7 @@ $("documents").ready(function () {
         var min = 30;
 
         var prazo = new Date();
-        prazo.setTime(prazo.getTime() + ( min * 60 * 1000));
+        prazo.setTime(prazo.getTime() + (min * 60 * 1000));
 
         // Converte a data para string
         prazo = prazo.toUTCString();
@@ -75,17 +82,17 @@ $("documents").ready(function () {
         // Exibo o modal
         $("#myModal").modal("show");
     }
-    
+
     // Verifica se o cookie existe
     if (cookies.indexOf("usuarioAtualizouPerfil") === -1) {
         // Entra aqui caso o cookie não exista no  navegador do usuário
 
         // Crio um objeto Date do Javascript pegando a data de hoje e incrementando + 1 dias nessa data
         var diasparaexpirar = 1;
-        var horas = 1;
+        var min = 30;
 
         var expiracao = new Date();
-        expiracao.setTime(expiracao.getTime() + (diasparaexpirar * horas * 60 * 60 * 1000));
+        expiracao.setTime(expiracao.getTime() + (diasparaexpirar * min * 60 * 1000));
 
         // Converte a data para string
         expiracao = expiracao.toUTCString();

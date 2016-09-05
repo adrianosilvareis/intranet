@@ -13,14 +13,14 @@ angular.module('naoConformidade')
                         templateUrl: link + "/painel.html",
                         controller: 'registros',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-indesejado")) {
-                                    $location.path('/blocked');
-                                }
+                            registros: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + '/registro');
+                            },
+                            session: function (config) {
+                                return config.userLogin;
                             }
                         }
                     });
-
             //visão seguimentada
             $routeProvider
                     .when("/painel/:local", {

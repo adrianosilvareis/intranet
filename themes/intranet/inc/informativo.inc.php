@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['userlogin']['user_birthday'] == NULL):        
+if (empty($_SESSION['userlogin']['user_birthday'])):
     ?>
     <div class="modal fade" id="updateInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

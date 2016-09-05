@@ -88,7 +88,7 @@ function AUTO($iDir, $file) {
 function Plugins() {
 
     $plugins = [
-        ['url' => 'aniversarios', 'title' => 'Aniversariantes do Mês'],
+//        ['url' => 'aniversarios', 'title' => 'Aniversariantes do Mês'],
         ['url' => 'contadores-de-impressao', 'title' => 'Contadores de impressão'],
         ['url' => 'agenda', 'title' => 'Agenda'],
         ['url' => 'faturamento', 'title' => 'Faturamento'],

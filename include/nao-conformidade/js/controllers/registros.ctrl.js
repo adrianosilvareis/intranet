@@ -1,63 +1,40 @@
-angular.module('naoConformidade').controller('registros', function ($scope, objetoAPI, config, $timeout) {
+angular.module('naoConformidade').controller('registros', function (registros, session, $scope) {
 
     $scope.abertos_enviados = [];
     $scope.fechados_enviados = [];
     $scope.abertos_recebidos = [];
     $scope.fechados_recebidos = [];
-    $scope.carregando = true;
 
-    var session = [];
+    var Session = [];
 
     var init = function () {
-        carregarSession();
-        carregarRegistros();
+        Session = session;
+        setAtributos(registros.data);
     };
 
-    var registros = function (data) {
-        //enviados
-        $scope.abertos_enviados = data.filter(function (reg) {
-            return reg.reg_finalizado == '0' && session.user_id == reg.user_cadastro;
+    var setAtributos = function (data) {
+        data.forEach(function (reg) {
+            if (reg.reg_finalizado == '0') {
+                //abertas
+                if (Session.user_id == reg.user_cadastro)
+                    //enviadas
+                    $scope.abertos_enviados.push(reg);
+
+                if (Session.user_id == reg.user_recebimento || Session.area_id == reg.area_recebimento)
+                    //recebidas
+                    $scope.abertos_recebidos.push(reg);
+
+            } else {
+                //fechadas
+                if (Session.user_id == reg.user_cadastro)
+                    //enviadas
+                    $scope.fechados_enviados.push(reg);
+
+                if (Session.user_id == reg.user_recebimento || Session.area_id == reg.area_recebimento)
+                    //recebidas
+                    $scope.fechados_recebidos.push(reg);
+            }
         });
-
-        $scope.fechados_enviados = data.filter(function (reg) {
-            return reg.reg_finalizado == '1' && session.user_id == reg.user_cadastro;
-        });
-
-        //recebidos
-        $scope.abertos_recebidos = data.filter(function (reg) {
-            return reg.reg_finalizado == '0' && session.user_id == reg.user_recebimento || reg.reg_finalizado == '0' && session.area_id == reg.area_recebimento;
-        });
-
-        $scope.fechados_recebidos = data.filter(function (reg) {
-            return reg.reg_finalizado == '1' && session.user_id == reg.user_recebimento || reg.reg_finalizado == '1' && session.area_id == reg.area_recebimento;
-        });
-
-        $timeout(function () {
-            $scope.carregando = false;
-        }, 100 * 20);
-    };
-
-    var carregarSession = function () {
-        objetoAPI.getObjeto(config.session)
-                .then(
-                        function (sucess) {
-                            session = sucess.data;
-                        },
-                        function (error) {
-                            console.log(error);
-                        });
-    };
-
-    var carregarRegistros = function () {
-        objetoAPI.getObjeto(config.apiURL + '/registro')
-                .then(
-                        function (success) {
-                            registros(success.data);
-                        },
-                        function (error) {
-                            console.log(error);
-                        }
-                );
     };
 
     init();
