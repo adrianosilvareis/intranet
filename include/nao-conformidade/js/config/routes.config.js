@@ -27,10 +27,14 @@ angular.module('naoConformidade')
                         templateUrl: link + "/painel_master.html",
                         controller: 'masterList',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-indesejado")) {
-                                    $location.path('/blocked');
-                                }
+                            registros: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + '/registro');
+                            },
+                            usuarios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + '/usuarios');
+                            },
+                            session: function (config) {
+                                return config.userLogin;
                             }
                         }
                     });
@@ -41,10 +45,26 @@ angular.module('naoConformidade')
                         templateUrl: link + "/registro.html",
                         controller: 'registro',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-cadastro")) {
-                                    $location.path('/blocked');
-                                }
+                            usuarios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + '/usuarios');
+                            },
+                            origens: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/origem");
+                            },
+                            areas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/area");
+                            },
+                            registro: function () {
+                                return null;
+                            },
+                            registroHasOrigem: function () {
+                                return null;
+                            },
+                            registroHasFile: function () {
+                                return null;
+                            },
+                            registroHasImage: function () {
+                                return null;
                             }
                         }
                     });
@@ -55,10 +75,27 @@ angular.module('naoConformidade')
                         templateUrl: link + "/registro.html",
                         controller: 'registro',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-view")) {
-                                    $location.path('/blocked');
-                                }
+                            usuarios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + '/usuarios');
+                            },
+                            origens: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/origem");
+                            },
+                            areas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/area");
+                            },
+                            registro: function ($route, objetoAPI, config) {
+                                var regId = $route.current.params.regId;
+                                return objetoAPI.getObjeto(config.apiURL + '/registro/&id=' + regId);
+                            },
+                            registroHasOrigem: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasOrigem");
+                            },
+                            registroHasFile: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasFile");
+                            },
+                            registroHasImage: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasImage");
                             }
                         }
                     });
@@ -69,10 +106,27 @@ angular.module('naoConformidade')
                         templateUrl: link + "/avaliacao.html",
                         controller: 'registro',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-avaliacao")) {
-                                    $location.path('/blocked');
-                                }
+                            usuarios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + '/usuarios');
+                            },
+                            origens: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/origem");
+                            },
+                            areas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/area");
+                            },
+                            registro: function ($route, objetoAPI, config) {
+                                var regId = $route.current.params.key;
+                                return objetoAPI.getObjeto(config.apiURL + '/registro/&id=' + regId);
+                            },
+                            registroHasOrigem: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasOrigem");
+                            },
+                            registroHasFile: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasFile");
+                            },
+                            registroHasImage: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasImage");
                             }
                         }
                     });
@@ -87,10 +141,8 @@ angular.module('naoConformidade')
                         templateUrl: link + '/admin/dashboard/geral.html',
                         controller: 'dashboard',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-admin")) {
-                                    $location.path('/blocked');
-                                }
+                            registros: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroDashboard");
                             }
                         }
                     });
@@ -100,10 +152,8 @@ angular.module('naoConformidade')
                         templateUrl: link + '/admin/dashboard/charts.html',
                         controller: 'dashboard',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-admin-grafico")) {
-                                    $location.path('/blocked');
-                                }
+                            registros: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroDashboard");
                             }
                         }
                     });
@@ -113,10 +163,8 @@ angular.module('naoConformidade')
                         templateUrl: link + '/admin/dashboard/report.html',
                         controller: 'dashboard',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-admin-relatorio")) {
-                                    $location.path('/blocked');
-                                }
+                            registros: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroDashboard");
                             }
                         }
                     });
@@ -127,10 +175,8 @@ angular.module('naoConformidade')
                         templateUrl: link + '/admin/origens/listar.html',
                         controller: 'origens',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-origem")) {
-                                    $location.path('/blocked');
-                                }
+                            origens: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/origem");
                             }
                         }
                     });
@@ -141,10 +187,8 @@ angular.module('naoConformidade')
                         templateUrl: link + '/admin/origens/origem.html',
                         controller: 'origem',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-origem-cadastro")) {
-                                    $location.path('/blocked');
-                                }
+                            origem: function () {
+                                return {data: null};
                             }
                         }
                     });
@@ -155,10 +199,9 @@ angular.module('naoConformidade')
                         templateUrl: link + '/admin/origens/origem.html',
                         controller: 'origem',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-origem-update")) {
-                                    $location.path('/blocked');
-                                }
+                            origem: function (objetoAPI, config, $route) {
+                                var origemID = $route.current.params.id;
+                                return objetoAPI.getObjeto(config.apiURL + "/origem&id=" + origemID);
                             }
                         }
                     });
@@ -168,10 +211,27 @@ angular.module('naoConformidade')
                         templateUrl: link + '/admin/dashboard/registro.html',
                         controller: 'registro',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-admin-registro")) {
-                                    $location.path('/blocked');
-                                }
+                            usuarios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + '/usuarios');
+                            },
+                            origens: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/origem");
+                            },
+                            areas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/area");
+                            },
+                            registro: function ($route, objetoAPI, config) {
+                                var regId = $route.current.params.regId;
+                                return objetoAPI.getObjeto(config.apiURL + '/registro/&id=' + regId);
+                            },
+                            registroHasOrigem: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasOrigem");
+                            },
+                            registroHasFile: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasFile");
+                            },
+                            registroHasImage: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasImage");
                             }
                         }
                     });
@@ -181,10 +241,27 @@ angular.module('naoConformidade')
                         templateUrl: link + '/admin/dashboard/avaliacao.html',
                         controller: 'registro',
                         resolve: {
-                            controleAcesso: function (accessControlProvider, $location) {
-                                if (!accessControlProvider.verificaAcesso("evento-admin-avaliacao")) {
-                                    $location.path('/blocked');
-                                }
+                            usuarios: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + '/usuarios');
+                            },
+                            origens: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/origem");
+                            },
+                            areas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/area");
+                            },
+                            registro: function ($route, objetoAPI, config) {
+                                var regId = $route.current.params.regId;
+                                return objetoAPI.getObjeto(config.apiURL + '/registro/&id=' + regId);
+                            },
+                            registroHasOrigem: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasOrigem");
+                            },
+                            registroHasFile: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasFile");
+                            },
+                            registroHasImage: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.apiURL + "/registroHasImage");
                             }
                         }
                     });
@@ -196,8 +273,3 @@ angular.module('naoConformidade')
 
             $routeProvider.otherwise({redirectTo: '/painel'});
         });
-//        .run(function ($rootScope, $location, accessControlProvider) {
-//            $rootScope.$on("$routeChangeStart", function (event, next, current) {
-//
-//            });
-//        });

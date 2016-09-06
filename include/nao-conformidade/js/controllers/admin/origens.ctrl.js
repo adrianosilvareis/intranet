@@ -1,4 +1,4 @@
-angular.module("naoConformidade").controller('origens', function ($scope, config, $http) {
+angular.module("naoConformidade").controller('origens', function ($scope, origens, objetoAPI, config) {
 
     $scope.origens = [];
 
@@ -7,6 +7,7 @@ angular.module("naoConformidade").controller('origens', function ($scope, config
         $scope.message.send = "";
         $scope.message.class = "";
         $scope.message.status = 0;
+        $scope.origens = origens.data;
     };
 
     $scope.AlterarStatus = function (origem) {
@@ -15,20 +16,13 @@ angular.module("naoConformidade").controller('origens', function ($scope, config
         salvar(origem);
     };
 
-    var carregarOrigens = function () {
-        $http.get(config.apiURL + "/origem").success(function (data) {
-            $scope.origens = data;
-        });
-    };
-
     var salvar = function (origem) {
-        $http.post(config.apiURL + "/origem", origem).success(function (data) {
+        objetoAPI.saveObjeto(config.apiURL + "/origem", origem).success(function (data) {
             $scope.message.send = "Origem atualizada com sucesso!";
             $scope.message.class = "alert alert-success";
             $scope.message.status = 200;
         });
     };
-    
+
     init();
-    carregarOrigens();
 });

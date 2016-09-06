@@ -1,1 +1,1 @@
-angular.module('naoConformidade', ['ngRoute','filterDefault', 'objetoAPI','ngFileUpload', 'ngMessages', 'accessControl']);
+angular.module('naoConformidade', ['ngRoute','filterDefault', 'objetoAPI','ngFileUpload', 'ngMessages']);

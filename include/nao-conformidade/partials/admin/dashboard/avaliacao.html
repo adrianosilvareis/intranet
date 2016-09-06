@@ -1,11 +1,7 @@
 <div ng-include="partials + '/admin/menu.html'"></div>
 <div ng-include="partials + '/admin/dashboard/menu.html'"></div>
 
-<div ng-if="carregando">
-    <img ng-src="{{gifLoad}}">
-</div>
-
-<section class="col-md-10" ng-show="!carregando">
+<section class="col-md-10">
     
     <a href="#/admin/registro/{{reg.reg_id}}" class="btn btn-default">Registro</a>
     
