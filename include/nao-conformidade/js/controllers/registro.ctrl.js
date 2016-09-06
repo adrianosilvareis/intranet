@@ -248,17 +248,16 @@ angular.module('naoConformidade').controller('registro',
             $scope.save = function (registro) {
                 objetoAPI.saveObjeto(config.apiURL + "/registro", registro).success(function (data) {
                     message("adicionado com sucesso!", 'alert-success');
-                    _novoRegistro();
+                    $scope.reg = data;
                 });
             };
 
             //
             //Limpar formulario
             //
-            _novoRegistro = function () {
-                reset();
+            $scope.novoRegistro = function (reg) {
                 delete $scope.reg;
-                _carregarRegistro();
+                reset();
                 _objetcInit();
                 $scope.registroForm.$setPristine();
             };
