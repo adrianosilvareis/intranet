@@ -48,7 +48,7 @@
                     <li><a class="icon profile radius" title="Perfil" href="<?= HOME ?>/profile">Perfíl</a></li>
                 <?php endif; ?>
                 <li><a class="icon logout radius" title="Sair dos sistema" href="<?= HOME ?>/&logoff=true">Sair</a></li>
-                <li><a class="badge" title="Eventos aguardando resposta" href="<?= HOME ?>/plugin/evento-indesejado/"><?= (!empty($size) ? $size : ""); ?></a></li>
+                <li><a class="badge" title="Eventos aguardando resposta" href="<?= HOME ?>/plugin/nao-conformidade/"><?= (!empty($size) ? $size : ""); ?></a></li>
             </ul>
         <?php endif; ?>
 

@@ -116,7 +116,7 @@ angular.module('naoConformidade')
                                 return objetoAPI.getObjeto(config.apiURL + "/area");
                             },
                             registro: function ($route, objetoAPI, config) {
-                                var regId = $route.current.params.key;
+                                var regId = $route.current.params.regId;
                                 return objetoAPI.getObjeto(config.apiURL + '/registro/&id=' + regId);
                             },
                             registroHasOrigem: function (objetoAPI, config) {

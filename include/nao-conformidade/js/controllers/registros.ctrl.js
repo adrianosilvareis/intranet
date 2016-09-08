@@ -13,6 +13,9 @@ angular.module('naoConformidade').controller('registros', function (registros, s
     };
 
     var setAtributos = function (data) {
+        if (!Array.isArray(data))
+            return;
+        
         data.forEach(function (reg) {
             if (reg.reg_finalizado == '0') {
                 //abertas

@@ -1,5 +1,5 @@
 angular.module('naoConformidade').controller('registro',
-        function (registro, registroHasOrigem, registroHasFile, registroHasImage, usuarios, origens, areas, $scope, objetoAPI, config, $routeParams, Upload) {
+        function (registro, registroHasOrigem, registroHasFile, registroHasImage, usuarios, origens, areas, $scope, $location, objetoAPI, config, $routeParams, Upload) {
 
             //
             //variaveis
@@ -249,17 +249,8 @@ angular.module('naoConformidade').controller('registro',
                 objetoAPI.saveObjeto(config.apiURL + "/registro", registro).success(function (data) {
                     message("adicionado com sucesso!", 'alert-success');
                     $scope.reg = data;
+                    $location.path('/painel');
                 });
-            };
-
-            //
-            //Limpar formulario
-            //
-            $scope.novoRegistro = function (reg) {
-                delete $scope.reg;
-                reset();
-                _objetcInit();
-                $scope.registroForm.$setPristine();
             };
 
             //
