@@ -35,17 +35,39 @@ angular.module('naoConformidade').controller('registro',
             //verifica que foi passado id de um registro
             //
             var _params = function () {
-                if ($routeParams.regId) {                    
+                if ($routeParams.regId) {
                     $scope.reg = registro.data;
                     $scope.reg.disabled = true;
                     _registerHasOrigens = registroHasOrigem.data;
                     _registerHasFile = registroHasFile.data;
                     _registerHasImage = registroHasImage.data;
                     addAtributos();
+                    checkADM();
                 } else {
                     if ($scope.origens && $scope.areas && $scope.users) {
                         $scope.carregando = false;
                     }
+                }
+            };
+
+            /**
+             *  VERIFICA se o usuario tem acesso adminsitrador
+             */
+            var checkADM = function () {
+                var _acessos = perfilUsuario.acessos;
+                var teste = _acessos.some(function (acesso) {
+                    return acesso.acesso_name === "evento-admin-registro";
+                });
+
+                if (teste) {
+                    $scope.reg.disabled = false;
+                    $scope.reg.adm = true;
+
+                    $scope.origens.map(function (origem) {
+                        origem.classe = $scope.reg.origens.some(function (ori) {
+                            return ori.origem_id === origem.origem_id;
+                        });
+                    });
                 }
             };
 
@@ -243,14 +265,35 @@ angular.module('naoConformidade').controller('registro',
             };
 
             //
+            // SALVAR avaliação
+            //
+            $scope.avaliar = function (registro) {
+                registro.reg_finalizado = 1;
+                $scope.save(registro);
+            };
+
+            //
             //Savar registro
             //
             $scope.save = function (registro) {
                 objetoAPI.saveObjeto(config.apiURL + "/registro", registro).success(function (data) {
                     message("adicionado com sucesso!", 'alert-success');
                     $scope.reg = data;
-                    $location.path('/painel');
+                    if (!registro.adm)
+                        $location.path('/painel');
                 });
+            };
+
+            $scope.remover = function (registro) {
+                objetoAPI.deleteObjeto(config.apiURL + "/registro/&id=" + registro.reg_id)
+                        .success(function (success) {
+                            console.log(success);
+                            $location.path('/admin/report');
+                        })
+                        .error(function (error) {
+                            console.log('error');
+                            console.log(error);
+                        });
             };
 
             //

@@ -112,7 +112,6 @@ switch ($method) {
             $request->reg_date_resposta = date('Y-m-d H:i:s');
             $request->reg_date_lastupdate = date('Y-m-d H:i:s');
             $request->user_lastupdate = $user->user_id;
-            $request->reg_finalizado = 1;
             unset($request->user_cadastro);
             unset($request->user_recebimento);
             unset($request->area_recebimento);
@@ -131,7 +130,6 @@ switch ($method) {
             $request->user_cadastro = $user->user_id;
             $request->user_lastupdate = $user->user_id;
             $request->reg_date_cadastro = date('Y-m-d H:i:s');
-            $request->reg_date_correcao = Check::Data($request->reg_date_correcao);
             $request->reg_date_lastupdate = date('Y-m-d H:i:s');
 
             $request = setDados((array) $request);
@@ -156,6 +154,22 @@ switch ($method) {
         break;
     case "DELETE":
         //deleta não implementado
+        
+        //deleta todos os arquivos deste registro
+        $NcRegFile = new NcRegFile();
+        $NcRegFile->setReg_id($id);
+        $NcRegFile->Execute()->delete();
+        
+        //deleta todas as imagens deste registro
+        $NcRegImage = new NcRegImage();
+        $NcRegImage->setReg_id($id);
+        $NcRegImage->Execute()->delete();
+        
+        //remove as relações many-to-many do registro
+        $RegistroHasOrigem = new RegistroHasOrigem();
+        $RegistroHasOrigem->setReg_id($id);
+        $RegistroHasOrigem->Execute()->delete();
+        
         $Read->setReg_id($id);
         $delete = $Read->Execute()->delete();
         echo json_encode($delete);

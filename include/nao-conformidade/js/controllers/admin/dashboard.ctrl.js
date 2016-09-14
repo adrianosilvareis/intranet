@@ -16,7 +16,7 @@ angular.module('naoConformidade').controller('dashboard', function ($scope, regi
     //Funções decarregamento
     //
     var init = function () {
-        var data = registros.data;
+        var data = (Array.isArray(registros.data) ? registros.data : []);
         $scope.registros = data;
         $scope.totalRegistros = data.length;
         $scope.regAtivos = $filter("regAtivo")(data);

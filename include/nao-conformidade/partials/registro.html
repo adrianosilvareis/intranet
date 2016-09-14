@@ -189,13 +189,14 @@
             <label>Responsável pela execução da açao:</label>
             <input type="text" class="form-control" name="reg_user_correcao" ng-model="reg.reg_user_correcao" ng-required="true" ng-minlength="5" ng-disabled="reg.disabled"/>
         </div>
-
+       
         <div class="form-group  col-md-6">
             <label>Data da ação corretiva:</label>
-            <div ng-if="reg.disabled" style="padding: 7px; border: 1px solid #CCC">
-                {{reg.reg_date_correcao| dateBr}}
+            <input type="text" class="form-control" name="reg_date_correcao" ng-model="reg.reg_date_correcao" ui-timestampbr/>
+<!--            <div ng-if="reg.disabled" style="padding: 7px; border: 1px solid #CCC">
+                {{reg.reg_date_correcao| timestampBr}}
             </div>
-            <input type="text" class="form-control formDate" name="reg_date_correcao" ng-model="reg.reg_date_correcao" ng-required="true" ng-minlength='10' ng-if="!reg.disabled"/>
+            <input type="text" class="form-control formDate" name="reg_date_correcao" ng-model="reg.reg_date_correcao" ng-required="true" ng-minlength='10' ng-if="!reg.disabled"/>-->
         </div>
     </div>
     <hr>

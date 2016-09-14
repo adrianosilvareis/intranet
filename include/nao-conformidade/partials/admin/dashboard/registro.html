@@ -3,45 +3,86 @@
 
 <section class="col-md-10">
 
-    <a href="#/admin/avaliacao/{{reg.reg_id}}" class="btn btn-default">Avaliação</a>
-    
     <div class="well">
-        <label>Origem do evento:</label>
+
+        <div class="form-group" ng-if="!reg.disabled">
+            <ul class="list-group" ng-model="origem" ng-require="true" >
+                <a id="origem_{{origem.origem_id}}}" href="" class="list-group-item col-md-3" style="float: left; text-align: center; min-height: 70px;"
+                   title="{{origem.origem_title}}" ng-repeat="origem in origens" ng-click="addOrigem(origem)" ng-class="activeItem(origem)"
+                   >{{origem.origem_title}}</a>
+            </ul>
+        </div>
+
         <div class="form-group" ng-if="reg.disabled">
             <ul class="list-group">
                 <li class="list-group-item col-md-3" style="float: left; text-align: center;" ng-repeat="origem in reg.origens">{{origem.origem_title}}</li>
             </ul>
         </div>
+
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <label>Outros:</label>
+            <input type="text" class="form-control" name="reg_origem_outros" ng-model="reg.reg_origem_outros" ng-disabled="reg.disabled"/>
+        </div>
+
     </div>
 
-    <div class="form-group row" ng-if="reg.images.length > 0">
-        <label>Imagens:</label>
-        <div class="row">
-            <div class="col-md-2" ng-repeat="img in reg.images" ng-if="reg.disabled">
-                <a href="" data-toggle="modal" data-target="#{{img.image_id}}">
-                    <img src="/intranet/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail" style="height: 105px; float: left; margin-left: 15px;"/>
-                </a>
-                <div id="{{img.image_id}}" class="modal fade" tabindex="-1" role="dialog">
-                    <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <img src="/intranet/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail"/>
+    <div class="well">
+
+        <div class="form-group">
+            <label>Anexo:</label>
+            <input class="form-control" type="file" ngf-select="onFileSelect(uploads)" multiple="true" ng-model="uploads" ng-disabled="reg.reg_finalizado == '1'"/>
+        </div>
+        
+        <div class="form-group row" ng-if="reg.images.length > 0">
+            <label>Imagens:</label>
+
+            <div class="row">
+                <div class="col-md-2" ng-repeat="img in reg.images">
+
+                    <a href="" data-toggle="modal" data-target="#{{img.image_id}}">
+                        <img src="/intranet/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail" style="height: 105px; float: left; margin-left: 15px;"/>
+                    </a>
+                    <div id="{{img.image_id}}" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <img ng-src="/intranet/uploads/{{img.image_url}}" alt="{{img.image_name}}" class="img-responsive img-thumbnail"/>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2" ng-repeat="img in reg.images">
+                    <div ng-if="img.TYNY">
+                        <img ng-src="{{img.TYNY}}"  alt="{{img.FILE.name}}" class="img-responsive img-thumbnail" style="height: 105px">
+                        <a href="" class="del" title="remover" ng-click="removeFile(img)">remover</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="form-group row" ng-if="reg.files.length > 0">
-        <label>Arquivos:</label>
-        <ul ng-if="reg.disabled">
-            <div  ng-repeat="file in reg.files">
+        <div class="form-group row" ng-if="reg.files.length > 0">
+            <label>Arquivos:</label>
+            <ul ng-if="reg.reg_finalizado == '1'">
                 <a href="/intranet/uploads/{{file.file_url}}" title="{{file.file_name}}" target="_black" 
-                   class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
+                   ng-repeat="file in reg.files" class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
                     {{file.file_name}}
                 </a>
-            </div>
-        </ul>
+            </ul>
+
+            <ul class="list-group" ng-if="reg.reg_finalizado == '0'">
+                <div ng-repeat="file in reg.files">
+                    <li ng-if="file.FILE" class="list-group-item col-md-3" style="float: left; text-align: center; height: 60px; overflow: hidden;">
+                        {{file.FILE.name}}<a href="" class="del" title="remover" ng-click="removeFile(file)">remover</a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+
+        <div class="progress" ng-if="reg.reg_finalizado == '0'">
+            <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 1%;"></div>
+        </div>
+
     </div>
 
     <div class="well">
@@ -59,21 +100,69 @@
     </div>
 
     <div class="well">
-        <div class="col-md-12 form-group">
+        <div class="col-md-4 form-group" ng-show="!reg.disabled">
+            <label>Encontre o setor</label>
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-search"></span>
+                <input type="text" class="form-control" name="area_search" ng-model="area_search"/>
+            </div>
+        </div>
+
+        <div class="col-md-8 form-group">
             <label>Aréa Resposável</label>
             <div class="form-control">
                 {{reg.area.area_title}}
             </div>
         </div>
+
+        <table class="table table-hover table-striped table-responsive" ng-if="area_search">
+            <thead>
+                <tr>
+                    <th>Nome do setor</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="area in areas| filter:area_search | limitTo: 5">
+                    <td><a class="btn" ng-click="addArea(area)">{{area.area_title}}</a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="well">
-        <div class="col-md-12 form-group">
+        <div class="col-md-4 form-group" ng-show="!reg.disabled">
+            <label>Encontre o usuário</label>
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-search"></span>
+                <input type="text" class="form-control" name="user_search" ng-model="user_search"/>
+            </div>
+        </div>
+
+        <div class="col-md-8 form-group">
             <label>Usuário responsável:</label>
             <div class="form-control">
                 {{reg.user.user_name}} {{reg.user.user_lastname}}
             </div>
         </div>
+
+        <table class="table table-hover table-striped table-responsive" ng-if="user_search">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="user in users| filter:user_search | limitTo:5">
+                    <td><a class="btn" ng-click="addUser(user)">{{user.user_nickname}}</a></td>
+                    <td><a class="btn" ng-click="addUser(user)">{{user.user_name}}</a></td>
+                    <td><a class="btn" ng-click="addUser(user)">{{user.user_lastname}}</a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="well">
@@ -89,10 +178,19 @@
 
         <div class="form-group  col-md-6">
             <label>Data da ação corretiva:</label>
-            <div ng-if="reg.disabled" style="padding: 7px; border: 1px solid #CCC">
-                {{reg.reg_date_correcao| dateBr}}
-            </div>
-            <input type="text" class="form-control formDate" name="reg_date_correcao" ng-model="reg.reg_date_correcao" ng-if="!reg.disabled"/>
+            <input type="text" class="form-control" name="reg_date_correcao" ng-model="reg.reg_date_correcao" ui-timestampbr/>
         </div>
     </div>
+
+    <div class="btn-group">
+        <a href="" class="btn btn-success" style="width: 200px;"  
+           ng-if="!reg.disabled" 
+           ng-disabled="registroForm.$invalid || origemValid() || !reg.user || !reg.area" 
+           ng-click="save(reg)">Salvar</a>
+        
+        <a href="#/admin/avaliacao/{{reg.reg_id}}" class="btn btn-default" style="width: 200px;" >Avaliação</a>
+        <a href="" class="btn btn-warning" style="width: 200px;" ng-click="remover(reg)">Remover</a>
+    </div>
+
+    <hr>
 </section>
