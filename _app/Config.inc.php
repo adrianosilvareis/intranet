@@ -15,6 +15,7 @@ define('THEME', 'intranet');
 define('REQUIRE_PATH', 'themes' . '/' . THEME);
 define('INCLUDE_PATH', HOME . DIRECTORY_SEPARATOR . REQUIRE_PATH);
 define('PRODUCAO', FALSE);
+define('SISS_VERSION', 'Versão 3.6');
 
 //CONFIGURACAO DO BANCO ####################
 define("DB_HOST", "localhost");

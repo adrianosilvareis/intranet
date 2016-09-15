@@ -88,16 +88,37 @@ angular.module('faturamento')
                         $scope.inconsistencias = $filter('filter')(Inconsistencias, search);
                     };
 
+                    $scope.filtroAvancado = function (dataInicial, dataFinal, search) {
+                        var hoje = new Date();
+                        var primeiroDiaDoMes = firstDayOfMonth();
+
+                        dataFinal = (dataFinal ? dataFinal : $filter('date')(hoje, 'yyyy-MM-dd'));
+                        dataInicial = (dataInicial ? dataInicial : $filter('date')(primeiroDiaDoMes, 'yyyy-MM-dd'));
+                        
+                        $scope.filtrarData(dataInicial, dataFinal);
+                        
+                        $scope.inconsistencias = $filter('filter')($scope.inconsistencias, search);
+                    };
+
+                    var firstDayOfMonth = function () {
+                        var date = new Date();
+                        var month = date.getMonth();
+                        var year = date.getYear();
+
+                        var dd = new Date(1900 + year, month, 1);
+                        return dd;
+                    };
+
                     $scope.progressSize = function (size, position) {
                         var result = 100 * position / size;
                         return parseInt(result);
                     };
 
                     $scope.toCsv = function (inconsistencias) {
-                        
+
                         if (inconsistencias.length === 0)
                             return;
-                        
+
                         objetoAPI.saveObjeto(config.urlAPI + '/inconsistencias', inconsistencias)
                                 .success(function (data) {
 

@@ -53,7 +53,12 @@
             <div class="col-md-4">
                 <button class="btn btn-success" ng-click="toCsv(inconsistencias)">Exportar para .CSV</button>
             </div>
-            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button class="btn btn-default" ng-click="filtroAvancado(dataInicial, dataFinal, search)" style="width: 100%;">
+                    Avançado
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
             <div class="col-md-4">
                 <button class="btn btn-primary" ng-click="filtrar(search)" style="width: 100%;">
                     Filtrar
