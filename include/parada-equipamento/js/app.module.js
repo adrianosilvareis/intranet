@@ -1,0 +1,1 @@
+angular.module('parada-equipamento', ['ngRoute', 'objetoAPI']);

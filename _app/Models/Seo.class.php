@@ -341,10 +341,6 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/js/intranet.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/progressBar.js'></script>" . "\n";
 
-        $this->seoLibs .= "<!--Google Charts-->\n";
-        $this->seoLibs .= "<script src='" . HOME . "/_lib/google-chart/loader.min.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/js/google-charts/start.js'></script>" . "\n";
-
         $this->seoLibs .= "<!--CDN-->\n";
         $this->seoLibs .= "<link rel='stylesheet' href='" . HOME . "/_lib/cdn/shadowbox/shadowbox.css'>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/_lib/cdn/jcycle.js'></script>" . "\n";
@@ -371,7 +367,7 @@ class Seo {
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/filterDefault/dateBr.filter.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/fileUploads/app.module.js'></script>" . "\n";
         $this->seoLibs .= "<script src='" . HOME . "/js/angular/fileUploads/directive/fileModel.directive.js'></script>" . "\n";
-        $this->seoLibs .= "<script src='" . HOME . "/js/angular/fileUploads/services/fileUpload.service.js'></script>" . "\n";
+        $this->seoLibs .= "<script src='" . HOME . "/js/angular/fileUploads/services/fileUpload.services.js'></script>" . "\n";
         $this->seoLibs .= "<!--CONFIG-->\n";
         $this->seoLibs .= "<script src='" . HOME . "/_app/Config.inc.js.php'></script>" . "\n";
     }

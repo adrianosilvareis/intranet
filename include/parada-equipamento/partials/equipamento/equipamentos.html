@@ -1,0 +1,39 @@
+<section class="section">
+    <h1><span class="label label-default">Equipamentos</span></h1>
+    
+    <div>
+        <a class="btn btn-primary" href="#/equipamento">Novo Equipamento</a>
+        <p class="text-muted" ng-show="equipamentos.length > 0">Total de equipamentos: {{equipamentos.length}}</p>
+        <p class="text-danger" ng-hide="equipamentos.length > 0">Nenhum equipamento cadastrado!</p>
+    </div>
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>OPERAÇÃO</th>
+                <th>SETOR</th>
+                <th>DATA</th>
+                <th>STATUS</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="equip in equipamentos track by $index">
+                <td>{{equip.equip_id}}</td>
+                <td>{{equip.equip_title}}</td>
+                <td>{{equip.equip_operation}}</td>
+                <td>{{equip.equip_sector}}</td>
+                <td>{{equip.equip_date}}</td>
+                <td>{{equip.equip_status}}</td>
+                <td>
+                    <button class="btn btn-warning" ng-click="remover(equip)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
