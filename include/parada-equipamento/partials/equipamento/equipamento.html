@@ -1,1 +1,53 @@
-equipamento
+<section>
+    <h1>Equipamento</h1>
+
+    <form>
+        <div class="form-group">
+            <label>Titulo</label>
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-tag"></span>
+                <input type="text" class="form-control" title="Titulo" ng-model="equip.equip_title" name="equip_title" placeholder="Nome do equipamento"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Setor</label>
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-bookmark"></span>
+                <input type="text" class="form-control" ng-model="equip.equip_sector" name="equip_sector" placeholder="Setor do equipamento"/>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="from-group">
+                    <label>Data de ativação</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                        <input type="text" class="form-control" ng-model="equip.equip_date" name="equip_date" placeholder="dd/mm/aaaa" /> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="from-group">
+                    <label>Ultima Atualização</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                        <span class="form-control">{{equip.equip_lastupdate}}</span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                liga desliga
+
+                equip_status
+                equip_operation
+            </div>
+
+        </div>
+
+    </form>
+</section>
