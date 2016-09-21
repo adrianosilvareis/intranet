@@ -9,13 +9,13 @@ abstract class Business extends ConexaoBancoDeDados {
 
     /** @var string Nome da tabela */
     protected $Table;
-    
+
     /**
      * Informaçõoes da conexão com banco de dados caso não seja padrão
      * @var Array 
      */
     protected $InfoConexaoBD;
-    
+
     /** @var PDOStatement */
     protected $Stmt;
 
@@ -156,11 +156,16 @@ abstract class Business extends ConexaoBancoDeDados {
 
     protected function Execute($Sql) {
         $this->Stmt = $this->prepare($Sql, $this->InfoConexaoBD);
-        
-        if($this->Dados && array_search('false', $this->Dados)):
-            $this->Dados[array_search('false', $this->Dados)] = '0';
-        endif;
-        
+
+        //procura falsos atá não encontrar mais
+        foreach ($this->Dados as $value) :
+            if (in_array('false', $this->Dados)) :
+                $this->isFalse();
+            else:
+                break;
+            endif;
+        endforeach;
+
         if ($this->Dados && array_key_exists('limit', $this->Dados)) {
             $Limit = (int) $this->Dados['limit'];
             $this->Stmt->bindParam(':limit', $Limit, PDO::PARAM_INT);
@@ -232,7 +237,7 @@ abstract class Business extends ConexaoBancoDeDados {
             $Links[] = "#" . $value . "#";
         endforeach;
         unset($Keys);
-        
+
         return ['Fields' => $Fields, 'Values' => $Values, 'Condition' => $Condition, 'Links' => $Links];
     }
 
@@ -268,6 +273,12 @@ abstract class Business extends ConexaoBancoDeDados {
             parse_str($Dados, $Dados);
         endif;
         $this->Dados = $Dados;
+    }
+
+    private function isFalse() {
+        if ($this->Dados && array_search('false', $this->Dados)):
+            $this->Dados[array_search('false', $this->Dados)] = '0';
+        endif;
     }
 
 }

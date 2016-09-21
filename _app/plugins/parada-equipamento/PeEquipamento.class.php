@@ -52,6 +52,7 @@ class PeEquipamento {
         $this->setEquip_date((isset($object->equip_date) ? $object->equip_date : null));
         $this->setEquip_lastupdate((isset($object->equip_lastupdate) ? $object->equip_lastupdate : null));
         $this->setEquip_sector((isset($object->equip_sector) ? $object->equip_sector : null));
+        $this->setEquip_status((isset($object->equip_status) ? $object->equip_status : null));
         $this->setEquip_operation((isset($object->equip_operation) ? $object->equip_operation : null));
         $this->setAutor_id((isset($object->autor_id) ? $object->autor_id : null));
     }
@@ -92,10 +93,16 @@ class PeEquipamento {
     }
 
     function getEquip_status() {
+        if (isset($this->equip_status)):
+            $this->equip_status = ($this->equip_status ? '1' : 'false');
+        endif;
         return $this->equip_status;
     }
 
     function getEquip_operation() {
+        if (isset($this->equip_operation)):
+            $this->equip_operation = ($this->equip_operation ? '1' : 'false');
+        endif;
         return $this->equip_operation;
     }
 

@@ -1,1 +1,1 @@
-angular.module('parada-equipamento', ['ngRoute', 'objetoAPI']);
+angular.module('parada-equipamento', ['ngRoute', 'objetoAPI', 'filterDefault', 'uiFormat']);

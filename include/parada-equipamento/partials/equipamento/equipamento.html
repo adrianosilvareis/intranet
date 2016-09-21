@@ -2,19 +2,35 @@
     <h1>Equipamento</h1>
 
     <form>
-        <div class="form-group">
-            <label>Titulo</label>
-            <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon-tag"></span>
-                <input type="text" class="form-control" title="Titulo" ng-model="equip.equip_title" name="equip_title" placeholder="Nome do equipamento"/>
+
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label>Cod</label>
+                    <span class="form-control">{{equip.equip_id}}</span>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label>Setor</label>
-            <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon-bookmark"></span>
-                <input type="text" class="form-control" ng-model="equip.equip_sector" name="equip_sector" placeholder="Setor do equipamento"/>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-tag"></span>
+                        <input type="text" class="form-control" title="Titulo" ng-model="equip.equip_title" name="equip_title" placeholder="Nome do equipamento"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Setor</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-bookmark"></span>
+                        <input type="text" class="form-control" ng-model="equip.equip_sector" name="equip_sector" placeholder="Setor do equipamento"/>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -25,7 +41,7 @@
                     <label>Data de ativação</label>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-calendar"></span>
-                        <input type="text" class="form-control" ng-model="equip.equip_date" name="equip_date" placeholder="dd/mm/aaaa" /> 
+                        <input type="text" class="form-control" ng-model="equip.equip_date" name="equip_date" placeholder="dd/mm/aaaa" ui-datebr/> 
                     </div>
                 </div>
             </div>
@@ -35,16 +51,29 @@
                     <label>Ultima Atualização</label>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-calendar"></span>
-                        <span class="form-control">{{equip.equip_lastupdate}}</span> 
+                        <span class="form-control">{{equip.equip_lastupdate|timestampBr}}</span> 
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
-                liga desliga
+                <div class="col-md-6">
+                    <label>Funcionamento</label>
+                    <div class="clearfix"></div>
+                    <button ng-show="equip.equip_operation == '0'" class="btn btn-success glyphicon glyphicon-play" ng-click="isWork()" title="ativar"></button>
+                    <button ng-hide="equip.equip_operation == '0'" class="btn btn-danger glyphicon glyphicon-stop" ng-click="isWork()" title="desativar"></button>
+                </div>
+                <div class="col-md-6">
+                    <label>Status</label>
+                    <div class="clearfix"></div>
+                    <button ng-show="equip.equip_status == '0'" class="btn btn-success glyphicon glyphicon-play" ng-click="isActive()" title="ativar"></button>
+                    <button ng-hide="equip.equip_status == '0'" class="btn btn-danger glyphicon glyphicon-stop" ng-click="isActive()" title="desativar"></button>
+                </div>
+            </div>
 
-                equip_status
-                equip_operation
+            <div class="btn btn-group" style="width: 100%; margin-top: 15px;">
+                <a href="" class="btn btn-block btn-primary" title="voltar"  ng-click="save(equip)">Salvar</a> 
+                <a href="#equipamentos" class="btn btn-block btn-default" title="voltar">Voltar</a> 
             </div>
 
         </div>

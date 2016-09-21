@@ -11,13 +11,22 @@ angular.module('parada-equipamento')
             $routeProvider
                     .when('/equipamento', {
                         templateUrl: partials + '/equipamento/equipamento.html',
-                        controller: 'equipamento'
+                        controller: 'equipamento',
+                        resolve: {
+                            equipamento: function () {}
+                        }
                     });
 
             $routeProvider
                     .when('/equipamento/:equip_id', {
                         templateUrl: partials + '/equipamento/equipamento.html',
-                        controller: 'equipamento'
+                        controller: 'equipamento',
+                        resolve: {
+                            equipamento: function ($route, objetoAPI, config) {
+                                var equip_id = $route.current.params.equip_id;
+                                return objetoAPI.getObjeto(config.urlAPI + '/equipamentos/&id=' + equip_id);
+                            }
+                        }
                     });
 
             $routeProvider

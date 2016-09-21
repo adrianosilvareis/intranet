@@ -6,6 +6,9 @@ if (!PRODUCAO):
     Register::addScript($url . '/js/config/route.config.js');
     Register::addScript($url . '/js/config/interceptors.config.js');
     Register::addScript($url . '/js/config/config.value.js');
+    Register::addScript($url . '/js/interceptors/error.interceptor.js');
+    Register::addScript($url . '/js/interceptors/loading.interceptor.js');
+    Register::addScript($url . '/js/interceptors/timestamp.interceptor.js');
     Register::addScript($url . '/js/controllers/equipamento.ctrl.js');
     Register::addScript($url . '/js/controllers/equipamentos.ctrl.js');
 endif;
@@ -13,11 +16,11 @@ endif;
 
 <div ng-app="parada-equipamento" class="conteiner">
 
+    <div ng-include="'<?= $url ?>/partials/menu.html'"></div>     
+    
     <div ng-show="loading" class="col-md-offset-4">
         <img ng-src="<?= $url ?>/img/carregando.gif" class="img img-responsive"/>
     </div>
-
-    <div ng-include="'<?= $url ?>/partials/menu.html'"></div>     
     
     <div ng-hide="loading">
         <div ng-view></div>

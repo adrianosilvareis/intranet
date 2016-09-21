@@ -3,5 +3,6 @@ angular.module('parada-equipamento').value('config', {
     urlAPI: CONFIG.API + "/parada-equipamento",
     tiny: CONFIG.HOME + '/tim.php?src=',
     partials: CONFIG.HOME + '/include/parada-equipamento/partials',
+    userLogin: userLogin,
     perfilUsuario: perfilUsuario
 });

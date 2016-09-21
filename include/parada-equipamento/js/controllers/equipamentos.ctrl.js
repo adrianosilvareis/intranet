@@ -12,10 +12,10 @@ angular.module('parada-equipamento').controller('equipamentos', function ($scope
     var carregarEquipamentos = function () {
         objetoAPI.getObjeto(config.urlAPI + '/equipamentos')
                 .success(function (data) {
+                    $scope.equipamentos = [];
                     if (Array.isArray(data)) {
                         $scope.equipamentos = data;
                     }
-
                 });
     };
 

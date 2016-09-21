@@ -21,12 +21,12 @@
         </thead>
         <tbody>
             <tr ng-repeat="equip in equipamentos track by $index">
-                <td>{{equip.equip_id}}</td>
-                <td>{{equip.equip_title}}</td>
-                <td>{{equip.equip_operation}}</td>
-                <td>{{equip.equip_sector}}</td>
-                <td>{{equip.equip_date}}</td>
-                <td>{{equip.equip_status}}</td>
+                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_id}}</a></td>
+                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_title}}</a></td>
+                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_operation}}</a></td>
+                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_sector}}</a></td>
+                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_date}}</a></td>
+                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_status}}</a></td>
                 <td>
                     <button class="btn btn-warning" ng-click="remover(equip)">
                         <span class="glyphicon glyphicon-trash"></span>
