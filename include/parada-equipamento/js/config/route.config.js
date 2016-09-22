@@ -31,7 +31,7 @@ angular.module('parada-equipamento')
 
             $routeProvider
                     .when('/equipamentos', {
-                        templateUrl: partials + '/equipamento/equipamentos.html',
+                        templateUrl: partials + '/equipamento/index.html',
                         controller: 'equipamentos',
                         resolve: {
                             equipamentos: function (objetoAPI, config) {
@@ -41,12 +41,24 @@ angular.module('parada-equipamento')
                     });
 
             $routeProvider
-                    .when('/tipos-de-paradas', {
-                        templateUrl: partials + '/index.html'
+                    .when('/metas', {
+                        templateUrl: partials + '/metas/index.html',
+                        controller: 'metas',
+                        resolve: {
+                            metas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/metas/');
+                            }
+                        }
                     });
 
             $routeProvider
-                    .when('/metas', {
+                    .when('/meta', {
+                        templateUrl: partials + '/metas/meta.html',
+                        controller: 'meta'
+                    });
+
+            $routeProvider
+                    .when('/tipos-de-paradas', {
                         templateUrl: partials + '/index.html'
                     });
 

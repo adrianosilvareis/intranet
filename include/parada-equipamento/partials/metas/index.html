@@ -1,0 +1,46 @@
+<section class="section">
+    <h1><span class="label label-default">Metas</span></h1>
+
+    <div>
+        <a class="btn btn-primary" href="#/meta">Novos Metas</a>
+        <p class="text-muted" ng-show="metas.length > 0">Total de metas {{metas.length}}</p>
+        <p class="text-danger" ng-hide="metas.length > 0">Nenhuma meta cadastrado!</p>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>DESCRIÇÃO</th>
+                <th>PRAZO</th>
+                <th>VALIDADE</th>
+                <th>STATUS</th>
+                <th>AUTOR</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="meta in metas track by $index">
+                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_id}}</a></td>
+                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_title}}</a></td>
+                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_content}}</a></td>
+                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_prazo_max}}</a></td>
+                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_validade| dateBr}}</a></td>
+                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_date| dateBr}}</a></td>
+                <td>
+                    <a href="#/equipamento/{{meta.meta_id}}">
+                        <span ng-class="(meta.equip_status == '0' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok')"></span>
+                    </a>
+                </td>
+                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.autor_id}}</a></td>
+                <td>
+                    <button class="btn btn-warning" ng-click="remover(meta)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>

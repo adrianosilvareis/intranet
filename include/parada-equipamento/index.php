@@ -9,8 +9,10 @@ if (!PRODUCAO):
     Register::addScript($url . '/js/interceptors/error.interceptor.js');
     Register::addScript($url . '/js/interceptors/loading.interceptor.js');
     Register::addScript($url . '/js/interceptors/timestamp.interceptor.js');
-    Register::addScript($url . '/js/controllers/equipamento.ctrl.js');
-    Register::addScript($url . '/js/controllers/equipamentos.ctrl.js');
+    Register::addScript($url . '/js/controllers/equipamentos/equipamento.ctrl.js');
+    Register::addScript($url . '/js/controllers/equipamentos/equipamentos.ctrl.js');
+    Register::addScript($url . '/js/controllers/metas/meta.ctrl.js');
+    Register::addScript($url . '/js/controllers/metas/metas.ctrl.js');
 endif;
 ?>
 

@@ -1,20 +1,20 @@
 <section class="section">
     <h1><span class="label label-default">Equipamentos</span></h1>
-    
+
     <div>
         <a class="btn btn-primary" href="#/equipamento">Novo Equipamento</a>
         <p class="text-muted" ng-show="equipamentos.length > 0">Total de equipamentos: {{equipamentos.length}}</p>
         <p class="text-danger" ng-hide="equipamentos.length > 0">Nenhum equipamento cadastrado!</p>
     </div>
-    
+
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>TITLE</th>
-                <th>OPERAÇÃO</th>
                 <th>SETOR</th>
                 <th>DATA</th>
+                <th>OPERAÇÃO</th>
                 <th>STATUS</th>
                 <th>Ação</th>
             </tr>
@@ -23,10 +23,18 @@
             <tr ng-repeat="equip in equipamentos track by $index">
                 <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_id}}</a></td>
                 <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_title}}</a></td>
-                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_operation}}</a></td>
                 <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_sector}}</a></td>
-                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_date}}</a></td>
-                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_status}}</a></td>
+                <td><a href="#/equipamento/{{equip.equip_id}}">{{equip.equip_date| dateBr}}</a></td>
+                <td>
+                    <a href="#/equipamento/{{equip.equip_id}}">
+                        <span ng-class="(equip.equip_operation == '0' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok')"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#/equipamento/{{equip.equip_id}}">
+                        <span ng-class="(equip.equip_status == '0' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok')"></span>
+                    </a>
+                </td>
                 <td>
                     <button class="btn btn-warning" ng-click="remover(equip)">
                         <span class="glyphicon glyphicon-trash"></span>
