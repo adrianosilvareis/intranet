@@ -47,6 +47,21 @@ angular.module('parada-equipamento')
                         resolve: {
                             metas: function (objetoAPI, config) {
                                 return objetoAPI.getObjeto(config.urlAPI + '/metas/');
+                            },
+                            users: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/usuarios/');
+                            }
+                        }
+                    });
+
+            $routeProvider
+                    .when('/meta/:meta_id', {
+                        templateUrl: partials + '/metas/meta.html',
+                        controller: 'meta',
+                        resolve: {
+                            meta: function ($route, objetoAPI, config) {
+                                var meta_id = $route.current.params.meta_id;
+                                return objetoAPI.getObjeto(config.urlAPI + '/metas/&id=' + meta_id);
                             }
                         }
                     });
@@ -54,13 +69,58 @@ angular.module('parada-equipamento')
             $routeProvider
                     .when('/meta', {
                         templateUrl: partials + '/metas/meta.html',
-                        controller: 'meta'
+                        controller: 'meta',
+                        resolve: {
+                            meta: function () {
+                                return {};
+                            }
+                        }
                     });
 
             $routeProvider
-                    .when('/tipos-de-paradas', {
-                        templateUrl: partials + '/index.html'
+                    .when('/tipos-de-parada', {
+                        templateUrl: partials + '/tipos-de-parada/index.html',
+                        controller: 'tipos',
+                        resolve: {
+                            tipos: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/tipos-de-parada/');
+                            },
+                            users: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/usuarios/');
+                            },
+                            metas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/metas/');
+                            }
+                        }
                     });
 
+            $routeProvider
+                    .when('/tipo-de-parada', {
+                        templateUrl: partials + '/tipos-de-parada/tipo-de-parada.html',
+                        controller: 'tipo',
+                        resolve: {
+                            tipo: function () {
+                                return {};
+                            },
+                            metas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/metas/');
+                            }
+                        }
+                    });
+
+            $routeProvider
+                    .when('/tipo-de-parada/:tipo_id', {
+                        templateUrl: partials + '/tipos-de-parada/tipo-de-parada.html',
+                        controller: 'tipo',
+                        resolve: {
+                            tipo: function ($route, objetoAPI, config) {
+                                var tipo_id = $route.current.params.tipo_id;
+                                return objetoAPI.getObjeto(config.urlAPI + '/tipos-de-parada/&id=' + tipo_id);
+                            },
+                            metas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/metas/');
+                            }
+                        }
+                    });
             $routeProvider.otherwise({redirectTo: '/'});
         });

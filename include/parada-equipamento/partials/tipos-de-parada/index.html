@@ -1,0 +1,45 @@
+<section class="section">
+    <h1><span class="label label-default">Tipos de parada</span></h1>
+
+    <div>
+        <a class="btn btn-primary" href="#/tipo-de-parada">Novos tipos</a>
+        <p class="text-muted" ng-show="tipos.length > 0">Total de tipos {{tipos.length}}</p>
+        <p class="text-danger" ng-hide="tipos.length > 0">Nenhum tipo cadastrado!</p>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>DESCRIÇÃO</th>
+                <th>DATA</th>
+                <th>STATUS</th>
+                <th>AUTOR</th>
+                <th>META</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="tipo in tipos track by $index">
+                <td><a href="#/tipo-de-parada/{{tipo.tipo_id}}">{{tipo.tipo_id}}</a></td>
+                <td><a href="#/tipo-de-parada/{{tipo.tipo_id}}">{{tipo.tipo_title}}</a></td>
+                <td><a href="#/tipo-de-parada/{{tipo.tipo_id}}">{{tipo.tipo_content}}</a></td>
+                <td><a href="#/tipo-de-parada/{{tipo.tipo_id}}">{{tipo.tipo_date| dateBr}}</a></td>
+                <td>
+                    <a href="#/tipo-de-parada/{{tipo.tipo_id}}">
+                        <span ng-class="(tipo.tipo_status == '0' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok')"></span>
+                    </a>
+                </td>
+                <td><a href="#/tipo-de-parada/{{tipo.tipo_id}}">{{tipo.autor_name}}</a></td>
+                <td><a href="#/tipo-de-parada/{{tipo.tipo_id}}">{{tipo.meta_name}}</a></td>
+                <td>
+                    <button class="btn btn-warning" ng-click="remover(tipo)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>

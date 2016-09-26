@@ -13,6 +13,8 @@ if (!PRODUCAO):
     Register::addScript($url . '/js/controllers/equipamentos/equipamentos.ctrl.js');
     Register::addScript($url . '/js/controllers/metas/meta.ctrl.js');
     Register::addScript($url . '/js/controllers/metas/metas.ctrl.js');
+    Register::addScript($url . '/js/controllers/tipos/tipo.ctrl.js');
+    Register::addScript($url . '/js/controllers/tipos/tipos.ctrl.js');
 endif;
 ?>
 

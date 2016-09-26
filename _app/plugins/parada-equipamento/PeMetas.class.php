@@ -97,6 +97,9 @@ class PeMetas {
     }
 
     function getMeta_status() {
+        if (isset($this->meta_status)):
+            $this->meta_status = ($this->meta_status ? '1' : 'false');
+        endif;
         return $this->meta_status;
     }
 

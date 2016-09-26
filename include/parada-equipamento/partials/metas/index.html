@@ -14,7 +14,8 @@
                 <th>TITLE</th>
                 <th>DESCRIÇÃO</th>
                 <th>PRAZO</th>
-                <th>VALIDADE</th>
+                <th>CRIADO</th>
+                <th>VALIDO</th>
                 <th>STATUS</th>
                 <th>AUTOR</th>
                 <th>Ação</th>
@@ -22,18 +23,18 @@
         </thead>
         <tbody>
             <tr ng-repeat="meta in metas track by $index">
-                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_id}}</a></td>
-                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_title}}</a></td>
-                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_content}}</a></td>
-                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_prazo_max}}</a></td>
-                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_validade| dateBr}}</a></td>
-                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.meta_date| dateBr}}</a></td>
+                <td><a href="#/meta/{{meta.meta_id}}">{{meta.meta_id}}</a></td>
+                <td><a href="#/meta/{{meta.meta_id}}">{{meta.meta_title}}</a></td>
+                <td><a href="#/meta/{{meta.meta_id}}">{{meta.meta_content}}</a></td>
+                <td><a href="#/meta/{{meta.meta_id}}">{{meta.meta_prazo_max}}</a></td>
+                <td><a href="#/meta/{{meta.meta_id}}">{{meta.meta_date| dateBr}}</a></td>
+                <td><a href="#/meta/{{meta.meta_id}}">{{meta.meta_validade| dateBr}}</a></td>
                 <td>
-                    <a href="#/equipamento/{{meta.meta_id}}">
-                        <span ng-class="(meta.equip_status == '0' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok')"></span>
+                    <a href="#/meta/{{meta.meta_id}}">
+                        <span ng-class="(meta.meta_status == '0' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok')"></span>
                     </a>
                 </td>
-                <td><a href="#/equipamento/{{meta.meta_id}}">{{meta.autor_id}}</a></td>
+                <td><a href="#/meta/{{meta.meta_id}}">{{meta.autor_name}}</a></td>
                 <td>
                     <button class="btn btn-warning" ng-click="remover(meta)">
                         <span class="glyphicon glyphicon-trash"></span>

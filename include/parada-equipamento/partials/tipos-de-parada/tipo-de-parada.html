@@ -1,0 +1,115 @@
+<section>
+    <h1>Tipo de Parada</h1>
+
+    <form>
+
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label>Cod</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-barcode"></span>
+                        <span class="form-control">{{tipo.tipo_id}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-tag"></span>
+                        <input type="text" class="form-control" title="Titulo" ng-model="tipo.tipo_title" name="tipo_title" placeholder="Tipo de parada"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-tags"></span>
+                        <input type="text" class="form-control" ng-model="tipo.tipo_content" name="tipo_content" placeholder="Descrição"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label>Meta</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-search"></span>
+                        <input type="text" class="form-control" ng-model="search" placeholder="Metas"/>
+                    </div>
+                </div>
+
+                <table ng-show="search" class="table table-hover">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>TITLE</th>
+                            <th>PRAZO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="meta in  metas | filter:search | limitTo: 5">
+                            <td><a href="" ng-click="addMetas(meta)">{{meta.meta_id}}</a></td>
+                            <td><a href="" ng-click="addMetas(meta)">{{meta.meta_title}}</a></td>
+                            <td><a href="" ng-click="addMetas(meta)">{{meta.meta_prazo_max}} min</a></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Meta</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-time"></span>
+                        <input type="text" class="form-control" ng-model="tipo.meta.meta_title" name="meta_id" placeholder="Meta"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="from-group">
+                    <label>Data de ativação</label>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                        <input type="text" class="form-control" ng-model="tipo.tipo_date" name="tipo_date" placeholder="dd/mm/aaaa" ui-datebr/> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="col-md-6">
+                    <label>Status</label>
+                    <div class="clearfix"></div>
+                    <button ng-show="tipo.meta_status == '0'" class="btn btn-success glyphicon glyphicon-play" ng-click="isActive()" title="ativar"></button>
+                    <button ng-hide="tipo.meta_status == '0'" class="btn btn-danger glyphicon glyphicon-stop" ng-click="isActive()" title="desativar"></button>
+                </div>
+            </div>
+
+            <div class="btn btn-group" style="width: 100%; margin-top: 15px;">
+                <a href="" class="btn btn-block btn-primary" title="voltar"  ng-click="save(tipo)">Salvar</a> 
+                <a href="#tipos-de-parada" class="btn btn-block btn-default" title="voltar">Voltar</a> 
+            </div>
+
+        </div>
+
+    </form>
+</section>
