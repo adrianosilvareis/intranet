@@ -1,18 +1,19 @@
 angular.module('parada-equipamento').controller('tipo', function ($scope, $location, objetoAPI, config, tipo, metas) {
 
     $scope.tipo = {};
-    $scope.metas = [];
+    $scope.meta = [];
+    var Metas = metas;
+    var Tipo = tipo;
 
-    var init = function (tipo, metas) {
-
-        if (metas !== undefined)
-            $scope.metas = metas.data;
-
-        if (tipo !== undefined) {
-            $scope.tipo = tipo.data;
+    var init = function () {
+        
+        if (Metas.data !== undefined)
+            $scope.metas = Metas.data;
+        
+        if (Tipo.data !== undefined) {
+            $scope.tipo = Tipo.data;
             addAll();
         }
-
     };
 
     var addAll = function () {
@@ -51,5 +52,5 @@ angular.module('parada-equipamento').controller('tipo', function ($scope, $locat
         delete $scope.search;
     };
 
-    init(tipo, metas);
+    init();
 });

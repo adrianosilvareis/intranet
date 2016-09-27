@@ -9,7 +9,7 @@
                     <label>Cod</label>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-barcode"></span>
-                        <span class="form-control">{{tipo.tipo_id}}</span>
+                        <span class="form-control">{{(tipo.tipo_id ? tipo.tipo_id : "#NOVO#")}}</span>
                     </div>
                 </div>
             </div>
@@ -94,13 +94,13 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-md-4">
                 <div class="col-md-6">
                     <label>Status</label>
                     <div class="clearfix"></div>
-                    <button ng-show="tipo.meta_status == '0'" class="btn btn-success glyphicon glyphicon-play" ng-click="isActive()" title="ativar"></button>
-                    <button ng-hide="tipo.meta_status == '0'" class="btn btn-danger glyphicon glyphicon-stop" ng-click="isActive()" title="desativar"></button>
+                    <button ng-show="tipo.tipo_status == '0'" class="btn btn-success glyphicon glyphicon-play" ng-click="isActive()" title="ativar"></button>
+                    <button ng-hide="tipo.tipo_status == '0'" class="btn btn-danger glyphicon glyphicon-stop" ng-click="isActive()" title="desativar"></button>
                 </div>
             </div>
 

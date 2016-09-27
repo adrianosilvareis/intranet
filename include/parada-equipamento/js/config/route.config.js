@@ -5,7 +5,25 @@ angular.module('parada-equipamento')
 
             $routeProvider
                     .when('/', {
-                        templateUrl: partials + '/index.html'
+                        templateUrl: partials + '/log-parada/index.html',
+                        controller: 'dashboard',
+                        resolve: {
+                            logs: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/log-parada/');
+                            },
+                            equipamentos: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/equipamentos');
+                            },
+                            tipos: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/tipos-de-parada/');
+                            },
+                            metas: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/metas/');
+                            },
+                            users: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/usuarios/');
+                            }
+                        }
                     });
 
             $routeProvider
@@ -18,6 +36,35 @@ angular.module('parada-equipamento')
                     });
 
             $routeProvider
+                    .when('/equipamentos', {
+                        templateUrl: partials + '/equipamento/index.html',
+                        controller: 'equipamentos',
+                        resolve: {
+                            equipamentos: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/equipamentos');
+                            }
+                        }
+                    });
+
+            $routeProvider
+                    .when('/equipamento/log/:equip_id', {
+                        templateUrl: partials + '/equipamento/log.html',
+                        controller: 'registro',
+                        resolve: {
+                            equipamento: function ($route, objetoAPI, config) {
+                                var equip_id = $route.current.params.equip_id;
+                                return objetoAPI.getObjeto(config.urlAPI + '/equipamentos/&id=' + equip_id);
+                            },
+                            tipos: function (objetoAPI, config) {
+                                return objetoAPI.getObjeto(config.urlAPI + '/tipos-de-parada/');
+                            },
+                            user: function (config) {
+                                return config.userLogin;
+                            }
+                        }
+                    });
+
+            $routeProvider
                     .when('/equipamento/:equip_id', {
                         templateUrl: partials + '/equipamento/equipamento.html',
                         controller: 'equipamento',
@@ -25,17 +72,6 @@ angular.module('parada-equipamento')
                             equipamento: function ($route, objetoAPI, config) {
                                 var equip_id = $route.current.params.equip_id;
                                 return objetoAPI.getObjeto(config.urlAPI + '/equipamentos/&id=' + equip_id);
-                            }
-                        }
-                    });
-
-            $routeProvider
-                    .when('/equipamentos', {
-                        templateUrl: partials + '/equipamento/index.html',
-                        controller: 'equipamentos',
-                        resolve: {
-                            equipamentos: function (objetoAPI, config) {
-                                return objetoAPI.getObjeto(config.urlAPI + '/equipamentos');
                             }
                         }
                     });
@@ -55,6 +91,17 @@ angular.module('parada-equipamento')
                     });
 
             $routeProvider
+                    .when('/meta', {
+                        templateUrl: partials + '/metas/meta.html',
+                        controller: 'meta',
+                        resolve: {
+                            meta: function () {
+                                return {};
+                            }
+                        }
+                    });
+
+            $routeProvider
                     .when('/meta/:meta_id', {
                         templateUrl: partials + '/metas/meta.html',
                         controller: 'meta',
@@ -62,17 +109,6 @@ angular.module('parada-equipamento')
                             meta: function ($route, objetoAPI, config) {
                                 var meta_id = $route.current.params.meta_id;
                                 return objetoAPI.getObjeto(config.urlAPI + '/metas/&id=' + meta_id);
-                            }
-                        }
-                    });
-
-            $routeProvider
-                    .when('/meta', {
-                        templateUrl: partials + '/metas/meta.html',
-                        controller: 'meta',
-                        resolve: {
-                            meta: function () {
-                                return {};
                             }
                         }
                     });
@@ -122,5 +158,7 @@ angular.module('parada-equipamento')
                             }
                         }
                     });
+
+
             $routeProvider.otherwise({redirectTo: '/'});
         });

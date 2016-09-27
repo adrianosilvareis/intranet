@@ -9,7 +9,7 @@
                     <label>Cod</label>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-barcode"></span>
-                        <span class="form-control">{{equip.equip_id}}</span>
+                        <span class="form-control">{{(equip.equip_id ? equip.equip_id : "#NOVO#")}}</span>
                     </div>
                 </div>
             </div>
@@ -60,12 +60,12 @@
             </div>
 
             <div class="col-md-4">
-                <div class="col-md-6">
+<!--                <div class="col-md-6">
                     <label>Funcionamento</label>
                     <div class="clearfix"></div>
                     <button ng-show="equip.equip_operation == '0'" class="btn btn-success glyphicon glyphicon-play" ng-click="isWork()" title="ativar"></button>
                     <button ng-hide="equip.equip_operation == '0'" class="btn btn-danger glyphicon glyphicon-stop" ng-click="isWork()" title="desativar"></button>
-                </div>
+                </div>-->
                 <div class="col-md-6">
                     <label>Status</label>
                     <div class="clearfix"></div>

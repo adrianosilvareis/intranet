@@ -11,16 +11,18 @@ if (!PRODUCAO):
     Register::addScript($url . '/js/interceptors/timestamp.interceptor.js');
     Register::addScript($url . '/js/controllers/equipamentos/equipamento.ctrl.js');
     Register::addScript($url . '/js/controllers/equipamentos/equipamentos.ctrl.js');
+    Register::addScript($url . '/js/controllers/equipamentos/registro.ctrl.js');
     Register::addScript($url . '/js/controllers/metas/meta.ctrl.js');
     Register::addScript($url . '/js/controllers/metas/metas.ctrl.js');
     Register::addScript($url . '/js/controllers/tipos/tipo.ctrl.js');
     Register::addScript($url . '/js/controllers/tipos/tipos.ctrl.js');
+    Register::addScript($url . '/js/controllers/log/dashboard.ctrl.js');
 endif;
 ?>
 
 <div ng-app="parada-equipamento" class="conteiner">
 
-    <div ng-include="'<?= $url ?>/partials/menu.html'"></div>     
+    <div ng-include="'<?= $url ?>/partials/menu.html'"></div>
     
     <div ng-show="loading" class="col-md-offset-4">
         <img ng-src="<?= $url ?>/img/carregando.gif" class="img img-responsive"/>

@@ -1,0 +1,32 @@
+<section>
+    <h1><span class="text-muted">Parada de Equipamento</span></h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>EQUIPAMENTO</th>
+                <th>DESCRIÇÃO</th>
+                <th>PRAZO</th>
+                <th>STATUS</th>
+                <th>TIPO</th>
+                <th>AUTOR</th>
+                <th>DATA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="log in logs">
+                <td>{{log.equip.equip_title}}</td>
+                <td>{{log.log_content}}</td>
+                <td>{{log.meta.meta_prazo_max}} min</td>
+                <td>
+                    <span ng-class="(log.log_start == '0' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok')"></span>
+                </td>
+                <td>{{log.tipo.tipo_title}}</td>
+                <td>{{log.autor.user_name}}</td>
+                <td>{{log.log_date |timestampBr}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
+
