@@ -1,5 +1,6 @@
 <?php
-if (empty($_SESSION['userlogin']['user_birthday'])):
+
+if (empty($_SESSION['userlogin']['user_birthday']) || $_SESSION['userlogin']['user_birthday'] == '1969-12-31'):
     ?>
     <div class="modal fade" id="updateInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

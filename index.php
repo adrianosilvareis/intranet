@@ -30,12 +30,18 @@ $Session = new Session;
 
         if ($logoff):
             unset($_SESSION['userlogin']);
+
+            echo "<script>";
+            foreach ($_COOKIE as $cok => $value) :
+                echo "document.cookie = '{$cok}={$value}; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/'; ";
+            endforeach;
+            echo "</script>";
             header('Location: ' . HOME . '/login.php?exe=logoff');
         endif;
 
         require(REQUIRE_PATH . '/inc/header.inc.php');
         ?>
-        
+
         <div class="section">
             <div class="container container-mobile">
                 <?php

@@ -29,12 +29,12 @@ if ($WsUsers->Execute()->getResult()):
                                 foreach ($WsUsers->Execute()->getResult() as $user):
                                     extract((array) $user);
                                     ?>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6" id="niver-card">
                                         <?php if (!empty($user_cover)): ?>
-                                            <img src="<?= HOME ?>/tim.php?src=<?= HOME ?>/uploads/<?= $user_cover; ?>&w=300&h=300"
+                                            <img id="niver" src="<?= HOME ?>/tim.php?src=<?= HOME ?>/uploads/<?= $user_cover; ?>&w=500&h=500"
                                                  class="center-block img-circle img-responsive">
                                              <?php else: ?>
-                                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"
+                                            <img id="niver" src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"
                                                  class = "center-block img-circle img-responsive">
                                              <?php endif;
                                              ?>

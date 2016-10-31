@@ -14,10 +14,10 @@
                     . "AND r.reg_finalizado = 0";
 
             extract($_SESSION['userlogin']);
-            
+
             $NcRegistro = new NcRegistro();
             $NcRegistro->Execute()->FullRead($sql, "user_id={$user_id}&area_id={$area_id}");
-            
+
             if ($NcRegistro->Execute()->getResult()):
                 $size = $NcRegistro->Execute()->getResult()[0]->size;
 
@@ -54,12 +54,14 @@
 
         <header style="margin-top: 55px;">
             <h1 class="notitle logo shadow-right"><?= SITENAME ?><a title="<?= SITENAME ?>" href="<?= HOME ?>"><img src="<?= HOME . '/themes/' . THEME ?>/images/header-trans-inverse.png" alt="<?= SITENAME ?>" class="img-responsive"></a></h1>
-            
+
             <?php require "informativo.inc.php"; ?>
-            
+
             <?php require "menu.inc.php"; ?>
-            
-            <?php include "aniversariantes.inc.php"; ?>
+
+            <?php require "aniversariantes.inc.php"; ?>
+
+            <?php // require "update-cover.inc.php" ?>
             <!-- modal -->
         </header>
     </div>

@@ -104,6 +104,23 @@
   font-family: cursive;
   color: #09f;
 }
+#openCover {
+  cursor: pointer;
+}
+.avatar-cover {
+  background: url("/intranet/themes/intranet/images/avatar.png") center center no-repeat;
+  background-size: 90px 90px;
+  font-size: 0;
+  width: 90px;
+  height: 90px;
+}
+/*Transition aniversariantes*/
+#niver-card {
+  transition: all 2s;
+}
+#niver-card #niver {
+  transition: all 2s;
+}
 .radius {
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;

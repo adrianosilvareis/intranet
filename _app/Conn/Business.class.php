@@ -158,13 +158,15 @@ abstract class Business extends ConexaoBancoDeDados {
         $this->Stmt = $this->prepare($Sql, $this->InfoConexaoBD);
 
         //procura falsos atá não encontrar mais
-        foreach ($this->Dados as $value) :
-            if (in_array('false', $this->Dados)) :
-                $this->isFalse();
-            else:
-                break;
-            endif;
-        endforeach;
+        if (!empty($this->Dados)):
+            foreach ($this->Dados as $value):
+                if (in_array('false', $this->Dados)):
+                    $this->isFalse();
+                else:
+                    break;
+                endif;
+            endforeach;
+        endif;
 
         if ($this->Dados && array_key_exists('limit', $this->Dados)) {
             $Limit = (int) $this->Dados['limit'];

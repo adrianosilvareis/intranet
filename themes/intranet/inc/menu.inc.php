@@ -19,8 +19,9 @@
                         <li><a href="https://webmail-seguro.com.br/tommasi.com.br/" target="_blank">WebMail</a></li>
                         <li><a href="http://helpdesktommasi.ddns.net:8778/ocomon/" target="_blank">HelpDesk</a></li>
                         <li><a href="http://sdlaudos.portalglauco.com.br/LoginNovo.aspx?ReturnUrl=%2fSistema%2fAberturaNova.aspx">SDLaudos</a></li>
-                        <li><a href="http://187.72.199.27/shift/lis/tommasi/s00.iu.Login.cls" target="_blank">SHIFT LIS</a></li>
+                        <li><a href="https://www.e-lis.com.br/shift/lis/tommasi/s00.iu.Login.cls" target="_blank">SHIFT LIS</a></li>
                         <li><a href="http://cetan.tempsite.ws/coleta/adm/login.php" target="_blank">Coleta Domiciliar</a></li>
+                        <li><a href="http://metaframe.suncoke.com.br" target="_blank">SunCoke</a></li>
                         <li><a href="http://www.crmes.org.br/index.php?option=com_medicos" target="_blank">Buscar Médicos (CRM)</a></li>
                     </ul>
                 </li>

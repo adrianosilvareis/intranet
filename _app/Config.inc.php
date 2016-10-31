@@ -93,9 +93,9 @@ function Plugins() {
         ['url' => 'contadores-de-impressao', 'title' => 'Contadores de impressão'],
         ['url' => 'agenda', 'title' => 'Agenda'],
         ['url' => 'faturamento', 'title' => 'Faturamento'],
-        ['url' => 'downtime', 'title' => 'DownTimes'],
         ['url' => 'fast-exames', 'title' => 'Fast Exames'],
-        ['url' => 'nao-conformidade', 'title' => 'Não Conformidade']        
+        ['url' => 'nao-conformidade', 'title' => 'Não Conformidade'],
+        ['url' => 'parada-equipamento', 'title' => 'Parada de equipamentos']
     ];
     
     return $plugins;

@@ -32,6 +32,42 @@ $(function () {
 
 $("documents").ready(function () {
 
+    //preview image
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#openCover").click(function (e) {
+        e.preventDefault();
+        $("#cover").modal("show");
+    });
+
+    //gatilho do efeito de click
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+
+    //almenta imagem de aniversariantes
+    $('img').click(function () {
+        var id = this.id.substr(4);
+        $("#" + id).modal('show');
+    });
+
+    $("#niver-card #niver").click(function () {
+        $(this).parent().toggleClass("col-md-6");
+        $(this).parent().toggleClass("col-md-12");
+        $(this).toggleClass("img-circle");
+        console.log($(this).parent());
+    });
+
     $("#updatePassword").hide();
 
     $("#openPass").click(function (e) {
@@ -61,7 +97,7 @@ $("documents").ready(function () {
         //Exibe a notificação da não conformidade;
         notify(title, icon, content, link);
     }
-
+    
     // Verifica se o cookie existe
     if (cookies.indexOf("usuarioVisualizouModal") === -1) {
         // Entra aqui caso o cookie não exista no  navegador do usuário

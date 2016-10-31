@@ -1,6 +1,6 @@
 <?php
 $WsUsers = new WsUsers();
-$Termos = "SELECT u.user_nickname, u.user_name, u.user_lastname, u.area_id, u.user_birthday, u.user_cover "
+$Termos = "SELECT u.user_id, u.user_nickname, u.user_name, u.user_lastname, u.area_id, u.user_birthday, u.user_cover "
         . "FROM ws_users u "
         . "WHERE MONTH(u.user_birthday) = MOD(MONTH(CURDATE()), 12) ORDER By DAY(u.user_birthday)";
 
@@ -71,18 +71,30 @@ else:
                     foreach ($WsUsers->Execute()->getResult() as $niver):
                         extract((array) $niver);
                         ?>
-                        <tr>
-                            <td><?= ucfirst(strtolower(Check::Words($user_name . ' ' . $user_lastname, 3))); ?></td>
-                            <td><?= Check::AreaById($area_id)->area_title; ?></td>
-                            <td><?= date('d', strtotime($user_birthday)); ?></td>
-                            <td>
-                                <?php if (!empty($user_cover)): ?>
-                                    <img src="<?= HOME ?>/tim.php?src=<?= HOME ?>/uploads/<?= $user_cover; ?>&w=50&h=50"
-                                         class="center-block img-responsive">
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+
+                        <?php if (!empty($user_cover)): ?>
+                        <div id="<?= $user_id; ?>" class="modal fade bs-example-modal-sm">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <img id="btn-<?= $user_id; ?>" src="<?= HOME ?>/tim.php?src=<?= HOME ?>/uploads/<?= $user_cover; ?>&w=600&h=600"
+                                         class="cool center-block img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <tr>
+                        <td><?= ucfirst(strtolower(Check::Words($user_name . ' ' . $user_lastname, 3))); ?></td>
+                        <td><?= Check::AreaById($area_id)->area_title; ?></td>
+                        <td><?= date('d', strtotime($user_birthday)); ?></td>
+                        <td>
+                            <?php if (!empty($user_cover)): ?>
+                                <img id="btn-<?= $user_id; ?>" src="<?= HOME ?>/tim.php?src=<?= HOME ?>/uploads/<?= $user_cover; ?>&w=50&h=50"
+                                     class="cool center-block img-responsive">
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
