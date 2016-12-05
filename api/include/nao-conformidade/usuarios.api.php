@@ -6,7 +6,7 @@ switch ($method) {
     case "GET":
         //retorna todos os itens
         $Read->Execute()->findAll();
-        Check::JsonReturn($Read->Execute()->getResult(), 'Nenhuma origem cadastrado!', '204');
+        Check::JsonReturn($Read->Execute()->getResult(), 'Nenhum usuario cadastrado!', '204');
 
         break;
     case "POST":

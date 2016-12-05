@@ -88,7 +88,7 @@ class Login {
         endif;
 
         $WsUsers->setUser_password($this->Senha);
-        $WsUsers->Execute()->Query("{$login} AND #user_password#");
+        $WsUsers->Execute()->Query("{$login} AND #user_password# AND user_status = 1");
         if ($WsUsers->Execute()->getResult()):
             $this->Result = $WsUsers->Execute()->getResult()[0];
             $this->Result->area_trabalho = $this->getAreaTrabalho($this->Result->area_id);

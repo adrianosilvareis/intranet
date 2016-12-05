@@ -18,7 +18,7 @@ define('PRODUCAO', FALSE);
 define('SISS_VERSION', 'Versão 3.6');
 
 //CONFIGURACAO DO BANCO ####################
-define("DB_HOST", "localhost");
+define("DB_HOST", "192.168.0.50");
 define("DB_USER", "root");
 define("DB_PASS", "root");
 define("DB_NAME", "ws_intranet");

@@ -23,6 +23,26 @@ class AdminUsers {
         endif;
     }
 
+    public function ExeStatus(int $UserId, $user_status) {
+
+        $this->Users = (int) $UserId;
+        $this->Read = new WsUsers();
+
+        $this->Read->setUser_id($this->Users);
+        $this->Read->Execute()->find();
+
+        if (!$this->Read->Execute()->getResult()):
+            $this->Result = false;
+            $this->Error = ["<b>Ops</b> O usuário não foi encontrado no sistema!", WS_ERROR];
+        else:
+            $this->Read->setThis($this->Read->Execute()->getResult());
+            $this->Read->setUser_status($user_status);
+            $this->Read->Execute()->update(null, "user_id");
+
+            $this->Error = ["<b>Sucesso:</b> O usuário <b>{$this->Read->getUser_name()}</b> foi atualizado com sucesso!", WS_ACCEPT];
+        endif;
+    }
+
     public function ExeUpdate($UserId, array $Data) {
         $this->Users = (int) $UserId;
         $this->Data = $Data;

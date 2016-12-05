@@ -30,7 +30,9 @@ else:
                 $Objeto['part_vl_liquido'] = Check::toFloat($Linha[9]);
                 $Objeto['part_vl_pago'] = Check::toFloat($Linha[10]);
                 $Objeto['part_vl_debito'] = Check::toFloat($Linha[11]);
-
+                
+                $Linha[2] = ($Linha[2] == '0' ? "418 - Sistema" : $Linha[2]);
+                
                 $findUser = explode(" - ", $Linha[2])[1];
                 $atendente = FindUser($findUser);
 

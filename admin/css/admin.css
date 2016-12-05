@@ -248,6 +248,8 @@ body.painel{background: url(../images/header_bg.png) repeat-x #fbfbfb;}
 .ultable li .ed .action{width: 25px; height: 22px; display: block; font-size: 0; float: left;}
 .ultable li .ed .user_edit{background: #ccc url(../icons/act_edit.png) center center no-repeat; background-size: 70%}
 .ultable li .ed .user_dele{background: #ccc url(../icons/act_delete.png) center center no-repeat; background-size: 70%}
+.ultable li .ed .user_ative{background: #ccc url(../icons/act_ative.png) center center no-repeat; background-size: 70%}
+.ultable li .ed .user_inative{background: #ccc url(../icons/act_inative.png) center center no-repeat; background-size: 70%}
 
 /*FOOTER GERAL*/
 .main_footer{background: #00254A; width: 100%; padding: 30px 0; text-align: center; border-top: 2px solid #444;}

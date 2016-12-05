@@ -2,7 +2,7 @@
 $WsUsers = new WsUsers();
 $Termos = "SELECT u.user_id, u.user_nickname, u.user_name, u.user_lastname, u.area_id, u.user_birthday, u.user_cover "
         . "FROM ws_users u "
-        . "WHERE MONTH(u.user_birthday) = MOD(MONTH(CURDATE()), 12) ORDER By DAY(u.user_birthday)";
+        . "WHERE MONTH(u.user_birthday) = MONTH(CURDATE()) AND u.user_status = 1 ORDER By DAY(u.user_birthday)";
 
 $WsUsers->Execute()->FullRead($Termos);
 
