@@ -36,6 +36,7 @@
             <th>Unidade</th>
             <th>Convênio</th>
             <th>Não Conformidade</th>
+            <th>Valor</th>
             <th>Status</th>
             <th>Faturista</th>
             <th></th>
@@ -43,7 +44,7 @@
     </thead>
 
     <tbody>
-        <tr ng-repeat="inco in inconsistencias |orderBy:inco.inco_date:true |filter:search |limitTo:limit track by inco.inco_id">
+        <tr ng-repeat="inco in inconsistencias|orderBy:inco.inco_date:true |filter:search |limitTo:limit track by inco.inco_id">
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_id}}</a></td>
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_date}}</a></td>
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_os}}</a></td>
@@ -51,6 +52,7 @@
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.unid.postos_nome}}</a></td>
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.conv.conv_title}}</a></td>
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.ncon.ncon_title}}</a></td>
+            <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_value|currency}}</a></td>            
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.inco_status}}</a></td>
             <td><a href="#/inconsistencia/{{inco.inco_id}}">{{inco.fatur.user_name}}</a></td>
             <td><button title="delete" ng-click="remover(inco)" class="btn btn-warning glyphicon glyphicon-trash"></button></td>

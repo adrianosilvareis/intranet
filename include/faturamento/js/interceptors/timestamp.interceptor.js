@@ -42,7 +42,7 @@ angular.module('faturamento').factory("timestampInterceptor", function ($locatio
                 auth(url);
                 return config;
             }
-
+            
             //para toda requisição ao backend, cria-se uma url unica para burlar o cacheamento.
             var timestamp = new Date().getTime();
             config.url = url + "&timestamp=" + timestamp;

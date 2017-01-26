@@ -14,6 +14,7 @@ class SftInconsistenciaGuia extends Beans {
     private $inco_status;
     private $inco_os;
     private $inco_obs;
+    private $inco_value;
     private $conv_id;
     private $ncon_id;
     private $aten_id;
@@ -35,6 +36,7 @@ class SftInconsistenciaGuia extends Beans {
             'inco_status' => $this->getInco_status(),
             'inco_os' => $this->getInco_os(),
             'inco_obs' => $this->getInco_obs(),
+            'inco_value' => $this->getInco_value(),
             'conv_id' => $this->getConv_id(),
             'ncon_id' => $this->getNcon_id(),
             'aten_id' => $this->getAten_id(),
@@ -56,6 +58,7 @@ class SftInconsistenciaGuia extends Beans {
         $this->setInco_status((isset($object->inco_status) ? $object->inco_status : null));
         $this->setInco_os((isset($object->inco_os) ? $object->inco_os : null));
         $this->setInco_obs((isset($object->inco_obs) ? $object->inco_obs : null));
+        $this->setInco_value((isset($object->inco_value) ? $object->inco_value : null));
         $this->setConv_id((isset($object->conv_id) ? $object->conv_id : null));
         $this->setNcon_id((isset($object->ncon_id) ? $object->ncon_id : null));
         $this->setAten_id((isset($object->aten_id) ? $object->aten_id : null));
@@ -98,6 +101,10 @@ class SftInconsistenciaGuia extends Beans {
         return $this->inco_obs;
     }
 
+    function getInco_value() {
+        return $this->inco_value;
+    }
+
     function getConv_id() {
         return $this->conv_id;
     }
@@ -136,6 +143,10 @@ class SftInconsistenciaGuia extends Beans {
 
     function setInco_obs($inco_obs) {
         $this->inco_obs = $inco_obs;
+    }
+
+    function setInco_value($inco_value) {
+        $this->inco_value = $inco_value;
     }
 
     function setConv_id($conv_id) {

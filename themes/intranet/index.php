@@ -3,7 +3,8 @@
 
     <?php
     $carrousel = Check::CatByName("destaques");
-    include "inc/carrousel-gallery.inc.php";
+//    include "inc/carrousel-gallery.inc.php";
+    include "inc/carrousel.inc.php";
     ?>
 
     <?php

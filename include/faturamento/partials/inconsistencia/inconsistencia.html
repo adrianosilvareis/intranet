@@ -60,7 +60,7 @@
          ng-class="{ 'has-error' : !inco.conv_id && !incoForm.search_conv.$pristine }">
         <label>Convênio</label>
         <div class="row">
-            
+
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-search"></span>
@@ -184,16 +184,14 @@
         </div>
     </div>
 
-    <div class="form-group"
-         ng-class="{ 'has-error' : incoForm.ncon_id.$error.required}">
-        <div class="row">
-            <div class="col-md-12">
-
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error' : incoForm.ncon_id.$error.required}">
                 <label>Não conformidade</label>
                 <div class="input-group">
                     <span class="input-group-addon glyphicon glyphicon-exclamation-sign"></span>
                     <select class="form-control" ng-model="inco.ncon_id" name="ncon_id" required
-                            ng-options="ncon.ncon_id as ncon.ncon_title +    ' - ' +    ncon.ncon_content for ncon in naoconformidades">
+                            ng-options="ncon.ncon_id as ncon.ncon_title +  ' - ' +  ncon.ncon_content for ncon in naoconformidades">
                         <option value="">Selecione uma não conformidade</option>
                     </select>
                 </div>
@@ -201,7 +199,21 @@
                     Selecione uma não conformidade
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
                 </p>
+            </div>
+        </div>
 
+        <div class="col-md-6">
+            <div class="form-group" 
+                 ng-class="{ 'has-error' : incoForm.inco_value.$invalid && !incoForm.inco_value.$pristine }">
+                <label>Valor da Guia</label>
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-usd"></span>
+                    <input name="inco_value" required type="text" class="form-control" ng-model="inco.inco_value" ui-number/>
+                </div>
+                <p ng-show="incoForm.inco_value.$invalid && !incoForm.inco_value.$pristine" class="help-block">
+                    Valor da os não foi informado
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </p>
             </div>
         </div>
     </div>

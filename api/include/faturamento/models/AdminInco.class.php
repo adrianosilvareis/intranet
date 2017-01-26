@@ -118,6 +118,7 @@ class AdminInco {
         unset($this->Data['aten']);
         unset($this->Data['unid']);
         unset($this->Data['conv']);
+        $this->Data['inco_value'] = Check::toFloat($this->Data['inco_value']);
 
         $this->Data = array_map('strip_tags', $this->Data);
         $this->Data = array_map('trim', $this->Data);

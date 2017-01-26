@@ -113,8 +113,8 @@ switch ($method) {
             $request->reg_date_lastupdate = date('Y-m-d H:i:s');
             $request->user_lastupdate = $user->user_id;
             unset($request->user_cadastro);
-            unset($request->user_recebimento);
-            unset($request->area_recebimento);
+//            unset($request->user_recebimento);
+//            unset($request->area_recebimento);
 
             $request = setDados((array) $request);
             $Read->setThis($request);
